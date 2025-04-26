@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stab"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0ab2392-df94-41b9-892a-9ec8e18e8d26"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61b2d091-0f83-4f47-90eb-9af19bfe6f13"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Goblin_Look = m_Goblin.FindAction("Look", throwIfNotFound: true);
         m_Goblin_Sprint = m_Goblin.FindAction("Sprint", throwIfNotFound: true);
         m_Goblin_Crouch = m_Goblin.FindAction("Crouch", throwIfNotFound: true);
+        m_Goblin_Stab = m_Goblin.FindAction("Stab", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -256,6 +277,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Goblin_Look;
     private readonly InputAction m_Goblin_Sprint;
     private readonly InputAction m_Goblin_Crouch;
+    private readonly InputAction m_Goblin_Stab;
     public struct GoblinActions
     {
         private @PlayerControls m_Wrapper;
@@ -265,6 +287,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Goblin_Look;
         public InputAction @Sprint => m_Wrapper.m_Goblin_Sprint;
         public InputAction @Crouch => m_Wrapper.m_Goblin_Crouch;
+        public InputAction @Stab => m_Wrapper.m_Goblin_Stab;
         public InputActionMap Get() { return m_Wrapper.m_Goblin; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -289,6 +312,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Stab.started += instance.OnStab;
+            @Stab.performed += instance.OnStab;
+            @Stab.canceled += instance.OnStab;
         }
 
         private void UnregisterCallbacks(IGoblinActions instance)
@@ -308,6 +334,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Stab.started -= instance.OnStab;
+            @Stab.performed -= instance.OnStab;
+            @Stab.canceled -= instance.OnStab;
         }
 
         public void RemoveCallbacks(IGoblinActions instance)
@@ -332,5 +361,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnStab(InputAction.CallbackContext context);
     }
 }

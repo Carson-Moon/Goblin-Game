@@ -7,6 +7,7 @@ public class Network_Goblin : NetworkBehaviour
     [SerializeField] Transform goblinOrientation;
     [SerializeField] MeshRenderer bodyRen;
     [SerializeField] MeshRenderer noseRen;
+    [SerializeField] CapsuleCollider capCol;
 
 
     public override void OnNetworkSpawn()
@@ -19,6 +20,7 @@ public class Network_Goblin : NetworkBehaviour
         {
             bodyRen.enabled = false;
             noseRen.enabled = false;
+            capCol.enabled = false;
         }
     }
 

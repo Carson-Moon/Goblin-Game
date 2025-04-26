@@ -23,6 +23,9 @@ public class Input_Goblin : MonoBehaviour
     [SerializeField] UnityEvent onCrouch;
     [SerializeField] UnityEvent offCrouch;
 
+    [Header("Stab")]
+    [SerializeField] UnityEvent onStab;
+
 
     void Awake()
     {
@@ -40,6 +43,8 @@ public class Input_Goblin : MonoBehaviour
 
         pControls.Goblin.Crouch.started += ctx => onCrouch.Invoke();
         pControls.Goblin.Crouch.canceled += ctx => offCrouch.Invoke();
+
+        pControls.Goblin.Stab.started += ctx => onStab.Invoke();
     }
 
 #region Getters

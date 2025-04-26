@@ -22,8 +22,8 @@ public class MouseLook_Goblin : MonoBehaviour
         pInput = GetComponentInParent<Input_Goblin>();
 
         // Lock Cursor
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
