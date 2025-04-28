@@ -284,6 +284,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onThrow:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5426920056334356926}
+        m_TargetAssemblyTypeName: JarManager_Goblin, Assembly-CSharp
+        m_MethodName: AttemptThrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8517432024635883613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +418,7 @@ MonoBehaviour:
   m_AudioListener: {fileID: 6515087097153532303}
   m_GoblinBody: {fileID: 8678033319501642560}
   m_GoblinHead: {fileID: 7991174977540929441}
+  m_JarManagerGoblin: {fileID: 5426920056334356926}
 --- !u!114 &7066446622847570788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +496,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 5929167952661625646}
   jarPosition: {fileID: 8703896377886433407}
+  m_HasJar: 0
+  m_CurrentJar: {fileID: 0}
   jarLayer:
     serializedVersion: 2
     m_Bits: 256

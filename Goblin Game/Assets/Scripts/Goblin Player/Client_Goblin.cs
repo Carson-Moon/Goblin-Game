@@ -14,6 +14,7 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private AudioListener m_AudioListener;
     [SerializeField] private MeshRenderer m_GoblinBody;
     [SerializeField] private MeshRenderer m_GoblinHead;
+    [SerializeField] private JarManager_Goblin m_JarManagerGoblin;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class Client_Goblin : NetworkBehaviour
         m_AudioListener.enabled = false;
         m_GoblinBody.enabled = false;
         m_GoblinHead.enabled = false;
+        m_JarManagerGoblin.enabled = false;
     }
 
     public override void OnNetworkSpawn()
@@ -40,6 +42,7 @@ public class Client_Goblin : NetworkBehaviour
             m_MouseLookGoblin.enabled = true;
             m_Camera.enabled = true;
             m_AudioListener.enabled = true;
+            m_JarManagerGoblin.enabled = true;
             
         }
         else

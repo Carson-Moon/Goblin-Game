@@ -11,7 +11,7 @@ public class Jar : NetworkBehaviour
 
     void Update()
     {
-        if(jarPosition)
+        if(jarPosition != null)
         {
             transform.position = jarPosition.position;
             transform.rotation = jarPosition.rotation;
@@ -40,6 +40,20 @@ public class Jar : NetworkBehaviour
         rb.useGravity = false;
         rb.isKinematic = true;
         col.enabled = false;
+    }
+
+    // Enable jar physics.
+    public void EnablePhysics()
+    {
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        col.enabled = true;
+    }
+
+    // Apply force in direction.
+    public void ImpulseInDirection(Vector3 direction, float strength)
+    {
+        rb.AddForce(strength * direction, ForceMode.Impulse);
     }
 
     // Set this jar position.

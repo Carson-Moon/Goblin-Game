@@ -7,6 +7,8 @@ public class JarManager_Goblin : MonoBehaviour
     // Runtime
     [SerializeField] Camera m_Camera;
     [SerializeField] Transform jarPosition;
+    [SerializeField] private bool m_HasJar = false;
+    [SerializeField] private Jar m_CurrentJar = null;
     private RaycastHit m_Hit;
 
     [Header("Jar Detection Settings")]
@@ -44,23 +46,40 @@ public class JarManager_Goblin : MonoBehaviour
     // Attempt to pick up a detectedJar.
     public void AttemptPickup()
     {
-        if(detectedJar == null)
+        if(detectedJar == null || m_HasJar)
             return;
 
+        m_HasJar = true;
+        m_CurrentJar = detectedJar.GetComponent<Jar>();
+
         // Request ownership of the jar.
-        detectedJar.GetComponent<Jar>().RequestOwnership();
+        m_CurrentJar.RequestOwnership();
 
         // Turn off jar physics.
-        detectedJar.GetComponent<Jar>().DisablePhysics();
+        m_CurrentJar.DisablePhysics();
 
         // Put jar in hand.
-        detectedJar.GetComponent<Jar>().SetJarPosition(jarPosition);       
+        m_CurrentJar.SetJarPosition(jarPosition);       
     }
 
     // Attempt to throw a jar.
     public void AttemptThrow()
     {
+        if(m_CurrentJar == null)
+            return;
 
+        // Turn on jar physics.
+        m_CurrentJar.EnablePhysics();
+
+        // Apply throw force to jar.
+        m_CurrentJar.ImpulseInDirection(jarPosition.forward, 10);
+
+        // Un-set jar position.
+        m_CurrentJar.SetJarPosition(null);
+
+        // Forget anything about a jar. Whats a jar?
+        m_CurrentJar = null;
+        m_HasJar = false;
     }
 
     void OnCollisionEnter(Collision collision)
