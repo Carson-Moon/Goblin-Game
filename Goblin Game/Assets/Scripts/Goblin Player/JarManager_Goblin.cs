@@ -16,14 +16,38 @@ public class JarManager_Goblin : MonoBehaviour
     [SerializeField] float rayLength;
     [SerializeField] GameObject detectedJar;
 
+    [Header("Pickup Timer")]
+    [SerializeField] private bool m_PickingUp;
+    [SerializeField] private float pickupCooldownLength;
+    private float m_PickupCooldown;
+
     [Header("UI")]
     [SerializeField] GameObject jarIndicator;
 
+
+    void Awake()
+    {
+        m_PickupCooldown = pickupCooldownLength;
+    }
 
     void Update()
     {
         // Perform our jar raycast.
         DetectJar(); 
+
+        // If we are picking up, apply cooldown.
+        if(m_PickingUp)
+        {
+            m_PickupCooldown -= Time.deltaTime;
+            m_PickupCooldown = Mathf.Clamp(m_PickupCooldown, 0, pickupCooldownLength);
+
+            if(m_PickupCooldown <= 0)
+            {
+                AttemptPickup();
+
+                StopAttemptPickup();
+            }
+        }
     }
 
     // Grabs a reference to a jar if we are detecting one.
@@ -43,17 +67,37 @@ public class JarManager_Goblin : MonoBehaviour
         }
     }
 
+    // Start attempting to pickup.
+    public void StartAttemptPickup()
+    {
+        if(detectedJar == null || m_HasJar)
+            return;
+
+        m_PickingUp = true;
+
+        detectedJar.GetComponent<Jar>().RequestOwnership();
+    }
+
+    // Stop attempting to pickup.
+    public void StopAttemptPickup()
+    {
+        m_PickingUp = false;
+
+        m_PickupCooldown = pickupCooldownLength;       
+    }
+
     // Attempt to pick up a detectedJar.
     public void AttemptPickup()
     {
         if(detectedJar == null || m_HasJar)
             return;
 
-        m_HasJar = true;
         m_CurrentJar = detectedJar.GetComponent<Jar>();
 
-        // Request ownership of the jar.
+        // Request ownership.
         m_CurrentJar.RequestOwnership();
+
+        m_HasJar = true;
 
         // Turn off jar physics.
         m_CurrentJar.DisablePhysics();

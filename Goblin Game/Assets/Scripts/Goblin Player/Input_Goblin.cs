@@ -29,6 +29,7 @@ public class Input_Goblin : MonoBehaviour
 
     [Header("Pickup")]
     [SerializeField] UnityEvent onPickup;
+    [SerializeField] UnityEvent offPickup;
 
     [Header("Throw")]
     [SerializeField] UnityEvent onThrow;
@@ -54,6 +55,7 @@ public class Input_Goblin : MonoBehaviour
         pControls.Goblin.Stab.started += ctx => onStab.Invoke();
 
         pControls.Goblin.Pickup.started += ctx => onPickup.Invoke();
+        pControls.Goblin.Pickup.canceled += ctx => offPickup.Invoke();
 
         pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
     }
