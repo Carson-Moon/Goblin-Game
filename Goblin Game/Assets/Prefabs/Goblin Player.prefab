@@ -346,6 +346,8 @@ MonoBehaviour:
   attemptingCrouch: 0
   isCrouching: 0
   bodyCollider: {fileID: 2857351335398081224}
+  goblinGraphics: {fileID: 6130587731823097189}
+  cameraTransform: {fileID: 1166793995176582284}
 --- !u!114 &4890626248099405764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +837,7 @@ MonoBehaviour:
   SyncRotAngleY: 1
   SyncRotAngleZ: 0
   SyncScaleX: 0
-  SyncScaleY: 0
+  SyncScaleY: 1
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01

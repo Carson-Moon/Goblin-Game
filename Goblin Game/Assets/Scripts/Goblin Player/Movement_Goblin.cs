@@ -37,6 +37,8 @@ public class Movement_Goblin : MonoBehaviour
     [SerializeField] bool attemptingCrouch = false;
     [SerializeField] bool isCrouching = false;
     [SerializeField] CapsuleCollider bodyCollider;
+    [SerializeField] Transform goblinGraphics;
+    [SerializeField] Transform cameraTransform;
 
 
     private void Awake()
@@ -186,6 +188,10 @@ public class Movement_Goblin : MonoBehaviour
         // Shrink our collider height.
         bodyCollider.height = 1f;
         bodyCollider.center = new Vector3(0, -0.5f, 0);
+
+        goblinGraphics.localScale = new Vector3(1, 0.5f, 1);
+        goblinGraphics.localPosition = new Vector3(0, -0.5f, 1);
+        cameraTransform.localPosition = new Vector3(0, -.25f, 0);
     }
 
     // Stop saying we are trying to crouch.
@@ -202,6 +208,10 @@ public class Movement_Goblin : MonoBehaviour
         // Reset collider height.
         bodyCollider.height = 2f;
         bodyCollider.center = Vector3.zero;
+
+        goblinGraphics.localScale = new Vector3(1, 1, 1);
+        goblinGraphics.localPosition = new Vector3(0, 0, 1);
+        cameraTransform.localPosition = new Vector3(0, .75f, 0);
     }
 #endregion
 
