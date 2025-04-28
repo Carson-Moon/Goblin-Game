@@ -57,11 +57,18 @@ public class JarManager_Goblin : MonoBehaviour
         detectedJar.GetComponent<Jar>().SetJarPosition(jarPosition);       
     }
 
+    // Attempt to throw a jar.
+    public void AttemptThrow()
+    {
+
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.layer == 8)
         {
             print("I just hit a jar!");
+            collision.gameObject.GetComponent<Jar>().RequestOwnership();
         }
     }
 }
