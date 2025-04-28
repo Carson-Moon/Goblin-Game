@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,6 +27,12 @@ public class Input_Goblin : MonoBehaviour
     [Header("Stab")]
     [SerializeField] UnityEvent onStab;
 
+    [Header("Pickup")]
+    [SerializeField] UnityEvent onPickup;
+
+    [Header("Throw")]
+    [SerializeField] UnityEvent onThrow;
+
 
     void Awake()
     {
@@ -45,6 +52,10 @@ public class Input_Goblin : MonoBehaviour
         pControls.Goblin.Crouch.canceled += ctx => offCrouch.Invoke();
 
         pControls.Goblin.Stab.started += ctx => onStab.Invoke();
+
+        pControls.Goblin.Pickup.started += ctx => onPickup.Invoke();
+
+        pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
     }
 
 #region Getters

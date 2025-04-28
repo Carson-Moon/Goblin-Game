@@ -80,6 +80,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pickup"",
+                    ""type"": ""Button"",
+                    ""id"": ""f25f944e-3e33-4f56-a0f4-3c6320407ddd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""870b7de0-a3fc-4262-8919-65a3fc6142b9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +210,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Stab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fed02f4c-ebc8-45fd-8ee1-7ee7ae6af93a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pickup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""315c9ac9-0850-45e7-a8a0-e318235ac7c8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +246,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Goblin_Sprint = m_Goblin.FindAction("Sprint", throwIfNotFound: true);
         m_Goblin_Crouch = m_Goblin.FindAction("Crouch", throwIfNotFound: true);
         m_Goblin_Stab = m_Goblin.FindAction("Stab", throwIfNotFound: true);
+        m_Goblin_Pickup = m_Goblin.FindAction("Pickup", throwIfNotFound: true);
+        m_Goblin_Throw = m_Goblin.FindAction("Throw", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -278,6 +320,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Goblin_Sprint;
     private readonly InputAction m_Goblin_Crouch;
     private readonly InputAction m_Goblin_Stab;
+    private readonly InputAction m_Goblin_Pickup;
+    private readonly InputAction m_Goblin_Throw;
     public struct GoblinActions
     {
         private @PlayerControls m_Wrapper;
@@ -288,6 +332,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Goblin_Sprint;
         public InputAction @Crouch => m_Wrapper.m_Goblin_Crouch;
         public InputAction @Stab => m_Wrapper.m_Goblin_Stab;
+        public InputAction @Pickup => m_Wrapper.m_Goblin_Pickup;
+        public InputAction @Throw => m_Wrapper.m_Goblin_Throw;
         public InputActionMap Get() { return m_Wrapper.m_Goblin; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -315,6 +361,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stab.started += instance.OnStab;
             @Stab.performed += instance.OnStab;
             @Stab.canceled += instance.OnStab;
+            @Pickup.started += instance.OnPickup;
+            @Pickup.performed += instance.OnPickup;
+            @Pickup.canceled += instance.OnPickup;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
         }
 
         private void UnregisterCallbacks(IGoblinActions instance)
@@ -337,6 +389,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stab.started -= instance.OnStab;
             @Stab.performed -= instance.OnStab;
             @Stab.canceled -= instance.OnStab;
+            @Pickup.started -= instance.OnPickup;
+            @Pickup.performed -= instance.OnPickup;
+            @Pickup.canceled -= instance.OnPickup;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
         }
 
         public void RemoveCallbacks(IGoblinActions instance)
@@ -362,5 +420,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnStab(InputAction.CallbackContext context);
+        void OnPickup(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
     }
 }
