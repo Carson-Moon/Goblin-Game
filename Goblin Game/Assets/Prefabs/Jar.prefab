@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2475379849273320193}
   - component: {fileID: 2125609004500095411}
   - component: {fileID: 4667843908071062280}
+  - component: {fileID: 2941038134726005030}
   m_Layer: 8
   m_Name: Jar
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.6917644, y: 4.7002654, z: 2.4308367}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.29062, y: 0.4790855, z: 0.3071813}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04fd4a3a8d23f5542b4dc935fa729c36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 4181597008
   InScenePlacedSourceGlobalObjectIdHash: 2287925479
   DeferredDespawnTick: 0
-  Ownership: 5
+  Ownership: 7
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -227,3 +228,19 @@ MonoBehaviour:
   UseRigidBodyForMotion: 1
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &2941038134726005030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270138425723782740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec510c5463e6f14c91f8d0d9c25d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  rb: {fileID: 8429655447347565210}
+  col: {fileID: 2703299827706221399}
+  jarPosition: {fileID: 0}

@@ -7,6 +7,7 @@ public class Jar : NetworkBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] Collider col;
     [SerializeField] Transform jarPosition;
+    [SerializeField] bool canStun = false;
 
 
     void Update()
@@ -60,5 +61,33 @@ public class Jar : NetworkBehaviour
     public void SetJarPosition(Transform jarPosition)
     {
         this.jarPosition = jarPosition;
+    }
+
+    
+    public void EnableStun()
+    {
+        EnableStunRPC();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void EnableStunRPC()
+    {
+        canStun = true;
+    }
+
+    public void DisableStun()
+    {
+        DisableStunRPC();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void DisableStunRPC()
+    {
+        canStun = false;
+    }
+
+    public bool CanStun()
+    {
+        return canStun;
     }
 }

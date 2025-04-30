@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using UnityEngine;
 
 // Responsible for picking up and performing actions with our jar.
 
-public class JarManager_Goblin : MonoBehaviour
+public class JarManager_Goblin : NetworkBehaviour
 {
     // Runtime
     [SerializeField] Camera m_Camera;
@@ -122,6 +123,9 @@ public class JarManager_Goblin : MonoBehaviour
         // Un-set jar position.
         m_CurrentJar.SetJarPosition(null);
 
+        // Set the ability for the jar to stun someone.
+        m_CurrentJar.EnableStun();
+
         // Forget anything about a jar. Whats a jar?
         m_CurrentJar = null;
         m_HasJar = false;
@@ -129,9 +133,23 @@ public class JarManager_Goblin : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // If we are not the owner, return.
+        if(!IsOwner)
+        {
+            return;
+        }
+
         if(collision.gameObject.layer == 8)
         {
-            print("I just hit a jar!");
+            Jar jar = collision.gameObject.GetComponent<Jar>();
+            // Determine if this jar can stun.
+            if(jar.CanStun())
+            {
+                print("I just hit a jar!");
+
+                jar.DisableStun();
+            }
+
             collision.gameObject.GetComponent<Jar>().RequestOwnership();
         }
     }
