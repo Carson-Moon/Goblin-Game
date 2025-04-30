@@ -15,6 +15,8 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private MeshRenderer m_GoblinBody;
     [SerializeField] private MeshRenderer m_GoblinHead;
     [SerializeField] private JarManager_Goblin m_JarManagerGoblin;
+    [SerializeField] private CoinManager_Goblin m_CoinManagerGoblin;
+    [SerializeField] private GameObject m_CanvasGoblin;
 
     void Awake()
     {
@@ -27,6 +29,8 @@ public class Client_Goblin : NetworkBehaviour
         m_GoblinBody.enabled = false;
         m_GoblinHead.enabled = false;
         m_JarManagerGoblin.enabled = false;
+        m_CoinManagerGoblin.enabled = false;
+        m_CanvasGoblin.SetActive(false);
     }
 
     public override void OnNetworkSpawn()
@@ -43,12 +47,15 @@ public class Client_Goblin : NetworkBehaviour
             m_Camera.enabled = true;
             m_AudioListener.enabled = true;
             m_JarManagerGoblin.enabled = true;
+            m_CoinManagerGoblin.enabled = true;
+            m_CanvasGoblin.SetActive(true);
             
         }
         else
         {
             m_GoblinBody.enabled = true;
             m_GoblinHead.enabled = true;
+            gameObject.layer = 7;
         }
     }
 }

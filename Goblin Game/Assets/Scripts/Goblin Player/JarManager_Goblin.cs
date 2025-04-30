@@ -10,6 +10,7 @@ public class JarManager_Goblin : MonoBehaviour
     [SerializeField] private bool m_HasJar = false;
     [SerializeField] private Jar m_CurrentJar = null;
     private RaycastHit m_Hit;
+    [SerializeField] private float m_JarThrowStrength;
 
     [Header("Jar Detection Settings")]
     [SerializeField] LayerMask jarLayer;
@@ -116,7 +117,7 @@ public class JarManager_Goblin : MonoBehaviour
         m_CurrentJar.EnablePhysics();
 
         // Apply throw force to jar.
-        m_CurrentJar.ImpulseInDirection(jarPosition.forward, 10);
+        m_CurrentJar.ImpulseInDirection(jarPosition.forward, m_JarThrowStrength);
 
         // Un-set jar position.
         m_CurrentJar.SetJarPosition(null);

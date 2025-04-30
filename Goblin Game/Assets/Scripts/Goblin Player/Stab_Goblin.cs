@@ -7,6 +7,7 @@ public class Stab_Goblin : MonoBehaviour
     [SerializeField] Transform stabPosition;
     [SerializeField] float stabRadius;
     [SerializeField] LayerMask stabMask;
+    [SerializeField] LayerMask breakableMask;
     [SerializeField] float stabCooldownLength;
     [SerializeField] float stabCooldown;
 
@@ -34,12 +35,22 @@ public class Stab_Goblin : MonoBehaviour
 
         print("Stab!");
 
-        // Determine if we hit anything.
+        // Determine if we hit any goblins.
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabMask);
 
         for(int i=0; i<cols.Length; i++)
         {
             print("Stabbed " + cols[i].name);
+            cols[i].GetComponent<CoinManager_Goblin>().LoseCoin();
+        }
+
+        // Determine if we hit any breakables.
+        cols = Physics.OverlapSphere(stabPosition.position, stabRadius, breakableMask);
+
+        for(int i=0; i<cols.Length; i++)
+        {
+            print("Stabbed " + cols[i].name);
+            cols[i].GetComponent<Breakable>().TakeDamage();
         }
 
         // Reset stab cooldown.
