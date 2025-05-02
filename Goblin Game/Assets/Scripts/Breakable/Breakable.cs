@@ -40,7 +40,7 @@ public class Breakable : NetworkBehaviour
         for(int i=0; i<coinAmount; i++)
         {
             // Instantiate a new coin.
-            var instance = Instantiate(coinPrefab, transform.position + new Vector3(0, 1,0), Quaternion.identity);
+            var instance = Instantiate(coinPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-0.5f, 0.5f), Random.Range(-1f, 1f)), Quaternion.identity);
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
         }       

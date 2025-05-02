@@ -15,6 +15,8 @@ public class BreakableSpawner : NetworkBehaviour
             var instance = Instantiate(breakablePrefab, transform.position + new Vector3(0, 1,0), Quaternion.identity);
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
+
+            Destroy(gameObject);
         }        
     }
 }

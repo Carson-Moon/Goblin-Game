@@ -1,7 +1,8 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Spawnpoint_Manager : MonoBehaviour
+public class Spawnpoint_Manager : NetworkBehaviour
 {
     // Spawn point singleton
     public static Spawnpoint_Manager instance {get; private set;}
@@ -23,6 +24,18 @@ public class Spawnpoint_Manager : MonoBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        m_CurrentIndex.OnValueChanged += OnValueChanged;
+    }
+
+    private void OnValueChanged(int wasInt, int newInt)
+    {
+        Debug.Log(m_CurrentIndex.Value);
+    }
+
     // Return the next spawn point.
     public Transform GetNextSpawnPosition()
     {
@@ -34,9 +47,9 @@ public class Spawnpoint_Manager : MonoBehaviour
         return nextPosition;
     }
 
-    [Rpc(SendTo.ClientsAndHost)]
+    [Rpc(SendTo.Server)]
     private void IncreaseCurrentIndexRPC()
     {
-        m_CurrentIndex.Value++;
+        m_CurrentIndex.Value += 1;
     }
 }

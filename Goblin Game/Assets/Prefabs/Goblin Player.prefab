@@ -384,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canStab: 1
   stabPosition: {fileID: 7684900180775963075}
-  stabRadius: 0.5
+  stabRadius: 0.75
   stabMask:
     serializedVersion: 2
     m_Bits: 128
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 255931541
+  GlobalObjectIdHash: 619401176
   InScenePlacedSourceGlobalObjectIdHash: 619401176
   DeferredDespawnTick: 0
   Ownership: 8
@@ -573,12 +573,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872415103402983890}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.866}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.75, z: 1.363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4111865218538238206}
+  m_Father: {fileID: 1166793995176582284}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2555955261046029568
 GameObject:
@@ -1040,7 +1040,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7684900180775963075}
   - {fileID: 6130587731823097189}
   m_Father: {fileID: 5670348359448975281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1301,6 +1300,7 @@ Transform:
   m_Children:
   - {fileID: 8703896377886433407}
   - {fileID: 1646718347026989888}
+  - {fileID: 7684900180775963075}
   m_Father: {fileID: 5670348359448975281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5929167952661625646
@@ -1706,10 +1706,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 8ea04b1d276c6fe478996386ad955303, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ec51c8a8126f7144082962b00c462f6b, type: 2}
+    - target: {fileID: -1656618812876407128, guid: 8ea04b1d276c6fe478996386ad955303, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ec51c8a8126f7144082962b00c462f6b, type: 2}
+    - target: {fileID: -1320494899587893101, guid: 8ea04b1d276c6fe478996386ad955303, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4cc02cc7bca020f4981ec48ede962303, type: 2}
     - target: {fileID: 919132149155446097, guid: 8ea04b1d276c6fe478996386ad955303, type: 3}
       propertyPath: m_Name
       value: Knife_Textured
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 8ea04b1d276c6fe478996386ad955303, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4142178ba7a535b4fbf611d78dd5204d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

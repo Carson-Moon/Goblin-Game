@@ -16,11 +16,6 @@ public class Stab_Goblin : MonoBehaviour
     private int m_AttackHash = Animator.StringToHash("attack");
 
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         // Stab cooldown.

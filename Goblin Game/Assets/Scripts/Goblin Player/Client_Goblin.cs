@@ -35,6 +35,15 @@ public class Client_Goblin : NetworkBehaviour
         m_LeftArm.SetActive(false);
     }
 
+    void Start()
+    {
+        // Move to a spawn point.
+        if(IsOwner)
+        {
+            transform.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
+        }       
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -51,11 +60,7 @@ public class Client_Goblin : NetworkBehaviour
             m_JarManagerGoblin.enabled = true;
             m_CoinManagerGoblin.enabled = true;
             m_CanvasGoblin.SetActive(true);
-            m_LeftArm.SetActive(true);
-
-            // Move to a spawn point.
-            transform.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
-            
+            m_LeftArm.SetActive(true);           
         }
         else
         {
