@@ -11,6 +11,15 @@ public class Stab_Goblin : MonoBehaviour
     [SerializeField] float stabCooldownLength;
     [SerializeField] float stabCooldown;
 
+    [Header("Animations")]
+    [SerializeField] private Animator m_Anim;
+    private int m_AttackHash = Animator.StringToHash("attack");
+
+
+    void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -32,6 +41,9 @@ public class Stab_Goblin : MonoBehaviour
     {
         if(!canStab)
             return;
+
+        // Play Animation.
+        m_Anim.SetTrigger(m_AttackHash);
 
         print("Stab!");
 

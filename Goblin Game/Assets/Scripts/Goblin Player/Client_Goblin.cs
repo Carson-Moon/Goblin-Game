@@ -17,6 +17,7 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private JarManager_Goblin m_JarManagerGoblin;
     [SerializeField] private CoinManager_Goblin m_CoinManagerGoblin;
     [SerializeField] private GameObject m_CanvasGoblin;
+    [SerializeField] private GameObject m_LeftArm;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class Client_Goblin : NetworkBehaviour
         m_JarManagerGoblin.enabled = false;
         m_CoinManagerGoblin.enabled = false;
         m_CanvasGoblin.SetActive(false);
+        m_LeftArm.SetActive(false);
     }
 
     public override void OnNetworkSpawn()
@@ -49,6 +51,10 @@ public class Client_Goblin : NetworkBehaviour
             m_JarManagerGoblin.enabled = true;
             m_CoinManagerGoblin.enabled = true;
             m_CanvasGoblin.SetActive(true);
+            m_LeftArm.SetActive(true);
+
+            // Move to a spawn point.
+            transform.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
             
         }
         else
