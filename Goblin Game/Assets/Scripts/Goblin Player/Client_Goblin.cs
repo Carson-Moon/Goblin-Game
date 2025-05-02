@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private CoinManager_Goblin m_CoinManagerGoblin;
     [SerializeField] private GameObject m_CanvasGoblin;
     [SerializeField] private GameObject m_LeftArm;
+    [SerializeField] private Rigidbody rb;
+    
+    [Header("Nameplate")]
+    [SerializeField] TextMeshPro namePlate;
 
     void Awake()
     {
@@ -33,14 +38,19 @@ public class Client_Goblin : NetworkBehaviour
         m_CoinManagerGoblin.enabled = false;
         m_CanvasGoblin.SetActive(false);
         m_LeftArm.SetActive(false);
+        namePlate.gameObject.SetActive(false);
     }
 
+    // Things to do once we establish our setup. Probably our own setup stuff!
     void Start()
     {
         // Move to a spawn point.
         if(IsOwner)
         {
-            transform.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
+            rb.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
+
+            // Setup our nameplate.
+            UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
         }       
     }
 
@@ -67,6 +77,21 @@ public class Client_Goblin : NetworkBehaviour
             m_GoblinBody.enabled = true;
             m_GoblinHead.enabled = true;
             gameObject.layer = 7;
+            namePlate.gameObject.SetActive(true);
         }
+
+        ForceUpdateNameplatesRPC();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void ForceUpdateNameplatesRPC()
+    {
+        UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void UpdateNameplateRPC(string name)
+    {
+        namePlate.text = name;
     }
 }

@@ -8,6 +8,7 @@ public class CoinManager_Goblin : NetworkBehaviour
     [SerializeField] private int m_CurrentCoins = 0;
     [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] GameObject coinPrefab;
+    [SerializeField] int coinLoseAmount;
 
 
     public override void OnNetworkSpawn()
@@ -37,11 +38,22 @@ public class CoinManager_Goblin : NetworkBehaviour
 
     public void LoseCoin()
     {
-        if(m_CurrentCoins > 0)
+        if(m_CurrentCoins >= coinLoseAmount)
         {
-            LoseCoinRPC();
-            CreateCoinRPC();
-        }       
+            for(int i=0; i<coinLoseAmount; i++)
+            {
+                LoseCoinRPC();
+                CreateCoinRPC();
+            }
+        }
+        else
+        {
+            for(int i=0; i<m_CurrentCoins; i++)
+            {
+                LoseCoinRPC();
+                CreateCoinRPC();
+            }
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -61,17 +73,17 @@ public class CoinManager_Goblin : NetworkBehaviour
     private void CreateCoinRPC()
     {
         // Instantiate a new coin.
-        var instance = Instantiate(coinPrefab, transform.position + new Vector3(0, 1,0), Quaternion.identity);
+        var instance = Instantiate(coinPrefab, transform.position + new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f)), Quaternion.identity);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.Spawn();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
         // If we collide with a coin, collect it!
-        if(collision.gameObject.layer == 9)
+        if(other.gameObject.layer == 9)
         {
-            Coin coin = collision.gameObject.GetComponent<Coin>();
+            Coin coin = other.gameObject.GetComponentInParent<Coin>();
 
             if(coin.CanCollect())
             {
