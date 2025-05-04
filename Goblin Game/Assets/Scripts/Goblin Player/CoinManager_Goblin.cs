@@ -14,8 +14,6 @@ public class CoinManager_Goblin : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        print(IsOwner);
     }
 
     public void GainCoin()

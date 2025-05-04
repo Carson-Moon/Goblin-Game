@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Responsible for allowing/disallowing behaviours based on client instance.
 
@@ -23,6 +24,7 @@ public class Client_Goblin : NetworkBehaviour
     
     [Header("Nameplate")]
     [SerializeField] TextMeshPro namePlate;
+    [SerializeField] string playerName;
 
     void Awake()
     {
@@ -51,6 +53,10 @@ public class Client_Goblin : NetworkBehaviour
 
             // Setup our nameplate.
             UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
+
+            print(NetworkManager.Singleton.LocalClientId);
+
+            LobbyManager.instance.AddClientToListRPC(this);
         }       
     }
 
@@ -93,5 +99,25 @@ public class Client_Goblin : NetworkBehaviour
     private void UpdateNameplateRPC(string name)
     {
         namePlate.text = name;
+        playerName = name;
     }
+
+    public void SwitchScene()
+    {
+        if(IsHost)
+        {
+            var status = NetworkManager.SceneManager.LoadScene("Test", LoadSceneMode.Single);
+            if(status != SceneEventProgressStatus.Started)
+            {
+                Debug.Log("Scene load failed!");
+            }
+        }
+    }
+
+#region Getters
+    public string GetName()
+    {
+        return playerName;
+    }
+#endregion
 }

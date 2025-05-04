@@ -315,6 +315,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDebug:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5849423459680005591}
+        m_TargetAssemblyTypeName: Client_Goblin, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8517432024635883613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +380,7 @@ MonoBehaviour:
   canStand: 0
   environmentLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1025
   groundCheckRadius: 0.2
   groundCheckOffset: {x: 0, y: -1, z: 0}
   ceilingCheckRadius: 0.45
@@ -446,6 +461,7 @@ MonoBehaviour:
   m_LeftArm: {fileID: 2130626142906472954}
   rb: {fileID: 3011344211950220100}
   namePlate: {fileID: 4944674114981462901}
+  playerName: 
 --- !u!114 &7066446622847570788
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,6 +34,9 @@ public class Input_Goblin : MonoBehaviour
     [Header("Throw")]
     [SerializeField] UnityEvent onThrow;
 
+    [Header("Debug")]
+    [SerializeField] UnityEvent onDebug;
+
 
     void Awake()
     {
@@ -58,6 +61,8 @@ public class Input_Goblin : MonoBehaviour
         pControls.Goblin.Pickup.canceled += ctx => offPickup.Invoke();
 
         pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
+
+        pControls.Goblin.Debug.started += ctx => onDebug.Invoke();
     }
 
 #region Getters

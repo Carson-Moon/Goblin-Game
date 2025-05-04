@@ -33,7 +33,7 @@ public class Spawnpoint_Manager : NetworkBehaviour
 
     private void OnValueChanged(int wasInt, int newInt)
     {
-        Debug.Log(m_CurrentIndex.Value);
+        //Debug.Log(m_CurrentIndex.Value);
     }
 
     // Return the next spawn point.

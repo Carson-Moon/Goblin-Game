@@ -8,6 +8,9 @@ public class PlayerInformation_Manager : MonoBehaviour
     [Header("Player Information Settings")]
     [SerializeField] private string m_PlayerName;
 
+    [Header("Main Menu Things")]
+    [SerializeField] private GameObject mainMenuCamera;
+
 
     void Awake()
     {
@@ -30,5 +33,11 @@ public class PlayerInformation_Manager : MonoBehaviour
     public string GetPlayerName()
     {
         return m_PlayerName;
+    }
+
+    // Disable main menu things.
+    public void DisableMainMenuThings()
+    {
+        mainMenuCamera.SetActive(false);
     }
 }
