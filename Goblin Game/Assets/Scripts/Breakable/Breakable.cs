@@ -6,15 +6,18 @@ public class Breakable : NetworkBehaviour
     [SerializeField] int health;
     [SerializeField] int coinAmount;
     [SerializeField] GameObject coinPrefab;
+    [SerializeField] GameObject cratePiecesPrefab;
+    [SerializeField] Transform centerPoint;
+    [SerializeField] Collider col;
 
 
-    public void TakeDamage()
+    public void TakeDamage(Vector3 damagePoint)
     {
         if(health == 1)
         {
             CreateCoinsRPC();
 
-            BreakRPC();
+            BreakRPC(damagePoint);
         }
         else
         {
@@ -29,9 +32,22 @@ public class Breakable : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void BreakRPC()
+    private void BreakRPC(Vector3 damagePoint)
     {
+        ActivateBreakablesRPC(damagePoint);
+
         GetComponent<NetworkObject>().Despawn(true);
+    }
+
+    [Rpc(SendTo.Server)]
+    private void ActivateBreakablesRPC(Vector3 damagePoint)
+    {
+        col.enabled = false;
+
+        var instance = Instantiate(cratePiecesPrefab, transform.position, Quaternion.identity);
+        var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+        instanceNetworkObject.Spawn();
+        instance.GetComponent<BreakableExplosion>().ExplodeRPC(damagePoint);
     }
 
     [Rpc(SendTo.Server)]

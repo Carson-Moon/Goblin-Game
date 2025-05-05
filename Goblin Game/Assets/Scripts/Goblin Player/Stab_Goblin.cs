@@ -57,7 +57,7 @@ public class Stab_Goblin : MonoBehaviour
         for(int i=0; i<cols.Length; i++)
         {
             print("Stabbed " + cols[i].name);
-            cols[i].GetComponent<Breakable>().TakeDamage();
+            cols[i].GetComponent<Breakable>().TakeDamage(stabPosition.position);
         }
 
         // Reset stab cooldown.
