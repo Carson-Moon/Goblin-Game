@@ -21,6 +21,8 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private GameObject m_CanvasGoblin;
     [SerializeField] private GameObject m_LeftArm;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject m_RightArm;
+    [SerializeField] private Vacuum_Goblin m_VacuumGoblin;
     
     [Header("Nameplate")]
     [SerializeField] TextMeshPro namePlate;
@@ -41,6 +43,8 @@ public class Client_Goblin : NetworkBehaviour
         m_CanvasGoblin.SetActive(false);
         m_LeftArm.SetActive(false);
         namePlate.gameObject.SetActive(false);
+        m_RightArm.SetActive(false);
+        m_VacuumGoblin.enabled = false;
     }
 
     // Things to do once we establish our setup. Probably our own setup stuff!
@@ -65,7 +69,7 @@ public class Client_Goblin : NetworkBehaviour
         base.OnNetworkSpawn();
 
         // Enable our camera and input if we are the owner.
-        if(IsOwner)
+        if (IsOwner)
         {
             m_GoblinInput.enabled = true;
             m_MovementGoblin.enabled = true;
@@ -76,7 +80,9 @@ public class Client_Goblin : NetworkBehaviour
             m_JarManagerGoblin.enabled = true;
             m_CoinManagerGoblin.enabled = true;
             m_CanvasGoblin.SetActive(true);
-            m_LeftArm.SetActive(true);           
+            m_LeftArm.SetActive(true);   
+            m_RightArm.SetActive(true);
+            m_VacuumGoblin.enabled = true;     
         }
         else
         {

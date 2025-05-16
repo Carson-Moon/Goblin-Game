@@ -12,6 +12,7 @@ public class JarManager_Goblin : NetworkBehaviour
     [SerializeField] private Jar m_CurrentJar = null;
     private RaycastHit m_Hit;
     [SerializeField] private float m_JarThrowStrength;
+    [SerializeField] private Movement_Goblin m_MovementGoblin;
 
     [Header("Jar Detection Settings")]
     [SerializeField] LayerMask jarLayer;
@@ -131,21 +132,31 @@ public class JarManager_Goblin : NetworkBehaviour
         m_HasJar = false;
     }
 
+    // Get stunned!
+    private void StartStun()
+    {
+
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         // If we are not the owner, return.
-        if(!IsOwner)
-        {
-            return;
-        }
+        //if(!IsOwner)
+        //{
+            //return;
+        //}
 
         if(collision.gameObject.layer == 8)
         {
             Jar jar = collision.gameObject.GetComponent<Jar>();
-            // Determine if this jar can stun.
+
+            // Determine if this jar can stun, we should get stunned!
             if(jar.CanStun())
             {
                 print("I just hit a jar!");
+
+                // Stun me!
+                StartStun();
 
                 jar.DisableStun();
             }

@@ -107,6 +107,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Vacuum"",
+                    ""type"": ""Button"",
+                    ""id"": ""821426de-6e1b-423e-94aa-a17f72baea99"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c473d1b-0f90-48ff-a77f-1c6d5f79556e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vacuum"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +289,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Goblin_Pickup = m_Goblin.FindAction("Pickup", throwIfNotFound: true);
         m_Goblin_Throw = m_Goblin.FindAction("Throw", throwIfNotFound: true);
         m_Goblin_Debug = m_Goblin.FindAction("Debug", throwIfNotFound: true);
+        m_Goblin_Vacuum = m_Goblin.FindAction("Vacuum", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -344,6 +365,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Goblin_Pickup;
     private readonly InputAction m_Goblin_Throw;
     private readonly InputAction m_Goblin_Debug;
+    private readonly InputAction m_Goblin_Vacuum;
     public struct GoblinActions
     {
         private @PlayerControls m_Wrapper;
@@ -357,6 +379,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Pickup => m_Wrapper.m_Goblin_Pickup;
         public InputAction @Throw => m_Wrapper.m_Goblin_Throw;
         public InputAction @Debug => m_Wrapper.m_Goblin_Debug;
+        public InputAction @Vacuum => m_Wrapper.m_Goblin_Vacuum;
         public InputActionMap Get() { return m_Wrapper.m_Goblin; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,6 +416,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Debug.started += instance.OnDebug;
             @Debug.performed += instance.OnDebug;
             @Debug.canceled += instance.OnDebug;
+            @Vacuum.started += instance.OnVacuum;
+            @Vacuum.performed += instance.OnVacuum;
+            @Vacuum.canceled += instance.OnVacuum;
         }
 
         private void UnregisterCallbacks(IGoblinActions instance)
@@ -424,6 +450,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Debug.started -= instance.OnDebug;
             @Debug.performed -= instance.OnDebug;
             @Debug.canceled -= instance.OnDebug;
+            @Vacuum.started -= instance.OnVacuum;
+            @Vacuum.performed -= instance.OnVacuum;
+            @Vacuum.canceled -= instance.OnVacuum;
         }
 
         public void RemoveCallbacks(IGoblinActions instance)
@@ -452,5 +481,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPickup(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
+        void OnVacuum(InputAction.CallbackContext context);
     }
 }

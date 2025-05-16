@@ -34,8 +34,13 @@ public class Input_Goblin : MonoBehaviour
     [Header("Throw")]
     [SerializeField] UnityEvent onThrow;
 
+    [Header("Vacuum")]
+    [SerializeField] UnityEvent onVacuum;
+    [SerializeField] UnityEvent offVacuum;
+
     [Header("Debug")]
     [SerializeField] UnityEvent onDebug;
+
 
 
     void Awake()
@@ -61,6 +66,9 @@ public class Input_Goblin : MonoBehaviour
         pControls.Goblin.Pickup.canceled += ctx => offPickup.Invoke();
 
         pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
+
+        pControls.Goblin.Vacuum.started += ctx => onVacuum.Invoke();
+        pControls.Goblin.Vacuum.canceled += ctx => offVacuum.Invoke();
 
         pControls.Goblin.Debug.started += ctx => onDebug.Invoke();
     }

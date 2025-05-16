@@ -258,4 +258,22 @@ public class Movement_Goblin : MonoBehaviour
         maxSpeed = baseMaxSpeed;
     }
 #endregion
+
+#region Movement Toggles
+    // Disable my movement.
+    public void DisableMovement()
+    {
+        canMove = false;
+        canJump = false;
+        canCrouch = false;
+    }
+
+    // Enable my movement.
+    public void EnableMovement()
+    {
+        canMove = true;
+        canJump = true;
+        canCrouch = true;
+    }
+#endregion
 }
