@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
@@ -79,19 +80,46 @@ public class LobbyManager : NetworkBehaviour
     public void AddClientToListRPC(NetworkBehaviourReference networkRef)
     {
         playerList.Add(networkRef);
-        networkRef.TryGet(out NetworkBehaviour nBehaviour, NetworkManager.Singleton);
-        players.Add(nBehaviour.GetComponent<Client_Goblin>());
+        //networkRef.TryGet(out NetworkBehaviour nBehaviour, NetworkManager.Singleton);
+        //players.Add(nBehaviour.GetComponent<Client_Goblin>());
 
-        BuildPlayerNameList();
+        StartCoroutine(ListCooldown());
 
         TestPrintRPC();
     }
 
-    private void BuildPlayerNameList()
+    IEnumerator ListCooldown()
     {
+        yield return new WaitForSeconds(.05f);
+
+        BuildPlayerNameListRPC();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void BuildPlayerNameListRPC()
+    {
+        // Build our player list.
+        players.Clear();
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            // Get network behaviour this reference is referencing
+            playerList[i].TryGet(out NetworkBehaviour nBehaviour, NetworkManager.Singleton);
+
+            if (nBehaviour != null)
+            {
+                players.Add(nBehaviour.GetComponent<Client_Goblin>());
+                print("JUST ADDED PLAYER " + i + ": " + nBehaviour.GetComponent<Client_Goblin>().GetName());
+            }
+            else
+            {
+                print("PLAYER " + i + ": " + "COULD NOT FIND CLIENT GOBLIN SCRIPT.");
+            }
+        }
+
+        // Build our list of names.
         int count = players.Count;
         string playerNames = "";
-        for(int i=0; i<count; i++)
+        for (int i = 0; i < count; i++)
         {
             playerNames += players[i].GetName() + "\n";
         }

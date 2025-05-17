@@ -28,6 +28,9 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] TextMeshPro namePlate;
     [SerializeField] string playerName;
 
+    [Header("Ready?")]
+    [SerializeField] bool isReady = false;
+
     void Awake()
     {
         m_GoblinInput.enabled = false;
@@ -45,6 +48,8 @@ public class Client_Goblin : NetworkBehaviour
         namePlate.gameObject.SetActive(false);
         m_RightArm.SetActive(false);
         m_VacuumGoblin.enabled = false;
+
+        isReady = false;
     }
 
     // Things to do once we establish our setup. Probably our own setup stuff!
@@ -98,12 +103,20 @@ public class Client_Goblin : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void ForceUpdateNameplatesRPC()
     {
-        UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
+        if (string.IsNullOrEmpty(playerName))
+        {
+            UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
+        }
+        else
+        {
+            UpdateNameplateRPC(playerName);
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void UpdateNameplateRPC(string name)
     {
+        print(name + " THIS IS MY NAME");
         namePlate.text = name;
         playerName = name;
     }

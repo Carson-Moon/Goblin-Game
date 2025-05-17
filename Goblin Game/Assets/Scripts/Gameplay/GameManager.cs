@@ -14,13 +14,20 @@ public class GameManager : NetworkBehaviour
         InitializeTimer();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        m_Timer.OnValueChanged += OnValueChanged;
+    }
+
     void Update()
     {
-        if(IsServer && m_RunTimer)
+        if (IsServer && m_RunTimer)
         {
             m_Timer.Value -= Time.deltaTime;
 
-            if(m_Timer.Value <= 0)
+            if (m_Timer.Value <= 0)
             {
                 m_Timer.Value = 0;
                 m_RunTimer = false;
@@ -32,7 +39,7 @@ public class GameManager : NetworkBehaviour
     // Initialize our timer.
     public void InitializeTimer()
     {
-        if(IsServer)
+        if (IsServer)
         {
             m_Timer.Value = timerLength;
             m_RunTimer = true;
@@ -55,5 +62,10 @@ public class GameManager : NetworkBehaviour
     public float GetTimerValue()
     {
         return m_Timer.Value;
+    }
+    
+    private void OnValueChanged(float wasFloat, float newFloat)
+    {
+        //Debug.Log(m_CurrentIndex.Value);
     }
 }
