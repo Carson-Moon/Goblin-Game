@@ -73,14 +73,10 @@ public class Vacuum_Goblin : NetworkBehaviour
                 m_CurrentUpwardsStrength = upwardsStrength;
             }
 
-            // Disable gravity.
-                //m_VacuumedRigidbody.useGravity = false;
-                // Add some lift so the coins go up?
-                Vector3 force = m_CurrentStrength * Time.deltaTime * ((Vector3.up * m_CurrentUpwardsStrength) + m_VacuumDirection);
+            // Add some lift so the coins go up?
+            Vector3 force = m_CurrentStrength * Time.deltaTime * ((Vector3.up * m_CurrentUpwardsStrength) + m_VacuumDirection);
             Vector3 torque = vacuumTorqueStrength * Time.deltaTime * m_VacuumedRigidbody.transform.right;
             m_VacuumedObjects[i].GetComponent<Vacuumable>().ApplyForceToThisRPC(force, torque);
-            //m_VacuumedRigidbody.AddForce(m_CurrentStrength * Time.deltaTime * ((Vector3.up * upwardsStrength) + m_VacuumDirection));
-            //m_VacuumedRigidbody.AddTorque(vacuumTorqueStrength * Time.deltaTime * m_VacuumedRigidbody.transform.right);
         }
     }
 

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,11 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class Client_Goblin : NetworkBehaviour
 {
+    [Header("Network Object")]
+    [SerializeField] NetworkObject nObject;
+
     // Behaviours to disable.
     [SerializeField] private Input_Goblin m_GoblinInput;
     [SerializeField] private Movement_Goblin m_MovementGoblin;
     [SerializeField] private Stab_Goblin m_StabGoblin;
-    [SerializeField] private MouseLook_Goblin m_MouseLookGoblin;
     [SerializeField] private Camera m_Camera;
     [SerializeField] private AudioListener m_AudioListener;
     [SerializeField] private MeshRenderer m_GoblinBody;
@@ -23,6 +26,9 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject m_RightArm;
     [SerializeField] private Vacuum_Goblin m_VacuumGoblin;
+    [SerializeField] private CinemachineCamera m_CinemachineCamera;
+    [SerializeField] private Follow_Goblin m_FollowGoblin;
+    [SerializeField] private MouseLook_Goblin m_MouseLookGoblin;
     
     [Header("Nameplate")]
     [SerializeField] TextMeshPro namePlate;
@@ -36,7 +42,6 @@ public class Client_Goblin : NetworkBehaviour
         m_GoblinInput.enabled = false;
         m_MovementGoblin.enabled = false;
         m_StabGoblin.enabled = false;
-        m_MouseLookGoblin.enabled = false;
         m_Camera.enabled = false;
         m_AudioListener.enabled = false;
         m_GoblinBody.enabled = false;
@@ -48,6 +53,9 @@ public class Client_Goblin : NetworkBehaviour
         namePlate.gameObject.SetActive(false);
         m_RightArm.SetActive(false);
         m_VacuumGoblin.enabled = false;
+        m_CinemachineCamera.enabled = false;
+        m_FollowGoblin.enabled = false;
+        m_MouseLookGoblin.enabled = false;
 
         isReady = false;
     }
@@ -56,7 +64,7 @@ public class Client_Goblin : NetworkBehaviour
     void Start()
     {
         // Move to a spawn point.
-        if(IsOwner)
+        if(nObject.IsOwner)
         {
             rb.position = Spawnpoint_Manager.instance.GetNextSpawnPosition().position;
 
@@ -65,7 +73,7 @@ public class Client_Goblin : NetworkBehaviour
 
             print(NetworkManager.Singleton.LocalClientId);
 
-            LobbyManager.instance.AddClientToListRPC(this);
+            //LobbyManager.instance.AddClientToListRPC(this);
         }       
     }
 
@@ -74,20 +82,22 @@ public class Client_Goblin : NetworkBehaviour
         base.OnNetworkSpawn();
 
         // Enable our camera and input if we are the owner.
-        if (IsOwner)
+        if (nObject.IsOwner)
         {
             m_GoblinInput.enabled = true;
             m_MovementGoblin.enabled = true;
             m_StabGoblin.enabled = true;
-            m_MouseLookGoblin.enabled = true;
             m_Camera.enabled = true;
             m_AudioListener.enabled = true;
             m_JarManagerGoblin.enabled = true;
             m_CoinManagerGoblin.enabled = true;
             m_CanvasGoblin.SetActive(true);
-            m_LeftArm.SetActive(true);   
+            m_LeftArm.SetActive(true);
             m_RightArm.SetActive(true);
-            m_VacuumGoblin.enabled = true;     
+            m_VacuumGoblin.enabled = true;
+            m_CinemachineCamera.enabled = true;
+            m_FollowGoblin.enabled = true;
+            m_MouseLookGoblin.enabled = true;
         }
         else
         {

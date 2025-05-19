@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -135,7 +136,20 @@ public class JarManager_Goblin : NetworkBehaviour
     // Get stunned!
     private void StartStun()
     {
+        // Disable my movement.
+        m_MovementGoblin.OnCrouch();
+        m_MovementGoblin.DisableMovement();
 
+        // Start our stun cooldown.
+        StartCoroutine(StunCooldown(3));
+    }
+
+    IEnumerator StunCooldown(float stunLength)
+    {
+        yield return new WaitForSeconds(stunLength);
+
+        m_MovementGoblin.EnableMovement();
+        m_MovementGoblin.OffCrouch();
     }
 
     void OnCollisionEnter(Collision collision)

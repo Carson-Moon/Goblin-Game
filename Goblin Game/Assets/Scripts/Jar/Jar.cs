@@ -8,11 +8,12 @@ public class Jar : NetworkBehaviour
     [SerializeField] Collider col;
     [SerializeField] Transform jarPosition;
     [SerializeField] bool canStun = false;
+    [SerializeField] bool canBreak = false;
 
 
     void Update()
     {
-        if(jarPosition != null)
+        if (jarPosition != null)
         {
             transform.position = jarPosition.position;
             transform.rotation = jarPosition.rotation;
@@ -22,7 +23,7 @@ public class Jar : NetworkBehaviour
     // Request ownership of this object.
     public void RequestOwnership()
     {
-        if(!IsOwner)
+        if (!IsOwner)
         {
             RequestOwnershipServerRPC(NetworkManager.Singleton.LocalClientId);
         }
@@ -63,7 +64,32 @@ public class Jar : NetworkBehaviour
         this.jarPosition = jarPosition;
     }
 
-    
+    void OnCollisionEnter(Collision collision)
+    {
+        // Collisions do not matter unless we can stun or break.
+        if (canStun || canBreak)
+        {
+            // If we hit a goblin, do not break!
+            if (collision.gameObject.layer == 7)
+            {
+                DisableStun();
+            }
+
+            // If we hit the lid, do nothing.
+            else if (collision.gameObject.layer == 15)
+            {
+                // Do nothing.
+            }
+            
+            // If we hit anything else, shatter and throw coins everywhere!
+            else
+            {
+                DespawnJarRPC();
+            }
+        }  
+    }
+
+
     public void EnableStun()
     {
         EnableStunRPC();
@@ -73,6 +99,7 @@ public class Jar : NetworkBehaviour
     private void EnableStunRPC()
     {
         canStun = true;
+        canBreak = true;
     }
 
     public void DisableStun()
@@ -84,10 +111,17 @@ public class Jar : NetworkBehaviour
     private void DisableStunRPC()
     {
         canStun = false;
+        canBreak = false;
     }
 
     public bool CanStun()
     {
         return canStun;
+    }
+    
+    [Rpc(SendTo.Server)]
+    private void DespawnJarRPC()
+    {
+        GetComponentInParent<NetworkObject>().Despawn();
     }
 }

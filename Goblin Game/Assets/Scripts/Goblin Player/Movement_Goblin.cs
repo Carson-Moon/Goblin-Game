@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Movement_Goblin : MonoBehaviour
@@ -6,6 +7,8 @@ public class Movement_Goblin : MonoBehaviour
     Rigidbody rb;
     Input_Goblin gInput;
     EnvironmentChecks_Goblin eChecks;
+    [SerializeField] Follow_Goblin gFollow;
+    [SerializeField] CinemachineFollow cineFollow;
 
     [Header("Movement Toggles")]
     [SerializeField] bool canMove = true;
@@ -182,6 +185,9 @@ public class Movement_Goblin : MonoBehaviour
     // Start crouching.
     public void OnCrouch()
     {
+        if (!canCrouch)
+            return;
+
         attemptingCrouch = true;
         isCrouching = true;
 
@@ -189,29 +195,37 @@ public class Movement_Goblin : MonoBehaviour
         bodyCollider.height = 1f;
         bodyCollider.center = new Vector3(0, -0.5f, 0);
 
+        // Update scale and positions of graphics and camera.
         goblinGraphics.localScale = new Vector3(1, 0.5f, 1);
-        goblinGraphics.localPosition = new Vector3(0, -0.5f, 0);
-        cameraTransform.localPosition = new Vector3(0, -.25f, 0);
+        gFollow.SetOffset(new Vector3(0, -0.5f, 0));
+        cineFollow.FollowOffset = new Vector3(0, -1f, 0);
     }
 
     // Stop saying we are trying to crouch.
     public void OffCrouch()
     {
+        if (!canCrouch)
+            return;
+
         attemptingCrouch = false;
     }
 
     // Stop crouching.
     private void Uncrouch()
     {
+        if (!canCrouch)
+            return;
+
         isCrouching = false;
 
         // Reset collider height.
         bodyCollider.height = 2f;
         bodyCollider.center = Vector3.zero;
 
+        // Update scale and positions of graphics and camera.
         goblinGraphics.localScale = new Vector3(1, 1, 1);
-        goblinGraphics.localPosition = new Vector3(0, 0, 0);
-        cameraTransform.localPosition = new Vector3(0, .75f, 0);
+        gFollow.SetOffset(new Vector3(0, 0, 0));
+        cineFollow.FollowOffset = new Vector3(0, 0, 0);
     }
 #endregion
 
