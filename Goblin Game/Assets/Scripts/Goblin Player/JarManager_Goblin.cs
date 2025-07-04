@@ -120,7 +120,7 @@ public class JarManager_Goblin : NetworkBehaviour
         m_CurrentJar.EnablePhysics();
 
         // Apply throw force to jar.
-        m_CurrentJar.ImpulseInDirection(jarPosition.forward, m_JarThrowStrength);
+        m_CurrentJar.ImpulseInDirection(m_Camera.transform.forward, m_JarThrowStrength);
 
         // Un-set jar position.
         m_CurrentJar.SetJarPosition(null);
@@ -155,10 +155,10 @@ public class JarManager_Goblin : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // If we are not the owner, return.
-        //if(!IsOwner)
-        //{
-            //return;
-        //}
+        if(IsOwner)
+        {
+            return;
+        }
 
         if(collision.gameObject.layer == 8)
         {
