@@ -1098,7 +1098,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
+  CustomBlends: {fileID: 11400000, guid: e7f3183d9f5b435419b9f89694c43e30, type: 2}
 --- !u!1 &4795355413679586397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1251,7 @@ GameObject:
   - component: {fileID: 9002851332663129184}
   - component: {fileID: 3675725882115871021}
   - component: {fileID: 9177615178424611166}
+  - component: {fileID: 7666255665008849532}
   m_Layer: 6
   m_Name: Goblin Logic
   m_TagString: Untagged
@@ -1710,6 +1711,7 @@ MonoBehaviour:
   m_CinemachineCamera: {fileID: 1256705584112571926}
   m_FollowGoblin: {fileID: 2523214181854344621}
   m_MouseLookGoblin: {fileID: 8211531466847824535}
+  m_OverlayCamera: {fileID: 7559453220991514419}
   namePlate: {fileID: 533954086948923629}
   playerName: 
   isReady: 0
@@ -1863,6 +1865,19 @@ MonoBehaviour:
   rayLength: 3
   detectedInteractable: {fileID: 0}
   interactionIndicator: {fileID: 7602318509702362562}
+--- !u!114 &7666255665008849532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232869928174608376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759da26f75c3f804e956e442fb2cdffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clientMachine: {fileID: 0}
 --- !u!1 &5914519012101673341
 GameObject:
   m_ObjectHideFlags: 0

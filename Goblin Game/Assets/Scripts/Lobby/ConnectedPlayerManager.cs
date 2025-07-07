@@ -27,6 +27,11 @@ public class ConnectedPlayerManager : NetworkBehaviour
     [Header("Player Data Dictionary")]
     [SerializeField] private Dictionary<ulong, PlayerData> playerDatas = new Dictionary<ulong, PlayerData>();
 
+    [Header("Client Goblin Dictionary")]
+    [SerializeField] private Dictionary<ulong, Client_Goblin> clientGoblins = new Dictionary<ulong, Client_Goblin>();
+
+    [Header("Client State Machine Dictionary")]
+    [SerializeField] private Dictionary<ulong, ClientMachineInteractor> clientMachines = new Dictionary<ulong, ClientMachineInteractor>();
 
     void Awake()
     {
@@ -78,8 +83,12 @@ public class ConnectedPlayerManager : NetworkBehaviour
             // If we found the script, grab the information and add to our dictionary.
             if (clientGoblin != null)
             {
+                AddClientGoblinToDictionary(clientID, clientGoblin);
+
                 PlayerData newData = new PlayerData(clientID, clientGoblin.GetName());
                 AddPlayerDataToDictionary(clientID, newData);
+
+                AddClientMachineInteractorToDictionary(clientID, clientGoblin.GetComponent<ClientMachineInteractor>());
             }
 
             // If we did not find the script, display error.
@@ -106,12 +115,50 @@ public class ConnectedPlayerManager : NetworkBehaviour
             print($"Newly Saved Player Data: {retrievedData.clientID}, {retrievedData.playerName}!");
         }
     }
-#endregion
+
+    private void AddClientGoblinToDictionary(ulong clientID, Client_Goblin clientGoblin)
+    {
+        clientGoblins.Add(clientID, clientGoblin);
+    }
+
+    private void AddClientMachineInteractorToDictionary(ulong clientID, ClientMachineInteractor clientInteractor)
+    {
+        clientMachines.Add(clientID, clientInteractor);
+
+        // Test to make sure data was saved.
+        if (clientMachines.TryGetValue(clientID, out ClientMachineInteractor retrievedData))
+        {
+            print("Saved Client Interactor!");
+        }
+    }
+    #endregion
+
+    public Client_Goblin GetClientGoblin(ulong clientID)
+    {
+        if (clientGoblins.TryGetValue(clientID, out Client_Goblin clientGoblin))
+        {
+            return clientGoblin;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     private void OnClientDisconnected(ulong clientID)
     {
         print($"Client Disconnected: {clientID}");
 
         connectedIDs.Remove(clientID);
+    }
+
+    public List<ulong> GetClientIDs()
+    {
+        return connectedIDs;
+    }
+
+    public Dictionary<ulong, ClientMachineInteractor> GetClientInteractors()
+    {
+        return clientMachines;
     }
 }

@@ -29,6 +29,7 @@ public class Client_Goblin : NetworkBehaviour
     [SerializeField] private CinemachineCamera m_CinemachineCamera;
     [SerializeField] private Follow_Goblin m_FollowGoblin;
     [SerializeField] private MouseLook_Goblin m_MouseLookGoblin;
+    [SerializeField] private Camera m_OverlayCamera;
     
     [Header("Nameplate")]
     [SerializeField] TextMeshPro namePlate;
@@ -56,6 +57,7 @@ public class Client_Goblin : NetworkBehaviour
         m_CinemachineCamera.enabled = false;
         m_FollowGoblin.enabled = false;
         m_MouseLookGoblin.enabled = false;
+        m_OverlayCamera.enabled = false;
 
         isReady = false;
     }
@@ -98,6 +100,7 @@ public class Client_Goblin : NetworkBehaviour
             m_CinemachineCamera.enabled = true;
             m_FollowGoblin.enabled = true;
             m_MouseLookGoblin.enabled = true;
+            m_OverlayCamera.enabled = true;
         }
         else
         {
@@ -141,6 +144,22 @@ public class Client_Goblin : NetworkBehaviour
                 Debug.Log("Scene load failed!");
             }
         }
+    }
+
+    // Set our overlay camera visibility.
+    public void SetOverlayCamera(bool value)
+    {
+        m_OverlayCamera.enabled = value;
+    }
+
+    // Set our goblins movement.
+    public void SetMovement(bool value)
+    {
+        if (value)
+            m_MovementGoblin.EnableMovement();
+        else
+            m_MovementGoblin.DisableMovement();
+        
     }
 
 #region Getters
