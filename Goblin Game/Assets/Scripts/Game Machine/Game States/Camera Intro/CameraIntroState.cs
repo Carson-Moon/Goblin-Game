@@ -70,6 +70,12 @@ public class CameraIntroState : GameState
             // Make sure our flythrough camera has no priority anymore.
             flythroughCam.Priority = -1;
 
+            RoundStatTracker.instance.TrackIntStat(IntStat.Coin);
+            RoundStatTracker.instance.TrackIntStat(IntStat.StabbedSomeone);
+            RoundStatTracker.instance.TrackIntStat(IntStat.StabbedSomeone);
+            MatchStatTracker.instance.SaveClientStatsRPC(NetworkManager.Singleton.LocalClientId, RoundStatTracker.instance.GrabRoundStats());
+            
+
             EndThisState();
         }
 
