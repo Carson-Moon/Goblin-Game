@@ -8,7 +8,6 @@ using UnityEngine;
 public class CountdownState : GameState
 {
     [SerializeField] CountdownCanvas countdownCanvas;
-    [SerializeField] Client_Goblin clientGoblin;
 
 
     public override void StartThisState()
@@ -16,10 +15,9 @@ public class CountdownState : GameState
         base.StartThisState();
 
         // Make sure our overlay camera is on!
-        clientGoblin = ConnectedPlayerManager.instance.GetClientGoblin(NetworkManager.Singleton.LocalClientId);
-        clientGoblin.SetOverlayCamera(true);
+        ClientGoblinHelper.GetMyClientGoblin().SetOverlayCamera(true);
 
-        FadeUI.StartFade(0, 1);
+        CanvasFader.FadeCanvas(FadeLevel.FullyTransparent, FadeSpeed.Medium);
 
         // Start our countdown.
         countdownCanvas.StartCountdown();
@@ -32,7 +30,7 @@ public class CountdownState : GameState
     {
         // Make sure our input is currently disabled!
         print("SETUP OUR PLAYER!");
-        clientGoblin.SetMovement(true);
+        ClientGoblinHelper.GetMyClientGoblin().SetMovement(true);
 
         // We are done with this state.
         EndThisState();

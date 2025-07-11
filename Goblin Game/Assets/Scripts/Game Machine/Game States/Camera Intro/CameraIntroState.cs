@@ -12,7 +12,6 @@ public class CameraIntroState : GameState
     [SerializeField] List<FlythroughData> flythroughData = new List<FlythroughData>();
     [SerializeField] CinemachineCamera flythroughCam;
     [SerializeField] CinemachineSplineDolly flythroughDolly;
-    [SerializeField] Client_Goblin clientGoblin;
 
 
     public override void StartThisState()
@@ -20,7 +19,7 @@ public class CameraIntroState : GameState
         base.StartThisState();
 
         // Grab our client goblin script and disable our overlay camera for the flythrough.
-        clientGoblin = ConnectedPlayerManager.instance.GetClientGoblin(NetworkManager.Singleton.LocalClientId);
+        Client_Goblin clientGoblin = ClientGoblinHelper.GetMyClientGoblin();
         clientGoblin.SetOverlayCamera(false);
         clientGoblin.SetMovement(false);
 
@@ -41,14 +40,14 @@ public class CameraIntroState : GameState
         float time = 0;
         bool startedFade = false;
 
-        FadeUI.StartFade(0, 0.5f);
+        CanvasFader.FadeCanvas(FadeLevel.FullyTransparent, FadeSpeed.SuperFast);
         while (time < thisData.GetSpeed())
         {
             // Fade out if we have half a second left.
             if (!startedFade && thisData.GetSpeed() - time <= 0.5f)
             {
                 startedFade = true;
-                FadeUI.StartFade(1, 0.5f);
+                CanvasFader.FadeCanvas(FadeLevel.FullyOpaque, FadeSpeed.SuperFast);
             }
 
             flythroughDolly.CameraPosition = Mathf.Lerp(0, 1, time / thisData.GetSpeed());
