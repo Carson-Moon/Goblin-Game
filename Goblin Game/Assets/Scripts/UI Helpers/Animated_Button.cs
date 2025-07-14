@@ -2,83 +2,56 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-// Responsible for holding what we need to animate a UI button.
-    // Skew button!
+// Skew button!
 
-public class Animated_Button : MonoBehaviour
+public class Animated_Button : Abstract_Animated_UI
 {
-    [Header("Button Settings")]
-    [SerializeField] bool isPressing;
-
-    [Header("Top Graphic Settings")]
-    [SerializeField] RectTransform topGraphic;
-    [SerializeField] Image topGraphicImage;
-    [SerializeField] float rotationDegrees;
-    [SerializeField] float rotationSeconds;
-    [SerializeField] float scaleMultiplier;
-    [SerializeField] float scaleSeconds;
-    [SerializeField] Color defaultColor;
-    [SerializeField] Color pressedColor;
-    [SerializeField] float colorSeconds;
-
     [Header("Button Events")]
     [SerializeField] UnityEvent onButtonPressed;
 
+    [Header("Button Animation Settings")]
+    [SerializeField] protected float rotationDegrees;
+    [SerializeField] protected float rotationSeconds;
+    [SerializeField] protected float scaleMultiplier;
+    [SerializeField] protected float scaleSeconds;
+    [SerializeField] protected Color defaultColor;
+    [SerializeField] protected Color pressedColor;
+    [SerializeField] protected float colorSeconds;
 
-    public void OnHover()
+
+    #region Logic
+
+    public override bool OnRelease(PointerEventData data)
     {
-        OnHoverAnimation();
-    }
+        if (!base.OnRelease(data))
+            return false;
 
-    public void OffHover()
-    {
-        if (isPressing)
-        {
-            isPressing = false;
-
-            OnReleaseAnimation();
-        }
-
-        OffHoverAnimation();
-    }
-
-    public void OnPress()
-    {
-        isPressing = true;
-
-        OnPressAnimation();
-    }
-
-    public void OnRelease()
-    {
-        if (!isPressing)
-            return;
-
-        isPressing = false;
-        onButtonPressed.Invoke();
         print("Button actually pressed!");
+        onButtonPressed.Invoke();
 
-        OnReleaseAnimation();
+        return true;
     }
+
+    #endregion
 
     #region Animations
-    
-    private void OnHoverAnimation()
+    protected override void OnHoverAnimation()
     {
         // Rotate our top graphic to askew.
         topGraphic.DORotate(new Vector3(0, 0, rotationDegrees), rotationSeconds, RotateMode.Fast)
             .SetEase(Ease.OutElastic);
     }
 
-    private void OffHoverAnimation()
+    protected override void OffHoverAnimation()
     {
         // Rotate our top graphic back to normal.
         topGraphic.DORotate(new Vector3(0, 0, 0), rotationSeconds, RotateMode.Fast)
             .SetEase(Ease.OutElastic);
     }
 
-    private void OnPressAnimation()
+    protected override void OnPressAnimation()
     {
         // Scale down our top graphic.
         topGraphic.DOScale(Vector3.one * scaleMultiplier, scaleSeconds)
@@ -88,7 +61,7 @@ public class Animated_Button : MonoBehaviour
         topGraphicImage.DOColor(pressedColor, colorSeconds);
     }
 
-    private void OnReleaseAnimation()
+    protected override void OnReleaseAnimation()
     {
         // Scale up our top graphic.
         topGraphic.DOScale(Vector3.one, scaleSeconds)

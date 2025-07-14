@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class TimedGameplayState : GameState
     [Header("Canvas Settings")]
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] GameObject stopText;
+    [SerializeField] Abstract_Canvas_Animation stopTextAnimation;
 
     [Header("Match Settings")]
     [SerializeField] bool isTimerActive;
@@ -25,7 +26,7 @@ public class TimedGameplayState : GameState
 
             if (currentMatchTimer <= 0)
             {
-                StopMatch();
+                StartCoroutine(StopMatch());
             }
         }
     }
@@ -53,7 +54,7 @@ public class TimedGameplayState : GameState
         CanvasFader.FadeCanvas(canvasGroup, FadeLevel.FullyOpaque, FadeSpeed.Medium);
     }
 
-    private void StopMatch()
+    IEnumerator StopMatch()
     {
         isTimerActive = false;
 
@@ -61,7 +62,12 @@ public class TimedGameplayState : GameState
         ClientGoblinHelper.GetMyClientGoblin().SetMovement(false);
 
         // Have some sort of tape over the screen to indicate the end of the round!
-        stopText.SetActive(true);
+        stopTextAnimation.PlayAnimation();
+
+        yield return new WaitForSeconds(3);
+
+        // Fade out our canvas.
+        CanvasFader.FadeCanvas(canvasGroup, FadeLevel.FullyTransparent, FadeSpeed.Medium);
 
         // We are done with this state!
         EndThisState();

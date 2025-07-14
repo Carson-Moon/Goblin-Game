@@ -274,6 +274,54 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI_Interaction"",
+            ""id"": ""a9332d33-79ae-43e1-ba8f-155ca503d8a8"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8c5ef954-af07-4c44-b8a4-3ec2444c97ad"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8bc045a9-1f41-42c8-a258-08e06c908234"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""452499ab-2617-42d0-a78a-8c0dd16bfcf6"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d664a170-1e28-4c1f-bee9-7bb15d8e0b2d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -290,11 +338,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Goblin_Throw = m_Goblin.FindAction("Throw", throwIfNotFound: true);
         m_Goblin_Debug = m_Goblin.FindAction("Debug", throwIfNotFound: true);
         m_Goblin_Vacuum = m_Goblin.FindAction("Vacuum", throwIfNotFound: true);
+        // UI_Interaction
+        m_UI_Interaction = asset.FindActionMap("UI_Interaction", throwIfNotFound: true);
+        m_UI_Interaction_MousePosition = m_UI_Interaction.FindAction("MousePosition", throwIfNotFound: true);
+        m_UI_Interaction_MouseDelta = m_UI_Interaction.FindAction("MouseDelta", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_Goblin.enabled, "This will cause a leak and performance issues, PlayerControls.Goblin.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI_Interaction.enabled, "This will cause a leak and performance issues, PlayerControls.UI_Interaction.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -470,6 +523,60 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public GoblinActions @Goblin => new GoblinActions(this);
+
+    // UI_Interaction
+    private readonly InputActionMap m_UI_Interaction;
+    private List<IUI_InteractionActions> m_UI_InteractionActionsCallbackInterfaces = new List<IUI_InteractionActions>();
+    private readonly InputAction m_UI_Interaction_MousePosition;
+    private readonly InputAction m_UI_Interaction_MouseDelta;
+    public struct UI_InteractionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UI_InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_UI_Interaction_MousePosition;
+        public InputAction @MouseDelta => m_Wrapper.m_UI_Interaction_MouseDelta;
+        public InputActionMap Get() { return m_Wrapper.m_UI_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UI_InteractionActions set) { return set.Get(); }
+        public void AddCallbacks(IUI_InteractionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UI_InteractionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UI_InteractionActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+            @MouseDelta.started += instance.OnMouseDelta;
+            @MouseDelta.performed += instance.OnMouseDelta;
+            @MouseDelta.canceled += instance.OnMouseDelta;
+        }
+
+        private void UnregisterCallbacks(IUI_InteractionActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+            @MouseDelta.started -= instance.OnMouseDelta;
+            @MouseDelta.performed -= instance.OnMouseDelta;
+            @MouseDelta.canceled -= instance.OnMouseDelta;
+        }
+
+        public void RemoveCallbacks(IUI_InteractionActions instance)
+        {
+            if (m_Wrapper.m_UI_InteractionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUI_InteractionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UI_InteractionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UI_InteractionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UI_InteractionActions @UI_Interaction => new UI_InteractionActions(this);
     public interface IGoblinActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -482,5 +589,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
         void OnVacuum(InputAction.CallbackContext context);
+    }
+    public interface IUI_InteractionActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
     }
 }
