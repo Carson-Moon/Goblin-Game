@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Goblin"",
+            ""name"": ""GoblinControls"",
             ""id"": ""73c72349-28a1-48e7-93ca-0d977487d969"",
             ""actions"": [
                 {
@@ -112,6 +112,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Vacuum"",
                     ""type"": ""Button"",
                     ""id"": ""821426de-6e1b-423e-94aa-a17f72baea99"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1eae91d-d9bd-4e8d-9299-f71ee1d5d114"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fa2127d-f5d2-4453-afbb-13db10aa0d08"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,6 +290,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Vacuum"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""477660e5-48da-4884-98ad-d673df23e7a4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f724f0dc-0739-4b5c-b674-bdc45836d94e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -322,32 +362,173 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GoblinMovement"",
+            ""id"": ""3fe22c95-6939-4468-83d8-5870c6f51fb2"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7938eb7b-12a0-4d07-b9cd-87bb64e66981"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""db4972bf-93ba-43ed-8fc8-0a3219d87728"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""969bc7f1-3b3a-48d4-aba4-75ed58b3018c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1ff14afe-8274-44d0-875e-5ddb472df27d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""115fcdc4-2e9e-410a-9055-15b577f01f23"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a0f3a09-97af-4bb5-b4e3-1deb9c56c28b"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""0a3ef21e-c876-49d1-b66f-9f70a3d6359e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""fea85e33-e0cf-4788-92f1-aa8d5390f10e"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""dfd4463d-178c-4a1e-8bd8-f3e41504f7d0"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5f79af34-1919-412c-8597-40208e100138"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""91953257-aa03-4c74-8548-94e20777fbc0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1a56b2a-c30d-423c-ae5c-a385ba6be7ba"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Goblin
-        m_Goblin = asset.FindActionMap("Goblin", throwIfNotFound: true);
-        m_Goblin_Move = m_Goblin.FindAction("Move", throwIfNotFound: true);
-        m_Goblin_Jump = m_Goblin.FindAction("Jump", throwIfNotFound: true);
-        m_Goblin_Look = m_Goblin.FindAction("Look", throwIfNotFound: true);
-        m_Goblin_Sprint = m_Goblin.FindAction("Sprint", throwIfNotFound: true);
-        m_Goblin_Crouch = m_Goblin.FindAction("Crouch", throwIfNotFound: true);
-        m_Goblin_Stab = m_Goblin.FindAction("Stab", throwIfNotFound: true);
-        m_Goblin_Pickup = m_Goblin.FindAction("Pickup", throwIfNotFound: true);
-        m_Goblin_Throw = m_Goblin.FindAction("Throw", throwIfNotFound: true);
-        m_Goblin_Debug = m_Goblin.FindAction("Debug", throwIfNotFound: true);
-        m_Goblin_Vacuum = m_Goblin.FindAction("Vacuum", throwIfNotFound: true);
+        // GoblinControls
+        m_GoblinControls = asset.FindActionMap("GoblinControls", throwIfNotFound: true);
+        m_GoblinControls_Move = m_GoblinControls.FindAction("Move", throwIfNotFound: true);
+        m_GoblinControls_Jump = m_GoblinControls.FindAction("Jump", throwIfNotFound: true);
+        m_GoblinControls_Look = m_GoblinControls.FindAction("Look", throwIfNotFound: true);
+        m_GoblinControls_Sprint = m_GoblinControls.FindAction("Sprint", throwIfNotFound: true);
+        m_GoblinControls_Crouch = m_GoblinControls.FindAction("Crouch", throwIfNotFound: true);
+        m_GoblinControls_Stab = m_GoblinControls.FindAction("Stab", throwIfNotFound: true);
+        m_GoblinControls_Pickup = m_GoblinControls.FindAction("Pickup", throwIfNotFound: true);
+        m_GoblinControls_Throw = m_GoblinControls.FindAction("Throw", throwIfNotFound: true);
+        m_GoblinControls_Debug = m_GoblinControls.FindAction("Debug", throwIfNotFound: true);
+        m_GoblinControls_Vacuum = m_GoblinControls.FindAction("Vacuum", throwIfNotFound: true);
+        m_GoblinControls_LeftClick = m_GoblinControls.FindAction("LeftClick", throwIfNotFound: true);
+        m_GoblinControls_RightClick = m_GoblinControls.FindAction("RightClick", throwIfNotFound: true);
         // UI_Interaction
         m_UI_Interaction = asset.FindActionMap("UI_Interaction", throwIfNotFound: true);
         m_UI_Interaction_MousePosition = m_UI_Interaction.FindAction("MousePosition", throwIfNotFound: true);
         m_UI_Interaction_MouseDelta = m_UI_Interaction.FindAction("MouseDelta", throwIfNotFound: true);
+        // GoblinMovement
+        m_GoblinMovement = asset.FindActionMap("GoblinMovement", throwIfNotFound: true);
+        m_GoblinMovement_Movement = m_GoblinMovement.FindAction("Movement", throwIfNotFound: true);
+        m_GoblinMovement_Jump = m_GoblinMovement.FindAction("Jump", throwIfNotFound: true);
+        m_GoblinMovement_Crouch = m_GoblinMovement.FindAction("Crouch", throwIfNotFound: true);
+        m_GoblinMovement_Look = m_GoblinMovement.FindAction("Look", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
-        UnityEngine.Debug.Assert(!m_Goblin.enabled, "This will cause a leak and performance issues, PlayerControls.Goblin.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GoblinControls.enabled, "This will cause a leak and performance issues, PlayerControls.GoblinControls.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI_Interaction.enabled, "This will cause a leak and performance issues, PlayerControls.UI_Interaction.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GoblinMovement.enabled, "This will cause a leak and performance issues, PlayerControls.GoblinMovement.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -406,42 +587,46 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Goblin
-    private readonly InputActionMap m_Goblin;
-    private List<IGoblinActions> m_GoblinActionsCallbackInterfaces = new List<IGoblinActions>();
-    private readonly InputAction m_Goblin_Move;
-    private readonly InputAction m_Goblin_Jump;
-    private readonly InputAction m_Goblin_Look;
-    private readonly InputAction m_Goblin_Sprint;
-    private readonly InputAction m_Goblin_Crouch;
-    private readonly InputAction m_Goblin_Stab;
-    private readonly InputAction m_Goblin_Pickup;
-    private readonly InputAction m_Goblin_Throw;
-    private readonly InputAction m_Goblin_Debug;
-    private readonly InputAction m_Goblin_Vacuum;
-    public struct GoblinActions
+    // GoblinControls
+    private readonly InputActionMap m_GoblinControls;
+    private List<IGoblinControlsActions> m_GoblinControlsActionsCallbackInterfaces = new List<IGoblinControlsActions>();
+    private readonly InputAction m_GoblinControls_Move;
+    private readonly InputAction m_GoblinControls_Jump;
+    private readonly InputAction m_GoblinControls_Look;
+    private readonly InputAction m_GoblinControls_Sprint;
+    private readonly InputAction m_GoblinControls_Crouch;
+    private readonly InputAction m_GoblinControls_Stab;
+    private readonly InputAction m_GoblinControls_Pickup;
+    private readonly InputAction m_GoblinControls_Throw;
+    private readonly InputAction m_GoblinControls_Debug;
+    private readonly InputAction m_GoblinControls_Vacuum;
+    private readonly InputAction m_GoblinControls_LeftClick;
+    private readonly InputAction m_GoblinControls_RightClick;
+    public struct GoblinControlsActions
     {
         private @PlayerControls m_Wrapper;
-        public GoblinActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Goblin_Move;
-        public InputAction @Jump => m_Wrapper.m_Goblin_Jump;
-        public InputAction @Look => m_Wrapper.m_Goblin_Look;
-        public InputAction @Sprint => m_Wrapper.m_Goblin_Sprint;
-        public InputAction @Crouch => m_Wrapper.m_Goblin_Crouch;
-        public InputAction @Stab => m_Wrapper.m_Goblin_Stab;
-        public InputAction @Pickup => m_Wrapper.m_Goblin_Pickup;
-        public InputAction @Throw => m_Wrapper.m_Goblin_Throw;
-        public InputAction @Debug => m_Wrapper.m_Goblin_Debug;
-        public InputAction @Vacuum => m_Wrapper.m_Goblin_Vacuum;
-        public InputActionMap Get() { return m_Wrapper.m_Goblin; }
+        public GoblinControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_GoblinControls_Move;
+        public InputAction @Jump => m_Wrapper.m_GoblinControls_Jump;
+        public InputAction @Look => m_Wrapper.m_GoblinControls_Look;
+        public InputAction @Sprint => m_Wrapper.m_GoblinControls_Sprint;
+        public InputAction @Crouch => m_Wrapper.m_GoblinControls_Crouch;
+        public InputAction @Stab => m_Wrapper.m_GoblinControls_Stab;
+        public InputAction @Pickup => m_Wrapper.m_GoblinControls_Pickup;
+        public InputAction @Throw => m_Wrapper.m_GoblinControls_Throw;
+        public InputAction @Debug => m_Wrapper.m_GoblinControls_Debug;
+        public InputAction @Vacuum => m_Wrapper.m_GoblinControls_Vacuum;
+        public InputAction @LeftClick => m_Wrapper.m_GoblinControls_LeftClick;
+        public InputAction @RightClick => m_Wrapper.m_GoblinControls_RightClick;
+        public InputActionMap Get() { return m_Wrapper.m_GoblinControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GoblinActions set) { return set.Get(); }
-        public void AddCallbacks(IGoblinActions instance)
+        public static implicit operator InputActionMap(GoblinControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IGoblinControlsActions instance)
         {
-            if (instance == null || m_Wrapper.m_GoblinActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GoblinActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GoblinControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GoblinControlsActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -472,9 +657,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Vacuum.started += instance.OnVacuum;
             @Vacuum.performed += instance.OnVacuum;
             @Vacuum.canceled += instance.OnVacuum;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
         }
 
-        private void UnregisterCallbacks(IGoblinActions instance)
+        private void UnregisterCallbacks(IGoblinControlsActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -506,23 +697,29 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Vacuum.started -= instance.OnVacuum;
             @Vacuum.performed -= instance.OnVacuum;
             @Vacuum.canceled -= instance.OnVacuum;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
         }
 
-        public void RemoveCallbacks(IGoblinActions instance)
+        public void RemoveCallbacks(IGoblinControlsActions instance)
         {
-            if (m_Wrapper.m_GoblinActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GoblinControlsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IGoblinActions instance)
+        public void SetCallbacks(IGoblinControlsActions instance)
         {
-            foreach (var item in m_Wrapper.m_GoblinActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GoblinControlsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_GoblinActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GoblinControlsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public GoblinActions @Goblin => new GoblinActions(this);
+    public GoblinControlsActions @GoblinControls => new GoblinControlsActions(this);
 
     // UI_Interaction
     private readonly InputActionMap m_UI_Interaction;
@@ -577,7 +774,77 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public UI_InteractionActions @UI_Interaction => new UI_InteractionActions(this);
-    public interface IGoblinActions
+
+    // GoblinMovement
+    private readonly InputActionMap m_GoblinMovement;
+    private List<IGoblinMovementActions> m_GoblinMovementActionsCallbackInterfaces = new List<IGoblinMovementActions>();
+    private readonly InputAction m_GoblinMovement_Movement;
+    private readonly InputAction m_GoblinMovement_Jump;
+    private readonly InputAction m_GoblinMovement_Crouch;
+    private readonly InputAction m_GoblinMovement_Look;
+    public struct GoblinMovementActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GoblinMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_GoblinMovement_Movement;
+        public InputAction @Jump => m_Wrapper.m_GoblinMovement_Jump;
+        public InputAction @Crouch => m_Wrapper.m_GoblinMovement_Crouch;
+        public InputAction @Look => m_Wrapper.m_GoblinMovement_Look;
+        public InputActionMap Get() { return m_Wrapper.m_GoblinMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GoblinMovementActions set) { return set.Get(); }
+        public void AddCallbacks(IGoblinMovementActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GoblinMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GoblinMovementActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+        }
+
+        private void UnregisterCallbacks(IGoblinMovementActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+        }
+
+        public void RemoveCallbacks(IGoblinMovementActions instance)
+        {
+            if (m_Wrapper.m_GoblinMovementActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGoblinMovementActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GoblinMovementActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GoblinMovementActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GoblinMovementActions @GoblinMovement => new GoblinMovementActions(this);
+    public interface IGoblinControlsActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
@@ -589,10 +856,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
         void OnVacuum(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
     public interface IUI_InteractionActions
     {
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
+    }
+    public interface IGoblinMovementActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

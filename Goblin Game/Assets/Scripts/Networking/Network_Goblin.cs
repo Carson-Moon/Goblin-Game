@@ -14,7 +14,7 @@ public class Network_Goblin : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        goblinOrientation = Goblin.instance.GetOrientation();
+        //goblinOrientation = Goblin.instance.GetOrientation();
 
         if(IsOwner)
         {

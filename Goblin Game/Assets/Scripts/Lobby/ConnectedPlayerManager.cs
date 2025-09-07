@@ -112,7 +112,7 @@ public class ConnectedPlayerManager : NetworkBehaviour
         // Test to make sure data was saved.
         if (playerDatas.TryGetValue(clientID, out PlayerData retrievedData))
         {
-            print($"Newly Saved Player Data: {retrievedData.clientID}, {retrievedData.playerName}!");
+            //print($"Newly Saved Player Data: {retrievedData.clientID}, {retrievedData.playerName}!");
         }
     }
 
@@ -128,7 +128,7 @@ public class ConnectedPlayerManager : NetworkBehaviour
         // Test to make sure data was saved.
         if (clientMachines.TryGetValue(clientID, out ClientMachineInteractor retrievedData))
         {
-            print("Saved Client Interactor!");
+            //print("Saved Client Interactor!");
         }
     }
     #endregion
