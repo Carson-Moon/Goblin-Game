@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -34,9 +35,9 @@ public class CanvasFader : MonoBehaviour
     }
 
     // Fades whatever canvas is passed in.
-    public static void FadeCanvas(CanvasGroup canvas, FadeLevel fadeLevel, FadeSpeed fadeSpeed)
+    public static void FadeCanvas(CanvasGroup canvas, FadeLevel fadeLevel, FadeSpeed fadeSpeed, Action onFadeComplete = null)
     {
-        canvas.DOFade((int)fadeLevel, DetermineFadeTime(fadeSpeed));
+        canvas.DOFade((int)fadeLevel, DetermineFadeTime(fadeSpeed)).OnComplete(() => onFadeComplete.Invoke());
     }
 
     // Determine fadeTime from FadeSpeed.

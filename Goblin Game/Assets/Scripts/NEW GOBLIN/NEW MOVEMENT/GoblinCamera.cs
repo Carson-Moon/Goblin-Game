@@ -13,7 +13,7 @@ public class GoblinCamera : MonoBehaviour
 
     public void Initialize(Transform cameraTarget)
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         transform.position = cameraTarget.position;
         transform.eulerAngles = _eulerAngles = cameraTarget.eulerAngles;

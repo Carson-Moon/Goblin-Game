@@ -27,8 +27,6 @@ public class StabAction : MonoBehaviour
 
     public void PerformStab()
     {
-        Debug.Log("Performed a Stab!");
-
         if(anim) anim.SetTrigger(AttackHash);
 
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabbableMask);

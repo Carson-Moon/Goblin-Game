@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 public class LoadingScreenManager : MonoBehaviour
 {
     // Singleton
-    public static LoadingScreenManager instance { get; private set; }
+    public static LoadingScreenManager Instance { get; private set; }
 
     [Header("Loading Screen Elements")]
     [SerializeField] CanvasGroup loadingGroup;
@@ -17,33 +18,39 @@ public class LoadingScreenManager : MonoBehaviour
     [SerializeField] string[] splashTextOptions;
 
 
-    // Enable our loading screen.
-    public void EnableLoadingScreen()
+    void Awake()
     {
-        mainText.text = "Loading. . .";
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
 
-        // Set our splash text.
-        splashText.text = splashTextOptions[Random.Range(0, splashTextOptions.Length)];
-
-        // Fade our canvas in.
-        CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyOpaque, FadeSpeed.Medium);
+        DontDestroyOnLoad(this);
     }
 
-    public void EnableLoadingScreen(string bigText)
+    // Enable our loading screen.
+    public void EnableLoadingScreen(string overrideMainText = "", string overrideSplashText = "", Action onFadeComplete = null)
     {
-        mainText.text = bigText;
+        // Set our main text.
+        if (string.Compare(overrideMainText, "") == 0)
+            mainText.text = "Loading. . .";
+        else
+            mainText.text = overrideMainText;
 
         // Set our splash text.
-        splashText.text = splashTextOptions[Random.Range(0, splashTextOptions.Length)];
+        if (string.Compare(overrideSplashText, "") == 0)
+            splashText.text = splashTextOptions[UnityEngine.Random.Range(0, splashTextOptions.Length)];
+        else
+            splashText.text = overrideSplashText;
 
         // Fade our canvas in.
-        CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyOpaque, FadeSpeed.Medium);
+        CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyOpaque, FadeSpeed.Medium, onFadeComplete);
     }
 
     // Disable our loading screen.
-    public void DisableLoadingScreen()
+    public void DisableLoadingScreen(Action onFadeComplete = null)
     {
         // Fade our canvas in.
-        CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyTransparent, FadeSpeed.Medium);
+        CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyTransparent, FadeSpeed.Medium, onFadeComplete);
     }
 }

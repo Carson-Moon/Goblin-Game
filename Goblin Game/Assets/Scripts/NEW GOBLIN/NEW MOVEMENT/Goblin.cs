@@ -3,8 +3,10 @@ using UnityEngine.PlayerLoop;
 
 public class Goblin : MonoBehaviour
 {
+    [Header("Character Controllers")]
     [SerializeField] private GoblinCharacter goblinCharacter;
     [SerializeField] private GoblinCamera goblinCamera;
+
 
     private PlayerControls pControls;
 
@@ -50,5 +52,10 @@ public class Goblin : MonoBehaviour
     void LateUpdate()
     {
         goblinCamera.UpdatePosition(goblinCharacter.CameraTarget);
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        goblinCharacter.SetPosition(position);
     }
 }

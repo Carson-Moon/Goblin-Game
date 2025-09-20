@@ -62,6 +62,8 @@ public class GoblinInitializer : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        
+
         if (IsOwner)
         {
             goblin.enabled = true;
@@ -80,6 +82,12 @@ public class GoblinInitializer : NetworkBehaviour
             grabAction.enabled = true;
             vacuumAction.enabled = true;
             throwAction.enabled = true;
+        }
+        else
+        {
+            Destroy(audioListener);
+
+            kinematicCharacterMotor.gameObject.layer = 7; // Network Goblin Layer
         }
     }
 }

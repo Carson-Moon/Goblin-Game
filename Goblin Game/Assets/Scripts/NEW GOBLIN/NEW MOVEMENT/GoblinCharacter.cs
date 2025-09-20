@@ -34,6 +34,8 @@ public struct CharacterInput
 
 public class GoblinCharacter : MonoBehaviour, ICharacterController
 {
+    [SerializeField] bool canMove = true;
+
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
@@ -89,19 +91,29 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     {
         _requestedRotation = input.Rotation;
 
-        _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
-        _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
-        _requestedMovement = input.Rotation * _requestedMovement;
-
-        _requestedJump = _requestedJump || input.Jump;
-        _requestedJumpSustain = input.JumpSustain;
-
-        _requestedCrouch = input.Crouch switch
+        if (canMove)
         {
-            CrouchInput.Toggle => !_requestedCrouch,
-            CrouchInput.None => _requestedCrouch,
-            _ => _requestedCrouch
-        };
+            _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
+            _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
+            _requestedMovement = input.Rotation * _requestedMovement;
+
+            _requestedJump = _requestedJump || input.Jump;
+            _requestedJumpSustain = input.JumpSustain;
+
+            _requestedCrouch = input.Crouch switch
+            {
+                CrouchInput.Toggle => !_requestedCrouch,
+                CrouchInput.None => _requestedCrouch,
+                _ => _requestedCrouch
+            };
+        }
+        else
+        {
+            _requestedMovement = Vector3.zero;
+            _requestedJump = false;
+            _requestedJumpSustain = false;
+            _requestedCrouch = false;
+        }
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -308,7 +320,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 }
 
                 // Steer towards current velocity.
-                    currentVelocity += movementForce;
+                currentVelocity += movementForce;
             }
 
             // Gravity
@@ -341,7 +353,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             {
                 _requestedJump = false;
             }
-            
+
         }
 
     }
@@ -429,5 +441,17 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
     {
+    }
+
+    public void SetPosition(Vector3 position, bool killVelocity = true)
+    {
+        motor.SetPosition(position);
+        if (killVelocity)
+            motor.BaseVelocity = Vector3.zero;
+    }
+
+    public void ToggleMovement(bool toggle)
+    {
+        canMove = toggle;
     }
 }
