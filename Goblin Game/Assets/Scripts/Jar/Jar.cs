@@ -6,19 +6,9 @@ public class Jar : NetworkBehaviour
     // Runtime
     [SerializeField] Rigidbody rb;
     [SerializeField] Collider col;
-    [SerializeField] Transform jarPosition;
     [SerializeField] bool canStun = false;
     [SerializeField] bool canBreak = false;
-
-
-    void Update()
-    {
-        if (jarPosition != null)
-        {
-            transform.position = jarPosition.position;
-            transform.rotation = jarPosition.rotation;
-        }
-    }
+    
 
     // Request ownership of this object.
     public void RequestOwnership()
@@ -56,12 +46,6 @@ public class Jar : NetworkBehaviour
     public void ImpulseInDirection(Vector3 direction, float strength)
     {
         rb.AddForce(strength * direction, ForceMode.Impulse);
-    }
-
-    // Set this jar position.
-    public void SetJarPosition(Transform jarPosition)
-    {
-        this.jarPosition = jarPosition;
     }
 
     void OnCollisionEnter(Collision collision)

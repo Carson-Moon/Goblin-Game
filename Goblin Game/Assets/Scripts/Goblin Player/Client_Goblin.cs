@@ -73,7 +73,7 @@ public class Client_Goblin : NetworkBehaviour
             // Setup our nameplate.
             UpdateNameplateRPC(PlayerInformation_Manager.instance.GetPlayerName());
 
-            print(NetworkManager.Singleton.LocalClientId);
+            //print(NetworkManager.Singleton.LocalClientId);
 
             //LobbyManager.instance.AddClientToListRPC(this);
         }       
@@ -86,6 +86,8 @@ public class Client_Goblin : NetworkBehaviour
         // Enable our camera and input if we are the owner.
         if (nObject.IsOwner)
         {
+            ClientGoblinHelper.SetMyClientGoblin(this);
+
             m_GoblinInput.enabled = true;
             m_MovementGoblin.enabled = true;
             m_StabGoblin.enabled = true;
@@ -129,7 +131,7 @@ public class Client_Goblin : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void UpdateNameplateRPC(string name)
     {
-        print(name + " THIS IS MY NAME");
+        //print(name + " THIS IS MY NAME");
         namePlate.text = name;
         playerName = name;
     }

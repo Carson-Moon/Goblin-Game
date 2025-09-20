@@ -22,4 +22,10 @@ public class ClientGoblinHelper : MonoBehaviour
         );
         return clientGoblin;
     }
+
+    // Sets our goblin client to the one passed in.
+    public static void SetMyClientGoblin(Client_Goblin _clientGoblin)
+    {
+        clientGoblin = _clientGoblin;
+    }
 }

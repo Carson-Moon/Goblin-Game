@@ -52,7 +52,7 @@ public class Animated_Slider_Controller : MonoBehaviour
     {
         // Grab our mouse delta!
         float xMousePos = UI_Input.GetMousePosition().x;
-        print(UI_Input.GetMouseDelta().x);
+        //print(UI_Input.GetMouseDelta().x);
 
         xPosition = xMousePos;
     }

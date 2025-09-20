@@ -28,6 +28,11 @@ public class JarManager_Goblin : NetworkBehaviour
     [Header("UI")]
     [SerializeField] GameObject jarIndicator;
 
+    [Header("Player Model Jar")]
+    [SerializeField] Transform rightHandWeaponSocket;
+    [SerializeField] GameObject playerJar;
+    [SerializeField] GameObject jarPrefab;
+
 
     void Awake()
     {
@@ -93,44 +98,53 @@ public class JarManager_Goblin : NetworkBehaviour
     // Attempt to pick up a detectedJar.
     public void AttemptPickup()
     {
-        if(detectedJar == null || m_HasJar)
+        if (detectedJar == null || m_HasJar)
             return;
 
-        m_CurrentJar = detectedJar.GetComponent<Jar>();
+        detectedJar.SetActive(false);
+
+        //m_CurrentJar = detectedJar.GetComponent<Jar>();
 
         // Request ownership.
-        m_CurrentJar.RequestOwnership();
+        //m_CurrentJar.RequestOwnership();
 
         m_HasJar = true;
 
         // Turn off jar physics.
-        m_CurrentJar.DisablePhysics();
+        //m_CurrentJar.DisablePhysics();
 
         // Put jar in hand.
-        m_CurrentJar.SetJarPosition(jarPosition);       
+        //m_CurrentJar.SetJarPosition(jarPosition);
+
+        playerJar.SetActive(true);
     }
 
     // Attempt to throw a jar.
     public void AttemptThrow()
     {
-        if(m_CurrentJar == null)
+        if (!m_HasJar)
             return;
 
-        // Turn on jar physics.
-        m_CurrentJar.EnablePhysics();
+        GameObject currentJar = Instantiate(jarPrefab, rightHandWeaponSocket.position, rightHandWeaponSocket.rotation);
+
+        //m_CurrentJar.EnablePhysics();
 
         // Apply throw force to jar.
-        m_CurrentJar.ImpulseInDirection(m_Camera.transform.forward, m_JarThrowStrength);
+        currentJar.GetComponent<Jar>().ImpulseInDirection(m_Camera.transform.forward, m_JarThrowStrength);
 
         // Un-set jar position.
-        m_CurrentJar.SetJarPosition(null);
+        //m_CurrentJar.SetJarPosition(null);
 
         // Set the ability for the jar to stun someone.
-        m_CurrentJar.EnableStun();
+        //m_CurrentJar.EnableStun();
 
-        // Forget anything about a jar. Whats a jar?
-        m_CurrentJar = null;
+        playerJar.SetActive(false);
+
         m_HasJar = false;
+
+        // Forget anything about a jar. Whats a jar? XD
+        //m_CurrentJar = null;
+        //m_HasJar = false;
     }
 
     // Get stunned!

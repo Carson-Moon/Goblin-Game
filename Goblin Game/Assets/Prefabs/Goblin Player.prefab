@@ -1805,6 +1805,9 @@ MonoBehaviour:
   m_PickingUp: 0
   pickupCooldownLength: 0.2
   jarIndicator: {fileID: 3163495014647634206}
+  rightHandWeaponSocket: {fileID: 3109027120343673529}
+  playerJar: {fileID: 1758688374434348538}
+  jarPrefab: {fileID: 8795931693288423260, guid: 5bbedea6dfe089f4f95a70c1716b58ad, type: 3}
 --- !u!114 &9002851332663129184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,6 +2674,11 @@ PrefabInstance:
 --- !u!4 &1379171786162497344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: af25cec3cd9a69c4a8dc6f953261a112, type: 3}
+  m_PrefabInstance: {fileID: 1488848780278726827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1758688374434348538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: af25cec3cd9a69c4a8dc6f953261a112, type: 3}
   m_PrefabInstance: {fileID: 1488848780278726827}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1510710153768839807

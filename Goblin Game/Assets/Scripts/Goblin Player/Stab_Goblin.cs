@@ -40,15 +40,16 @@ public class Stab_Goblin : MonoBehaviour
         // Play Animation.
         m_Anim.SetTrigger(m_AttackHash);
 
-        print("Stab!");
+        //print("Stab!");
 
         // Determine if we hit any goblins.
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabMask);
 
-        for(int i=0; i<cols.Length; i++)
+        for (int i = 0; i < cols.Length; i++)
         {
-            print("Stabbed " + cols[i].name);
+            //print("Stabbed " + cols[i].name);
             cols[i].GetComponent<CoinManager_Goblin>().LoseCoin();
+            RoundStatTracker.instance.TrackIntStat(IntStat.StabbedSomeone);
         }
 
         // Determine if we hit any breakables.
@@ -56,7 +57,7 @@ public class Stab_Goblin : MonoBehaviour
 
         for(int i=0; i<cols.Length; i++)
         {
-            print("Stabbed " + cols[i].name);
+            //print("Stabbed " + cols[i].name);
             cols[i].GetComponent<Breakable>().TakeDamage(stabPosition.position);
         }
 

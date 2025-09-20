@@ -21,6 +21,6 @@ public class GameState : MonoBehaviour
 
         inState = false;
 
-        onStateEnding.Invoke();
+        onStateEnding?.Invoke();
     }
 }
