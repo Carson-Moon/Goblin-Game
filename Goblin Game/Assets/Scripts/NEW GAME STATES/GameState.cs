@@ -17,6 +17,12 @@ public class GameState : NetworkBehaviour
         OnStartStateServer();
     }
 
+    [Rpc(SendTo.ClientsAndHost)]
+    public virtual void OnStartStateClientRpc()
+    {
+
+    }
+
     protected virtual void OnStartStateServer()
     {
 
@@ -28,9 +34,16 @@ public class GameState : NetworkBehaviour
         OnEndStateServer();
     }
 
+    [Rpc(SendTo.ClientsAndHost)]
+    public void OnEndStateClientRpc()
+    {
+
+    }
+
     protected virtual void OnEndStateServer()
     {
         Debug.Log("End state...");
+        nextState.OnStartStateServerRpc();
     }
 
     #region Locks

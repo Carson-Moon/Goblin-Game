@@ -9,6 +9,9 @@ public class LoadingScreenManager : MonoBehaviour
     // Singleton
     public static LoadingScreenManager Instance { get; private set; }
 
+    private bool isEnabled = false;
+    public bool IsEnabled => isEnabled;
+
     [Header("Loading Screen Elements")]
     [SerializeField] CanvasGroup loadingGroup;
     [SerializeField] TextMeshProUGUI mainText;
@@ -31,6 +34,8 @@ public class LoadingScreenManager : MonoBehaviour
     // Enable our loading screen.
     public void EnableLoadingScreen(string overrideMainText = "", string overrideSplashText = "", Action onFadeComplete = null)
     {
+        isEnabled = true;
+
         // Set our main text.
         if (string.Compare(overrideMainText, "") == 0)
             mainText.text = "Loading. . .";
@@ -50,6 +55,8 @@ public class LoadingScreenManager : MonoBehaviour
     // Disable our loading screen.
     public void DisableLoadingScreen(Action onFadeComplete = null)
     {
+        isEnabled = false;
+
         // Fade our canvas in.
         CanvasFader.FadeCanvas(loadingGroup, FadeLevel.FullyTransparent, FadeSpeed.Medium, onFadeComplete);
     }

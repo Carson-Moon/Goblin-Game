@@ -29,6 +29,8 @@ public class ServerLobbyManager : NetworkBehaviour
             Destroy(this);
         else
             Instance = this;
+
+        DontDestroyOnLoad(this);
     }
 
     public override void OnNetworkSpawn()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4201775871144521541}
   - component: {fileID: 4065944487667801021}
   - component: {fileID: 6362148326120534586}
+  - component: {fileID: 6908813717726033148}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -67,10 +68,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 5000
   field of view: 90
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -139,6 +140,38 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581938333026998448}
   m_Enabled: 0
+--- !u!114 &6908813717726033148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581938333026998448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 11400000, guid: e7f3183d9f5b435419b9f89694c43e30, type: 2}
 --- !u!1 &788027199077820154
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  armOverlayCamera: {fileID: 0}
+  armOverlayCamera: {fileID: 3038331782566860949}
   goblin: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
 --- !u!114 &5991039492803107786
@@ -358,9 +391,10 @@ MonoBehaviour:
   goblin: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
   kinematicCharacterMotor: {fileID: 7404937040295175108}
-  arms: {fileID: 3802210966163159799}
   goblinMainCamera: {fileID: 4201775871144521541}
   goblinArmCamera: {fileID: 3038331782566860949}
+  cineCamera: {fileID: 9202160244556914376}
+  cineBrain: {fileID: 6908813717726033148}
   goblinCamera: {fileID: 4011678651782211475}
   audioListener: {fileID: 6362148326120534586}
   goblinInput: {fileID: 6795982543156156883}
@@ -370,6 +404,8 @@ MonoBehaviour:
   grabAction: {fileID: 1745396969761280378}
   vacuumAction: {fileID: 6540168890667881968}
   throwAction: {fileID: 5765187728319096523}
+  bodyMesh: {fileID: 4804998472372978188}
+  arms: {fileID: 3802210966163159799}
   overrideInitialization: 0
 --- !u!114 &6795982543156156883
 MonoBehaviour:
@@ -691,6 +727,81 @@ MonoBehaviour:
   playerCamera: {fileID: 4201775871144521541}
   targetDistance: 5
   throwStrength: 40
+--- !u!1 &2556874686487586637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517901332134064208}
+  - component: {fileID: 9202160244556914376}
+  m_Layer: 0
+  m_Name: First Person Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &517901332134064208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556874686487586637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4490883546053278517}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9202160244556914376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556874686487586637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 90
+    OrthographicSize: 10
+    NearClipPlane: 0.01
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &2567211540995401116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,8 +1221,8 @@ MonoBehaviour:
   slideFriction: 0.8
   slideSteerAcceleration: 5
   slideGravity: -90
-  standHeight: 2
-  crouchHeight: 1
+  standHeight: 1.2
+  crouchHeight: 0.6
   crouchHeightResponse: 15
   standCameraTargetHeight: 0.8
   crouchCameraTargetHeight: 0.4
@@ -2101,7 +2212,7 @@ Transform:
   m_GameObject: {fileID: 7444916820910177607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.417, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2466,6 +2577,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8105120241247439305}
+  - {fileID: 517901332134064208}
   - {fileID: 8143758072915861600}
   m_Father: {fileID: 7331015665713564294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2646,7 +2758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 79d3399c771f2084cb29c71d58cc5d55, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8270783425826130642, guid: 79d3399c771f2084cb29c71d58cc5d55, type: 3}
       propertyPath: m_Layer
@@ -2930,7 +3042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e05a67064a19c8841ae63e5bb681ce56, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8603971712184721262, guid: e05a67064a19c8841ae63e5bb681ce56, type: 3}
       propertyPath: m_Layer

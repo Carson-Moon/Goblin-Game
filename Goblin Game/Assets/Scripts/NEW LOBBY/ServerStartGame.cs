@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class ServerStartGame : NetworkBehaviour
 {
+    public static ServerStartGame Instance { get; private set; }
+
     [SerializeField] string gameScene = "GameScene";
     private Dictionary<ulong, bool> readyToSwitch = new();
+
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
+    }
 
     public void AttemptTransitionToGameScene()
     {
