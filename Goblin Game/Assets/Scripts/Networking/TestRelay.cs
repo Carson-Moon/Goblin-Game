@@ -8,6 +8,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,50 +27,93 @@ public class TestRelay : MonoBehaviour
     [Header("On Lobby Started/Joined")]
     public UnityEvent onLobbyJoined;
 
+    private VivoxParticipant vivoxParticipant = null;
 
-    private void Update() {
-        if(createRelay)
+
+    private void Update()
+    {
+        if (createRelay)
         {
             CreateRelay();
             createRelay = false;
         }
 
-        if(joinRelay)
+        if (joinRelay)
         {
             JoinRelay(joinCode);
             joinRelay = false;
         }
+
+        if (vivoxParticipant != null)
+            Debug.Log($"AUDIO ENERGY: {vivoxParticipant.AudioEnergy}");
     }
 
-    private async void Start() {
+    private async void Start()
+    {
         await UnityServices.InitializeAsync();
 
-        AuthenticationService.Instance.SignedIn += () =>{
+        AuthenticationService.Instance.SignedIn += () =>
+        {
             Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        await VivoxService.Instance.InitializeAsync();
+        LoginToVivoxAsync();
+
+        VivoxService.Instance.ParticipantAddedToChannel += (participant) =>
+        {
+            vivoxParticipant = participant;
+            Debug.Log("Someone just joined!");
+        };
     }
 
+    public async void LoginToVivoxAsync()
+    {
+        LoginOptions options = new LoginOptions();
+        options.DisplayName = "Carson";
+        options.EnableTTS = true;
+        await VivoxService.Instance.LoginAsync(options);
+
+        JoinPositionalChannel();
+    }
+
+    public async void JoinPositionalChannel()
+    {
+        string channelToJoin = "Lobby";
+        await VivoxService.Instance.JoinPositionalChannelAsync
+        (
+            channelToJoin,
+            ChatCapability.TextAndAudio,
+            new Channel3DProperties(10, 5, 2, AudioFadeModel.LinearByDistance)
+        );
+
+        Debug.Log("Joined Lobby channel");
+    }
+
+    
+
     // Host creates relay...
-    public async void CreateRelay(){
+    public async void CreateRelay()
+    {
         // The number is maximum number of conenctions, not including the host!
-        try 
+        try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(9);
 
             joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            if(joinCode != null) joinCodeText.text = joinCode;
+            if (joinCode != null) joinCodeText.text = joinCode;
 
             RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             StartLobby();
-        } 
-        catch(RelayServiceException e)
+        }
+        catch (RelayServiceException e)
         {
             Debug.Log(e);
-        }        
+        }
     }
 
     // Client joins relay...
