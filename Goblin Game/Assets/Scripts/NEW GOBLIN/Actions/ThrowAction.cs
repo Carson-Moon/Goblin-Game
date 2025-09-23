@@ -8,6 +8,7 @@ public class ThrowAction : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] float targetDistance;
     [SerializeField] float throwStrength;
+    [SerializeField] Transform throwStartPosition;
 
     public void AttemptThrow()
     {
@@ -18,7 +19,7 @@ public class ThrowAction : MonoBehaviour
 
         Vector3 throwDirection = playerCamera.transform.forward * targetDistance;
 
-        grabAction.CurrentPickup.OnThrow(throwDirection, throwStrength);
+        grabAction.CurrentPickup.OnThrow(throwStartPosition.position, throwDirection, throwStrength);
         grabAction.DiscardCurrentPickup();
     }
 }

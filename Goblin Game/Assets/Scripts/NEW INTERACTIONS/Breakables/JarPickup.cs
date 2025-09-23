@@ -12,9 +12,9 @@ public class JarPickup : AbstractBreakablePickup
         base.OnPickup(pickupPos);
     }
 
-    public override void OnThrow(Vector3 throwDirection, float throwForce)
+    public override void OnThrow(Vector3 throwStartPos, Vector3 throwDirection, float throwForce)
     {
-        base.OnThrow(throwDirection, throwForce);
+        base.OnThrow(throwStartPos, throwDirection, throwForce);
     }
 
     public override void Break()

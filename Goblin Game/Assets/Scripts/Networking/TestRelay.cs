@@ -44,8 +44,8 @@ public class TestRelay : MonoBehaviour
             joinRelay = false;
         }
 
-        if (vivoxParticipant != null)
-            Debug.Log($"AUDIO ENERGY: {vivoxParticipant.AudioEnergy}");
+        //if (vivoxParticipant != null)
+            //Debug.Log($"AUDIO ENERGY: {vivoxParticipant.AudioEnergy}");
     }
 
     private async void Start()

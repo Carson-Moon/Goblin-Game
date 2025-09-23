@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class AbstractBreakablePickup : MonoBehaviour, IPickup
+public class AbstractBreakablePickup : NetworkBehaviour, IPickup
 {
     [Header("Breakable Pickup Components")]
     [SerializeField] Rigidbody rb;
@@ -15,13 +16,26 @@ public class AbstractBreakablePickup : MonoBehaviour, IPickup
 
     public virtual void OnPickup(Transform pickupPos)
     {
-        DisablePhysics();
-        ParentToPickupPosition(pickupPos);
+        OnPickupClientRpc();
+        //ParentToPickupPosition(pickupPos);
     }
 
-    public virtual void OnThrow(Vector3 throwDirection, float throwForce)
+    [Rpc(SendTo.ClientsAndHost)]
+    private void OnPickupClientRpc()
     {
-        UnparentFromPickupPosition();
+        DisablePhysics();
+    }
+
+    public virtual void OnThrow(Vector3 throwStartPos, Vector3 throwDirection, float throwForce)
+    {
+        OnThrowClientRpc(throwStartPos, throwDirection, throwForce);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void OnThrowClientRpc(Vector3 throwStartPos, Vector3 throwDirection, float throwForce)
+    {
+        //UnparentFromPickupPosition();
+        transform.position = throwStartPos;
 
         EnablePhysics();
 
@@ -41,13 +55,13 @@ public class AbstractBreakablePickup : MonoBehaviour, IPickup
 
     public void ParentToPickupPosition(Transform pickupPos)
     {
-        transform.SetParent(pickupPos);
-        transform.localPosition = Vector3.zero;
+        // transform.SetParent(pickupPos);
+        // transform.localPosition = Vector3.zero;
     }
 
     public void UnparentFromPickupPosition()
     {
-        transform.SetParent(null);
+        // transform.SetParent(null);
     }
 
     public void DisablePhysics()

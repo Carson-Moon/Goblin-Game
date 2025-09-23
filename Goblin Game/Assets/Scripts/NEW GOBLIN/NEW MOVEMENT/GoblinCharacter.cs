@@ -35,6 +35,7 @@ public struct CharacterInput
 public class GoblinCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] bool canMove = true;
+    [SerializeField] bool canLook = true;
 
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
@@ -89,7 +90,15 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateInput(CharacterInput input)
     {
-        _requestedRotation = input.Rotation;
+        if (canLook)
+        {
+            _requestedRotation = input.Rotation;
+        }
+        else
+        {
+            _requestedRotation = Quaternion.identity;
+        }
+
 
         if (canMove)
         {
@@ -453,5 +462,10 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     public void ToggleMovement(bool toggle)
     {
         canMove = toggle;
+    }
+
+    public void ToggleLook(bool toggle)
+    {
+        canLook = toggle;
     }
 }
