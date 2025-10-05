@@ -3,13 +3,14 @@ using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using System;
 
 // Skew button!
 
 public class Animated_Button : Abstract_Animated_UI
 {
     [Header("Button Events")]
-    [SerializeField] UnityEvent onButtonPressed;
+    [SerializeField] public UnityEvent onButtonPressed;
 
     [Header("Button Animation Settings")]
     [SerializeField] protected float rotationDegrees;

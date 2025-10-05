@@ -34,7 +34,7 @@ public class GoblinClient : NetworkBehaviour
         ServerLobbyManager.Instance.ReceiveRequestedPlayerInformationServerRpc
         (
             NetworkManager.Singleton.LocalClientId,
-            new PlayerInformation(GoblinName)       // THIS WILL CHANGE TO PLAYERPREFS GRAB!
+            new PlayerInformation(PlayerPrefs.GetString(StaticPlayerPrefsHelper.UsernamePref, StaticPlayerPrefsHelper.DefaultUsername))       // THIS WILL CHANGE TO PLAYERPREFS GRAB!
         );
     }
 
