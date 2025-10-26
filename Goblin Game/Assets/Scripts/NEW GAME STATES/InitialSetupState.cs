@@ -39,6 +39,9 @@ public class InitialSetupState : GameState
     [ClientRpc]
     private void MoveToSpawnPointClientRpc(Vector3 spawnPosition, ClientRpcParams clientRpcParams)
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         GoblinClientPointer.LocalGoblinClient().ToggleMovement(false);
 
         Debug.Log($"We are spawning at this position: {spawnPosition}!");
