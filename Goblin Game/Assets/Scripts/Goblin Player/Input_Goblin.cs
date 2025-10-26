@@ -48,29 +48,29 @@ public class Input_Goblin : MonoBehaviour
         pControls = new PlayerControls();
 
         // Assign input listeners.
-        pControls.Goblin.Move.performed += ctx => rawMoveDirection = ctx.ReadValue<Vector2>();
-        pControls.Goblin.Look.performed += ctx => rawMouseDelta = ctx.ReadValue<Vector2>();
+        // pControls.Goblin.Move.performed += ctx => rawMoveDirection = ctx.ReadValue<Vector2>();
+        // pControls.Goblin.Look.performed += ctx => rawMouseDelta = ctx.ReadValue<Vector2>();
 
-        pControls.Goblin.Jump.started += ctx => onJump.Invoke();
-        pControls.Goblin.Jump.canceled += ctx => offJump.Invoke();
+        // pControls.Goblin.Jump.started += ctx => onJump.Invoke();
+        // pControls.Goblin.Jump.canceled += ctx => offJump.Invoke();
 
-        pControls.Goblin.Sprint.started += ctx => onSprint.Invoke();
-        pControls.Goblin.Sprint.canceled += ctx => offSprint.Invoke();
+        // pControls.Goblin.Sprint.started += ctx => onSprint.Invoke();
+        // pControls.Goblin.Sprint.canceled += ctx => offSprint.Invoke();
 
-        pControls.Goblin.Crouch.started += ctx => onCrouch.Invoke();
-        pControls.Goblin.Crouch.canceled += ctx => offCrouch.Invoke();
+        // pControls.Goblin.Crouch.started += ctx => onCrouch.Invoke();
+        // pControls.Goblin.Crouch.canceled += ctx => offCrouch.Invoke();
 
-        pControls.Goblin.Stab.started += ctx => onStab.Invoke();
+        // pControls.Goblin.Stab.started += ctx => onStab.Invoke();
 
-        pControls.Goblin.Pickup.started += ctx => onPickup.Invoke();
-        pControls.Goblin.Pickup.canceled += ctx => offPickup.Invoke();
+        // pControls.Goblin.Pickup.started += ctx => onPickup.Invoke();
+        // pControls.Goblin.Pickup.canceled += ctx => offPickup.Invoke();
 
-        pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
+        // pControls.Goblin.Throw.started += ctx => onThrow.Invoke();
 
-        pControls.Goblin.Vacuum.started += ctx => onVacuum.Invoke();
-        pControls.Goblin.Vacuum.canceled += ctx => offVacuum.Invoke();
+        // pControls.Goblin.Vacuum.started += ctx => onVacuum.Invoke();
+        // pControls.Goblin.Vacuum.canceled += ctx => offVacuum.Invoke();
 
-        pControls.Goblin.Debug.started += ctx => onDebug.Invoke();
+        // pControls.Goblin.Debug.started += ctx => onDebug.Invoke();
     }
 
 #region Getters
