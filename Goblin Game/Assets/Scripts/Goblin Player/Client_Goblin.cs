@@ -86,7 +86,7 @@ public class Client_Goblin : NetworkBehaviour
         // Enable our camera and input if we are the owner.
         if (nObject.IsOwner)
         {
-            ClientGoblinHelper.SetMyClientGoblin(this);
+            //ClientGoblinHelper.SetMyClientGoblin(this);
 
             m_GoblinInput.enabled = true;
             m_MovementGoblin.enabled = true;

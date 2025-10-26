@@ -71,7 +71,7 @@ public class TestRelay : MonoBehaviour
     public async void LoginToVivoxAsync()
     {
         LoginOptions options = new LoginOptions();
-        options.DisplayName = "Carson";
+        options.DisplayName = "Player " + Random.Range(0, 1000).ToString();
         options.EnableTTS = true;
         await VivoxService.Instance.LoginAsync(options);
 
@@ -80,12 +80,12 @@ public class TestRelay : MonoBehaviour
 
     public async void JoinPositionalChannel()
     {
-        string channelToJoin = "Lobby";
+        string channelToJoin = "default";
         await VivoxService.Instance.JoinPositionalChannelAsync
         (
             channelToJoin,
             ChatCapability.TextAndAudio,
-            new Channel3DProperties(10, 5, 2, AudioFadeModel.LinearByDistance)
+            new Channel3DProperties(2, 1, 50, AudioFadeModel.LinearByDistance)
         );
 
         Debug.Log("Joined Lobby channel");

@@ -1,6 +1,7 @@
 using System;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.Services.Vivox;
 using UnityEngine;
 
 // This is the in and out of a goblin. Things will look here for information!
@@ -20,6 +21,12 @@ public class GoblinClient : NetworkBehaviour
 
     [SerializeField] GoblinCharacter goblinCharacter;
 
+
+    void Update()
+    {
+        if(VivoxService.Instance.ActiveChannels.Count != 0)
+            VivoxService.Instance.Set3DPosition(goblinCharacter.gameObject, "default");
+    }
 
     public override void OnNetworkSpawn()
     {
