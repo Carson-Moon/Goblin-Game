@@ -173,10 +173,12 @@ public class TestRelay : MonoBehaviour
     }
 
     // Changes to make when a lobby is successfully started/joined.
-    private void OnStartLobby(){
+    private void OnStartLobby()
+    {
         onLobbyJoined.Invoke();
 
-        joinCodeText.text = "Current Join Code: " + joinCode;
+        //joinCodeText.text = "Current Join Code: " + joinCode;
+        joinCodeText.text = joinCode;
     }
 
     // Join a lobby.

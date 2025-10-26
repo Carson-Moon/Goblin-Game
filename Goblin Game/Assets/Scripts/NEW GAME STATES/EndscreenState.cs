@@ -27,6 +27,9 @@ public class EndscreenState : GameState
         // want to display on the endscreen here and set it up.
         // Probably want to do a little animation.
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         currentCountdown = countdownLength;
         countdownText.text = currentCountdown.ToString("F2");
         countdown = true;
