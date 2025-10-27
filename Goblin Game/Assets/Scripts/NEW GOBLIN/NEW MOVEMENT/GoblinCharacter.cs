@@ -72,6 +72,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
+    public bool RequestingMovement => _requestedMovement != Vector3.zero;
     private bool _requestedJump;
     private bool _requestedJumpSustain;
     private bool _requestedCrouch;
@@ -467,5 +468,10 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     public void ToggleLook(bool toggle)
     {
         canLook = toggle;
+    }
+
+    public float HorizontalVelocityMagnitude()
+    {
+        return new Vector3(motor.Velocity.x, 0f, motor.Velocity.z).magnitude;
     }
 }
