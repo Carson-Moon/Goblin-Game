@@ -31,8 +31,9 @@ public class GoblinInitializer : NetworkBehaviour
     [SerializeField] ThrowAction throwAction;
 
     // Graphics
-    [SerializeField] GameObject bodyMesh;
+    [SerializeField] GameObject[] thirdPersonBody;
     [SerializeField] GameObject arms;
+    [SerializeField] GoblinAnimator goblinAnimator;
 
     [SerializeField] bool overrideInitialization = false;
 
@@ -60,7 +61,7 @@ public class GoblinInitializer : NetworkBehaviour
         throwAction.enabled = false;
 
         arms.SetActive(false);
-        bodyMesh.SetActive(false);
+        goblinAnimator.enabled = false;
     }
 
     void Start()
@@ -93,15 +94,18 @@ public class GoblinInitializer : NetworkBehaviour
             throwAction.enabled = true;
 
             arms.SetActive(true);
-            bodyMesh.SetActive(false);
+            goblinAnimator.enabled = true;
         }
         else
         {
             Destroy(audioListener);
 
-            kinematicCharacterMotor.gameObject.layer = 7; // Network Goblin Layer
+            kinematicCharacterMotor.gameObject.layer = 0; // Network Goblin Layer
 
-            bodyMesh.SetActive(true);
+            foreach(GameObject bodyComponent in thirdPersonBody)
+            {
+                bodyComponent.gameObject.layer = 0;
+            }
         }
     }
 }

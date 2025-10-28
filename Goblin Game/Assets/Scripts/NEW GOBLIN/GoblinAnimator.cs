@@ -16,6 +16,8 @@ public class GoblinAnimator : MonoBehaviour
     private float currentMovementBlend;
     private float targetMovementBlend;
 
+    private int StabHash = Animator.StringToHash("stab");
+
 
     void Awake()
     {
@@ -33,7 +35,12 @@ public class GoblinAnimator : MonoBehaviour
             b: targetMovementBlend,
             t: 1f - Mathf.Exp(-blendResponse * Time.deltaTime)
         );
-  
+
         anim.SetFloat(MoveHash, currentMovementBlend);
+    }
+    
+    public void StabAnimation()
+    {
+        anim.SetTrigger(StabHash);
     }
 }

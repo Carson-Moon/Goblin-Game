@@ -13,6 +13,7 @@ public class StabAction : MonoBehaviour
     [SerializeField] bool onCooldown;
 
     [Header("Animator")]
+    [SerializeField] GoblinAnimator goblinAnimator;
     [SerializeField] Animator anim;
     private int AttackHash = Animator.StringToHash("attack");
 
@@ -27,7 +28,8 @@ public class StabAction : MonoBehaviour
 
     public void PerformStab()
     {
-        if(anim) anim.SetTrigger(AttackHash);
+        if (anim) anim.SetTrigger(AttackHash);
+        if (goblinAnimator) goblinAnimator.StabAnimation();
 
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabbableMask);
         foreach (Collider col in cols)
