@@ -146,7 +146,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 ? standCameraTargetHeight
                 : crouchCameraTargetHeight
         );
-        var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
+        //var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
 
         cameraTarget.localPosition = Vector3.Lerp
         (
@@ -154,12 +154,12 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             b: new Vector3(0f, cameraTargetHeight, 0f),
             t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
         );
-        root.localScale = Vector3.Lerp
-        (
-            a: root.localScale,
-            b: rootTargetScale,
-            t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
-        );
+        // root.localScale = Vector3.Lerp
+        // (
+        //     a: root.localScale,
+        //     b: rootTargetScale,
+        //     t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
+        // );
     }
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)

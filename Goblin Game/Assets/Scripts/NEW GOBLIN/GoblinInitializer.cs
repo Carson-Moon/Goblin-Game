@@ -102,7 +102,7 @@ public class GoblinInitializer : NetworkBehaviour
 
             kinematicCharacterMotor.gameObject.layer = 0; // Network Goblin Layer
 
-            foreach(GameObject bodyComponent in thirdPersonBody)
+            foreach (GameObject bodyComponent in thirdPersonBody)
             {
                 bodyComponent.gameObject.layer = 0;
             }
