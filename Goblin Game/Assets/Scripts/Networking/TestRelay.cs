@@ -43,9 +43,11 @@ public class TestRelay : MonoBehaviour
             JoinRelay(joinCode);
             joinRelay = false;
         }
+    }
 
-        //if (vivoxParticipant != null)
-            //Debug.Log($"AUDIO ENERGY: {vivoxParticipant.AudioEnergy}");
+    private void SetAudioEnergy()
+    {
+        Debug.Log(vivoxParticipant.SpeechDetected);
     }
 
     private async void Start()
@@ -64,6 +66,7 @@ public class TestRelay : MonoBehaviour
         VivoxService.Instance.ParticipantAddedToChannel += (participant) =>
         {
             vivoxParticipant = participant;
+            vivoxParticipant.ParticipantSpeechDetected += SetAudioEnergy;
             Debug.Log("Someone just joined!");
         };
     }
@@ -90,6 +93,7 @@ public class TestRelay : MonoBehaviour
 
         Debug.Log("Joined Lobby channel");
     }
+
 
     
 

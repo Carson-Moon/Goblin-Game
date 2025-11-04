@@ -21,4 +21,9 @@ public class JarPickup : AbstractBreakablePickup
     {
         base.Break();
     }
+
+    public void LoseCoin()
+    {
+        coins--;
+    }
 }

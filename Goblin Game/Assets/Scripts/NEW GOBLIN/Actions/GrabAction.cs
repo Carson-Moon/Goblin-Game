@@ -15,6 +15,10 @@ public class GrabAction : MonoBehaviour
     [SerializeField] IPickup currentPickup;
     public IPickup CurrentPickup => currentPickup;
 
+    private JarPickup jarCandidate;
+    [SerializeField] JarPickup currentJar;
+    public JarPickup CurrentJar => currentJar;
+
     private Collider[] pickupCols;
 
 
@@ -32,6 +36,7 @@ public class GrabAction : MonoBehaviour
         heldJarVisual.SetActive(true);
 
         currentPickup = pickupCandidate;
+        currentJar = jarCandidate;
         pickupCandidate = null;
     }
 
@@ -47,11 +52,13 @@ public class GrabAction : MonoBehaviour
         if (pickupCols.Length > 0)
         {
             pickupCandidate = pickupCols[0].GetComponent<IPickup>();
+            jarCandidate = pickupCols[0].GetComponent<JarPickup>();
             Debug.Log($"Pickup Candidate: {pickupCols[0].name}");
         }
         else
         {
             pickupCandidate = null;
+            jarCandidate = null;
         }
     }
 

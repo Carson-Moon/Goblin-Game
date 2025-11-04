@@ -19,6 +19,10 @@ public class GoblinInput : MonoBehaviour
     [SerializeField] UnityEvent onRightClick;
     [SerializeField] UnityEvent offRightClick;
 
+    [Header("Eating Coins Input")]
+    [SerializeField] UnityEvent onEat;
+    [SerializeField] UnityEvent offEat;
+
 
     void Awake()
     {
@@ -31,6 +35,10 @@ public class GoblinInput : MonoBehaviour
         pControls.GoblinControls.LeftClick.canceled += ctx => offLeftClick.Invoke();
         pControls.GoblinControls.RightClick.started += ctx => onRightClick.Invoke();
         pControls.GoblinControls.RightClick.canceled += ctx => offRightClick.Invoke();
+
+        // Eating
+        pControls.GoblinControls.CoinEat.started += ctx => onEat.Invoke();
+        pControls.GoblinControls.CoinEat.canceled += ctx => offEat.Invoke();
     }
 
 

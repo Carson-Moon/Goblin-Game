@@ -63,7 +63,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     [SerializeField] float crouchHeight = 1f;
     [SerializeField] float crouchHeightResponse = 15f;
     [Space]
-    [Range(0, 1), SerializeField] float standCameraTargetHeight = 0.9f;
+    [Range(0, 1.5f), SerializeField] float standCameraTargetHeight = 0.9f;
     [Range(0, 1), SerializeField] float crouchCameraTargetHeight = 0.7f;
 
     private CharacterState _state;

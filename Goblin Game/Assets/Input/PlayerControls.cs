@@ -134,6 +134,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CoinEat"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf913507-11c5-4e94-8b25-595967184b71"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -310,6 +319,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ee58b93-fa94-4478-a9f1-756f9139849e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CoinEat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -512,6 +532,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GoblinControls_Vacuum = m_GoblinControls.FindAction("Vacuum", throwIfNotFound: true);
         m_GoblinControls_LeftClick = m_GoblinControls.FindAction("LeftClick", throwIfNotFound: true);
         m_GoblinControls_RightClick = m_GoblinControls.FindAction("RightClick", throwIfNotFound: true);
+        m_GoblinControls_CoinEat = m_GoblinControls.FindAction("CoinEat", throwIfNotFound: true);
         // UI_Interaction
         m_UI_Interaction = asset.FindActionMap("UI_Interaction", throwIfNotFound: true);
         m_UI_Interaction_MousePosition = m_UI_Interaction.FindAction("MousePosition", throwIfNotFound: true);
@@ -602,6 +623,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GoblinControls_Vacuum;
     private readonly InputAction m_GoblinControls_LeftClick;
     private readonly InputAction m_GoblinControls_RightClick;
+    private readonly InputAction m_GoblinControls_CoinEat;
     public struct GoblinControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -618,6 +640,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Vacuum => m_Wrapper.m_GoblinControls_Vacuum;
         public InputAction @LeftClick => m_Wrapper.m_GoblinControls_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_GoblinControls_RightClick;
+        public InputAction @CoinEat => m_Wrapper.m_GoblinControls_CoinEat;
         public InputActionMap Get() { return m_Wrapper.m_GoblinControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -663,6 +686,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightClick.started += instance.OnRightClick;
             @RightClick.performed += instance.OnRightClick;
             @RightClick.canceled += instance.OnRightClick;
+            @CoinEat.started += instance.OnCoinEat;
+            @CoinEat.performed += instance.OnCoinEat;
+            @CoinEat.canceled += instance.OnCoinEat;
         }
 
         private void UnregisterCallbacks(IGoblinControlsActions instance)
@@ -703,6 +729,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RightClick.started -= instance.OnRightClick;
             @RightClick.performed -= instance.OnRightClick;
             @RightClick.canceled -= instance.OnRightClick;
+            @CoinEat.started -= instance.OnCoinEat;
+            @CoinEat.performed -= instance.OnCoinEat;
+            @CoinEat.canceled -= instance.OnCoinEat;
         }
 
         public void RemoveCallbacks(IGoblinControlsActions instance)
@@ -858,6 +887,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnVacuum(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnCoinEat(InputAction.CallbackContext context);
     }
     public interface IUI_InteractionActions
     {
