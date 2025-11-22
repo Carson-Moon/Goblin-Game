@@ -19,7 +19,7 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
         Debug.Log("Take damage");
 
         int coinsToLose = goblinCoinEating.SubtractFromCoinsEaten(5);
-        ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
+        ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, 10);
 
         TakeDamageServerRpc();
     }
