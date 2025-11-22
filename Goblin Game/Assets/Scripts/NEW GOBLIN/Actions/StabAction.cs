@@ -38,7 +38,7 @@ public class StabAction : MonoBehaviour
             if (damageable == null)
                 continue;
 
-            damageable.TakeDamage();
+            damageable.TakeDamage(stabPosition.position);
         }
 
         PerformCooldown();

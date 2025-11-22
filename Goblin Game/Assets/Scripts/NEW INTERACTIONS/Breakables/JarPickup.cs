@@ -20,10 +20,17 @@ public class JarPickup : AbstractBreakablePickup
     public override void Break()
     {
         base.Break();
+
+        ServerCoinManager.Instance.SpawnMultipleCoinsServerRpc(transform.position, coins);
     }
 
     public void LoseCoin()
     {
         coins--;
+    }
+
+    public void GainCoin()
+    {
+        coins++;
     }
 }

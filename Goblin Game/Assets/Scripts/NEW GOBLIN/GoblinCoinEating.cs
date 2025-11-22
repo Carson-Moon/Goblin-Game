@@ -69,6 +69,20 @@ public class GoblinCoinEating : MonoBehaviour
             grabAction.CurrentJar.LoseCoin();
         }
     }
+
+    public int SubtractFromCoinsEaten(int amountToSubtract)
+    {
+        coinsEaten -= amountToSubtract;
+
+        int coinsSubtracted = amountToSubtract;
+        if(coinsEaten < 0)
+        {
+            coinsSubtracted = amountToSubtract + coinsEaten;
+            coinsEaten = 0;
+        }
+
+        return coinsSubtracted;  
+    }
     
     private void ResetEatingTimer()
     {

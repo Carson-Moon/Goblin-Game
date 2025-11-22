@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class Breakable : NetworkBehaviour
+public class Breakable : NetworkBehaviour, IDamageable
 {
     [SerializeField] int health;
     [SerializeField] int coinAmount;
@@ -9,6 +9,7 @@ public class Breakable : NetworkBehaviour
     [SerializeField] GameObject cratePiecesPrefab;
     [SerializeField] Transform centerPoint;
     [SerializeField] Collider col;
+    [SerializeField] MeshRenderer meshRen;
 
 
     public void TakeDamage(Vector3 damagePoint)
@@ -31,7 +32,7 @@ public class Breakable : NetworkBehaviour
         health--;
     }
 
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     private void BreakRPC(Vector3 damagePoint)
     {
         ActivateBreakablesRPC(damagePoint);
@@ -43,6 +44,7 @@ public class Breakable : NetworkBehaviour
     private void ActivateBreakablesRPC(Vector3 damagePoint)
     {
         col.enabled = false;
+        meshRen.enabled = false;
 
         var instance = Instantiate(cratePiecesPrefab, transform.position, Quaternion.identity);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
@@ -60,5 +62,10 @@ public class Breakable : NetworkBehaviour
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
         }       
+    }
+
+    public void OnDeath()
+    {
+        
     }
 }

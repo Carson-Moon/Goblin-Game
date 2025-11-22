@@ -546,6 +546,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 67967358805400648}
+  - component: {fileID: 4282118338408580232}
+  - component: {fileID: 7069534316776449659}
   m_Layer: 0
   m_Name: Vacuum Position
   m_TagString: Untagged
@@ -568,6 +570,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5054305255542629090}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4282118338408580232
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075997423789511673}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.41387787, y: 0.33014607, z: 0.3157922}
+  m_Center: {x: -0.17105196, y: 0.0047847033, z: 0.3421039}
+--- !u!114 &7069534316776449659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075997423789511673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f6eb7113409a74fae1e15c029448a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAction: {fileID: 1745396969761280378}
 --- !u!1 &1394948944510019133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,8 +2108,8 @@ MonoBehaviour:
   standHeight: 1.2
   crouchHeight: 0.6
   crouchHeightResponse: 15
-  standCameraTargetHeight: 1.2
-  crouchCameraTargetHeight: 0.6
+  standCameraTargetHeight: 1.229
+  crouchCameraTargetHeight: 0
 --- !u!114 &4427158862887684846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,6 +2162,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   coinSpawnPosition: {fileID: 5573091884376836184}
   unconsciousManager: {fileID: 1045678369365100981}
+  goblinCoinEating: {fileID: 0}
 --- !u!114 &6832119070845444782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4480,7 +4517,7 @@ Transform:
   m_GameObject: {fileID: 8371696187623669225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0.948, z: 0.237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4500,6 +4537,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isVacuuming: 0
+  vacuumLength: 10
+  vacuumWidth: 5
+  vacuumStartPos: {fileID: 67967358805400648}
+  vacuumStrength: 1000
+  vacuumTorqueStrength: 10
+  upwardsStrength: 0.1
+  vacuumableMask:
+    serializedVersion: 2
+    m_Bits: 512
   vacuumVFX: {fileID: 4416021002938383822}
   anim: {fileID: 3531510230065429643}
 --- !u!1 &8447703168165676721

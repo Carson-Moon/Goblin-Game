@@ -10,7 +10,7 @@ public class MatchStatTracker : NetworkBehaviour
     public static MatchStatTracker instance { get; private set; }
 
     [SerializeField] Dictionary<ulong, RoundStats> playerStats = new Dictionary<ulong, RoundStats>();
-    [SerializeField] RoundStats newStats;
+    public Dictionary<ulong, RoundStats> PlayerStats => playerStats;
 
 
     void Awake()
@@ -28,28 +28,40 @@ public class MatchStatTracker : NetworkBehaviour
 
     // Save our stats to the dictionary. If we already have stats, condense them.
     [Rpc(SendTo.Server)]
-    public void SaveClientStatsRPC(ulong clientID, RoundStats stats)
+    public void SaveClientStatsServerRpc(ulong clientID, RoundStats stats)
     {
         // Determine if we already have stats saved for this client.
         if (playerStats.TryGetValue(clientID, out RoundStats savedStats))
         {
             // Condense our stats.
-            CondenseClientStats(clientID, savedStats, stats);
+            RoundStats newStats = CondenseClientStats(savedStats, stats);
+            playerStats[clientID] = newStats;
+            SaveClientStatsClientRpc(clientID, newStats);
+            return;
         }
         else
         {
             // Save our stats.
             playerStats.Add(clientID, stats);
-        }
+            SaveClientStatsClientRpc(clientID, stats);
+        }  
+    }
 
-        newStats = stats;
+    [Rpc(SendTo.NotServer)]
+    public void SaveClientStatsClientRpc(ulong clientID, RoundStats stats)
+    {
+        if(playerStats.ContainsKey(clientID))
+            playerStats[clientID] = stats;
+        else
+            playerStats.Add(clientID, stats);
+
     }
 
     // Condense our stats into one RoundStats struct. Save to this clientID.
-    public void CondenseClientStats(ulong clientID, RoundStats oldStats, RoundStats newStats)
+    public RoundStats CondenseClientStats(RoundStats oldStats, RoundStats newStats)
     {
         // Create a new stats struct and add our stats together.
-        RoundStats totalStats = new RoundStats()
+        return new RoundStats()
         {
             CoinsCollected = oldStats.CoinsCollected + newStats.CoinsCollected,
             TotalCoinsAtEnd = oldStats.TotalCoinsAtEnd + newStats.TotalCoinsAtEnd,
@@ -62,8 +74,5 @@ public class MatchStatTracker : NetworkBehaviour
             TimeSprinting = oldStats.TimeSprinting + newStats.TimeSprinting,
             TimeDoingNothing = oldStats.TimeDoingNothing + newStats.TimeDoingNothing
         };
-
-        // Update totalStats for this clientID.
-        playerStats[clientID] = totalStats;
     }
 }

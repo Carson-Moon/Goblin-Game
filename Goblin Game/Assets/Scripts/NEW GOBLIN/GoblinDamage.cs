@@ -7,15 +7,19 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
 
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
+    [SerializeField] GoblinCoinEating goblinCoinEating;
 
     public void OnDeath()
     {
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(Vector3 damagePoint)
     {
-        ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, 10);
+        Debug.Log("Take damage");
+
+        int coinsToLose = goblinCoinEating.SubtractFromCoinsEaten(5);
+        ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
 
         TakeDamageServerRpc();
     }
@@ -30,11 +34,9 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
     {
         if (collision.gameObject.layer == 17) // Pickup layer
         {
-            Debug.Log("Here");
             JarPickup jar = collision.gameObject.GetComponent<JarPickup>();
             if (jar != null && jar.Thrown)
             {
-                Debug.Log("In here");
                 unconsciousManager.GetKnockedOut();
             }
         }

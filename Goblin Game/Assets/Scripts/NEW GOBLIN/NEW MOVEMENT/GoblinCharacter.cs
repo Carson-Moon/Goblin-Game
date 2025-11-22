@@ -140,7 +140,9 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     {
         var currentHeight = motor.Capsule.height;
         var normalizedHeight = currentHeight / standHeight;
-        var cameraTargetHeight = currentHeight *
+
+        // Replaced currentHeight with 1 for now.
+        var cameraTargetHeight = 1 *
         (
             _state.stance is Stance.Stand
                 ? standCameraTargetHeight
