@@ -8,10 +8,10 @@ public class MarkerPrefabBaker : MonoBehaviour
     [System.Serializable]
     public class MarkerMapping
     {
-        // Prefix of the marker name to look for, ex) "Marker_"
+        [Tooltip("Prefix of the marker name to look for: ex) 'Marker_'")]
         public string markerPrefix;
 
-        // Prefab to instantiate for markers with this prefix
+        [Tooltip("Prefab to instantiate at the location of markers with this prefix")]
         public GameObject prefab;
     }
 
@@ -41,7 +41,7 @@ public class MarkerPrefabBaker : MonoBehaviour
         // for each mapping, add it to dictionary.
         AddToDictionary(dict);
 
-        // collect all markers (they're transforms). Make sure to not modify the hierarchy while iterating.
+        // collect all markers (in my case, they will all be transforms).
         var markers = new List<Transform>();
         foreach (Transform t in GetComponentsInChildren<Transform>(true))
         {
@@ -72,6 +72,16 @@ public class MarkerPrefabBaker : MonoBehaviour
 
         Debug.Log($"[MarkerPrefabBaker] Baked {bakedInstances.Count} markers under {name}.");
     }
+    private void AddToDictionary(Dictionary<string, GameObject> dict)
+    {
+        foreach (var m in mappings)
+        {
+            if (!string.IsNullOrEmpty(m.markerPrefix) && m.prefab != null)
+            {
+                dict[m.markerPrefix] = m.prefab;
+            }
+        }
+    }
 
     private void ProcessAndSpawnPrefabsAtMarkers(Dictionary<string, GameObject> dict, List<Transform> markers)
     {
@@ -100,14 +110,4 @@ public class MarkerPrefabBaker : MonoBehaviour
         }
     }
 
-    private void AddToDictionary(Dictionary<string, GameObject> dict)
-    {
-        foreach (var m in mappings)
-        {
-            if (!string.IsNullOrEmpty(m.markerPrefix) && m.prefab != null)
-            {
-                dict[m.markerPrefix] = m.prefab;
-            }
-        }
-    }
 }
