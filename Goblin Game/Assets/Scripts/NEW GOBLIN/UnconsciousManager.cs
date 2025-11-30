@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 
-public class UnconsciousManager : MonoBehaviour
+public class UnconsciousManager : NetworkBehaviour
 {
     [SerializeField] List<string> impactMessages = new();
 
@@ -36,6 +37,9 @@ public class UnconsciousManager : MonoBehaviour
     public void GetKnockedOut()
     {
         if (isUnconscious)
+            return;
+
+        if(!IsOwner)
             return;
 
         isUnconscious = true;
