@@ -9,16 +9,22 @@ public class GoblinCoinEating : NetworkBehaviour
     [SerializeField] int coinsEaten;
     public int CoinsEaten => coinsEaten;
 
+    [Header("Movement Speed Tweaks")]
+    [SerializeField] float lowestPossibleSpeed;
+    [SerializeField] float highestPossibleSpeed;
+    [SerializeField] int coinHighLimit;
+
     [Header("Eating Progress")]
     [SerializeField] private bool eating = false;
     [SerializeField] float eatingLength;
-    [SerializeField] private float eatingTimer;
+    private float eatingTimer;
 
     [Header("Eating UI")]
     [SerializeField] Slider progressSlider;
     [SerializeField] CanvasGroup eatingCanvasGroup;
     [SerializeField] TextMeshProUGUI coinsEatenDisplay;
 
+    [SerializeField] GoblinCharacter goblinCharacter;
     private GrabAction grabAction;
 
 
@@ -79,12 +85,18 @@ public class GoblinCoinEating : NetworkBehaviour
     private void GainEatenCoinClientRpc()
     {
         coinsEaten++;
+
+        if(IsOwner)
+            CalculateCurrentSpeed();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void SetEatenCoinsClientRpc(int coins)
     {
         coinsEaten = coins;
+
+        if(IsOwner)
+            CalculateCurrentSpeed();
     }
 
     private void UpdateCoinsEatenDisplay()
@@ -105,6 +117,7 @@ public class GoblinCoinEating : NetworkBehaviour
 
         SetEatenCoinsClientRpc(coinsEaten);
         UpdateCoinsEatenDisplay();
+        CalculateCurrentSpeed();
 
         return coinsSubtracted;  
     }
@@ -112,6 +125,17 @@ public class GoblinCoinEating : NetworkBehaviour
     private void ResetEatingTimer()
     {
         eatingTimer = eatingLength;
+    }
+
+    private void CalculateCurrentSpeed()
+    {
+        float speedPercentage = 1f - ((float)coinsEaten / coinHighLimit);
+        speedPercentage = Mathf.Clamp(speedPercentage, 0, 1);
+
+        float desiredSpeed = highestPossibleSpeed * speedPercentage;
+        desiredSpeed = Mathf.Clamp(desiredSpeed, lowestPossibleSpeed, highestPossibleSpeed);
+
+        goblinCharacter.SetWalkSpeed(desiredSpeed);
     }
     
     #region Eating UI

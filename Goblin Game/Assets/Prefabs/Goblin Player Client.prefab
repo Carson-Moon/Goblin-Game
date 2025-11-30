@@ -969,12 +969,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   coinsEaten: 0
+  lowestPossibleSpeed: 4
+  highestPossibleSpeed: 10
+  coinHighLimit: 100
   eating: 0
   eatingLength: 1
-  eatingTimer: 0
   progressSlider: {fileID: 7526808740828830758}
   eatingCanvasGroup: {fileID: 4932969575797007040}
   coinsEatenDisplay: {fileID: 5410051985881383309}
+  goblinCharacter: {fileID: 8215219192210770407}
 --- !u!1 &1715316946345268199
 GameObject:
   m_ObjectHideFlags: 0

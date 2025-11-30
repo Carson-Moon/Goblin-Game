@@ -476,4 +476,9 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     {
         return new Vector3(motor.Velocity.x, 0f, motor.Velocity.z).magnitude;
     }
+
+    public void SetWalkSpeed(float speedValue)
+    {
+        walkSpeed = speedValue;
+    }
 }
