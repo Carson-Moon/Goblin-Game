@@ -34,12 +34,12 @@ public class StabAction : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabbableMask);
         foreach (Collider col in cols)
         {
-            Debug.Log($"Collider! {col.gameObject.name}");
+            //Debug.Log($"Collider! {col.gameObject.name}");
             IDamageable damageable = col.GetComponent<IDamageable>();
             if (damageable == null)
                 continue;
 
-            Debug.Log("Damageable!");
+            //Debug.Log("Damageable!");
             damageable.TakeDamage(stabPosition.position);
         }
 
