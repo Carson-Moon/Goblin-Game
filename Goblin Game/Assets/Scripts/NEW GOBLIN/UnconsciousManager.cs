@@ -42,6 +42,8 @@ public class UnconsciousManager : NetworkBehaviour
         if(!IsOwner)
             return;
 
+        Debug.Log("SHOULD GET KNOCKED OUT HERE");
+
         isUnconscious = true;
 
         Sequence sequence = DOTween.Sequence();
