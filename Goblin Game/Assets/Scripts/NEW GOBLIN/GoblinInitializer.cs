@@ -35,6 +35,9 @@ public class GoblinInitializer : NetworkBehaviour
     [SerializeField] GameObject arms;
     [SerializeField] GoblinAnimator goblinAnimator;
 
+    // UI
+    [SerializeField] GameObject coinUICanvas;
+
     [SerializeField] bool overrideInitialization = false;
 
     void Awake()
@@ -62,6 +65,8 @@ public class GoblinInitializer : NetworkBehaviour
 
         arms.SetActive(false);
         goblinAnimator.enabled = false;
+
+        coinUICanvas.SetActive(false);
     }
 
     void Start()
@@ -95,6 +100,8 @@ public class GoblinInitializer : NetworkBehaviour
 
             arms.SetActive(true);
             goblinAnimator.enabled = true;
+
+            coinUICanvas.SetActive(true);
         }
         else
         {
