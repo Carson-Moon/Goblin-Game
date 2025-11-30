@@ -1,8 +1,9 @@
 using DG.Tweening;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoblinCoinEating : MonoBehaviour
+public class GoblinCoinEating : NetworkBehaviour
 {
     [SerializeField] int coinsEaten;
     public int CoinsEaten => coinsEaten;
@@ -65,9 +66,21 @@ public class GoblinCoinEating : MonoBehaviour
 
         if(grabAction.CurrentJar != null && grabAction.CurrentJar.Coins > 0)
         {
-            coinsEaten++;
+            GainEatenCoinClientRpc();
             grabAction.CurrentJar.LoseCoin();
         }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void GainEatenCoinClientRpc()
+    {
+        coinsEaten++;
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SetEatenCoinsClientRpc(int coins)
+    {
+        coinsEaten = coins;
     }
 
     public int SubtractFromCoinsEaten(int amountToSubtract)
@@ -80,6 +93,8 @@ public class GoblinCoinEating : MonoBehaviour
             coinsSubtracted = amountToSubtract + coinsEaten;
             coinsEaten = 0;
         }
+
+        SetEatenCoinsClientRpc(coinsEaten);
 
         return coinsSubtracted;  
     }
