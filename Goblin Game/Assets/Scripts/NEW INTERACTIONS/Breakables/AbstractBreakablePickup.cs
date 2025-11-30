@@ -8,6 +8,7 @@ public class AbstractBreakablePickup : NetworkBehaviour, IPickup
     [SerializeField] Rigidbody rb;
     [SerializeField] bool thrown;
     public bool Thrown => thrown;
+    private bool broken = false;
 
     [Header("FX")]
     [SerializeField] GameObject onBreakVFX;
@@ -44,13 +45,32 @@ public class AbstractBreakablePickup : NetworkBehaviour, IPickup
         thrown = true;
     }
 
+    [Rpc(SendTo.Server)]
+    private void BreakServerRpc()
+    {
+        if(broken)
+            return;
+
+        broken = true;
+
+        BreakClientRpc();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void BreakClientRpc()
+    {
+        Break();
+    }
+
     public virtual void Break()
     {
         onBreakVFX.transform.SetParent(null);
         onBreakVFX.SetActive(true);
         Destroy(onBreakVFX, 5f);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+
+        //Destroy(gameObject);
     }
 
     public void ParentToPickupPosition(Transform pickupPos)
@@ -84,6 +104,6 @@ public class AbstractBreakablePickup : NetworkBehaviour, IPickup
     void OnCollisionEnter(Collision collision)
     {
         if (thrown)
-            Break();
+            BreakServerRpc();
     }
 }
