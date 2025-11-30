@@ -100,7 +100,7 @@ public class GoblinInitializer : NetworkBehaviour
         {
             Destroy(audioListener);
 
-            kinematicCharacterMotor.gameObject.layer = 0; // Network Goblin Layer
+            kinematicCharacterMotor.gameObject.layer = 7; // Network Goblin Layer
 
             foreach (GameObject bodyComponent in thirdPersonBody)
             {

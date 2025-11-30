@@ -53,6 +53,9 @@ public class GoblinHeadIKController : MonoBehaviour
         InterestPoint mostInterestingPoint = null;
         foreach (InterestPoint ip in interestPoints)
         {
+            if(ip == null)
+                continue;
+
             if (mostInterestingPoint == null)
             {
                 mostInterestingPoint = ip;

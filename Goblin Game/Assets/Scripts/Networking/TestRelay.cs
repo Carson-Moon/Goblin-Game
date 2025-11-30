@@ -8,7 +8,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
-using Unity.Services.Vivox;
+//using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,7 +27,7 @@ public class TestRelay : MonoBehaviour
     [Header("On Lobby Started/Joined")]
     public UnityEvent onLobbyJoined;
 
-    private VivoxParticipant vivoxParticipant = null;
+    //private VivoxParticipant vivoxParticipant = null;
 
 
     private void Update()
@@ -45,10 +45,10 @@ public class TestRelay : MonoBehaviour
         }
     }
 
-    private void SetAudioEnergy()
-    {
-        Debug.Log(vivoxParticipant.SpeechDetected);
-    }
+    // private void SetAudioEnergy()
+    // {
+    //     Debug.Log(vivoxParticipant.SpeechDetected);
+    // }
 
     private async void Start()
     {
@@ -60,39 +60,39 @@ public class TestRelay : MonoBehaviour
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-        await VivoxService.Instance.InitializeAsync();
-        LoginToVivoxAsync();
+        //await VivoxService.Instance.InitializeAsync();
+        //LoginToVivoxAsync();
 
-        VivoxService.Instance.ParticipantAddedToChannel += (participant) =>
-        {
-            vivoxParticipant = participant;
-            vivoxParticipant.ParticipantSpeechDetected += SetAudioEnergy;
-            Debug.Log("Someone just joined!");
-        };
+        // VivoxService.Instance.ParticipantAddedToChannel += (participant) =>
+        // {
+        //     vivoxParticipant = participant;
+        //     vivoxParticipant.ParticipantSpeechDetected += SetAudioEnergy;
+        //     Debug.Log("Someone just joined!");
+        // };
     }
 
-    public async void LoginToVivoxAsync()
-    {
-        LoginOptions options = new LoginOptions();
-        options.DisplayName = "Player " + Random.Range(0, 1000).ToString();
-        options.EnableTTS = true;
-        await VivoxService.Instance.LoginAsync(options);
+    // public async void LoginToVivoxAsync()
+    // {
+    //     LoginOptions options = new LoginOptions();
+    //     options.DisplayName = "Player " + Random.Range(0, 1000).ToString();
+    //     options.EnableTTS = true;
+    //     await VivoxService.Instance.LoginAsync(options);
 
-        JoinPositionalChannel();
-    }
+    //     JoinPositionalChannel();
+    // }
 
-    public async void JoinPositionalChannel()
-    {
-        string channelToJoin = "default";
-        await VivoxService.Instance.JoinPositionalChannelAsync
-        (
-            channelToJoin,
-            ChatCapability.TextAndAudio,
-            new Channel3DProperties(2, 1, 50, AudioFadeModel.LinearByDistance)
-        );
+    // public async void JoinPositionalChannel()
+    // {
+    //     string channelToJoin = "default";
+    //     await VivoxService.Instance.JoinPositionalChannelAsync
+    //     (
+    //         channelToJoin,
+    //         ChatCapability.TextAndAudio,
+    //         new Channel3DProperties(2, 1, 50, AudioFadeModel.LinearByDistance)
+    //     );
 
-        Debug.Log("Joined Lobby channel");
-    }
+    //     Debug.Log("Joined Lobby channel");
+    // }
 
 
     

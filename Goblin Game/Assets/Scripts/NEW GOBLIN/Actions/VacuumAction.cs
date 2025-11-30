@@ -45,7 +45,7 @@ public class VacuumAction : MonoBehaviour
 
         anim.SetTrigger(StartVacuumHash);
         //vacuumVFX.EnableTornado();
-        Debug.Log("Started vacuuming!");
+        //Debug.Log("Started vacuuming!");
     }
 
     public void AttemptStopVacuum()
@@ -54,7 +54,7 @@ public class VacuumAction : MonoBehaviour
 
         anim.SetTrigger(EndVacuumHash);
         //vacuumVFX.DisableTornado();
-        Debug.Log("Stopped vacuuming.");
+        //Debug.Log("Stopped vacuuming.");
     }
 
     // Perform vacuum.
