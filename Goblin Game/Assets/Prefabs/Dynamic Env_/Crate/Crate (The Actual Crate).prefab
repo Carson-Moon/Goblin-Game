@@ -248,6 +248,7 @@ MonoBehaviour:
   cratePiecesPrefab: {fileID: 3762050295698305136, guid: 8ef4186da72287e418f48c15250e1849, type: 3}
   centerPoint: {fileID: 4579706970523677692}
   col: {fileID: 3715369330729666577}
+  meshRen: {fileID: 1827773204343636171}
 --- !u!1001 &5432445565417965568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,5 +325,10 @@ PrefabInstance:
 --- !u!4 &654889840986209188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4788820239399580580, guid: 72dd0ca1ea73e3d4aa337ae5dac8d553, type: 3}
+  m_PrefabInstance: {fileID: 5432445565417965568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1827773204343636171 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5926282453013694667, guid: 72dd0ca1ea73e3d4aa337ae5dac8d553, type: 3}
   m_PrefabInstance: {fileID: 5432445565417965568}
   m_PrefabAsset: {fileID: 0}

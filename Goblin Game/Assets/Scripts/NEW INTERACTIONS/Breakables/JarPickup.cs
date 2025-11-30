@@ -21,7 +21,8 @@ public class JarPickup : AbstractBreakablePickup
     {
         base.Break();
 
-        ServerCoinManager.Instance.SpawnMultipleCoinsServerRpc(transform.position, coins);
+        if(ServerCoinManager.Instance != null)
+            ServerCoinManager.Instance.SpawnMultipleCoinsServerRpc(transform.position, coins);
     }
 
     public void LoseCoin()

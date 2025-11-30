@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GrabAction : MonoBehaviour
@@ -18,6 +19,10 @@ public class GrabAction : MonoBehaviour
     private JarPickup jarCandidate;
     [SerializeField] JarPickup currentJar;
     public JarPickup CurrentJar => currentJar;
+
+    [Header("UI")]
+    [SerializeField] GameObject jarCoinsUI;
+    [SerializeField] TextMeshProUGUI jarCoinsDisplay;
 
     private Collider[] pickupCols;
 
@@ -43,6 +48,16 @@ public class GrabAction : MonoBehaviour
     void Update()
     {
         CheckForPickups();
+
+        if(currentJar != null)
+        {
+            jarCoinsUI.SetActive(true);
+            jarCoinsDisplay.text = $"{currentJar.Coins}";
+        }
+        else
+        {
+            jarCoinsUI.SetActive(false);
+        }
     }
 
     private void CheckForPickups()
@@ -65,6 +80,7 @@ public class GrabAction : MonoBehaviour
     public void DiscardCurrentPickup()
     {
         currentPickup = null;
+        currentJar = null;
         currentHeldVisual.SetActive(false);
     }
 }

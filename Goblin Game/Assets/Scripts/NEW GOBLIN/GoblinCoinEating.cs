@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class GoblinCoinEating : NetworkBehaviour
     [Header("Eating UI")]
     [SerializeField] Slider progressSlider;
     [SerializeField] CanvasGroup eatingCanvasGroup;
+    [SerializeField] TextMeshProUGUI coinsEatenDisplay;
 
     private GrabAction grabAction;
 
@@ -23,6 +25,7 @@ public class GoblinCoinEating : NetworkBehaviour
     void Awake()
     {
         grabAction = GetComponentInChildren<GrabAction>();
+        UpdateCoinsEatenDisplay();
     }
 
     void Update()
@@ -43,7 +46,7 @@ public class GoblinCoinEating : NetworkBehaviour
 
     public void StartEatingCoins()
     {
-        if (grabAction.CurrentJar == null)
+        if (grabAction.CurrentJar == null || grabAction.CurrentJar.Coins <= 0)
             return;
 
         ResetEatingTimer();
@@ -68,6 +71,7 @@ public class GoblinCoinEating : NetworkBehaviour
         {
             GainEatenCoinClientRpc();
             grabAction.CurrentJar.LoseCoin();
+            UpdateCoinsEatenDisplay();
         }
     }
 
@@ -83,6 +87,11 @@ public class GoblinCoinEating : NetworkBehaviour
         coinsEaten = coins;
     }
 
+    private void UpdateCoinsEatenDisplay()
+    {
+        coinsEatenDisplay.text = $"{coinsEaten}";
+    }
+
     public int SubtractFromCoinsEaten(int amountToSubtract)
     {
         coinsEaten -= amountToSubtract;
@@ -95,6 +104,7 @@ public class GoblinCoinEating : NetworkBehaviour
         }
 
         SetEatenCoinsClientRpc(coinsEaten);
+        UpdateCoinsEatenDisplay();
 
         return coinsSubtracted;  
     }
