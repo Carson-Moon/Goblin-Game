@@ -21,7 +21,8 @@ public class Goblin : MonoBehaviour
 
     void OnDestroy()
     {
-        pControls.Dispose();
+        if(pControls != null)
+            pControls.Dispose();
     }
 
     void Update()
