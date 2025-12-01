@@ -55,6 +55,8 @@ public class GoblinCoinEating : NetworkBehaviour
         if (grabAction.CurrentJar == null || grabAction.CurrentJar.Coins <= 0)
             return;
 
+        ToggleEatingMovementLock(true);
+
         ResetEatingTimer();
         eating = true;
 
@@ -64,6 +66,8 @@ public class GoblinCoinEating : NetworkBehaviour
     public void StopEatingCoins()
     {
         eating = false;
+
+        ToggleEatingMovementLock(false);
 
         eatingCanvasGroup.DOFade(0, .1f);
     }
@@ -136,6 +140,11 @@ public class GoblinCoinEating : NetworkBehaviour
         desiredSpeed = Mathf.Clamp(desiredSpeed, lowestPossibleSpeed, highestPossibleSpeed);
 
         goblinCharacter.SetWalkSpeed(desiredSpeed);
+    }
+
+    private void ToggleEatingMovementLock(bool value)
+    {
+        goblinCharacter.eatingMovementLock = value;
     }
     
     #region Eating UI

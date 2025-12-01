@@ -35,6 +35,7 @@ public struct CharacterInput
 public class GoblinCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] bool canMove = true;
+    public bool eatingMovementLock = false;
     [SerializeField] bool canLook = true;
 
     [SerializeField] private KinematicCharacterMotor motor;
@@ -101,7 +102,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         }
 
 
-        if (canMove)
+        if (canMove && !eatingMovementLock)
         {
             _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
             _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
