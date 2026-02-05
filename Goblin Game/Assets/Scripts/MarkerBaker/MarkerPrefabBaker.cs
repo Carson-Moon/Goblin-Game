@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Goal: Replace marker GameObjects in-scene with specified prefabs based on name prefixes.
-
 public class MarkerPrefabBaker : MonoBehaviour
 {
     [System.Serializable]
