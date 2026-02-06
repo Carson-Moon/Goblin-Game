@@ -27,7 +27,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -85,6 +85,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Surface_Foam_Texture:
+        m_Texture: {fileID: 2800000, guid: 756d6724924f2448ab273c1be1db34c8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _gradient:
+        m_Texture: {fileID: 2800000, guid: c0487042221c3bf49a116823b5d90abf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -107,39 +115,56 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Comparison: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth_Fade_Distance: 1
+    - _Depth_Fade_Distance: 0.33
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FoamBlend: 1.26
+    - _Foam_Opacity: 0.1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Horizon_Distance: 12.41
+    - _Horizon_Distance: 8.85
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Refraction_Scale: 0.08
+    - _Refraction_Speed: 0.06
+    - _Refraction_Strength: 0.004
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _Surface_Foam_Direction: 1
+    - _Surface_Foam_Distortion: 2.51
+    - _Surface_Foam_Speed: 0.05
+    - _Surface_Foam_Tiling: 3.84
+    - _Wave_Length: 1.05
+    - _Wave_Speed: 0.32
+    - _Wave_Steepness: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.7893378, g: 0.9234567, b: 0.9245283, a: 0}
+    - _DeepColor: {r: 0.7893378, g: 0.9234567, b: 0.9245283, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Horizon_Color: {r: 0.9245283, g: 0.7321349, b: 0.6497864, a: 0}
-    - _ShallowColor: {r: 0.037339456, g: 0.1981132, b: 0.032707363, a: 0}
+    - _FoamBase: {r: 0.34900323, g: 0.6037736, b: 0.33891058, a: 0}
+    - _FoamColor: {r: 0.8773585, g: 0.85913396, b: 0.6000801, a: 0}
+    - _Horizon_Color: {r: 0.1317639, g: 0.5943396, b: 0.30522978, a: 0}
+    - _Overlay: {r: 0.46226418, g: 0.21586864, b: 0.21586864, a: 0}
+    - _ShallowColor: {r: 0.037339456, g: 0.19811314, b: 0.032707363, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Wave_Directions: {r: 0.27, g: 0.3, b: 0.21, a: 1.69}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
