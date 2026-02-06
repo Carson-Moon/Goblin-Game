@@ -2101,6 +2101,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "dc9d50388a4f4094a67e8936ae2f31a4"
@@ -2151,6 +2152,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "DistortUV",
     "m_FunctionSource": "f9682a62aee1443a58ccaaae00d22a8e",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -2216,6 +2218,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "GerstnerWaves",
     "m_FunctionSource": "2c87b840851a04124970a8163dd70348",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -2339,7 +2342,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -2457,7 +2460,7 @@
     "m_StageCapability": 2,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -2613,7 +2616,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -2697,8 +2700,8 @@
     "m_ObjectId": "0f2da41ca2ae455c9ce33cbe7680eaa2",
     "m_Title": "Refracted UV",
     "m_Position": {
-        "x": -3127.5,
-        "y": -1974.0
+        "x": -3127.000244140625,
+        "y": -1974.0001220703125
     }
 }
 
@@ -3066,7 +3069,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -3200,8 +3203,8 @@
     "m_ObjectId": "1b6d09055f394d00950ea3377ba3bd9f",
     "m_Title": "Surface Foam",
     "m_Position": {
-        "x": -2574.374755859375,
-        "y": -780.8956909179688
+        "x": -2574.000244140625,
+        "y": -781.0
     }
 }
 
@@ -3433,8 +3436,8 @@
     "m_ObjectId": "1e1bcc658e1148ee8f980416af030f29",
     "m_Title": "Waves",
     "m_Position": {
-        "x": -1447.4407958984375,
-        "y": -2658.234130859375
+        "x": -1447.0,
+        "y": -2658.000244140625
     }
 }
 
@@ -3631,8 +3634,8 @@
     "m_ObjectId": "2405771c62e44faa97c63051c025bcb6",
     "m_Title": "Blended Normals",
     "m_Position": {
-        "x": -3573.5,
-        "y": -2262.5
+        "x": -3573.000244140625,
+        "y": -2263.000244140625
     }
 }
 
@@ -4099,8 +4102,8 @@
     "m_ObjectId": "2d0725776df441ab9c4fe7002fddc90c",
     "m_Title": "Lighting",
     "m_Position": {
-        "x": -2166.0,
-        "y": -2262.5
+        "x": -2166.000244140625,
+        "y": -2263.000244140625
     }
 }
 
@@ -4330,8 +4333,8 @@
     "m_ObjectId": "3100b0a35b31444a8d58a1e3b256eaa7",
     "m_Title": "Depth Color",
     "m_Position": {
-        "x": -2349.499755859375,
-        "y": -1284.1412353515625
+        "x": -2349.000244140625,
+        "y": -1284.0001220703125
     }
 }
 
@@ -5527,8 +5530,8 @@
     "m_ObjectId": "4581f27f7b9d419f84520c8ba0672770",
     "m_Title": "Underwater Color",
     "m_Position": {
-        "x": -1801.0,
-        "y": -1449.0
+        "x": -1801.0001220703125,
+        "y": -1448.9998779296875
     }
 }
 
@@ -5651,7 +5654,7 @@
     "m_ObjectId": "4820e6512a0a42899026c3e223453a49",
     "m_Title": "Refracted UV",
     "m_Position": {
-        "x": -3364.0,
+        "x": -3364.000244140625,
         "y": -1466.0
     }
 }
@@ -7663,7 +7666,7 @@
     "m_ObjectId": "74caf97f6edb471c88470783549c5774",
     "m_Title": "Linear Fog",
     "m_Position": {
-        "x": -574.5,
+        "x": -574.0003051757813,
         "y": -1028.0
     }
 }
@@ -7955,8 +7958,8 @@
     "m_ObjectId": "7c193e355a3a429e8a403e5fe60052f7",
     "m_Title": "Intersection Foam",
     "m_Position": {
-        "x": -2354.12646484375,
-        "y": 13.934687614440918
+        "x": -2354.000244140625,
+        "y": 14.0
     }
 }
 
@@ -8434,6 +8437,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "MainLighting",
     "m_FunctionSource": "d02e691520ab940ca80be457724cc562",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -9340,8 +9344,8 @@
     "m_ObjectId": "99939e672fbc4e0f870b9d27948a800c",
     "m_Title": "Intersection Foam Mask",
     "m_Position": {
-        "x": -2359.2490234375,
-        "y": -342.24310302734377
+        "x": -2359.000244140625,
+        "y": -342.0
     }
 }
 
@@ -9989,7 +9993,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -10529,7 +10533,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -10584,8 +10588,8 @@
     "m_ObjectId": "be34f468e9c94adea836b89dd150495f",
     "m_Title": "Exponential Fog",
     "m_Position": {
-        "x": -575.0,
-        "y": -1218.0
+        "x": -575.0003051757813,
+        "y": -1217.9998779296875
     }
 }
 
@@ -10938,8 +10942,8 @@
     "m_ObjectId": "c589778ddabd4f02847f973e4a47df3d",
     "m_Title": "Depth Fade",
     "m_Position": {
-        "x": -2840.499755859375,
-        "y": -1236.1412353515625
+        "x": -2840.000244140625,
+        "y": -1250.0001220703125
     }
 }
 
@@ -11949,6 +11953,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -12684,6 +12691,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "AdditionalLighting",
     "m_FunctionSource": "d02e691520ab940ca80be457724cc562",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -12936,8 +12944,8 @@
     "m_ObjectId": "ed80a74ec8034cf1b3f36b6bb812d1f7",
     "m_Title": "Horizon Color",
     "m_Position": {
-        "x": -2348.499755859375,
-        "y": -1043.141357421875
+        "x": -2348.000244140625,
+        "y": -1043.0001220703125
     }
 }
 
