@@ -65,12 +65,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: c0487042221c3bf49a116823b5d90abf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Intersection_Foam_Texture:
+        m_Texture: {fileID: 2800000, guid: 716010ae70e1b4e84ba6baf439991fae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normals_Texture:
+        m_Texture: {fileID: 2800000, guid: ead3be67941d84de8806e2bdbc4a2d24, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -118,7 +126,7 @@ Material:
     - _Comparison: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth_Fade_Distance: 0.33
+    - _Depth_Fade_Distance: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -130,7 +138,19 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Horizon_Distance: 8.85
+    - _Intersection_Foam_Blend: 0.5
+    - _Intersection_Foam_Cutoff: 1
+    - _Intersection_Foam_Depth: 1.07
+    - _Intersection_Foam_Direction: 6.96
+    - _Intersection_Foam_Fade: 0.71
+    - _Intersection_Foam_Speed: 0.1
+    - _Intersection_Foam_Tiling: 9.63
+    - _Lighting_Hardness: 0.96
+    - _Lighting_Smoothness: 0.43
     - _Metallic: 0
+    - _Normals_Scale: 1.68
+    - _Normals_Speed: 0.02
+    - _Normals_Strength: 1.88
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -162,9 +182,11 @@ Material:
     - _FoamBase: {r: 0.34900323, g: 0.6037736, b: 0.33891058, a: 0}
     - _FoamColor: {r: 0.8773585, g: 0.85913396, b: 0.6000801, a: 0}
     - _Horizon_Color: {r: 0.1317639, g: 0.5943396, b: 0.30522978, a: 0}
+    - _Intersection_Foam_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Overlay: {r: 0.46226418, g: 0.21586864, b: 0.21586864, a: 0}
-    - _ShallowColor: {r: 0.037339456, g: 0.19811314, b: 0.032707363, a: 1}
+    - _ShallowColor: {r: 0.037339456, g: 0.19811308, b: 0.032707363, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Specular_Color: {r: 0.6997597, g: 0.8018868, b: 0.7067772, a: 1}
     - _Wave_Directions: {r: 0.27, g: 0.3, b: 0.21, a: 1.69}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

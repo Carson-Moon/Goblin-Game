@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: d9be20e5d4ac04a7f8c7bfd1c4330a4f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - WORLD_SPACE_UV_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -50,37 +51,37 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - WORLD_SPACE_UV: 0
-    - _Depth_Fade_Distance: 0.4
+    - WORLD_SPACE_UV: 1
+    - _Depth_Fade_Distance: 1.48
     - _Foam_Blend: 1
-    - _Horizon_Distance: 5.1
+    - _Horizon_Distance: 16.5
     - _Intersection_Foam_Blend: 0
     - _Intersection_Foam_Color_Blend: 1
-    - _Intersection_Foam_Cutoff: 0.875
-    - _Intersection_Foam_Depth: 0.75
+    - _Intersection_Foam_Cutoff: 0.655
+    - _Intersection_Foam_Depth: 1.02
     - _Intersection_Foam_Direction: 0.154
     - _Intersection_Foam_Fade: 1
-    - _Intersection_Foam_Speed: 0.131
-    - _Intersection_Foam_Tiling: 100
+    - _Intersection_Foam_Speed: 0.173
+    - _Intersection_Foam_Tiling: 14.7
     - _Lighting_Hardness: 1
-    - _Lighting_Smoothness: 0.587
-    - _Normals_Scale: 0.012
-    - _Normals_Speed: 0.073
-    - _Normals_Strength: 0.277
+    - _Lighting_Smoothness: 0.148
+    - _Normals_Scale: 0.2
+    - _Normals_Speed: 0.0769
+    - _Normals_Strength: 0.236
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _Refraction_Scale: 0.01
+    - _Refraction_Scale: 0.254
     - _Refraction_Speed: 0.053
     - _Refraction_Strength: 0.0065
     - _Shore_Depth: 0
     - _Smoothness: 0.47
     - _Surface_Foam_Blend: 1
-    - _Surface_Foam_Color_Blend: 1
+    - _Surface_Foam_Color_Blend: 0.399
     - _Surface_Foam_Cutoff: 0.131
-    - _Surface_Foam_Direction: 0.413
-    - _Surface_Foam_Distortion: 0.94
-    - _Surface_Foam_Speed: 0
-    - _Surface_Foam_Tiling: 84.8
+    - _Surface_Foam_Direction: 0.581
+    - _Surface_Foam_Distortion: 1.58
+    - _Surface_Foam_Speed: 0.133
+    - _Surface_Foam_Tiling: 1
     - _Wave_Length: 2.8
     - _Wave_Speed: 0.57
     - _Wave_Steepness: 0.088
@@ -94,7 +95,7 @@ Material:
     - _Shallow_Color: {r: 0.45768058, g: 0.8018868, b: 0.7984465, a: 0.43137255}
     - _Shore_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Specular_Color: {r: 1, g: 1, b: 1, a: 0.1764706}
-    - _Surface_Foam_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Surface_Foam_Color: {r: 0.9245283, g: 0.7980598, b: 0.7980598, a: 0}
     - _Wave_Directions: {r: 0, g: 0.5, b: 1, a: 0.2}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
