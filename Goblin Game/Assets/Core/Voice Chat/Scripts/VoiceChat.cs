@@ -227,6 +227,26 @@ public class VoiceChat : MonoBehaviour
         }
     }
 
+    public void AdjustLocalPlayerVolume(string displayName, int newVolume, Action<int> onSuccess)
+    {
+        if(currentChannelParticipants.TryGetValue(displayName, out VivoxParticipant participant))
+        {
+            if(participant.IsSelf)
+            {
+                Debug.LogWarning("Cannot adjust your own volume yet.");
+                return;
+            }
+
+            participant.SetLocalVolume(newVolume);
+            onSuccess?.Invoke(newVolume);
+
+        }
+        else
+        {
+            Debug.LogWarning($"Player not found: {displayName}. Cannot adjust local volume.");
+        }
+    }
+
     #endregion
 
     void OnDestroy()

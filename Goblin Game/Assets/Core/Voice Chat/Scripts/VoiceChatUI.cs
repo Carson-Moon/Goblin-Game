@@ -64,7 +64,7 @@ public class VoiceChatUI : MonoBehaviour
     private void AddToUI(VivoxParticipant participant)
     {
         VoiceChatPlayerUI playerUI = Instantiate(playerUIPrefab, playerUIHolder);
-        playerUI.Setup(participant.DisplayName, VoiceChat.Instance.ToggleLocalPlayerMute);
+        playerUI.Setup(participant.DisplayName, VoiceChat.Instance.ToggleLocalPlayerMute, VoiceChat.Instance.AdjustLocalPlayerVolume);
 
         currentPlayerUIs.Add(participant.DisplayName, playerUI);
     }

@@ -58,7 +58,9 @@ MonoBehaviour:
   muteImage: {fileID: 3317688425122787272}
   unmutedSprite: {fileID: 21300000, guid: 9f72c50bb2d1c1340ba3db842c4da37e, type: 3}
   mutedSprite: {fileID: 21300000, guid: 2a8f2697b92606642bd2d073d04226e2, type: 3}
-  volumeSlider: {fileID: 0}
+  volumeSlider: {fileID: 700410965386881442}
+  minVolume: -25
+  maxVolume: 25
 --- !u!1 &2204917642665921922
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,10 +258,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 643914138732379617}
+        m_TargetAssemblyTypeName: VoiceChatPlayerUI, Assembly-CSharp
+        m_MethodName: AdjustVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6140885989288531879
 GameObject:
   m_ObjectHideFlags: 0
