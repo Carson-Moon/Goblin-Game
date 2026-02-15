@@ -22,12 +22,6 @@ public class GoblinClient : NetworkBehaviour
     [SerializeField] GoblinCharacter goblinCharacter;
 
 
-    void Update()
-    {
-        if(VivoxService.Instance.ActiveChannels.Count != 0)
-            VivoxService.Instance.Set3DPosition(goblinCharacter.gameObject, "default");
-    }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();

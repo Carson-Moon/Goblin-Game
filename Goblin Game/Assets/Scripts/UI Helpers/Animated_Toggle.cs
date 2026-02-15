@@ -151,5 +151,11 @@ public class Animated_Toggle : Abstract_Animated_UI
         }
     }
 
+    protected override void Destroy()
+    {
+        onToggleOn = null;
+        onToggleOff = null;
+    }
+
     #endregion
 }

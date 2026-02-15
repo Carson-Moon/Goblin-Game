@@ -8,210 +8,160 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Services.Vivox;
+
 //using Unity.Services.Vivox;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class TestRelay : MonoBehaviour
 {
-    [Header("Debug Buttons")]
-    public bool createRelay = false;
-    public bool joinRelay = false;
+//     [Header("Debug Buttons")]
+//     public bool createRelay = false;
+//     public bool joinRelay = false;
 
-    [Header("Relay Settings")]
-    public string joinCode;
-    public TextMeshProUGUI joinCodeText;
-    //public TextMeshPro inLobbyText;
-    public TMP_InputField codeInput;
+//     [Header("Relay Settings")]
+//     public string joinCode;
+//     public TextMeshProUGUI joinCodeText;
+//     //public TextMeshPro inLobbyText;
+//     public TMP_InputField codeInput;
 
-    [Header("On Lobby Started/Joined")]
-    public UnityEvent onLobbyJoined;
+//     [Header("On Lobby Started/Joined")]
+//     public UnityEvent onLobbyJoined;
 
-    //private VivoxParticipant vivoxParticipant = null;
-
-
-    private void Update()
-    {
-        if (createRelay)
-        {
-            CreateRelay();
-            createRelay = false;
-        }
-
-        if (joinRelay)
-        {
-            JoinRelay(joinCode);
-            joinRelay = false;
-        }
-    }
-
-    // private void SetAudioEnergy()
-    // {
-    //     Debug.Log(vivoxParticipant.SpeechDetected);
-    // }
-
-    private async void Start()
-    {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-        };
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-        //await VivoxService.Instance.InitializeAsync();
-        //LoginToVivoxAsync();
-
-        // VivoxService.Instance.ParticipantAddedToChannel += (participant) =>
-        // {
-        //     vivoxParticipant = participant;
-        //     vivoxParticipant.ParticipantSpeechDetected += SetAudioEnergy;
-        //     Debug.Log("Someone just joined!");
-        // };
-    }
-
-    // public async void LoginToVivoxAsync()
-    // {
-    //     LoginOptions options = new LoginOptions();
-    //     options.DisplayName = "Player " + Random.Range(0, 1000).ToString();
-    //     options.EnableTTS = true;
-    //     await VivoxService.Instance.LoginAsync(options);
-
-    //     JoinPositionalChannel();
-    // }
-
-    // public async void JoinPositionalChannel()
-    // {
-    //     string channelToJoin = "default";
-    //     await VivoxService.Instance.JoinPositionalChannelAsync
-    //     (
-    //         channelToJoin,
-    //         ChatCapability.TextAndAudio,
-    //         new Channel3DProperties(2, 1, 50, AudioFadeModel.LinearByDistance)
-    //     );
-
-    //     Debug.Log("Joined Lobby channel");
-    // }
+//     //private VivoxParticipant vivoxParticipant = null;
 
 
-    
+//     private void Update()
+//     {
+//         if (createRelay)
+//         {
+//             CreateRelay();
+//             createRelay = false;
+//         }
 
-    // Host creates relay...
-    public async void CreateRelay()
-    {
-        // The number is maximum number of conenctions, not including the host!
-        try
-        {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(9);
+//         if (joinRelay)
+//         {
+//             JoinRelay(joinCode);
+//             joinRelay = false;
+//         }
+//     }
 
-            joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            if (joinCode != null) joinCodeText.text = joinCode;
+//     // Host creates relay...
+//     public async void CreateRelay()
+//     {
+//         // The number is maximum number of conenctions, not including the host!
+//         try
+//         {
+//             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(9);
 
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
+//             joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+//             if (joinCode != null) joinCodeText.text = joinCode;
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+//             RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
 
-            StartLobby();
-        }
-        catch (RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
+//             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-    // Client joins relay...
-    public async void JoinRelay(string joinCode){
-        try
-        {
-            Debug.Log("Joining Relay with " + joinCode);
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+//             StartLobby();
+//         }
+//         catch (RelayServiceException e)
+//         {
+//             Debug.Log(e);
+//         }
+//     }
 
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
+//     // Client joins relay...
+//     public async void JoinRelay(string joinCode){
+//         try
+//         {
+//             Debug.Log("Joining Relay with " + joinCode);
+//             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+
+//             RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
             
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+//             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-            JoinLobby();
-        }
-        catch(RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
+//             JoinLobby();
+//         }
+//         catch(RelayServiceException e)
+//         {
+//             Debug.Log(e);
+//         }
+//     }
 
-    // Client joins relay...
-    public async void JoinRelay(){
-        try
-        {
-            string roomCode = codeInput.text;
-            joinCode = codeInput.text.ToUpper();
+//     // Client joins relay...
+//     public async void JoinRelay(){
+//         try
+//         {
+//             string roomCode = codeInput.text;
+//             joinCode = codeInput.text.ToUpper();
 
-            Debug.Log("Joining Relay with " + roomCode);
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(roomCode);
+//             Debug.Log("Joining Relay with " + roomCode);
+//             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(roomCode);
 
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
+//             RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+//             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
-            JoinLobby();
-        }
-        catch(RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
+//             JoinLobby();
+//         }
+//         catch(RelayServiceException e)
+//         {
+//             Debug.Log(e);
+//         }
+//     }
 
-#region Joining and Leaving Lobbies
-    // Start a lobby!
-    public void StartLobby(){
-        // Ensure we are not already in a lobby...
-        if(NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
-        {
-            print("Already in a lobby!");
-            return;
-        }
+// #region Joining and Leaving Lobbies
+//     // Start a lobby!
+//     public void StartLobby(){
+//         // Ensure we are not already in a lobby...
+//         if(NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
+//         {
+//             print("Already in a lobby!");
+//             return;
+//         }
             
-        NetworkManager.Singleton.StartHost();
+//         NetworkManager.Singleton.StartHost();
 
-        OnStartLobby();
-    }
+//         OnStartLobby();
+//     }
 
-    // Changes to make when a lobby is successfully started/joined.
-    private void OnStartLobby()
-    {
-        onLobbyJoined.Invoke();
+//     // Changes to make when a lobby is successfully started/joined.
+//     private void OnStartLobby()
+//     {
+//         onLobbyJoined.Invoke();
 
-        //joinCodeText.text = "Current Join Code: " + joinCode;
-        joinCodeText.text = joinCode;
-    }
+//         //joinCodeText.text = "Current Join Code: " + joinCode;
+//         joinCodeText.text = joinCode;
+//     }
 
-    // Join a lobby.
-    public void JoinLobby(){
-        // Ensure we are not already in a lobby...
-        if(NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
-        {
-            print("Already in a lobby!");
-            return;
-        }
+//     // Join a lobby.
+//     public void JoinLobby(){
+//         // Ensure we are not already in a lobby...
+//         if(NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
+//         {
+//             print("Already in a lobby!");
+//             return;
+//         }
             
-        NetworkManager.Singleton.StartClient();
+//         NetworkManager.Singleton.StartClient();
 
-        OnStartLobby();
-    }
+//         OnStartLobby();
+//     }
 
-    // Leave a lobby.
-    public void LeaveLobby(){
-        if(NetworkManager.Singleton.IsHost)
-        {
-            print("Host is leaving the lobby...");
-        }
-        else if(NetworkManager.Singleton.IsClient)
-        {
-            print("Client is leaving the lobby...");
-        }
+//     // Leave a lobby.
+//     public void LeaveLobby(){
+//         if(NetworkManager.Singleton.IsHost)
+//         {
+//             print("Host is leaving the lobby...");
+//         }
+//         else if(NetworkManager.Singleton.IsClient)
+//         {
+//             print("Client is leaving the lobby...");
+//         }
 
-        NetworkManager.Singleton.Shutdown();
-    }
+//         NetworkManager.Singleton.Shutdown();
+//     }
 
-#endregion
+// #endregion
 }

@@ -10,7 +10,8 @@ using System;
 public class Animated_Button : Abstract_Animated_UI
 {
     [Header("Button Events")]
-    [SerializeField] public UnityEvent onButtonPressed;
+    [SerializeField] private UnityEvent onButtonPressedEvent;
+    public event Action onButtonPressedAction;
 
     [Header("Button Animation Settings")]
     [SerializeField] protected float rotationDegrees;
@@ -30,7 +31,8 @@ public class Animated_Button : Abstract_Animated_UI
             return false;
 
         print("Button actually pressed!");
-        onButtonPressed.Invoke();
+        onButtonPressedEvent?.Invoke();
+        onButtonPressedAction?.Invoke();
 
         return true;
     }
@@ -70,6 +72,12 @@ public class Animated_Button : Abstract_Animated_UI
 
         // Tween to our default color.
         topGraphicImage.DOColor(defaultColor, colorSeconds);
+    }
+
+    protected override void Destroy()
+    {
+        onButtonPressedEvent = null;
+        onButtonPressedAction = null;
     }
 
     #endregion

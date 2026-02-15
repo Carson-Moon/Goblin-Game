@@ -98,25 +98,20 @@ public abstract class Abstract_Animated_UI : MonoBehaviour
 
     #region Animations
 
-    protected virtual void OnHoverAnimation()
-    {
+    protected abstract void OnHoverAnimation();
 
-    }
+    protected abstract void OffHoverAnimation();
 
-    protected virtual void OffHoverAnimation()
-    {
+    protected abstract void OnPressAnimation();
 
-    }
-
-    protected virtual void OnPressAnimation()
-    {
-
-    }
-
-    protected virtual void OnReleaseAnimation()
-    {
-
-    }
+    protected abstract void OnReleaseAnimation();
 
     #endregion
+
+    protected abstract void Destroy();
+
+    private void OnDestroy()
+    {
+        Destroy();
+    }
 }

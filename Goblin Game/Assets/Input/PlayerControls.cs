@@ -356,6 +356,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bdb1c9e-7b24-4123-959b-53a20528424f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VoiceChat"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b05fb54-6fde-4813-a8c4-a5aa17ee0ac5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -378,6 +396,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a79564d-27f8-4a3a-a5b9-458282f9ab80"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceb90f67-00b2-4a97-a983-4fa3d4093c21"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VoiceChat"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -537,6 +577,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_Interaction = asset.FindActionMap("UI_Interaction", throwIfNotFound: true);
         m_UI_Interaction_MousePosition = m_UI_Interaction.FindAction("MousePosition", throwIfNotFound: true);
         m_UI_Interaction_MouseDelta = m_UI_Interaction.FindAction("MouseDelta", throwIfNotFound: true);
+        m_UI_Interaction_Escape = m_UI_Interaction.FindAction("Escape", throwIfNotFound: true);
+        m_UI_Interaction_VoiceChat = m_UI_Interaction.FindAction("VoiceChat", throwIfNotFound: true);
         // GoblinMovement
         m_GoblinMovement = asset.FindActionMap("GoblinMovement", throwIfNotFound: true);
         m_GoblinMovement_Movement = m_GoblinMovement.FindAction("Movement", throwIfNotFound: true);
@@ -755,12 +797,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IUI_InteractionActions> m_UI_InteractionActionsCallbackInterfaces = new List<IUI_InteractionActions>();
     private readonly InputAction m_UI_Interaction_MousePosition;
     private readonly InputAction m_UI_Interaction_MouseDelta;
+    private readonly InputAction m_UI_Interaction_Escape;
+    private readonly InputAction m_UI_Interaction_VoiceChat;
     public struct UI_InteractionActions
     {
         private @PlayerControls m_Wrapper;
         public UI_InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePosition => m_Wrapper.m_UI_Interaction_MousePosition;
         public InputAction @MouseDelta => m_Wrapper.m_UI_Interaction_MouseDelta;
+        public InputAction @Escape => m_Wrapper.m_UI_Interaction_Escape;
+        public InputAction @VoiceChat => m_Wrapper.m_UI_Interaction_VoiceChat;
         public InputActionMap Get() { return m_Wrapper.m_UI_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -776,6 +822,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseDelta.started += instance.OnMouseDelta;
             @MouseDelta.performed += instance.OnMouseDelta;
             @MouseDelta.canceled += instance.OnMouseDelta;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+            @VoiceChat.started += instance.OnVoiceChat;
+            @VoiceChat.performed += instance.OnVoiceChat;
+            @VoiceChat.canceled += instance.OnVoiceChat;
         }
 
         private void UnregisterCallbacks(IUI_InteractionActions instance)
@@ -786,6 +838,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseDelta.started -= instance.OnMouseDelta;
             @MouseDelta.performed -= instance.OnMouseDelta;
             @MouseDelta.canceled -= instance.OnMouseDelta;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+            @VoiceChat.started -= instance.OnVoiceChat;
+            @VoiceChat.performed -= instance.OnVoiceChat;
+            @VoiceChat.canceled -= instance.OnVoiceChat;
         }
 
         public void RemoveCallbacks(IUI_InteractionActions instance)
@@ -893,6 +951,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+        void OnVoiceChat(InputAction.CallbackContext context);
     }
     public interface IGoblinMovementActions
     {
