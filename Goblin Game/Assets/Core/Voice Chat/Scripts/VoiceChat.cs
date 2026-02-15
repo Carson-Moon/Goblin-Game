@@ -186,7 +186,7 @@ public class VoiceChat : MonoBehaviour
             participantSource.transform.SetParent(goblinClient.GoblinCharacter.transform);
             participantSource.transform.localPosition = Vector3.zero;
 
-            participantSource.outputAudioMixerGroup = audioMixer;
+            if(audioMixer != null) participantSource.outputAudioMixerGroup = audioMixer;
             participantSource.spatialBlend = spatialBlend;
             participantSource.rolloffMode = rolloffMode;
             participantSource.minDistance = rolloffMinDistance;

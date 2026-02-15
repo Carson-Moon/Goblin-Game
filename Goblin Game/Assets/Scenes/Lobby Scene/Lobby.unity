@@ -293,6 +293,10 @@ PrefabInstance:
       propertyPath: m_BlocksRaycasts
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4973576535289229559, guid: f6ca354ba63ed1f4abd8b51874c73859, type: 3}
+      propertyPath: audioListener
+      value: 
+      objectReference: {fileID: 1170948399}
     - target: {fileID: 5175674142438923642, guid: f6ca354ba63ed1f4abd8b51874c73859, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -422,12 +426,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1723bce5116224c843e1b642396e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24300002, guid: 7e0e4d6d5e7e249caae4011d055711ef, type: 2}
+  audioMixer: {fileID: 0}
   spatialBlend: 1
   rolloffMode: 1
   rolloffMinDistance: 5
   rolloffMaxDistance: 35
-  debugDisplayName: Carson
 --- !u!1 &203460815
 GameObject:
   m_ObjectHideFlags: 0

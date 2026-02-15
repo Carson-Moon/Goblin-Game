@@ -240,7 +240,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581938333026998448}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &6908813717726033148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,6 +752,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  goblinName:
+    m_InternalValue:
+      utf8LengthInBytes: 11
+      bytes:
+        offset0000:
+          byte0000: 77
+          byte0001: 105
+          byte0002: 110
+          byte0003: 100
+          byte0004: 32
+          byte0005: 71
+          byte0006: 111
+          byte0007: 98
+          byte0008: 108
+          byte0009: 105
+          byte0010: 110
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0016: 0
+        byte0017: 0
+        byte0018: 0
+        byte0019: 0
+        byte0020: 0
+        byte0021: 0
+        byte0022: 0
+        byte0023: 0
+        byte0024: 0
+        byte0025: 0
+        byte0026: 0
+        byte0027: 0
+        byte0028: 0
+        byte0029: 0
   armOverlayCamera: {fileID: 3038331782566860949}
   goblin: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
@@ -2308,6 +2343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  eatingMovementLock: 0
   canLook: 1
   motor: {fileID: 7404937040295175108}
   root: {fileID: 7988590949935145556}

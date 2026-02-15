@@ -3,6 +3,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] AudioListener audioListener;
 
     [Header("Menu Sections")]
     [SerializeField] MainMenuLobbySection lobbySection;
@@ -20,11 +21,13 @@ public class MainMenu : MonoBehaviour
     public void Show()
     {
         canvasGroup.TurnOn(1f);
+        audioListener.enabled = true;
     }
 
     public void Hide()
     {
         canvasGroup.TurnOff(1f);
+        audioListener.enabled = false;
     }
 
 #endregion
