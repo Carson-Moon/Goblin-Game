@@ -17,6 +17,7 @@ public class MainMenuLobbySection : MonoBehaviour
         onSuccess = _onSuccess;
 
         createButton.onButtonPressedAction += Create;
+        joinButton.onButtonPressedAction += Join;
     }
 
 #region Create Button
