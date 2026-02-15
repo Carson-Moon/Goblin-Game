@@ -60,7 +60,7 @@ public class RelayConnection : MonoBehaviour
         }
         catch(Exception e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
     }
 
@@ -80,7 +80,7 @@ public class RelayConnection : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
     }
 
@@ -102,21 +102,19 @@ public class RelayConnection : MonoBehaviour
         try
         {
             Debug.Log("Starting to join a lobby...");
-            await JoinRelayAsClient(_joinCode);
-            Debug.Log($"Successfully joined a lobby. Join code is <color=green>{joinCode}</color>");
-            onSuccess?.Invoke();
+            await JoinRelayAsClient(_joinCode, onSuccess);
         }
         catch(Exception e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
     }
 
-    public async Task JoinRelayAsClient(string _joinCode)
+    public async Task JoinRelayAsClient(string _joinCode, Action onSuccess)
     {
         try
         {
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(_joinCode);
 
             RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
             
@@ -124,15 +122,15 @@ public class RelayConnection : MonoBehaviour
 
             joinCode = _joinCode;
 
-            JoinLobbyAsClient();
+            JoinLobbyAsClient(onSuccess);
         }
         catch(RelayServiceException e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
     }
 
-    private void JoinLobbyAsClient()
+    private void JoinLobbyAsClient(Action onSuccess)
     {
         if(NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
         {
@@ -141,6 +139,9 @@ public class RelayConnection : MonoBehaviour
         }
 
         NetworkManager.Singleton.StartClient();
+
+        Debug.Log($"Successfully joined a lobby. Join code is <color=green>{joinCode}</color>");
+        onSuccess?.Invoke();
     }
 #endregion
 
