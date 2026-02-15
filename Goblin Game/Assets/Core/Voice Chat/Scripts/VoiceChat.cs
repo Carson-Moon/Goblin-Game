@@ -41,7 +41,7 @@ public class VoiceChat : MonoBehaviour
 
     private void Start() 
     {
-        BindVivoxActions(true);
+        BindRelayActions(true);
     }
 
     private void BindVivoxActions(bool bind)
@@ -52,8 +52,6 @@ public class VoiceChat : MonoBehaviour
             VivoxService.Instance.ChannelLeft += OnChannelLeft;
             VivoxService.Instance.ParticipantAddedToChannel += OnParticipantAddedToChannel;
             VivoxService.Instance.ParticipantRemovedFromChannel += OnParticipantRemovedFromChannel;
-
-            RelayConnection.Instance.onClientStarted += StartEnablingVoiceChat;
         }
         else
         {
@@ -61,7 +59,17 @@ public class VoiceChat : MonoBehaviour
             VivoxService.Instance.ChannelLeft -= OnChannelLeft;
             VivoxService.Instance.ParticipantAddedToChannel -= OnParticipantAddedToChannel;
             VivoxService.Instance.ParticipantRemovedFromChannel -= OnParticipantRemovedFromChannel;
+        }
+    }
 
+    private void BindRelayActions(bool bind)
+    {
+        if(bind)
+        {
+            RelayConnection.Instance.onClientStarted += StartEnablingVoiceChat;
+        }
+        else
+        {
             RelayConnection.Instance.onClientStarted -= StartEnablingVoiceChat;
         }
     }
@@ -104,6 +112,9 @@ public class VoiceChat : MonoBehaviour
             options.DisplayName = _displayName;
 
             await VivoxService.Instance.LoginAsync(options);
+
+            BindVivoxActions(true);
+
             Debug.Log("Login successful.");
         }
         catch(Exception e)
@@ -211,6 +222,7 @@ public class VoiceChat : MonoBehaviour
 
     void OnDestroy()
     {
+        BindRelayActions(false);
         BindVivoxActions(false);
     }
 }
