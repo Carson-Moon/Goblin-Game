@@ -15,6 +15,8 @@ public class VoiceChat : MonoBehaviour
     // This string should be replaced with a unique ID tied to the player object for proximity chat.
     private Dictionary<string, VivoxParticipant> currentChannelParticipants = new();
     public Dictionary<string, VivoxParticipant> CurrentChannelParticipants => currentChannelParticipants;
+    
+    private Dictionary<string, AudioSource> currentParticipantTaps = new();
 
     public event Action<string> onChannelJoined;
     public event Action<string> onChannelLeft;
@@ -191,6 +193,8 @@ public class VoiceChat : MonoBehaviour
             participantSource.rolloffMode = rolloffMode;
             participantSource.minDistance = rolloffMinDistance;
             participantSource.maxDistance = rolloffMaxDistance;
+
+            currentParticipantTaps.Add(participant.DisplayName, participantSource);
         }
 
         onParticipantJoinedChannel?.Invoke(participant);
@@ -201,6 +205,7 @@ public class VoiceChat : MonoBehaviour
         onParticipantLeftChannel?.Invoke(participant);
 
         currentChannelParticipants.Remove(participant.DisplayName);
+        currentParticipantTaps.Remove(participant.DisplayName);
     }
 
     public void ToggleLocalPlayerMute(string displayName, bool muted, Action<bool> onSuccess)
@@ -227,7 +232,7 @@ public class VoiceChat : MonoBehaviour
         }
     }
 
-    public void AdjustLocalPlayerVolume(string displayName, int newVolume, Action<int> onSuccess)
+    public void AdjustLocalPlayerVolume(string displayName, float newVolume, Action<float> onSuccess)
     {
         if(currentChannelParticipants.TryGetValue(displayName, out VivoxParticipant participant))
         {
@@ -237,9 +242,15 @@ public class VoiceChat : MonoBehaviour
                 return;
             }
 
-            participant.SetLocalVolume(newVolume);
-            onSuccess?.Invoke(newVolume);
-
+            if(currentParticipantTaps.TryGetValue(displayName, out AudioSource participantTap))
+            {
+                participantTap.volume = newVolume;
+                onSuccess?.Invoke(newVolume);
+            }
+            else
+            {
+                Debug.Log($"{displayName} was found, but no Audio Tap was found.");
+            }
         }
         else
         {

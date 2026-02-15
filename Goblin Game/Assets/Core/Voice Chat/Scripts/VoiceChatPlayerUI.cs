@@ -22,10 +22,10 @@ public class VoiceChatPlayerUI : MonoBehaviour
     [SerializeField] int minVolume;
     [SerializeField] int maxVolume;
 
-    private Action<string, int, Action<int>> adjustVolumeAction;
+    private Action<string, float, Action<float>> adjustVolumeAction;
 
 
-    public void Setup(string _displayName, Action<string, bool, Action<bool>> _toggleMuteAction, Action<string, int, Action<int>> _adjustVolumeAction)
+    public void Setup(string _displayName, Action<string, bool, Action<bool>> _toggleMuteAction, Action<string, float, Action<float>> _adjustVolumeAction)
     {
         displayName = _displayName;
         toggleMuteAction += _toggleMuteAction;
@@ -54,13 +54,10 @@ public class VoiceChatPlayerUI : MonoBehaviour
 #region Volume Adjust
     public void AdjustVolume()
     {
-        int volumeRange = maxVolume - minVolume;
-        int newVolume = minVolume + (int)(volumeRange * volumeSlider.value);
-
-        adjustVolumeAction?.Invoke(displayName, newVolume, OnVolumeAdjustSuccess);
+        adjustVolumeAction?.Invoke(displayName, volumeSlider.value, OnVolumeAdjustSuccess);
     }
 
-    private void OnVolumeAdjustSuccess(int newVolume)
+    private void OnVolumeAdjustSuccess(float newVolume)
     {
         Debug.Log($"Set to new volume: {newVolume}");
     }
