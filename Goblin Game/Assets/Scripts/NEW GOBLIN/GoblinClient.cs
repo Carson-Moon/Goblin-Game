@@ -33,7 +33,8 @@ public class GoblinClient : NetworkBehaviour
         };
 
         // Set our name here from player prefs.
-        SetUsernameServerRpc(UsernameHolder.Username);
+        if(IsLocalPlayer)
+            SetUsernameServerRpc(UsernameHolder.Username);
     }
 
     [ServerRpc(RequireOwnership = false)]
