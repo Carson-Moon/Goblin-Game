@@ -6,12 +6,14 @@ public class MainMenu : MonoBehaviour
 
     [Header("Menu Sections")]
     [SerializeField] MainMenuLobbySection lobbySection;
+    [SerializeField] MainMenuUsernameSection usernameSection;
     
 
 
     void Start()
     {
         lobbySection.Initialize(Hide);
+        usernameSection.Initialize();
     }
 
 #region Show/Hide

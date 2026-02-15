@@ -7,6 +7,11 @@ using UnityEngine;
 
 public class ServiceLoader : MonoBehaviour
 {
+    void Awake()
+    {
+        UsernameHolder.FetchExistingUsername();
+    }
+
     private async void Start() 
     {
         await InitializeAsync();

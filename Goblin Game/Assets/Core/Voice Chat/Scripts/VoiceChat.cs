@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -26,9 +27,6 @@ public class VoiceChat : MonoBehaviour
     [SerializeField] AudioRolloffMode rolloffMode;
     [SerializeField] float rolloffMinDistance;
     [SerializeField] float rolloffMaxDistance;
-
-    [Header("Debug")]
-    [SerializeField] string debugDisplayName;
 
 
     void Awake()
@@ -79,7 +77,7 @@ public class VoiceChat : MonoBehaviour
         try
         {
             string _channelName = RelayConnection.Instance.JoinCode;
-            string _displayName = debugDisplayName;
+            string _displayName = UsernameHolder.Username;
 
             await EnableVoiceChat(_channelName, _displayName);
             Debug.Log("Voice Chat Successfully enabled.");
@@ -176,7 +174,18 @@ public class VoiceChat : MonoBehaviour
 
         if(!participant.IsSelf)
         {
+            GoblinClient goblinClient = FindObjectsByType<GoblinClient>(FindObjectsSortMode.None).First(x => x.GoblinName == participant.DisplayName);
+            if(goblinClient == null)
+            {
+                Debug.LogWarning("Could not find goblin client for audio tap.");
+                return;
+            }
+
             AudioSource participantSource = participant.CreateVivoxParticipantTap($"{participant.DisplayName}'s Audio Tap").GetComponent<AudioSource>();
+
+            participantSource.transform.SetParent(goblinClient.GoblinCharacter.transform);
+            participantSource.transform.localPosition = Vector3.zero;
+
             participantSource.outputAudioMixerGroup = audioMixer;
             participantSource.spatialBlend = spatialBlend;
             participantSource.rolloffMode = rolloffMode;

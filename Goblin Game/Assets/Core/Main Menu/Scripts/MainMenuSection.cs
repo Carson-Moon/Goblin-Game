@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class MainMenuSection : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] CanvasGroup canvasGroup;
+
+
+    public void Show()
     {
-        
+        canvasGroup.TurnOn(1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Hide()
     {
-        
+        canvasGroup.TurnOff(1f);
     }
 }

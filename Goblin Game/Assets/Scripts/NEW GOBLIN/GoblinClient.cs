@@ -9,7 +9,7 @@ using UnityEngine;
 public class GoblinClient : NetworkBehaviour
 {
     [Header("Goblin Client Information")]
-    private NetworkVariable<FixedString32Bytes> goblinName = new NetworkVariable<FixedString32Bytes>("Mind Goblin");
+    [SerializeField] private NetworkVariable<FixedString32Bytes> goblinName = new NetworkVariable<FixedString32Bytes>("Mind Goblin");
     public FixedString32Bytes GoblinName => goblinName.Value;
 
     [Header("Goblin Components")]
@@ -20,13 +20,26 @@ public class GoblinClient : NetworkBehaviour
     public Goblin Goblin => goblin;
 
     [SerializeField] GoblinCharacter goblinCharacter;
+    public GoblinCharacter GoblinCharacter => goblinCharacter;
 
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
 
+        goblinName.OnValueChanged += (previousValue, newValue) =>
+        {
+            Debug.Log($"Goblin Name: {newValue}");
+        };
+
         // Set our name here from player prefs.
+        SetUsernameServerRpc(UsernameHolder.Username);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetUsernameServerRpc(string _username)
+    {
+        goblinName.Value = _username;
     }
 
     [ClientRpc]
@@ -35,7 +48,7 @@ public class GoblinClient : NetworkBehaviour
         ServerLobbyManager.Instance.ReceiveRequestedPlayerInformationServerRpc
         (
             NetworkManager.Singleton.LocalClientId,
-            new PlayerInformation(PlayerPrefs.GetString(StaticPlayerPrefsHelper.UsernamePref, StaticPlayerPrefsHelper.DefaultUsername))       // THIS WILL CHANGE TO PLAYERPREFS GRAB!
+            new PlayerInformation(PlayerPrefs.GetString(UsernameHolder.Username, StaticPlayerPrefsHelper.DefaultUsername))       // THIS WILL CHANGE TO PLAYERPREFS GRAB!
         );
     }
 
