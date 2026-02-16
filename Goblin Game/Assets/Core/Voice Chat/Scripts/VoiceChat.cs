@@ -214,17 +214,25 @@ public class VoiceChat : MonoBehaviour
         {
             if(participant.IsSelf)
             {
-                Debug.LogWarning("Cannot mute yourself!");
-                return;
+                if(muted)
+                    VivoxService.Instance.MuteInputDevice();
+                else
+                    VivoxService.Instance.UnmuteInputDevice();
+
+                Debug.Log("Successfully " + (muted ? "muted" : "unmuted") + $" your input device.");
+            }
+            else
+            {
+                if(muted)
+                    participant.MutePlayerLocally();
+                else
+                    participant.UnmutePlayerLocally();
+
+                Debug.Log("Successfully " + (muted ? "muted" : "unmuted") + $" {displayName}.");
             }
 
-            if(muted)
-                participant.MutePlayerLocally();
-            else
-                participant.UnmutePlayerLocally();
-
             onSuccess?.Invoke(muted);
-            Debug.Log("Successfully " + (muted ? "muted" : "unmuted") + $" {displayName}.");
+            
         }
         else
         {
@@ -232,19 +240,31 @@ public class VoiceChat : MonoBehaviour
         }
     }
 
+    private const int minInputVolume = -50;
+    private const int maxInputVolume = 25;
+
     public void AdjustLocalPlayerVolume(string displayName, float newVolume, Action<float> onSuccess)
     {
         if(currentChannelParticipants.TryGetValue(displayName, out VivoxParticipant participant))
         {
             if(participant.IsSelf)
             {
-                Debug.LogWarning("Cannot adjust your own volume yet.");
+                int volumeRange = maxInputVolume - minInputVolume;
+                int newInputVolume = minInputVolume + (int)(volumeRange * newVolume);
+                VivoxService.Instance.SetInputDeviceVolume(newInputVolume);
+
+                Debug.LogWarning($"Set your input device to {newInputVolume} volume.");
+
+                onSuccess?.Invoke(newVolume);
                 return;
             }
 
             if(currentParticipantTaps.TryGetValue(displayName, out AudioSource participantTap))
             {
                 participantTap.volume = newVolume;
+
+                Debug.LogWarning($"Set {displayName}'s volume to {newVolume}.");
+                    
                 onSuccess?.Invoke(newVolume);
             }
             else

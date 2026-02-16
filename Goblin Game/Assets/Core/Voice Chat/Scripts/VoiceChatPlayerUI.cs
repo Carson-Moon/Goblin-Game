@@ -59,7 +59,7 @@ public class VoiceChatPlayerUI : MonoBehaviour
 
     private void OnVolumeAdjustSuccess(float newVolume)
     {
-        Debug.Log($"Set to new volume: {newVolume}");
+        
     }
 
 #endregion
