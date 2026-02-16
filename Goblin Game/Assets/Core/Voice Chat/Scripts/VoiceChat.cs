@@ -241,7 +241,7 @@ public class VoiceChat : MonoBehaviour
     }
 
     private const int minInputVolume = -50;
-    private const int maxInputVolume = 25;
+    private const int maxInputVolume = 20;
 
     public void AdjustLocalPlayerVolume(string displayName, float newVolume, Action<float> onSuccess)
     {

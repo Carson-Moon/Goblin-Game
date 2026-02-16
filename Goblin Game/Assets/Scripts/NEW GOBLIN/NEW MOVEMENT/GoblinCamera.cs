@@ -8,6 +8,7 @@ public struct CameraInput
 public class GoblinCamera : MonoBehaviour
 {
     [SerializeField] float sensitivity = 0.1f;
+    [SerializeField] float verticalClamp;
 
     private Vector3 _eulerAngles;
 
@@ -22,6 +23,9 @@ public class GoblinCamera : MonoBehaviour
     public void UpdateRotation(CameraInput input)
     {
         _eulerAngles += new Vector3(-input.Look.y, input.Look.x) * sensitivity;
+
+        _eulerAngles = new Vector3(Mathf.Clamp(_eulerAngles.x, -verticalClamp, verticalClamp), _eulerAngles.y, _eulerAngles.z);
+
         transform.eulerAngles = _eulerAngles;
     }
 

@@ -5,7 +5,6 @@ public class VoiceChatCanvas : MonoBehaviour
 {
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] AudioMixer voiceChatMixer;
-    private bool visible = false;
 
 
     void Start()
@@ -19,10 +18,15 @@ public class VoiceChatCanvas : MonoBehaviour
             ToggleCanvas();
     }
 
+#region Voice Chat Settings UI
     public void OnSliderUpdated(float value)
     {
         voiceChatMixer.SetFloat("Volume", Mathf.Log10(value) * 20);
     }
+#endregion
+    
+#region Show/Hide
+    private bool visible = false;
 
     public void ToggleCanvas()
     {
@@ -49,4 +53,5 @@ public class VoiceChatCanvas : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+#endregion
 }
