@@ -16,8 +16,8 @@ public class GoblinClient : NetworkBehaviour
     [SerializeField] Camera armOverlayCamera;
     public Camera ArmOverlayCamera => armOverlayCamera;
 
-    [SerializeField] Goblin goblin;
-    public Goblin Goblin => goblin;
+    [SerializeField] GoblinController goblinController;
+    public GoblinController Goblin => goblinController;
 
     [SerializeField] GoblinCharacter goblinCharacter;
     public GoblinCharacter GoblinCharacter => goblinCharacter;
@@ -53,10 +53,10 @@ public class GoblinClient : NetworkBehaviour
         );
     }
 
-    #region Game Manager Functions
+#region Game Manager Functions
     public void InitialSpawn(Vector3 position, Action onComplete)
     {
-        goblin.Teleport(position);
+        goblinController.Teleport(position);
 
         onComplete.Invoke();
         //LoadingScreenManager.Instance.DisableLoadingScreen(onComplete);
@@ -66,5 +66,5 @@ public class GoblinClient : NetworkBehaviour
     {
         goblinCharacter.ToggleMovement(toggle);
     }
-    #endregion
+#endregion
 }

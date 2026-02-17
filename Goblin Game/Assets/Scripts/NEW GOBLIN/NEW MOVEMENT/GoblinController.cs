@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Goblin : MonoBehaviour
+public class GoblinController : MonoBehaviour
 {
     [Header("Character Controllers")]
     [SerializeField] private GoblinCharacter goblinCharacter;

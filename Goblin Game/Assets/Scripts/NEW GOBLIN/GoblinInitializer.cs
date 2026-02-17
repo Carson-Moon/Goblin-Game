@@ -9,7 +9,7 @@ using UnityEngine;
 public class GoblinInitializer : NetworkBehaviour
 {
     // Movement
-    [SerializeField] Goblin goblin;
+    [SerializeField] GoblinController goblin;
     [SerializeField] GoblinCharacter goblinCharacter;
     [SerializeField] KinematicCharacterMotor kinematicCharacterMotor;
 
