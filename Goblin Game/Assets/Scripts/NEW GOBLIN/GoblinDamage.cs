@@ -34,12 +34,14 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
 
     void OnCollisionEnter(Collision collision)
     {
+        if(!IsOwner)
+            return;
+
         if (collision.gameObject.layer == 17) // Pickup layer
         {
-            JarPickup jar = collision.gameObject.GetComponent<JarPickup>();
-            if (jar != null && jar.Thrown)
+            if(collision.gameObject.TryGetComponent<JarPickup>(out JarPickup jar) && jar.Thrown)
             {
-                unconsciousManager.GetKnockedOut(collision.transform.position);
+                unconsciousManager.LoseConsciousness(collision.transform.position);
             }
         }
     }

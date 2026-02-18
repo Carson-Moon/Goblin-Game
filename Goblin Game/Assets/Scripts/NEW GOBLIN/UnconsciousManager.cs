@@ -9,8 +9,6 @@ public class UnconsciousManager : NetworkBehaviour
 {
     [SerializeField] List<string> impactMessages = new();
 
-    [SerializeField] Transform graphicsTransform;
-    [SerializeField] CinemachineCamera mainPlayerCamera;
     [SerializeField] CinemachineCamera unconsciousCamera;
     [SerializeField] Camera armOverlayCamera;
     [SerializeField] CanvasGroup onHitOverlay;
@@ -29,42 +27,44 @@ public class UnconsciousManager : NetworkBehaviour
     {
         if (debug)
         {
-            GetKnockedOut(Vector3.zero);
+            LoseConsciousness(Vector3.zero);
             debug = false;
         }
     }
 
-    public void GetKnockedOut(Vector3 impactPoint)
+    public void LoseConsciousness(Vector3 impactPoint)
     {
-        if (isUnconscious)
+        if(isUnconscious)
+        {
+            Debug.Log("Already knocked out!");
             return;
-
-        if(!IsOwner)
-            return;
-
+        }
+            
         isUnconscious = true;
 
         Sequence sequence = DOTween.Sequence();
+
         sequence.AppendCallback(() =>
         {
             goblinCharacter.ToggleMovement(false);
             goblinCharacter.ToggleLook(false);
 
             impactText.text = impactMessages[Random.Range(0, impactMessages.Count)];
-
             onHitOverlay.alpha = 1;
+
             armOverlayCamera.enabled = false;
             unconsciousCamera.Priority = 100;
 
-
-            goblinRagdoll.Ragdoll(impactPoint);
-            // graphicsTransform.gameObject.SetActive(true);
-            // graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 90);
+            LoseConsciousnessClientRpc(impactPoint);
         });
+
         sequence.Append(onHitOverlay.DOFade(0, .4f));
         sequence.AppendInterval(3f);
+
         sequence.AppendCallback(() =>
         {
+            RegainConsciousnessClientRpc();
+
             goblinCharacter.ToggleMovement(true);
             goblinCharacter.ToggleLook(true);
 
@@ -72,14 +72,20 @@ public class UnconsciousManager : NetworkBehaviour
 
             armOverlayCamera.enabled = true;
 
-            // graphicsTransform.gameObject.SetActive(false);
-            // graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 0);
-
-            goblinRagdoll.ResetRagdoll();
-
             isUnconscious = false;
         });
+        
     }
 
+    [ClientRpc]
+    private void LoseConsciousnessClientRpc(Vector3 impactPoint)
+    {
+        goblinRagdoll.Ragdoll(impactPoint);
+    }
 
+    [ClientRpc]
+    private void RegainConsciousnessClientRpc()
+    {
+        goblinRagdoll.ResetRagdoll();
+    }
 }
