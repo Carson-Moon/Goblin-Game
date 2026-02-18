@@ -17,10 +17,10 @@ public class UnconsciousManager : NetworkBehaviour
     [SerializeField] TextMeshProUGUI impactText;
 
     [SerializeField] GoblinCharacter goblinCharacter;
+    [SerializeField] GoblinRagdoll goblinRagdoll;
 
 
     [SerializeField] bool isUnconscious = false;
-    public bool IsUnconscious => isUnconscious;
 
 
     public bool debug = false;
@@ -29,20 +29,18 @@ public class UnconsciousManager : NetworkBehaviour
     {
         if (debug)
         {
-            GetKnockedOut();
+            GetKnockedOut(Vector3.zero);
             debug = false;
         }
     }
 
-    public void GetKnockedOut()
+    public void GetKnockedOut(Vector3 impactPoint)
     {
         if (isUnconscious)
             return;
 
         if(!IsOwner)
             return;
-
-        Debug.Log("SHOULD GET KNOCKED OUT HERE");
 
         isUnconscious = true;
 
@@ -52,29 +50,32 @@ public class UnconsciousManager : NetworkBehaviour
             goblinCharacter.ToggleMovement(false);
             goblinCharacter.ToggleLook(false);
 
-            //impactText.text = impactMessages[Random.Range(0, impactMessages.Count)];
+            impactText.text = impactMessages[Random.Range(0, impactMessages.Count)];
 
             onHitOverlay.alpha = 1;
             armOverlayCamera.enabled = false;
             unconsciousCamera.Priority = 100;
 
-            graphicsTransform.gameObject.SetActive(true);
-            graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 90);
+
+            goblinRagdoll.Ragdoll(impactPoint);
+            // graphicsTransform.gameObject.SetActive(true);
+            // graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 90);
         });
-        sequence.Append(onHitOverlay.DOFade(0, .5f));
+        sequence.Append(onHitOverlay.DOFade(0, .4f));
         sequence.AppendInterval(3f);
         sequence.AppendCallback(() =>
         {
             goblinCharacter.ToggleMovement(true);
             goblinCharacter.ToggleLook(true);
 
-            armOverlayCamera.enabled = false;
             unconsciousCamera.Priority = -1;
 
             armOverlayCamera.enabled = true;
 
-            graphicsTransform.gameObject.SetActive(false);
-            graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 0);
+            // graphicsTransform.gameObject.SetActive(false);
+            // graphicsTransform.localEulerAngles = new Vector3(graphicsTransform.localEulerAngles.x, graphicsTransform.localEulerAngles.y, 0);
+
+            goblinRagdoll.ResetRagdoll();
 
             isUnconscious = false;
         });

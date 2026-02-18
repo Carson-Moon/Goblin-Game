@@ -39,7 +39,7 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
             JarPickup jar = collision.gameObject.GetComponent<JarPickup>();
             if (jar != null && jar.Thrown)
             {
-                unconsciousManager.GetKnockedOut();
+                unconsciousManager.GetKnockedOut(collision.transform.position);
             }
         }
     }
