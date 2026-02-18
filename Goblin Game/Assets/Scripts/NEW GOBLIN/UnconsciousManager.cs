@@ -55,7 +55,7 @@ public class UnconsciousManager : NetworkBehaviour
             armOverlayCamera.enabled = false;
             unconsciousCamera.Priority = 100;
 
-            LoseConsciousnessClientRpc(impactPoint);
+            LoseConsciounessServerRpc(impactPoint);
         });
 
         sequence.Append(onHitOverlay.DOFade(0, .4f));
@@ -63,7 +63,7 @@ public class UnconsciousManager : NetworkBehaviour
 
         sequence.AppendCallback(() =>
         {
-            RegainConsciousnessClientRpc();
+            RegainConsciousnessServerRpc();
 
             goblinCharacter.ToggleMovement(true);
             goblinCharacter.ToggleLook(true);
@@ -77,10 +77,22 @@ public class UnconsciousManager : NetworkBehaviour
         
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void LoseConsciounessServerRpc(Vector3 impactPoint)
+    {
+        LoseConsciousnessClientRpc(impactPoint);
+    }
+
     [ClientRpc]
     private void LoseConsciousnessClientRpc(Vector3 impactPoint)
     {
         goblinRagdoll.Ragdoll(impactPoint);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RegainConsciousnessServerRpc()
+    {
+        RegainConsciousnessClientRpc();
     }
 
     [ClientRpc]
