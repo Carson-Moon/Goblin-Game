@@ -10,6 +10,7 @@ public class GrabAction : MonoBehaviour
 
     [Header("Grab Detection Settings")]
     [SerializeField] Transform grabTransform;
+    [SerializeField] float grabLength;
     [SerializeField] float grabRadius;
     [SerializeField] LayerMask pickupMask;
     [SerializeField] IPickup pickupCandidate;
@@ -62,7 +63,7 @@ public class GrabAction : MonoBehaviour
 
     private void CheckForPickups()
     {
-        pickupCols = Physics.OverlapSphere(grabTransform.position, grabRadius, pickupMask);
+        pickupCols = Physics.OverlapCapsule(grabTransform.position, grabTransform.position + (grabTransform.forward * grabLength), grabRadius, pickupMask);
 
         if (pickupCols.Length > 0)
         {
@@ -75,6 +76,12 @@ public class GrabAction : MonoBehaviour
             pickupCandidate = null;
             jarCandidate = null;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(grabTransform.position, grabTransform.position + (grabTransform.forward * grabLength));
     }
 
     public void DiscardCurrentPickup()
