@@ -35,7 +35,7 @@ public class GoblinCoinEating : NetworkBehaviour
 
     private void EatCoin()
     {
-        goblinCoins.GainCoin();
+        goblinCoins.GainCoinServerRpc();
         grabAction.CurrentJar.LoseCoin();
     }
 }

@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GoblinCoins : MonoBehaviour
+public class GoblinCoins : NetworkBehaviour
 {
     [SerializeField] private int _coins;
     public int Coins => _coins;
@@ -14,7 +15,6 @@ public class GoblinCoins : MonoBehaviour
 
     public event Action<int> OnNumberOfCoinsChanged;
 
-    private GoblinCharacter goblinCharacter;
 
     void Start()
     {
@@ -28,20 +28,41 @@ public class GoblinCoins : MonoBehaviour
         coinFillUI.Initialize(_maxCoins);
     }
 
-    public void GainCoin()
+    [ServerRpc(RequireOwnership = false)]
+    public void GainCoinServerRpc()
     {
-        _coins++;
-        coinFillUI.UpdateUI(_coins);
-
-        OnNumberOfCoinsChanged?.Invoke(_coins);
+        GainCoinClientRpc();
     }
 
-    public void LoseCoin()
+    [ClientRpc]
+    private void GainCoinClientRpc()
+    {
+        _coins++;
+
+        if(IsOwner)
+        {
+            coinFillUI.UpdateUI(_coins);
+            OnNumberOfCoinsChanged?.Invoke(_coins);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void LoseCoinServerRpc()
+    {
+        LoseCoinClientRpc();
+    }
+
+    [ClientRpc]
+    private void LoseCoinClientRpc()
     {
         _coins--;
-        coinFillUI.UpdateUI(_coins);
 
-        OnNumberOfCoinsChanged?.Invoke(_coins);
+        if(IsOwner)
+        {
+            coinFillUI.UpdateUI(_coins);
+
+            OnNumberOfCoinsChanged?.Invoke(_coins);
+        }
     }
 
     public int LoseCoins(int coinsToLose)

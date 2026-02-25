@@ -29,6 +29,7 @@ public class GoblinInitializer : NetworkBehaviour
     [SerializeField] GrabAction grabAction;
     [SerializeField] VacuumAction vacuumAction;
     [SerializeField] ThrowAction throwAction;
+    [SerializeField] GoblinCoinEating goblinCoinEating;
 
     // Graphics
     [SerializeField] GameObject[] thirdPersonBody;
@@ -36,7 +37,7 @@ public class GoblinInitializer : NetworkBehaviour
     [SerializeField] GoblinAnimator goblinAnimator;
 
     // UI
-    [SerializeField] GameObject coinUICanvas;
+    [SerializeField] GameObject playerCanvas;
 
     [SerializeField] bool overrideInitialization = false;
 
@@ -62,11 +63,12 @@ public class GoblinInitializer : NetworkBehaviour
         grabAction.enabled = false;
         vacuumAction.enabled = false;
         throwAction.enabled = false;
+        goblinCoinEating.enabled = false;
 
         arms.SetActive(false);
         goblinAnimator.enabled = false;
 
-        coinUICanvas.SetActive(false);
+        playerCanvas.SetActive(false);
     }
 
     void Start()
@@ -97,11 +99,12 @@ public class GoblinInitializer : NetworkBehaviour
             grabAction.enabled = true;
             vacuumAction.enabled = true;
             throwAction.enabled = true;
+            goblinCoinEating.enabled = true;
 
             arms.SetActive(true);
             goblinAnimator.enabled = true;
 
-            coinUICanvas.SetActive(true);
+            playerCanvas.SetActive(true);
         }
         else
         {
