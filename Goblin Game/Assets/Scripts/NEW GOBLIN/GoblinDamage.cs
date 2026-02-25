@@ -7,18 +7,17 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
 
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
-    [SerializeField] GoblinCoinEating goblinCoinEating;
+    private GoblinCoins goblinCoins;
 
-    public void OnDeath()
+
+    void Awake()
     {
-
+        goblinCoins = GetComponent<GoblinCoins>();
     }
 
     public void TakeDamage(Vector3 damagePoint)
     {
-        //Debug.Log("Take damage");
-
-        int coinsToLose = goblinCoinEating.SubtractFromCoinsEaten(5);
+        int coinsToLose = goblinCoins.LoseCoins(5);
 
         if(ServerCoinManager != null)
             ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
@@ -28,6 +27,11 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
 
     [Rpc(SendTo.Server)]
     public void TakeDamageServerRpc()
+    {
+
+    }
+
+    public void OnDeath()
     {
 
     }

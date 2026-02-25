@@ -30,12 +30,8 @@ public class GrabAction : MonoBehaviour
 
     public void AttemptPickup()
     {
-        //Debug.Log("Attempting Pickup!");
-
         if (pickupCandidate == null || currentPickup != null)
             return;
-
-        //Debug.Log("Successful Pickup!");
 
         pickupCandidate.OnPickup(pickupPos);
         currentHeldVisual = heldJarVisual;
@@ -69,7 +65,6 @@ public class GrabAction : MonoBehaviour
         {
             pickupCandidate = pickupCols[0].GetComponent<IPickup>();
             jarCandidate = pickupCols[0].GetComponent<JarPickup>();
-            //Debug.Log($"Pickup Candidate: {pickupCols[0].name}");
         }
         else
         {

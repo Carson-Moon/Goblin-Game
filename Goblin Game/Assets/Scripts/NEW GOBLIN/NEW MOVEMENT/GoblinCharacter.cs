@@ -35,7 +35,7 @@ public struct CharacterInput
 public class GoblinCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] bool canMove = true;
-    public bool eatingMovementLock = false;
+    public bool movementLock = false;
     [SerializeField] bool canLook = true;
 
     [SerializeField] private KinematicCharacterMotor motor;
@@ -80,6 +80,13 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     private Collider[] _uncrouchOverlapColliders;
 
+    [Header("Coin Variables")]
+    [SerializeField] float minWalkSpeed;
+    [SerializeField] float maxWalkSpeed;
+    [SerializeField, Tooltip("How many coins until we start losing speed.")] float lowCoinThreshold;
+    [SerializeField, Tooltip("How many coins until we are the slowest.")] float highCoinThreshold;
+    private GoblinCoins goblinCoins;
+
     public void Initialize()
     {
         _state.stance = Stance.Stand;
@@ -88,6 +95,9 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         _uncrouchOverlapColliders = new Collider[8];
 
         motor.CharacterController = this;
+
+        goblinCoins = GetComponentInParent<GoblinCoins>();
+        goblinCoins.OnNumberOfCoinsChanged += SetWalkSpeed;
     }
 
     public void UpdateInput(CharacterInput input)
@@ -102,7 +112,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         }
 
 
-        if (canMove && !eatingMovementLock)
+        if (canMove && !movementLock)
         {
             _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
             _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
@@ -478,8 +488,25 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         return new Vector3(motor.Velocity.x, 0f, motor.Velocity.z).magnitude;
     }
 
-    public void SetWalkSpeed(float speedValue)
+    public void SetWalkSpeed(int coins)
     {
-        walkSpeed = speedValue;
+        if(coins < lowCoinThreshold)
+        {
+            walkSpeed = maxWalkSpeed;
+        }
+        else if(coins > highCoinThreshold)
+        {
+            walkSpeed = minWalkSpeed;
+        }
+        else
+        {
+            float percentage = (coins - lowCoinThreshold) / (highCoinThreshold - lowCoinThreshold);
+            walkSpeed = maxWalkSpeed - (percentage * (maxWalkSpeed - minWalkSpeed));
+        }
+    }
+
+    public void ToggleMovementLock(bool value)
+    {
+        movementLock = value;
     }
 }
