@@ -11,19 +11,19 @@ public class GoblinCoinEating : NetworkBehaviour
 
     private GoblinCoins goblinCoins;
     
-    private GrabAction grabAction;
+    private PickupAction pickupAction;
 
 
     void Awake()
     {
         goblinCoins = GetComponent<GoblinCoins>();
-        grabAction = GetComponentInChildren<GrabAction>();
+        pickupAction = GetComponentInChildren<PickupAction>();
     }
 
     public void StartEatingCoins()
     {
-        if (grabAction.CurrentJar == null || grabAction.CurrentJar.Coins <= 0)
-            return;
+        // if (pickupAction.CurrentJar == null || pickupAction.CurrentJar.Coins <= 0)
+        //     return;
 
         coinEatingUI.StartEatingUI(eatingLength, EatCoin);
     }
@@ -36,6 +36,6 @@ public class GoblinCoinEating : NetworkBehaviour
     private void EatCoin()
     {
         goblinCoins.GainCoinServerRpc();
-        grabAction.CurrentJar.LoseCoin();
+        // pickupAction.CurrentJar.LoseCoin();
     }
 }

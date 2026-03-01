@@ -8,7 +8,7 @@ using UnityEngine;
 public class GoblinLeftClick : AbstractButtonInputContainer
 {
     [SerializeField] StabAction stabAction;
-    [SerializeField] GrabAction grabAction;
+    [SerializeField] PickupAction grabAction;
     [SerializeField] ThrowAction throwAction;
 
     [SerializeField] bool isHolding = false;

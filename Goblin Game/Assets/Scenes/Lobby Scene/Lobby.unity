@@ -1394,13 +1394,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2417006421985140150, guid: a5c697ceadb8f6144b9fe10c50f23e6b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7890870821486347958, guid: a5c697ceadb8f6144b9fe10c50f23e6b, type: 3}
-      insertIndex: 5
+      insertIndex: -1
       addedObject: {fileID: 712102352}
+    - targetCorrespondingSourceObject: {fileID: 7890870821486347958, guid: a5c697ceadb8f6144b9fe10c50f23e6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 712102359}
   m_SourcePrefab: {fileID: 100100000, guid: a5c697ceadb8f6144b9fe10c50f23e6b, type: 3}
 --- !u!1 &712102351 stripped
 GameObject:
@@ -1432,6 +1436,22 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &712102359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712102351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcb7f0f006974a478a8769c0acb3a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _id: 1
+  breakVFX: {fileID: 0}
+  breakSFX: {fileID: 0}
 --- !u!1 &724626098
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class GoblinRightClick : AbstractButtonInputContainer
 {
-    [SerializeField] GrabAction grabAction;
+    [SerializeField] PickupAction pickupAction;
     [SerializeField] VacuumAction vacuumAction;
     
 
     protected override void OnPressedAction()
     {
-        if (grabAction.CurrentPickup == null)
+        if (pickupAction.CurrentPickup == null)
         {
-            grabAction.AttemptPickup();
+            pickupAction.AttemptPickup();
         }
         else
         {

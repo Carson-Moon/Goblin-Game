@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ThrowAction : MonoBehaviour
 {
-    [SerializeField] GrabAction grabAction;
+    [SerializeField] PickupAction pickupAction;
 
     [Header("Throw Settings")]
     [SerializeField] Camera playerCamera;
@@ -12,14 +12,14 @@ public class ThrowAction : MonoBehaviour
 
     public void AttemptThrow()
     {
-        if (grabAction.CurrentPickup == null)
+        if (pickupAction.CurrentPickup == null)
             return;
 
-        Rigidbody throwRB = grabAction.CurrentPickup.GetRigidbody();
+        // Rigidbody throwRB = pickupAction.CurrentPickup.GetRigidbody();
 
         Vector3 throwDirection = playerCamera.transform.forward * targetDistance;
 
-        grabAction.CurrentPickup.OnThrow(throwStartPosition.position, throwDirection, throwStrength);
-        grabAction.DiscardCurrentPickup();
+        pickupAction.CurrentPickup.OnThrow(throwStartPosition.position, throwDirection, throwStrength);
+        pickupAction.DiscardCurrentPickup();
     }
 }
