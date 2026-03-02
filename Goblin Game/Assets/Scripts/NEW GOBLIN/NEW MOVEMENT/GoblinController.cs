@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GoblinController : MonoBehaviour
@@ -6,6 +7,10 @@ public class GoblinController : MonoBehaviour
     [SerializeField] private GoblinCharacter goblinCharacter;
     [SerializeField] private GoblinCamera goblinCamera;
 
+    [SerializeField] private List<string> _movementLocks = new();
+    [SerializeField] private List<string> _lookLocks = new();
+    private bool CanMove => _movementLocks.Count == 0;
+    private bool CanLook => _lookLocks.Count == 0;
 
     private PlayerControls pControls;
 
@@ -31,16 +36,16 @@ public class GoblinController : MonoBehaviour
 
         var cameraInput = new CameraInput
         {
-            Look = input.Look.ReadValue<Vector2>()
+            Look = CanLook ? input.Look.ReadValue<Vector2>() : Vector2.zero
         };
         goblinCamera.UpdateRotation(cameraInput);
 
         var characterInput = new CharacterInput
         {
             Rotation = goblinCamera.transform.rotation,
-            Move = input.Movement.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),
-            JumpSustain = input.Jump.IsPressed(),
+            Move = CanMove ? input.Movement.ReadValue<Vector2>() : Vector2.zero,
+            Jump = CanMove ? input.Jump.WasPressedThisFrame() : false,
+            JumpSustain = CanMove ? input.Jump.IsPressed() : false,
             Crouch = input.Crouch.WasPressedThisFrame()
                 ? CrouchInput.Toggle
                 : CrouchInput.None
@@ -57,5 +62,25 @@ public class GoblinController : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         goblinCharacter.SetPosition(position);
+    }
+
+    public void AddMovementLock(string lockID)
+    {
+        _movementLocks.Add(lockID);
+    }
+
+    public void RemoveMovementLock(string lockID)
+    {
+        _movementLocks.Remove(lockID);
+    }
+
+    public void AddLookLock(string lockID)
+    {
+        _lookLocks.Add(lockID);
+    }
+
+    public void RemoveLookLock(string lockID)
+    {
+        _lookLocks.Remove(lockID);
     }
 }

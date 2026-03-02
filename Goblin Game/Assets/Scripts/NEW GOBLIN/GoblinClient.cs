@@ -17,7 +17,7 @@ public class GoblinClient : NetworkBehaviour
     public Camera ArmOverlayCamera => armOverlayCamera;
 
     [SerializeField] GoblinController goblinController;
-    public GoblinController Goblin => goblinController;
+    public GoblinController GoblinController => goblinController;
 
     [SerializeField] GoblinCharacter goblinCharacter;
     public GoblinCharacter GoblinCharacter => goblinCharacter;
@@ -60,11 +60,6 @@ public class GoblinClient : NetworkBehaviour
 
         onComplete.Invoke();
         //LoadingScreenManager.Instance.DisableLoadingScreen(onComplete);
-    }
-
-    public void ToggleMovement(bool toggle)
-    {
-        goblinCharacter.ToggleMovement(toggle);
     }
 #endregion
 }

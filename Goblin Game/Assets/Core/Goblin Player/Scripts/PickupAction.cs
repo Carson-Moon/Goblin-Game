@@ -1,8 +1,11 @@
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PickupAction : MonoBehaviour
 {
+    [SerializeField] PickupVisuals _pickupVisuals;
+
     [Header("Detection Settings")]
     [SerializeField] Transform pickupTransform;
     [SerializeField] float pickupLength;
@@ -13,10 +16,6 @@ public class PickupAction : MonoBehaviour
     public Pickup CurrentPickup => _currentPickup;
 
 
-    // [Header("UI")]
-    // [SerializeField] GameObject jarCoinsUI;
-    // [SerializeField] TextMeshProUGUI jarCoinsDisplay;
-
     private Collider[] pickupCols;
 
 
@@ -26,6 +25,8 @@ public class PickupAction : MonoBehaviour
             return;
 
         _pickupCandidate.OnPickup();
+
+        _pickupVisuals.TogglePickupVisualClientRpc(_pickupCandidate.ID);
 
         _currentPickup = _pickupCandidate;
         _pickupCandidate = null;

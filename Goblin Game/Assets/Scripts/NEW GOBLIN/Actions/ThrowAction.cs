@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ThrowAction : MonoBehaviour
 {
-    [SerializeField] PickupAction pickupAction;
+    [SerializeField] PickupAction _pickupAction;
+    [SerializeField] PickupVisuals _pickupVisuals;
 
     [Header("Throw Settings")]
     [SerializeField] Camera playerCamera;
@@ -12,14 +13,16 @@ public class ThrowAction : MonoBehaviour
 
     public void AttemptThrow()
     {
-        if (pickupAction.CurrentPickup == null)
+        if (_pickupAction.CurrentPickup == null)
             return;
 
         // Rigidbody throwRB = pickupAction.CurrentPickup.GetRigidbody();
 
         Vector3 throwDirection = playerCamera.transform.forward * targetDistance;
 
-        pickupAction.CurrentPickup.OnThrow(throwStartPosition.position, throwDirection, throwStrength);
-        pickupAction.DiscardCurrentPickup();
+        _pickupAction.CurrentPickup.OnThrow(throwStartPosition.position, throwStartPosition.rotation, throwDirection, throwStrength);
+        _pickupAction.DiscardCurrentPickup();
+
+        _pickupVisuals.TogglePickupVisualClientRpc(PickupID.None);
     }
 }

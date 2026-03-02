@@ -31,8 +31,10 @@ public class GoblinRagdoll : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Ragdoll(Vector3 impactPoint)
+    public void Ragdoll(Vector3 spawnPoint, Quaternion spawnRotation, Vector3 impactPoint)
     {
+        transform.position = spawnPoint;
+        transform.rotation = spawnRotation;
         gameObject.SetActive(true);
 
         // Apply forces to the closest rigidbodies to the impact point.

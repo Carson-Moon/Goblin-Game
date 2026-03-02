@@ -11,6 +11,9 @@ public class GameState : NetworkBehaviour
     protected StateLock stateLock = null;
     protected Action OnClientUnlocked = null;
 
+    protected const string INTRO_MOVEMENT_LOCK = "intro_movement_lock";
+
+
     [Rpc(SendTo.Server)]
     public void OnStartStateServerRpc()
     {

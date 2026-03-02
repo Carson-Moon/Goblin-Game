@@ -1,16 +1,51 @@
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PickupVisuals : MonoBehaviour
+public class PickupVisuals : NetworkBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] List<PickupVisual> firstPersonVisuals = new();
+    [SerializeField] List<PickupVisual> thirdPersonVisuals = new();
+
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void TogglePickupVisualClientRpc(PickupID id)
     {
-        
+        TogglePickupVisual(id);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TogglePickupVisual(PickupID id)
     {
-        
+        if(id is PickupID.None)
+        {
+            foreach(var fpVisual in firstPersonVisuals)
+                fpVisual.ToggleVisual(false);
+            
+            foreach(var tpVisual in thirdPersonVisuals)
+                tpVisual.ToggleVisual(false);
+        }
+        else
+        {
+            if(IsOwner)
+            {
+                foreach(var fpVisual in firstPersonVisuals)
+                {
+                    if(fpVisual.ID == id)
+                        fpVisual.ToggleVisual(true);
+                    else
+                        fpVisual.ToggleVisual(false);
+                }
+            }
+            else
+            {
+                foreach(var tpVisual in thirdPersonVisuals)
+                {
+                    if(tpVisual.ID == id)
+                        tpVisual.ToggleVisual(true);
+                    else
+                        tpVisual.ToggleVisual(false);
+                }
+            }
+        }
     }
 }

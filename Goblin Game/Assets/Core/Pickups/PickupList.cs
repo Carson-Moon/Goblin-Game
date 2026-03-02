@@ -1,5 +1,5 @@
 
-public enum PickupList
+public enum PickupID
 {
     None,
     Jar

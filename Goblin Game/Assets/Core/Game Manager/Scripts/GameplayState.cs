@@ -34,7 +34,8 @@ public class GameplayState : GameState
             countdownText.text = currentCountdown.ToString("F0");
             countdownGroup.alpha = 1;
 
-            GoblinClientPointer.LocalGoblinClient().ToggleMovement(true);
+            GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveMovementLock(INTRO_MOVEMENT_LOCK);
+            GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveLookLock(INTRO_MOVEMENT_LOCK);
 
             countdown = true;
         });
@@ -63,7 +64,8 @@ public class GameplayState : GameState
     {
         Debug.Log("Countdown ended!");
 
-        GoblinClientPointer.LocalGoblinClient().ToggleMovement(false);
+        GoblinClientPointer.LocalGoblinClient().GoblinController.AddMovementLock(INTRO_MOVEMENT_LOCK);
+        GoblinClientPointer.LocalGoblinClient().GoblinController.AddLookLock(INTRO_MOVEMENT_LOCK);
 
         // Endscreen tape!
 

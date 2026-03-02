@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5288260108564409986}
   - component: {fileID: 405431176848862578}
   - component: {fileID: 622127510278127492}
-  - component: {fileID: -654040145493969267}
-  - component: {fileID: 2417006421985140150}
+  - component: {fileID: 7916350797779170046}
+  - component: {fileID: 3421060719689591544}
   m_Layer: 17
   m_Name: Jar (The Actual One)
   m_TagString: Untagged
@@ -140,7 +140,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &-654040145493969267
+--- !u!114 &7916350797779170046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,20 +152,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3173332418
+  GlobalObjectIdHash: 3122689802
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &2417006421985140150
+--- !u!114 &3421060719689591544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,15 +174,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7890870821486347958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b993c119a8bbd844481564d316cb80b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fcb7f0f006974a478a8769c0acb3a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  rb: {fileID: 622127510278127492}
-  thrown: 0
-  onBreakVFX: {fileID: 2819414463390710330}
-  onBreakSFX: {fileID: 0}
-  coins: 30
+  _id: 1
+  breakVFX: {fileID: 2819414463390710330}
+  breakSFX: {fileID: 0}
 --- !u!1001 &7752121093165408230
 PrefabInstance:
   m_ObjectHideFlags: 0

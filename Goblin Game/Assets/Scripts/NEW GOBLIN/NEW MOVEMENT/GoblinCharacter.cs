@@ -34,10 +34,6 @@ public struct CharacterInput
 
 public class GoblinCharacter : MonoBehaviour, ICharacterController
 {
-    [SerializeField] bool canMove = true;
-    public bool movementLock = false;
-    [SerializeField] bool canLook = true;
-
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
@@ -102,39 +98,21 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateInput(CharacterInput input)
     {
-        if (canLook)
-        {
-            _requestedRotation = input.Rotation;
-        }
-        else
-        {
-            _requestedRotation = Quaternion.identity;
-        }
+        _requestedRotation = input.Rotation;
 
+        _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
+        _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
+        _requestedMovement = input.Rotation * _requestedMovement;
 
-        if (canMove && !movementLock)
+        _requestedJump = _requestedJump || input.Jump;
+        _requestedJumpSustain = input.JumpSustain;
+
+        _requestedCrouch = input.Crouch switch
         {
-            _requestedMovement = new Vector3(input.Move.x, 0f, input.Move.y);
-            _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
-            _requestedMovement = input.Rotation * _requestedMovement;
-
-            _requestedJump = _requestedJump || input.Jump;
-            _requestedJumpSustain = input.JumpSustain;
-
-            _requestedCrouch = input.Crouch switch
-            {
-                CrouchInput.Toggle => !_requestedCrouch,
-                CrouchInput.None => _requestedCrouch,
-                _ => _requestedCrouch
-            };
-        }
-        else
-        {
-            _requestedMovement = Vector3.zero;
-            _requestedJump = false;
-            _requestedJumpSustain = false;
-            _requestedCrouch = false;
-        }
+            CrouchInput.Toggle => !_requestedCrouch,
+            CrouchInput.None => _requestedCrouch,
+            _ => _requestedCrouch
+        };
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -473,16 +451,6 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             motor.BaseVelocity = Vector3.zero;
     }
 
-    public void ToggleMovement(bool toggle)
-    {
-        canMove = toggle;
-    }
-
-    public void ToggleLook(bool toggle)
-    {
-        canLook = toggle;
-    }
-
     public float HorizontalVelocityMagnitude()
     {
         return new Vector3(motor.Velocity.x, 0f, motor.Velocity.z).magnitude;
@@ -503,10 +471,5 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             float percentage = (coins - lowCoinThreshold) / (highCoinThreshold - lowCoinThreshold);
             walkSpeed = maxWalkSpeed - (percentage * (maxWalkSpeed - minWalkSpeed));
         }
-    }
-
-    public void ToggleMovementLock(bool value)
-    {
-        movementLock = value;
     }
 }

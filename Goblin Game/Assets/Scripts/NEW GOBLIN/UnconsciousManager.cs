@@ -9,16 +9,20 @@ public class UnconsciousManager : NetworkBehaviour
 {
     [SerializeField] List<string> impactMessages = new();
 
+    [SerializeField] Transform ragdollPosition;
     [SerializeField] CinemachineCamera unconsciousCamera;
     [SerializeField] Camera armOverlayCamera;
     [SerializeField] CanvasGroup onHitOverlay;
     [SerializeField] TextMeshProUGUI impactText;
 
-    [SerializeField] GoblinCharacter goblinCharacter;
-    [SerializeField] GoblinRagdoll goblinRagdoll;
+    [SerializeField] GameObject thirdPersonGoblin;
+    [SerializeField] GoblinController goblinController;
+    private GoblinRagdoll _currentRagdoll = null;
 
 
     [SerializeField] bool isUnconscious = false;
+
+    public const string UNCONSCIOUS_LOCK = "unconscious_lock";
 
 
     public bool debug = false;
@@ -46,8 +50,8 @@ public class UnconsciousManager : NetworkBehaviour
 
         sequence.AppendCallback(() =>
         {
-            goblinCharacter.ToggleMovement(false);
-            goblinCharacter.ToggleLook(false);
+            goblinController.AddMovementLock(UNCONSCIOUS_LOCK);
+            goblinController.AddLookLock(UNCONSCIOUS_LOCK);
 
             impactText.text = impactMessages[Random.Range(0, impactMessages.Count)];
             onHitOverlay.alpha = 1;
@@ -65,8 +69,8 @@ public class UnconsciousManager : NetworkBehaviour
         {
             RegainConsciousnessServerRpc();
 
-            goblinCharacter.ToggleMovement(true);
-            goblinCharacter.ToggleLook(true);
+            goblinController.RemoveMovementLock(UNCONSCIOUS_LOCK);
+            goblinController.RemoveLookLock(UNCONSCIOUS_LOCK);
 
             unconsciousCamera.Priority = -1;
 
@@ -86,7 +90,9 @@ public class UnconsciousManager : NetworkBehaviour
     [ClientRpc]
     private void LoseConsciousnessClientRpc(Vector3 impactPoint)
     {
-        goblinRagdoll.Ragdoll(impactPoint);
+        thirdPersonGoblin.SetActive(false);
+
+        _currentRagdoll = RagdollPool.Instance.GetRagdoll(ragdollPosition, impactPoint);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -98,6 +104,12 @@ public class UnconsciousManager : NetworkBehaviour
     [ClientRpc]
     private void RegainConsciousnessClientRpc()
     {
-        goblinRagdoll.ResetRagdoll();
+        thirdPersonGoblin.SetActive(true);
+
+        if(_currentRagdoll != null)
+        {
+            RagdollPool.Instance.ReturnRagdoll(_currentRagdoll);
+            _currentRagdoll = null;
+        }
     }
 }

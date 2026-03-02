@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PickupVisual : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private PickupID _id;
+    public PickupID ID => _id;
+
+    void Awake()
     {
-        
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleVisual(bool toggle)
     {
-        
+        gameObject.SetActive(toggle);
     }
 }

@@ -8,8 +8,8 @@ public class Pickup : NetworkBehaviour
     private Rigidbody _rb;
     private NetworkObject _networkObject;
 
-    [SerializeField] private PickupList _id;
-    public PickupList ID => _id;
+    [SerializeField] private PickupID _id;
+    public PickupID ID => _id;
 
     [Header("Break")]
     [SerializeField] GameObject breakVFX;
@@ -48,15 +48,16 @@ public class Pickup : NetworkBehaviour
     }
 
 #region Throw
-    public void OnThrow(Vector3 startPosition, Vector3 direction, float force)
+    public void OnThrow(Vector3 startPosition, Quaternion startRotation, Vector3 direction, float force)
     {
-        OnThrowClientRpc(startPosition, direction, force);
+        OnThrowClientRpc(startPosition, startRotation, direction, force);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void OnThrowClientRpc(Vector3 startPosition, Vector3 direction, float force)
+    private void OnThrowClientRpc(Vector3 startPosition, Quaternion startRotation, Vector3 direction, float force)
     {
         transform.position = startPosition;
+        transform.rotation = startRotation;
         ToggleObject(true);
 
         _rb.AddForce(direction * force, ForceMode.Impulse);
@@ -80,17 +81,23 @@ public class Pickup : NetworkBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.AppendCallback(() =>
         {
-            breakVFX.transform.SetParent(null);
-            breakVFX.SetActive(true);
+            if(breakVFX != null)
+            {
+                breakVFX.transform.SetParent(null);
+                breakVFX.SetActive(true);
+            }
 
             ToggleObject(false);
         });
         sequence.AppendInterval(5);
         sequence.AppendCallback(() =>
         {
-            breakVFX.SetActive(false);
-            breakVFX.transform.SetParent(transform);
-            breakVFX.transform.localPosition = Vector3.zero;
+            if(breakVFX != null)
+            {
+                breakVFX.SetActive(false);
+                breakVFX.transform.SetParent(transform);
+                breakVFX.transform.localPosition = Vector3.zero;
+            }
         });
     }
 

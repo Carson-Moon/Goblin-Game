@@ -42,7 +42,8 @@ public class InitialSetupState : GameState
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        GoblinClientPointer.LocalGoblinClient().ToggleMovement(false);
+        GoblinClientPointer.LocalGoblinClient().GoblinController.AddMovementLock(INTRO_MOVEMENT_LOCK);
+            GoblinClientPointer.LocalGoblinClient().GoblinController.AddMovementLock(INTRO_MOVEMENT_LOCK);
 
         Debug.Log($"We are spawning at this position: {spawnPosition}!");
 
