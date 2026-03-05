@@ -48,7 +48,7 @@ public class CoinPool : NetworkBehaviour
     {
         for(int i=0; i<numCoinsInPool; i++)
         {
-            Coin newCoin = Instantiate(coinPrefab, transform);
+            Coin newCoin = Instantiate(coinPrefab);
             newCoin.CreateCoin(i);
             localCoinPool.Add(i, newCoin);
         }

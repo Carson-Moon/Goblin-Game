@@ -37,6 +37,7 @@ public class Coin : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        gameObject.layer = 21;      // Coin on Spawn Layer
         canCollect = false;
     }
 
@@ -44,7 +45,7 @@ public class Coin : MonoBehaviour
     {
         transform.SetParent(null);
 
-        rb.position = _pos;
+        transform.position = _pos;
 
         gameObject.SetActive(true);
 
@@ -58,5 +59,6 @@ public class Coin : MonoBehaviour
     {
         yield return new WaitForSeconds(collectCooldown);
         canCollect = true;
+        gameObject.layer = 11;      // No Player Collision Layer
     }
 }

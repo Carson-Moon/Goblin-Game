@@ -14,7 +14,6 @@ public class NewCoinCollection : MonoBehaviour
             if(coin != null && pickupAction.HasJar)
             {
                 CoinPool.Instance.OnCoinCollectedServerRpc(coin.ID);
-                //pickupAction.CurrentPickup as JarPickup.GainCoin();
             }
         }
     }

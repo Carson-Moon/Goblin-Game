@@ -47,15 +47,18 @@ public class GoblinCoins : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void LoseCoinServerRpc()
+    public void LoseCoinsServerRpc(int coinsToLose)
     {
-        LoseCoinClientRpc();
+        LoseCoinsClientRpc(coinsToLose);
     }
 
     [ClientRpc]
-    private void LoseCoinClientRpc()
+    private void LoseCoinsClientRpc(int coinsToLose)
     {
-        _coins--;
+        if(IsOwner)
+            return;
+
+        _coins -= coinsToLose;
 
         if(IsOwner)
         {
@@ -71,6 +74,7 @@ public class GoblinCoins : NetworkBehaviour
         {
             _coins -= coinsToLose;
             coinFillUI.UpdateUI(_coins);
+            LoseCoinsServerRpc(coinsToLose);
             return coinsToLose;
         }
         else
@@ -78,6 +82,7 @@ public class GoblinCoins : NetworkBehaviour
             int coinsLost = _coins;
             _coins = 0;
             coinFillUI.UpdateUI(_coins);
+            LoseCoinsServerRpc(_coins);
             return coinsLost;
         }
     }
