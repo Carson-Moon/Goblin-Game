@@ -83,12 +83,12 @@ public class CoinManager_Goblin : NetworkBehaviour
         {
             Coin coin = other.gameObject.GetComponentInParent<Coin>();
 
-            if(coin.CanCollect())
-            {
-                GainCoin();
+            // if(coin.CanCollect())
+            // {
+            //     GainCoin();
 
-                coin.OnCollect();
-            }
+            //     coin.OnCollect();
+            // }
             
         }
     }

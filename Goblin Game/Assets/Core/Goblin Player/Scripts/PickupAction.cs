@@ -14,6 +14,7 @@ public class PickupAction : MonoBehaviour
     [SerializeField] private Pickup _pickupCandidate;
     [SerializeField] private Pickup _currentPickup;
     public Pickup CurrentPickup => _currentPickup;
+    public bool HasJar => _currentPickup != null && _currentPickup.ID is PickupID.Jar;
 
 
     private Collider[] pickupCols;

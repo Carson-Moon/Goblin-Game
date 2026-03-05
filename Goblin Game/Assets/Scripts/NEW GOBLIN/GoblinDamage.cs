@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GoblinDamage : NetworkBehaviour, IDamageable
 {
-    ServerCoinManager ServerCoinManager => ServerCoinManager.Instance;
-
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
     private GoblinCoins goblinCoins;
@@ -19,8 +17,8 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
     {
         int coinsToLose = goblinCoins.LoseCoins(5);
 
-        if(ServerCoinManager != null)
-            ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
+        if(CoinPool.Instance != null)
+            //ServerCoinManager.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
 
         TakeDamageServerRpc();
     }

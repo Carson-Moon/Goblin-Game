@@ -7,14 +7,15 @@ public class NewCoinCollection : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // if(pickupAction.CurrentJar == null)
-        //     return;
-
         if(other.gameObject.layer == 9)     // 9-> Coin Layer
         {
-            other.GetComponentInParent<Coin>().OnCollect();
+            var coin = other.GetComponentInParent<Coin>();
 
-            // pickupAction.CurrentJar.GainCoin();
+            if(coin != null && pickupAction.HasJar)
+            {
+                CoinPool.Instance.OnCoinCollectedServerRpc(coin.ID);
+                //pickupAction.CurrentPickup as JarPickup.GainCoin();
+            }
         }
     }
 }

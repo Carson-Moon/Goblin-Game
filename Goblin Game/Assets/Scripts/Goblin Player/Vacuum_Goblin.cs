@@ -76,7 +76,7 @@ public class Vacuum_Goblin : NetworkBehaviour
             // Add some lift so the coins go up?
             Vector3 force = m_CurrentStrength * Time.deltaTime * ((Vector3.up * m_CurrentUpwardsStrength) + m_VacuumDirection);
             Vector3 torque = vacuumTorqueStrength * Time.deltaTime * m_VacuumedRigidbody.transform.right;
-            m_VacuumedObjects[i].GetComponent<Vacuumable>().ApplyForceToThisRPC(force, torque);
+            m_VacuumedObjects[i].GetComponent<Vacuumable>().ApplyForceToThis(force, torque);
         }
     }
 

@@ -20,7 +20,13 @@ public class MainMenuLobbySection : MonoBehaviour
         joinButton.onButtonPressedAction += Join;
     }
 
-#region Create Button
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+            Join();
+    }
+
+    #region Create Button
     private void Create()
     {
         RelayConnection.Instance.StartHosting(onSuccess);
