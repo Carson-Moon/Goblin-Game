@@ -27,7 +27,6 @@ public class GoblinInitializer : NetworkBehaviour
     [SerializeField] GoblinRightClick goblinRightClick;
     [SerializeField] StabAction stabAction;
     [SerializeField] PickupAction pickupAction;
-    [SerializeField] VacuumAction vacuumAction;
     [SerializeField] ThrowAction throwAction;
     [SerializeField] GoblinCoinEating goblinCoinEating;
 
@@ -61,7 +60,6 @@ public class GoblinInitializer : NetworkBehaviour
         goblinRightClick.enabled = false;
         stabAction.enabled = false;
         pickupAction.enabled = false;
-        vacuumAction.enabled = false;
         throwAction.enabled = false;
         goblinCoinEating.enabled = false;
 
@@ -97,7 +95,6 @@ public class GoblinInitializer : NetworkBehaviour
             goblinRightClick.enabled = true;
             stabAction.enabled = true;
             pickupAction.enabled = true;
-            vacuumAction.enabled = true;
             throwAction.enabled = true;
             goblinCoinEating.enabled = true;
 

@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class VacuumAction : MonoBehaviour
+public class VacuumAction : NetworkBehaviour
 {
     [SerializeField] bool isVacuuming = false;
     public bool IsVacuuming => isVacuuming;
@@ -41,20 +42,32 @@ public class VacuumAction : MonoBehaviour
 
     public void AttemptStartVacuum()
     {
-        isVacuuming = true;
+        AttemptStartVacuumClientRpc();
 
         anim.SetTrigger(StartVacuumHash);
         //vacuumVFX.EnableTornado();
         //Debug.Log("Started vacuuming!");
     }
 
+    [Rpc(SendTo.ClientsAndHost)]
+    private void AttemptStartVacuumClientRpc()
+    {
+        isVacuuming = true;
+    }
+
     public void AttemptStopVacuum()
     {
-        isVacuuming = false;
+        AttemptStopVacuumClientRpc();
 
         anim.SetTrigger(EndVacuumHash);
         //vacuumVFX.DisableTornado();
         //Debug.Log("Stopped vacuuming.");
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void AttemptStopVacuumClientRpc()
+    {
+        isVacuuming = false;
     }
 
     // Perform vacuum.

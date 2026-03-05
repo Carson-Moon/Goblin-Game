@@ -940,7 +940,6 @@ MonoBehaviour:
   goblinRightClick: {fileID: 8814946469210745664}
   stabAction: {fileID: 2221687886784087454}
   pickupAction: {fileID: 1745396969761280378}
-  vacuumAction: {fileID: 6540168890667881968}
   throwAction: {fileID: 5765187728319096523}
   goblinCoinEating: {fileID: 2322484879353364755}
   thirdPersonBody:
@@ -5751,6 +5750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2fc6676e5b0b84ab0fb79ffe20dd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   isVacuuming: 0
   vacuumLength: 10
   vacuumWidth: 5
