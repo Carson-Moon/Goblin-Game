@@ -39,8 +39,8 @@ public class StabAction : MonoBehaviour
             if (damageable == null)
                 continue;
 
-            //Debug.Log("Damageable!");
             damageable.TakeDamage(stabPosition.position);
+            RoundStatTracker.Instance.TrackIntStat(IntStat.StabbedSomeone);
         }
 
         PerformCooldown();

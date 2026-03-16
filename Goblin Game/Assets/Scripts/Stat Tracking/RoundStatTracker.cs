@@ -54,7 +54,7 @@ public enum FloatStat
 public class RoundStatTracker : MonoBehaviour
 {
     // Singleton
-    public static RoundStatTracker instance { get; private set; }
+    public static RoundStatTracker Instance { get; private set; }
 
     [Header("Current Stats")]
     public int coinsCollected;
@@ -72,13 +72,13 @@ public class RoundStatTracker : MonoBehaviour
     void Awake()
     {
         // Singleton Setup
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 

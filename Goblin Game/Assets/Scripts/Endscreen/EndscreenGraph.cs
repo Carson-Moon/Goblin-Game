@@ -10,7 +10,7 @@ public class EndscreenGraph : MonoBehaviour
 
     public void DisplayCoinStat()
     {
-        foreach(KeyValuePair<ulong, RoundStats> kvp in MatchStatTracker.instance.PlayerStats)
+        foreach(KeyValuePair<ulong, RoundStats> kvp in MatchStatTracker.Instance.PlayerStats)
         {
             if(playerGraphs.TryGetValue(kvp.Key, out GraphBarUI graphUI))
             {

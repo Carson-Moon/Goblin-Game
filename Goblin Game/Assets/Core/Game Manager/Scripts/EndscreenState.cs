@@ -35,6 +35,7 @@ public class EndscreenState : GameState
         countdown = true;
 
         endscreenGroup.interactable = true;
+        endscreenGroup.blocksRaycasts = true;
         endscreenGroup.alpha = 1;
         animatedButton.gameObject.SetActive(true);
     }

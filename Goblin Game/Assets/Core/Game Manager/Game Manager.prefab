@@ -510,6 +510,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3584269677677306150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2752877919687236007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8472124856667915634}
+  - component: {fileID: 8772632170363677835}
+  - component: {fileID: 3353899720928558064}
+  m_Layer: 0
+  m_Name: Coin Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8472124856667915634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752877919687236007}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5579859784484657346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8772632170363677835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752877919687236007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 282086462
+  InScenePlacedSourceGlobalObjectIdHash: 2993353685
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &3353899720928558064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752877919687236007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88207b2469ae2e54c8bb60c97aa00d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  numCoinsInPool: 500
+  coinPrefab: {fileID: 5149244181717193722, guid: 6f670ad4c1381ee438522d4bf2eb49c8, type: 3}
+  debug: 0
+  debugTransform: {fileID: 0}
 --- !u!1 &2891291152835974141
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5579859784484657346}
   - component: {fileID: 7653876053505221471}
-  - component: {fileID: 5509196311662886303}
+  - component: {fileID: 6064722189827979586}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -884,6 +959,8 @@ Transform:
   - {fileID: 8660886399276073766}
   - {fileID: 949051583398071233}
   - {fileID: 4892384506835892410}
+  - {fileID: 8472124856667915634}
+  - {fileID: 4738215623000949589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7653876053505221471
@@ -898,8 +975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 405878581
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3442661560
+  InScenePlacedSourceGlobalObjectIdHash: 2993353685
   DeferredDespawnTick: 0
   Ownership: 8
   AlwaysReplicateAsRoot: 0
@@ -911,7 +988,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &5509196311662886303
+--- !u!114 &6064722189827979586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -920,11 +997,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 3974544052275100596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88207b2469ae2e54c8bb60c97aa00d9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b3f88a8589bfa546becde93e862a331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  coinPrefab: {fileID: 5149244181717193722, guid: 6f670ad4c1381ee438522d4bf2eb49c8, type: 3}
+  numRagdollsInPool: 10
+  goblinRagdollPrefab: {fileID: 2674774880950701344, guid: 1d04712ae3296f84383e7afb3df9bde7, type: 3}
+  ragdolls: []
+--- !u!1 &4113065246969086791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4738215623000949589}
+  - component: {fileID: 6592192845433495204}
+  m_Layer: 0
+  m_Name: Round Stat Tracker (Client)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4738215623000949589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4113065246969086791}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5579859784484657346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6592192845433495204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4113065246969086791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd40bb241ca56f46823f5e2e06b5ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsCollected: 0
+  totalCoinsAtEnd: 0
+  timesStabbedOtherPlayers: 0
+  timesStabbedByOtherPlayer: 0
+  timeKnockedOut: 0
+  timesKnockedOutOtherPlayer: 0
+  timesKnockedOutByOtherPlayer: 0
+  timeCrouching: 0
+  timeSprinting: 0
+  timeDoingNothing: 0
 --- !u!1 &4504107548524324017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1170,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &5162320942687523242
 GameObject:
@@ -1731,7 +1863,7 @@ MonoBehaviour:
   initialCountdownGroup: {fileID: 3158332949898111836}
   initialCountdownText: {fileID: 6249604357654932171}
   countdown: 0
-  countdownLength: 180
+  countdownLength: 5
   currentCountdown: 0
   countdownGroup: {fileID: 9209797217519503612}
   countdownText: {fileID: 1699829953029024333}

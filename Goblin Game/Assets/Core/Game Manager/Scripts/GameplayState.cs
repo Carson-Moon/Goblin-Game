@@ -6,8 +6,9 @@ using UnityEngine;
 public class GameplayState : GameState
 {
     [SerializeField] CanvasGroup initialCountdownGroup;
-    [SerializeField] TextMeshProUGUI initialCountdownText;
 
+    [Header("Countdown")]
+    [SerializeField] TextMeshProUGUI initialCountdownText;
     [SerializeField] bool countdown = false;
     [SerializeField] float countdownLength;
     [SerializeField] float currentCountdown;
@@ -68,6 +69,9 @@ public class GameplayState : GameState
         GoblinClientPointer.LocalGoblinClient().GoblinController.AddLookLock(INTRO_MOVEMENT_LOCK);
 
         // Endscreen tape!
+
+        // Send our client stats to the server.
+        MatchStatTracker.Instance.SaveClientStatsServerRpc(NetworkManager.Singleton.LocalClientId, RoundStatTracker.Instance.GrabRoundStats());
 
         ClientUnlock();
     }

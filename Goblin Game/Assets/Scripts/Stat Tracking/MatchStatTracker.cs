@@ -7,7 +7,7 @@ using UnityEngine;
 public class MatchStatTracker : NetworkBehaviour
 {
     // Singleton
-    public static MatchStatTracker instance { get; private set; }
+    public static MatchStatTracker Instance { get; private set; }
 
     [SerializeField] Dictionary<ulong, RoundStats> playerStats = new Dictionary<ulong, RoundStats>();
     public Dictionary<ulong, RoundStats> PlayerStats => playerStats;
@@ -16,18 +16,20 @@ public class MatchStatTracker : NetworkBehaviour
     void Awake()
     {
         // Singleton Setup
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
+
+        DontDestroyOnLoad(this);
     }
 
     // Save our stats to the dictionary. If we already have stats, condense them.
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void SaveClientStatsServerRpc(ulong clientID, RoundStats stats)
     {
         // Determine if we already have stats saved for this client.
@@ -35,16 +37,20 @@ public class MatchStatTracker : NetworkBehaviour
         {
             // Condense our stats.
             RoundStats newStats = CondenseClientStats(savedStats, stats);
+            Debug.Log($"Merged Player Data for {clientID}. Stabs to Other Players: {newStats.TimesStabbedOtherPlayers}.");
             playerStats[clientID] = newStats;
-            SaveClientStatsClientRpc(clientID, newStats);
+            //SaveClientStatsClientRpc(clientID, newStats);
             return;
         }
         else
         {
             // Save our stats.
             playerStats.Add(clientID, stats);
-            SaveClientStatsClientRpc(clientID, stats);
-        }  
+            Debug.Log($"Received New Player Data for {clientID}. Stabs to Other Players: {stats.TimesStabbedOtherPlayers}.");
+            //SaveClientStatsClientRpc(clientID, stats);
+        } 
+
+        
     }
 
     [Rpc(SendTo.NotServer)]

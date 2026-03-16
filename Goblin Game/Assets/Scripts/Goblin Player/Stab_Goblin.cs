@@ -49,7 +49,7 @@ public class Stab_Goblin : MonoBehaviour
         {
             //print("Stabbed " + cols[i].name);
             cols[i].GetComponent<CoinManager_Goblin>().LoseCoin();
-            RoundStatTracker.instance.TrackIntStat(IntStat.StabbedSomeone);
+            //RoundStatTracker.Instance.TrackIntStat(IntStat.StabbedSomeone);
         }
 
         // Determine if we hit any breakables.
