@@ -61,5 +61,10 @@ public class GoblinClient : NetworkBehaviour
         onComplete.Invoke();
         //LoadingScreenManager.Instance.DisableLoadingScreen(onComplete);
     }
+
+    public void SetPosition(Vector3 position)
+    {
+        goblinController.Teleport(position);
+    }
 #endregion
 }

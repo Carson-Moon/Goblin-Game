@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
 {
+    [SerializeField] AwardsCeremonyUI awardsCeremonyUI;
+
     private bool inIntro = false;
     public bool InIntro => inIntro;
 
@@ -36,16 +38,20 @@ public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
 
     private void StopAnnouncingStat()
     {
+        awardsCeremonyUI.ResetScreen();
+
         announcingStat = false;
     }
 
     IEnumerator AnnounceIntStat(string statTitle, string winnerName, int stat)
     {
         Debug.Log("Drumroll please...");
+        awardsCeremonyUI.SetStatTitle(statTitle);
 
         yield return new WaitForSeconds(2);
 
         Debug.Log($"The winner of {statTitle} is {winnerName} with {stat}!");
+        awardsCeremonyUI.SetPlayerName(winnerName);
 
         yield return new WaitForSeconds(3);
 

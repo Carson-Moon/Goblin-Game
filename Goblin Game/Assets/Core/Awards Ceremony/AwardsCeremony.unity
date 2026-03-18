@@ -131,8 +131,9 @@ GameObject:
   - component: {fileID: 44957144}
   - component: {fileID: 44957143}
   - component: {fileID: 44957142}
+  - component: {fileID: 44957146}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Announcement UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,6 +224,20 @@ RectTransform:
   m_AnchoredPosition: {x: -17.5, y: 12.25}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &44957146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44957141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d782d42b0543474289b601919783735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statAnnouncementText: {fileID: 118393994}
+  playerAnnouncementText: {fileID: 832855103}
 --- !u!1 &66267538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,6 +2552,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 814071254
       objectReference: {fileID: 0}
+    - target: {fileID: 6232626266779898897, guid: c2360f5bb7702cc4697ce386d82f5753, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2086988127
+      objectReference: {fileID: 0}
     - target: {fileID: 8666138659018426614, guid: c2360f5bb7702cc4697ce386d82f5753, type: 3}
       propertyPath: m_Name
       value: Dummy Goblin
@@ -2579,7 +2598,7 @@ Transform:
   m_GameObject: {fileID: 1582588579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -169.85728, y: 29.572952, z: 106.77699}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2604,7 +2623,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -2624,6 +2643,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   statAnnouncement: {fileID: 1582588583}
+  spawnPoints:
+  - {fileID: 252138701}
+  - {fileID: 505850055}
+  - {fileID: 663856923}
+  - {fileID: 1622591268}
+  - {fileID: 1460193026}
+  - {fileID: 124243260}
+  - {fileID: 1799722148}
+  - {fileID: 731087681}
   intStatOptions: 01000000
   floatStatOptions: 
 --- !u!114 &1582588583
@@ -2639,6 +2667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  awardsCeremonyUI: {fileID: 44957146}
 --- !u!1 &1622591267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2869,6 +2898,6 @@ SceneRoots:
   - {fileID: 94811296}
   - {fileID: 1499334097}
   - {fileID: 1901346164}
-  - {fileID: 44957145}
   - {fileID: 1556756129}
   - {fileID: 1582588580}
+  - {fileID: 44957145}

@@ -83,4 +83,10 @@ public class GoblinController : MonoBehaviour
     {
         _lookLocks.Remove(lockID);
     }
+
+    public void RemoveAllLocks()
+    {
+        _movementLocks.Clear();
+        _lookLocks.Clear();
+    }
 }
