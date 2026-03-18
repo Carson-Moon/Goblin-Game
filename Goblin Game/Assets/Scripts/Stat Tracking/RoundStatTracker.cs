@@ -31,24 +31,72 @@ public struct RoundStats : INetworkSerializable
         serializer.SerializeValue(ref TimeSprinting);
         serializer.SerializeValue(ref TimeDoingNothing);
     }
+
+    // Getters
+    public int GetIntStat(IntStat stat)
+    {
+        switch (stat)
+        {
+            case IntStat.Coin:
+                return CoinsCollected;
+
+            case IntStat.Stabbed_Someone:
+                return TimesStabbedOtherPlayers;
+
+            case IntStat.Got_Stabbed:
+                return TimesStabbedByOtherPlayer;
+
+            case IntStat.Got_Knocked_Out:
+                return TimesKnockedOutByOtherPlayer;
+
+            case IntStat.Knocked_Someone_Out:
+                return TimesKnockedOutOtherPlayer;
+
+            default:
+                Debug.LogWarning($"Could not find int stat: {stat}.");
+                return 0;
+        }
+    }
+
+    public float GetFloatStat(FloatStat stat)
+    {
+        switch (stat)
+        {
+            case FloatStat.Is_Knocked_Out:
+                return TimeKnockedOut;
+
+            case FloatStat.Is_Crouching:
+                return TimeCrouching;
+
+            case FloatStat.Is_Sprinting:
+                return TimeSprinting;
+
+            case FloatStat.Is_Doing_Nothing:
+                return TimeDoingNothing;
+
+            default:
+                Debug.LogWarning($"Could not find float stat: {stat}.");
+                return 0;
+        }
+    }
 }
 
 public enum IntStat
 {
     Coin,
-    StabbedSomeone,
-    GotStabbed,
-    KnockedSomeoneOut,
-    GotKnockedOut,
+    Stabbed_Someone,
+    Got_Stabbed,
+    Knocked_Someone_Out,
+    Got_Knocked_Out,
 
 }
 
 public enum FloatStat
 {
-    IsKnockedOut,
-    IsCrouching,
-    IsSprinting,
-    IsDoingNothing
+    Is_Knocked_Out,
+    Is_Crouching,
+    Is_Sprinting,
+    Is_Doing_Nothing
 }
 
 public class RoundStatTracker : MonoBehaviour
@@ -109,19 +157,19 @@ public class RoundStatTracker : MonoBehaviour
                 coinsCollected++;
                 break;
 
-            case IntStat.StabbedSomeone:
+            case IntStat.Stabbed_Someone:
                 timesStabbedOtherPlayers++;
                 break;
 
-            case IntStat.GotStabbed:
+            case IntStat.Got_Stabbed:
                 timesStabbedByOtherPlayer++;
                 break;
 
-            case IntStat.GotKnockedOut:
+            case IntStat.Got_Knocked_Out:
                 timesKnockedOutByOtherPlayer++;
                 break;
 
-            case IntStat.KnockedSomeoneOut:
+            case IntStat.Knocked_Someone_Out:
                 timesKnockedOutOtherPlayer++;
                 break;
         }
@@ -131,19 +179,19 @@ public class RoundStatTracker : MonoBehaviour
     {
         switch (stat)
         {
-            case FloatStat.IsKnockedOut:
+            case FloatStat.Is_Knocked_Out:
                 timeKnockedOut += Time.deltaTime;
                 break;
 
-            case FloatStat.IsCrouching:
+            case FloatStat.Is_Crouching:
                 timeCrouching += Time.deltaTime;
                 break;
 
-            case FloatStat.IsSprinting:
+            case FloatStat.Is_Sprinting:
                 timeSprinting += Time.deltaTime;
                 break;
 
-            case FloatStat.IsDoingNothing:
+            case FloatStat.Is_Doing_Nothing:
                 timeDoingNothing += Time.deltaTime;
                 break;
         }

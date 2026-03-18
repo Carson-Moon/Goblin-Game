@@ -19,11 +19,6 @@ public struct PlayerInformation : INetworkSerializable, IEquatable<PlayerInforma
         serializer.SerializeValue(ref Username);
     }
 
-    public override string ToString()
-    {
-        return $"Username: {Username}";
-    }
-
     public bool Equals(PlayerInformation other)
     {
         return Username == other.Username;

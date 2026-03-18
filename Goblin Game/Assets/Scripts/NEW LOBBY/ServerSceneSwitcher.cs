@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ServerStartGame : NetworkBehaviour
+public class ServerSceneSwitcher : NetworkBehaviour
 {
-    public static ServerStartGame Instance { get; private set; }
+    public static ServerSceneSwitcher Instance { get; private set; }
 
     [SerializeField] string gameScene = "GameScene";
+    [SerializeField] string awardsScene = "AwardsCeremony";
+    private string targetScene;
+
     private Dictionary<ulong, bool> readyToSwitch = new();
 
 
@@ -20,13 +23,18 @@ public class ServerStartGame : NetworkBehaviour
 
     public void AttemptTransitionToGameScene()
     {
-        // Make sure we are good to switch.
+        targetScene = gameScene;
+        StartTransitionToSceneServerRpc();
+    }
 
-        StartTransitionToGameSceneServerRpc();
+    public void AttemptTransitionToAwardsScene()
+    {
+        targetScene = awardsScene;
+        StartTransitionToSceneServerRpc();
     }
 
     [Rpc(SendTo.Server)]
-    private void StartTransitionToGameSceneServerRpc()
+    private void StartTransitionToSceneServerRpc()
     {
         // Setup our dictionary with all client ids.
         readyToSwitch.Clear();
@@ -36,11 +44,11 @@ public class ServerStartGame : NetworkBehaviour
         }
 
         // Everything we do client side before loading.
-        StartTransitionToGameSceneClientRpc();
+        StartTransitionToSceneClientRpc();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void StartTransitionToGameSceneClientRpc()
+    private void StartTransitionToSceneClientRpc()
     {
         ulong localClientID = NetworkManager.Singleton.LocalClientId;
 
@@ -70,6 +78,6 @@ public class ServerStartGame : NetworkBehaviour
 
     private void LoadGameScene()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(gameScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(targetScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }

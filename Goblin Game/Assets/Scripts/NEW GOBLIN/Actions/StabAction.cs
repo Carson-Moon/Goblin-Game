@@ -40,7 +40,7 @@ public class StabAction : MonoBehaviour
                 continue;
 
             damageable.TakeDamage(stabPosition.position);
-            RoundStatTracker.Instance.TrackIntStat(IntStat.StabbedSomeone);
+            RoundStatTracker.Instance.TrackIntStat(IntStat.Stabbed_Someone);
         }
 
         PerformCooldown();
