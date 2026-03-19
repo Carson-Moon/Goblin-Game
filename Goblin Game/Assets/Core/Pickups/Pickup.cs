@@ -15,6 +15,10 @@ public class Pickup : NetworkBehaviour
     [SerializeField] GameObject breakVFX;
     [SerializeField] AudioSource breakSFX;
 
+    private PickupCoins pickupCoins;
+    public PickupCoins PickupCoins => pickupCoins;
+    public bool HoldsCoins => pickupCoins != null;
+
     private bool _pickedUp = false;
 
     private bool _thrown = false;
@@ -25,6 +29,7 @@ public class Pickup : NetworkBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _networkObject = GetComponent<NetworkObject>();
+        pickupCoins = GetComponent<PickupCoins>();
     }
 
     public void OnPickup()
@@ -72,7 +77,23 @@ public class Pickup : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if(_thrown)
+        {
             BreakClientRpc();
+            BreakServerRpc();
+        }
+            
+    }
+
+    [ServerRpc]
+    private void BreakServerRpc()
+    {
+        if(HoldsCoins)
+        {
+            int coinsToSpawn = pickupCoins.Coins;
+            CoinPool.Instance.SpawnMultipleCoinsServerRpc(transform.position, coinsToSpawn);
+            pickupCoins.SetCoinsServerRpc(0);
+        }
+            
     }
 
     [Rpc(SendTo.ClientsAndHost)]

@@ -11,9 +11,10 @@ public class NewCoinCollection : MonoBehaviour
         {
             var coin = other.GetComponentInParent<Coin>();
 
-            if(coin != null && pickupAction.HasJar)
+            if(coin != null && pickupAction.CurrentPickup != null && pickupAction.CurrentPickup.HoldsCoins)
             {
                 CoinPool.Instance.OnCoinCollectedServerRpc(coin.ID);
+                pickupAction.CurrentPickup.PickupCoins.AddCoinsServerRpc(1);
             }
         }
     }

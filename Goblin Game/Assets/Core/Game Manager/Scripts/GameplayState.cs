@@ -35,8 +35,7 @@ public class GameplayState : GameState
             countdownText.text = currentCountdown.ToString("F0");
             countdownGroup.alpha = 1;
 
-            GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveMovementLock(INTRO_MOVEMENT_LOCK);
-            GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveLookLock(INTRO_MOVEMENT_LOCK);
+            GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveAllLocks();
 
             countdown = true;
         });

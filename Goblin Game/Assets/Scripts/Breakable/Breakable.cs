@@ -35,33 +35,33 @@ public class Breakable : NetworkBehaviour, IDamageable
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void BreakRPC(Vector3 damagePoint)
     {
+        BreakClientRpc();
+
         ActivateBreakablesRPC(damagePoint);
 
         GetComponent<NetworkObject>().Despawn(true);
     }
 
-    [Rpc(SendTo.Server)]
-    private void ActivateBreakablesRPC(Vector3 damagePoint)
+    [ClientRpc]
+    private void BreakClientRpc()
     {
         col.enabled = false;
         meshRen.enabled = false;
+    }
 
+    [Rpc(SendTo.Server)]
+    private void ActivateBreakablesRPC(Vector3 damagePoint)
+    {
         var instance = Instantiate(cratePiecesPrefab, transform.position, Quaternion.identity);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-        instanceNetworkObject.Spawn();
+        instanceNetworkObject.Spawn(destroyWithScene: true);
         instance.GetComponent<BreakableExplosion>().ExplodeRPC(damagePoint);
     }
 
     [Rpc(SendTo.Server)]
     private void CreateCoinsRPC()
     {
-        for(int i=0; i<coinAmount; i++)
-        {
-            // Instantiate a new coin.
-            var instance = Instantiate(coinPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-0.5f, 0.5f), Random.Range(-1f, 1f)), Quaternion.identity);
-            var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-            instanceNetworkObject.Spawn();
-        }       
+        CoinPool.Instance.SpawnMultipleCoinsServerRpc(transform.position, coinAmount);      
     }
 
     public void OnDeath()

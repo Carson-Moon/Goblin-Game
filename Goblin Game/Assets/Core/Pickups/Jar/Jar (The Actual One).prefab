@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 622127510278127492}
   - component: {fileID: 7916350797779170046}
   - component: {fileID: 3421060719689591544}
+  - component: {fileID: 5812102256807523555}
   m_Layer: 17
   m_Name: Jar (The Actual One)
   m_TagString: Untagged
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3122689802
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3881474104
+  InScenePlacedSourceGlobalObjectIdHash: 2347574744
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -181,6 +182,21 @@ MonoBehaviour:
   _id: 1
   breakVFX: {fileID: 2819414463390710330}
   breakSFX: {fileID: 0}
+--- !u!114 &5812102256807523555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890870821486347958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cba300e424b014c80b77b4201b1992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _coins:
+    m_InternalValue: 0
 --- !u!1001 &7752121093165408230
 PrefabInstance:
   m_ObjectHideFlags: 0
