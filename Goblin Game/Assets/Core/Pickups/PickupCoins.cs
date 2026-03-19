@@ -27,6 +27,12 @@ public class PickupCoins : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
+    public void LoseCoinsServerRpc(int coinsToLose)
+    {
+        _coins.Value -= coinsToLose;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     public void SetCoinsServerRpc(int coinsToSet)
     {
         _coins.Value = coinsToSet;

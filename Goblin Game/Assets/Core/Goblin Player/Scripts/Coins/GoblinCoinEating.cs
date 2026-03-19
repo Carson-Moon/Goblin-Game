@@ -22,8 +22,8 @@ public class GoblinCoinEating : NetworkBehaviour
 
     public void StartEatingCoins()
     {
-        // if (pickupAction.CurrentJar == null || pickupAction.CurrentJar.Coins <= 0)
-        //     return;
+        if (pickupAction.CurrentPickup == null || !pickupAction.CurrentPickup.HoldsCoins || pickupAction.CurrentPickup.PickupCoins.Coins == 0)
+            return;
 
         coinEatingUI.StartEatingUI(eatingLength, EatCoin);
     }
@@ -36,6 +36,10 @@ public class GoblinCoinEating : NetworkBehaviour
     private void EatCoin()
     {
         goblinCoins.GainCoinServerRpc();
-        // pickupAction.CurrentJar.LoseCoin();
+
+        if(pickupAction.CurrentPickup.PickupCoins.Coins - 1 == 0)
+            StopEatingCoins();
+
+        pickupAction.CurrentPickup.PickupCoins.LoseCoinsServerRpc(1);
     }
 }
