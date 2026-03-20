@@ -7,6 +7,8 @@ public class PickupCoins : NetworkBehaviour
     [SerializeField] private NetworkVariable<int> _coins = new NetworkVariable<int>(0);
     public int Coins => _coins.Value;
 
+    public event Action<int> OnCoinValueChange;
+
 
     public override void OnNetworkSpawn()
     {
@@ -18,6 +20,7 @@ public class PickupCoins : NetworkBehaviour
     private void OnValueChanged(int previousValue, int newValue)
     {
         // We can play a vfx here if coins are lost or gained.
+        OnCoinValueChange?.Invoke(newValue);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -36,5 +39,12 @@ public class PickupCoins : NetworkBehaviour
     public void SetCoinsServerRpc(int coinsToSet)
     {
         _coins.Value = coinsToSet;
+    }
+
+    public override void OnDestroy()
+    {
+        OnCoinValueChange = null;
+
+        base.OnDestroy();
     }
 }

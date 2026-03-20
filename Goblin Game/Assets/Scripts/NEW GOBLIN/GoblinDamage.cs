@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GoblinDamage : NetworkBehaviour, IDamageable
 {
+    [SerializeField] DamageVignette damageVignette;
+
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
     [SerializeField] GoblinCoins goblinCoins;
@@ -18,6 +20,8 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
     {
         if(!IsOwner)
             return;
+
+        damageVignette.PerformDamageFlash();
 
         int coinsToLose = goblinCoins.LoseCoins(5);
 

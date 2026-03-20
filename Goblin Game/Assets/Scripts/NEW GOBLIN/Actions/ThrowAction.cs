@@ -4,6 +4,7 @@ public class ThrowAction : MonoBehaviour
 {
     [SerializeField] PickupAction _pickupAction;
     [SerializeField] PickupVisuals _pickupVisuals;
+    [SerializeField] PickupVisualUI _pickupUI;
 
     [Header("Throw Settings")]
     [SerializeField] Camera playerCamera;
@@ -22,6 +23,7 @@ public class ThrowAction : MonoBehaviour
 
         _pickupAction.CurrentPickup.OnThrow(throwStartPosition.position, throwStartPosition.rotation, throwDirection, throwStrength);
         _pickupAction.DiscardCurrentPickup();
+        _pickupUI.OffPickup();
 
         _pickupVisuals.TogglePickupVisualClientRpc(PickupID.None);
     }

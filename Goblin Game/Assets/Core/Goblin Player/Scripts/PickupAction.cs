@@ -5,19 +5,19 @@ using UnityEngine;
 public class PickupAction : MonoBehaviour
 {
     [SerializeField] PickupVisuals _pickupVisuals;
+    [SerializeField] PickupVisualUI _pickupUI;
 
     [Header("Detection Settings")]
     [SerializeField] Transform pickupTransform;
     [SerializeField] float pickupLength;
     [SerializeField] float pickupRadius;
     [SerializeField] LayerMask pickupMask;
-    [SerializeField] private Pickup _pickupCandidate;
-    [SerializeField] private Pickup _currentPickup;
-    public Pickup CurrentPickup => _currentPickup;
-    public bool HasJar => _currentPickup != null && _currentPickup.ID is PickupID.Jar;
-
-
+    private Pickup _pickupCandidate;
     private Collider[] pickupCols;
+
+    private Pickup _currentPickup;
+    public Pickup CurrentPickup => _currentPickup;
+
 
 
     public void AttemptPickup()
@@ -28,6 +28,7 @@ public class PickupAction : MonoBehaviour
         _pickupCandidate.OnPickup();
 
         _pickupVisuals.TogglePickupVisualClientRpc(_pickupCandidate.ID);
+        _pickupUI.OnPickup(_pickupCandidate);
 
         _currentPickup = _pickupCandidate;
         _pickupCandidate = null;
