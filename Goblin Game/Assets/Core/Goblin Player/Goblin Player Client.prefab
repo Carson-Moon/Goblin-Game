@@ -129,8 +129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581938333026998448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.02437953, y: 0.70668644, z: 0.024379533, w: 0.7066863}
-  m_LocalPosition: {x: -39.43, y: 4.17, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168,11 +168,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60.000004
+  near clip plane: 0.01
+  far clip plane: 5000
+  field of view: 90
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1412,6 +1412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517901332134064208}
   - component: {fileID: 9202160244556914376}
+  - component: {fileID: 1957069308224951191}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: Untagged
@@ -1477,6 +1478,23 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1957069308224951191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556874686487586637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 0
+  FrequencyGain: 0
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2567211540995401116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,6 +2487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageVignette: {fileID: 1243158559098339265}
+  cameraShake: {fileID: 691395841388577097}
   coinSpawnPosition: {fileID: 5573091884376836184}
   unconsciousManager: {fileID: 1045678369365100981}
   goblinCoins: {fileID: 1436054211432088170}
@@ -5406,6 +5425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4490883546053278517}
   - component: {fileID: 4011678651782211475}
+  - component: {fileID: 691395841388577097}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5445,6 +5465,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 0.1
   verticalClamp: 80
+--- !u!114 &691395841388577097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546556234041210145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525d5cdf79a890a46ba440f1c8db604a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinemachineNoise: {fileID: 1957069308224951191}
 --- !u!1 &9106764007832235064
 GameObject:
   m_ObjectHideFlags: 0

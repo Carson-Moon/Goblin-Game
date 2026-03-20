@@ -4,6 +4,7 @@ using UnityEngine;
 public class GoblinDamage : NetworkBehaviour, IDamageable
 {
     [SerializeField] DamageVignette damageVignette;
+    [SerializeField] CameraShake cameraShake;
 
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
@@ -22,14 +23,14 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
             return;
 
         damageVignette.PerformDamageFlash();
+        cameraShake.PerformImpulseShake();
 
         int coinsToLose = goblinCoins.LoseCoins(5);
 
         if(CoinPool.Instance != null)
         {
             CoinPool.Instance.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
-        }
-            
+        }   
     }
 
     public void OnDeath()
