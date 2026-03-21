@@ -69,7 +69,11 @@ public class EndscreenState : GameState
 
     protected override void OnEndStateServer()
     {
-        ServerSceneSwitcher.Instance.AttemptTransitionToGameScene();
-        //ServerSceneSwitcher.Instance.AttemptTransitionToAwardsScene();
+        ServerRoundTracker.Instance.IncreaseRoundsPlayed();
+
+        if(ServerRoundTracker.Instance.PlayedAllRounds)
+            ServerSceneSwitcher.Instance.AttemptTransitionToAwardsScene();
+        else
+            ServerSceneSwitcher.Instance.AttemptTransitionToGameScene();
     }
 }

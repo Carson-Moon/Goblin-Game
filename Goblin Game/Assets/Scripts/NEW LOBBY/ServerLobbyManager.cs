@@ -31,7 +31,7 @@ public class ServerLobbyManager : NetworkBehaviour
         else
             Instance = this;
 
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnNetworkSpawn()
