@@ -60,8 +60,20 @@ public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
         yield break;
     }
 
-    IEnumerator AnnounceFloatStat(string statTitle, string winnerName, List<(ulong, float)> stats)
+    [ClientRpc]
+    public void AnnounceWinnerClientRpc(string winnerName)
     {
-        yield break;   
+        StartCoroutine(AnnounceWinner(winnerName));
+    }
+
+    IEnumerator AnnounceWinner(string winnerName)
+    {
+        Debug.Log("Drumroll please...");
+        awardsCeremonyUI.SetStatTitle("The winner is...");
+
+        yield return new WaitForSeconds(2);
+
+        Debug.Log($"The overall winner is {winnerName}!");
+        awardsCeremonyUI.SetPlayerName(winnerName);
     }
 }

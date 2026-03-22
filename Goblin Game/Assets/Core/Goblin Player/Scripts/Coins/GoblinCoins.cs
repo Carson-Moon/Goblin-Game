@@ -41,6 +41,8 @@ public class GoblinCoins : NetworkBehaviour
 
         if(IsOwner)
         {
+            RoundStatTracker.Instance.TrackIntStat(IntStat.Coin);
+
             coinFillUI.UpdateUI(_coins);
             OnNumberOfCoinsChanged?.Invoke(_coins);
         }

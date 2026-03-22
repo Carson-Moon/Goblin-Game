@@ -34,6 +34,11 @@ public class UnconsciousManager : NetworkBehaviour
             LoseConsciousness(Vector3.zero);
             debug = false;
         }
+
+        if(isUnconscious)
+        {
+            RoundStatTracker.Instance.TrackFloatStat(FloatStat.Is_Knocked_Out);
+        }
     }
 
     public void LoseConsciousness(Vector3 impactPoint)
@@ -43,6 +48,8 @@ public class UnconsciousManager : NetworkBehaviour
             Debug.Log("Already knocked out!");
             return;
         }
+
+        RoundStatTracker.Instance.TrackIntStat(IntStat.Got_Knocked_Out);
             
         isUnconscious = true;
 

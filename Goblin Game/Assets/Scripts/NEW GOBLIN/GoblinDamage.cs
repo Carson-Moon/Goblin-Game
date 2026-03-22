@@ -22,6 +22,8 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
         if(!IsOwner)
             return;
 
+        RoundStatTracker.Instance.TrackIntStat(IntStat.Got_Stabbed);
+
         damageVignette.PerformDamageFlash();
         cameraShake.PerformImpulseShake();
 
