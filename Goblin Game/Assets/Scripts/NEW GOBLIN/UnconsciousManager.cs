@@ -66,7 +66,7 @@ public class UnconsciousManager : NetworkBehaviour
             armOverlayCamera.enabled = false;
             unconsciousCamera.Priority = 100;
 
-            LoseConsciounessServerRpc(impactPoint);
+            LoseConsciounessServerRpc(impactPoint, NetworkManager.Singleton.LocalClientId);
         });
 
         sequence.Append(onHitOverlay.DOFade(0, .4f));
@@ -89,17 +89,17 @@ public class UnconsciousManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void LoseConsciounessServerRpc(Vector3 impactPoint)
+    private void LoseConsciounessServerRpc(Vector3 impactPoint, ulong playerID)
     {
-        LoseConsciousnessClientRpc(impactPoint);
+        LoseConsciousnessClientRpc(impactPoint, playerID);
     }
 
     [ClientRpc]
-    private void LoseConsciousnessClientRpc(Vector3 impactPoint)
+    private void LoseConsciousnessClientRpc(Vector3 impactPoint, ulong playerID)
     {
         thirdPersonGoblin.SetActive(false);
 
-        _currentRagdoll = RagdollPool.Instance.GetRagdoll(ragdollPosition, impactPoint);
+        _currentRagdoll = RagdollPool.Instance.GetRagdoll(ragdollPosition, impactPoint, playerID);
     }
 
     [ServerRpc(RequireOwnership = false)]

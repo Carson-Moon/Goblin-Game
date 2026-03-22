@@ -112,4 +112,13 @@ public class ServerLobbyManager : NetworkBehaviour
 
         connectedPlayersDisplay.RemoveConnectedPlayerDisplayClientRpc(clientID, remainingClientRpcParams);
     }
+
+    [ServerRpc]
+    public void RemotelyTakeDamageServerRpc(ulong playerID, Vector3 damagePoint)
+    {
+        if(goblinClients.ContainsKey(playerID))
+        {
+            goblinClients[playerID].GetComponentInChildren<GoblinDamage>().TakeDamage(damagePoint);
+        }
+    }
 }

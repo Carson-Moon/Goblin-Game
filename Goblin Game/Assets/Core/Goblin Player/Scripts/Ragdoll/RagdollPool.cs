@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class RagdollPool : MonoBehaviour
@@ -27,13 +28,13 @@ public class RagdollPool : MonoBehaviour
             ragdolls.Add(Instantiate(goblinRagdollPrefab, transform));
     }
 
-    public GoblinRagdoll GetRagdoll(Transform ragdollPosition, Vector3 impactPoint)
+    public GoblinRagdoll GetRagdoll(Transform ragdollPosition, Vector3 impactPoint, ulong playerID)
     {
         if(ragdolls.Count > 0)
         {
             var ragdoll = ragdolls[0];
             ragdolls.Remove(ragdoll);
-            ragdoll.Ragdoll(ragdollPosition.position, ragdollPosition.rotation, impactPoint);
+            ragdoll.Ragdoll(ragdollPosition.position, ragdollPosition.rotation, impactPoint, playerID);
 
             return ragdoll;
         }

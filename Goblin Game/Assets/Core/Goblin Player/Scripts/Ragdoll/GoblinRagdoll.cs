@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GoblinRagdoll : MonoBehaviour
+public class GoblinRagdoll : MonoBehaviour, IDamageable
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] float forceStrength;
@@ -11,6 +11,8 @@ public class GoblinRagdoll : MonoBehaviour
 
     private IEnumerable<Rigidbody> orderedRigidbodies;
     private Vector3 forceDirection;
+
+    private ulong _playerID;
 
 
     void Awake()
@@ -31,8 +33,10 @@ public class GoblinRagdoll : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Ragdoll(Vector3 spawnPoint, Quaternion spawnRotation, Vector3 impactPoint)
+    public void Ragdoll(Vector3 spawnPoint, Quaternion spawnRotation, Vector3 impactPoint, ulong playerID)
     {
+        _playerID = playerID;
+
         transform.position = spawnPoint;
         transform.rotation = spawnRotation;
         gameObject.SetActive(true);
@@ -55,5 +59,15 @@ public class GoblinRagdoll : MonoBehaviour
         {
             ragdollRb.ResetTransform();
         }
+    }
+
+    public void TakeDamage(Vector3 damagePoint)
+    {
+        ServerLobbyManager.Instance.RemotelyTakeDamageServerRpc(_playerID, damagePoint);
+    }
+
+    public void OnDeath()
+    {
+        
     }
 }
