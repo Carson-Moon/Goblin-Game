@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GoblinAnimator : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class GoblinAnimator : MonoBehaviour
     private GoblinCharacter gCharacter;
 
     [SerializeField] Animator anim;
+    [SerializeField] VisualEffectAsset[] stepParticles;
 
     [Space(10)]
 
