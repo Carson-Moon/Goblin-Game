@@ -11,7 +11,7 @@ public class RelayConnection : MonoBehaviour
 {
     public static RelayConnection Instance {get; private set;}
 
-    [SerializeField] private string joinCode = string.Empty;
+    private string joinCode = string.Empty;
     public string JoinCode => joinCode;
 
     public event Action onClientStarted;

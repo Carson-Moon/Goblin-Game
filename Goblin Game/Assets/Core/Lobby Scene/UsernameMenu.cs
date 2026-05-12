@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class MainMenuUsernameSection : MainMenuSection
+public class UsernameMenu : MainMenuSection
 {
     [Header("Username UI")]
     [SerializeField] Animated_Button usernameButton;
