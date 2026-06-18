@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &5979287094368768112
 Transform:
@@ -102,7 +102,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3677531708792545807
 Transform:
@@ -188,7 +188,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &5157980207706160395
 Transform:
@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c93ebe1dc2932a640b727a4f473c10dd, type: 2}
+    - target: {fileID: -3919796887962296046, guid: f6ace56cb459f92468cb4acefe8248cb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f6ace56cb459f92468cb4acefe8248cb, type: 3}
       propertyPath: m_Name
       value: WoodWalkway
@@ -326,6 +330,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c93ebe1dc2932a640b727a4f473c10dd, type: 2}
+    - target: {fileID: 6140994139569067330, guid: f6ace56cb459f92468cb4acefe8248cb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6633947738691741599, guid: f6ace56cb459f92468cb4acefe8248cb, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

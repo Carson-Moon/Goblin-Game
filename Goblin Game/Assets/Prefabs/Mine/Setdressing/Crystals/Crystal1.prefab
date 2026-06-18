@@ -16,8 +16,8 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_StaticEditorFlags: 1
+  m_IsActive: 0
 --- !u!4 &2036117877583799463
 Transform:
   m_ObjectHideFlags: 0
@@ -132,6 +132,10 @@ PrefabInstance:
     - target: {fileID: 410713742498577, guid: c51a83d26ab3c024a9971b9a024c4f9f, type: 3}
       propertyPath: m_Name
       value: Sparkles_PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 410713742498577, guid: c51a83d26ab3c024a9971b9a024c4f9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6059323527412320639, guid: c51a83d26ab3c024a9971b9a024c4f9f, type: 3}
       propertyPath: m_LocalScale.x
@@ -250,6 +254,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7eea70e5eba33d9478f942186821d541, type: 3}
       propertyPath: m_Name
       value: Crystal1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7eea70e5eba33d9478f942186821d541, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
