@@ -6,6 +6,7 @@ using UnityEngine;
 public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
 {
     [SerializeField] AwardsCeremonyUI awardsCeremonyUI;
+    [SerializeField] WinnersWheel wheel;
 
     private bool inIntro = false;
     public bool InIntro => inIntro;
@@ -14,9 +15,11 @@ public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
     public bool AnnouncingStat => announcingStat;
 
     [ClientRpc]
-    public void IntroClientRpc()
+    public void IntroClientRpc(int[] intStats, int[] floatStats)
     {
         inIntro = true;
+
+        wheel.GenerateWheel(intStats, floatStats);
 
         StartCoroutine(Intro());
     }
@@ -45,6 +48,8 @@ public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
 
     IEnumerator AnnounceIntStat(string statTitle, string winnerName, int stat)
     {
+        
+
         Debug.Log("Drumroll please...");
         awardsCeremonyUI.SetStatTitle(statTitle);
 

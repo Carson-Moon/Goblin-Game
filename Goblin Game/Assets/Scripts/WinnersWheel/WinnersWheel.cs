@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections;
 
 public class WinnersWheel : MonoBehaviour
 {
@@ -11,7 +13,11 @@ public class WinnersWheel : MonoBehaviour
     public float fineTuningAngle = 0f;
 
     [Header("Categories")]
-    public List<string> categories = new List<string>();
+    public List<IntStat> intCategories = new();
+    public List<FloatStat> floatCategories = new();
+    private int categoryCount;
+    private List<string> categories = new List<string>();
+    private List<string> chosenCategories = new List<string>();
 
     [Header("Wheel Settings")]
     public float radius = 5f;
@@ -28,35 +34,38 @@ public class WinnersWheel : MonoBehaviour
     public AnimationCurve spinCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     public List<GameObject> labelObjects = new List<GameObject>();
-    private int winnerIndex = -1;
     private float currentAngleOffset = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        GenerateWheel();
-    }
+
+    // void Start()
+    // {
+    //     GenerateWheel(intCategories, floatCategories);
+    // }
 
     void Update()
     {
         if (isDebug && reinitializeCategories)
         {
             reinitializeCategories = false;
-            GenerateWheel();
+            GenerateWheel(intCategories.Select(x => (int)x).ToArray(), floatCategories.Select(x => (int)x).ToArray());
         }
         if (isDebug && spinWheelButton)
         {
             spinWheelButton = false;
-            Spin();
+            int category = ChooseCategory();
+            Spin(category);
         }
     }
 
     // take categories and space them equidistant from one another, create text objects.
-    public void GenerateWheel()
+    public void GenerateWheel(int[] intStats, int[] floatStats)
     {
         ClearLabels();
 
-        int count = categories.Count;
+        intCategories = intStats.Select(x => (IntStat)x).ToList();
+        floatCategories = floatStats.Select(x => (FloatStat)x).ToList();
+
+        int count = intCategories.Count + floatCategories.Count;
         float anglePerSegment = 360f / count;
 
         for (int i = 0; i < count; i++)
@@ -66,7 +75,9 @@ public class WinnersWheel : MonoBehaviour
 
             Vector3 pos = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0f) * radius;
 
-            GameObject labelObj = new GameObject("Label_" + categories[i]);
+            string categoryTitle = i < intStats.Length ? intCategories[i].ToString() : floatCategories[i - intStats.Length].ToString();
+
+            GameObject labelObj = new GameObject("Label_" + categoryTitle);
             labelObj.transform.SetParent(transform, false);
             labelObj.transform.localPosition = pos;
 
@@ -76,7 +87,7 @@ public class WinnersWheel : MonoBehaviour
             }
 
             TextMesh tm = labelObj.AddComponent<TextMesh>();
-            tm.text = categories[i];
+            tm.text = categoryTitle;
             tm.fontSize = (int)fontSize;
             tm.characterSize = characterSize;
             tm.color = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 1f);
@@ -84,16 +95,22 @@ public class WinnersWheel : MonoBehaviour
             tm.alignment = TextAlignment.Left;
 
             labelObjects.Add(labelObj);
+            categories.Add(categoryTitle);
         }
+
+        categoryCount = categories.Count;
     }
 
-    public void Spin()
+    public int ChooseCategory()
     {
-        if (categories.Count == 0) return;
+        if (categories.Count == 0) return -1;
 
-        // determine the winner immediately before any animation
-        winnerIndex = Random.Range(0, categories.Count);
-        StartCoroutine(SpinCoroutine(winnerIndex));
+        return Random.Range(0, categories.Count);
+    }
+
+    public void Spin(int index)
+    {
+        StartCoroutine(SpinCoroutine(index));
     }
 
     IEnumerator SpinCoroutine(int winner)
@@ -132,13 +149,21 @@ public class WinnersWheel : MonoBehaviour
         currentAngleOffset = startOffset + delta;
         ApplyAngleOffset(currentAngleOffset);
 
-        Debug.Log("Winner: " + categories[winner]);
-        OnSpinComplete(winner);
+        DetermineWinner(categories[winner]);
+        OnSpinComplete(categories[winner]);
+    }
+
+    private void DetermineWinner(string category)
+    {
+        if(intCategories.Select(x => x.ToString()).Contains(category))
+            Debug.Log($"Winner is an Int Stat: {category}");
+        else
+            Debug.Log($"Winner is a Float Stat: {category}");
     }
 
     void ApplyAngleOffset(float offset)
     {
-        int count = categories.Count;
+        int count = categoryCount;
         float anglePerSegment = 360f / count;
 
         for (int i = 0; i < count; i++)
@@ -156,10 +181,11 @@ public class WinnersWheel : MonoBehaviour
         }
     }
 
-    void OnSpinComplete(int winner)
+    void OnSpinComplete(string category)
     {
         // trigger any necessary events here
-        Debug.Log("Spin Complete: Winning Category: " + categories[winner]);
+        chosenCategories.Add(category);
+        categories.Remove(category);
     }
 
     void ClearLabels()

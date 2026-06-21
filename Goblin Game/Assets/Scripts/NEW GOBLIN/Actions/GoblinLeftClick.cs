@@ -48,8 +48,7 @@ public class GoblinLeftClick : AbstractButtonInputContainer
     {
         pastHoldingThreshold = true;
 
-        // Transition into throw.
-        //print("START THROW!");
+        throwAction.ChargeThrow();
     }
 
     protected override void OnReleasedAction()

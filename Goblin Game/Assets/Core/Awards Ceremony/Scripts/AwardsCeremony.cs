@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using WebSocketSharp;
 
 public class AwardsCeremony : NetworkBehaviour
 {
     [SerializeField] AwardsCeremonyStatAnnouncement statAnnouncement;
+    [SerializeField] WinnersWheel wheel;
 
     [SerializeField] List<Transform> spawnPoints = new();
 
@@ -43,25 +45,26 @@ public class AwardsCeremony : NetworkBehaviour
 
         Dictionary<ulong, RoundStats> playerStats = MatchStatTracker.Instance.PlayerStats;
 
-        statAnnouncement.IntroClientRpc();
+        statAnnouncement.IntroClientRpc(intStatOptions.Select(x => (int)x).ToArray(), floatStatOptions.Select(x => (int)x).ToArray());
         yield return new WaitUntil(() => !statAnnouncement.InIntro);
 
         for(int i=0; i<2; i++)
         {
-            List<IntStat> statOptions = new(intStatOptions);
-            IntStat intStat = statOptions[Random.Range(0, statOptions.Count)];
-            statOptions.Remove(intStat);
+            // List<IntStat> statOptions = new(intStatOptions);
+            // IntStat intStat = statOptions[Random.Range(0, statOptions.Count)];
+            // statOptions.Remove(intStat);
+            int category = wheel.ChooseCategory();
 
             List<(ulong, int)> intStats = new();
             foreach(var playerStat in playerStats)
             {
-                intStats.Add((playerStat.Key, playerStat.Value.GetIntStat(intStat)));
+                // intStats.Add((playerStat.Key, playerStat.Value.GetIntStat(intStat)));
             }
             intStats = intStats.OrderByDescending(x => x.Item2).ToList();
 
             if(intStats.Count == 0)
             {
-                Debug.LogWarning($"Did not find enough players for int stat: {intStat}.");
+                // Debug.LogWarning($"Did not find enough players for int stat: {intStat}.");
                 continue;
             }
 
@@ -70,7 +73,7 @@ public class AwardsCeremony : NetworkBehaviour
             else
                 finalPoints.Add(intStats.First().Item1, 1);
 
-            statAnnouncement.AnnounceStatClientRpc(intStat.ToString().Replace('_', ' '), intStats.First().Item1.GetUsername(), intStats.First().Item2);
+            // statAnnouncement.AnnounceStatClientRpc(intStat.ToString().Replace('_', ' '), intStats.First().Item1.GetUsername(), intStats.First().Item2);
             yield return new WaitUntil(() => !statAnnouncement.AnnouncingStat);
             yield return new WaitForSeconds(2f);
         }
