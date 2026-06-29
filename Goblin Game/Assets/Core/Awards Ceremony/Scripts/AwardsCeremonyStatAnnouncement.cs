@@ -19,7 +19,7 @@ public class AwardsCeremonyStatAnnouncement : NetworkBehaviour
     {
         inIntro = true;
 
-        wheel.GenerateWheel(intStats, floatStats);
+        // wheel.GenerateWheel(intStats, floatStats);
 
         StartCoroutine(Intro());
     }

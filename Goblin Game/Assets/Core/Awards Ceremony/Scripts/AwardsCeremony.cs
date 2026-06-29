@@ -10,7 +10,7 @@ public class AwardsCeremony : NetworkBehaviour
     [SerializeField] AwardsCeremonyStatAnnouncement statAnnouncement;
     [SerializeField] WinnersWheel wheel;
 
-    [SerializeField] List<Transform> spawnPoints = new();
+    [SerializeField] SpawnPointSetter spawnPointSetter;
 
     // Announce 2 int stats and 1 float stat.
     [SerializeField] List<IntStat> intStatOptions = new();
@@ -27,19 +27,7 @@ public class AwardsCeremony : NetworkBehaviour
 
     IEnumerator AwardsCeremonyServer()
     {
-        // Send each player their spawn point.
-        spawnPoints.Shuffle();
-        int spIndex = 0;
-        foreach (ulong clientID in ServerLobbyManager.Instance.ClientIDs)
-        {
-            var clientRpcParams = new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams { TargetClientIds = new[] { clientID } }
-            };
-
-            MoveToSpawnPointClientRpc(spawnPoints[spIndex].position, clientRpcParams);
-            spIndex++;
-        }
+        spawnPointSetter.MovePlayersToSpawnPoints();
 
         yield return new WaitForSeconds(3f);
 
@@ -50,9 +38,6 @@ public class AwardsCeremony : NetworkBehaviour
 
         for(int i=0; i<2; i++)
         {
-            // List<IntStat> statOptions = new(intStatOptions);
-            // IntStat intStat = statOptions[Random.Range(0, statOptions.Count)];
-            // statOptions.Remove(intStat);
             int category = wheel.ChooseCategory();
 
             List<(ulong, int)> intStats = new();
@@ -112,19 +97,5 @@ public class AwardsCeremony : NetworkBehaviour
         statAnnouncement.AnnounceWinnerClientRpc(winnerID.GetUsername());
 
         yield break;
-    }
-
-    [ClientRpc]
-    private void MoveToSpawnPointClientRpc(Vector3 spawnPosition, ClientRpcParams clientRpcParams)
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        Debug.Log($"We are spawning at this position: {spawnPosition}!");
-
-        GoblinClientPointer.LocalGoblinClient().SetPosition(spawnPosition);
-
-        GoblinClientPointer.LocalGoblinClient().GoblinController.RemoveAllLocks();
-        LoadingScreenManager.Instance.DisableLoadingScreen();
     }
 }
