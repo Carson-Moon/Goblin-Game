@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
 public class CeremonyStatAnnouncementState : CeremonyState
 {
-    [SerializeField] CeremonyWheel wheelUI;
+    [SerializeField] CeremonySetupState setupState;
+    [SerializeField] CeremonyStatAnnouncement statAnnouncement;
+    [SerializeField] int numStatsToAnnounce;
 
-    private Dictionary<ulong, bool> playersAnnouncingStat = new();
+    private List<string> usedStats = new();
+    private Dictionary<ulong, bool> playersDone = new();
     private bool waitingForPlayers = false;
     
 
@@ -16,40 +20,55 @@ public class CeremonyStatAnnouncementState : CeremonyState
     {
         base.StartState();
 
+        StartCoroutine(StatAnnounceSequence());
+    }
 
+    private string GetRandomStat()
+    {
+        List<string> availableStats = setupState.AllStatStrings.Where(x => !usedStats.Contains(x)).ToList();
+        string randomStat = availableStats[Random.Range(0, availableStats.Count)];
+        usedStats.Add(randomStat);
+        return randomStat;
     }
 
     IEnumerator StatAnnounceSequence()
     {
-        AnnounceStatClientRpc();
+        for(int i=0; i<numStatsToAnnounce; i++)
+        {
+            Debug.Log($"Stat number {i+1}!");
 
-        yield return null;
+            playersDone.Clear();
+            foreach(ulong clientID in ServerLobbyManager.Instance.ClientIDs)
+                playersDone.Add(clientID, false);
+
+            waitingForPlayers = true;
+            AnnounceStatClientRpc(GetRandomStat());
+            yield return new WaitUntil(() => !waitingForPlayers);
+        }
+
+        EndState();
     }
 
     [ClientRpc]
-    private void AnnounceStatClientRpc()
+    private void AnnounceStatClientRpc(string statToAnnounce)
     {
-        
-    }
-
-    IEnumerator AnnounceStat()
-    {
-        yield return null;
+        statAnnouncement.StartAnnouncingStat(statToAnnounce, DoneAnnouncingStatServerRpc);
     }
 
     [ServerRpc]
     private void DoneAnnouncingStatServerRpc(ulong playerID)
     {
-        playersAnnouncingStat[playerID] = true;
+        playersDone[playerID] = true;
 
         bool allPlayersDone = true;
-        foreach(var kvp in playersAnnouncingStat)
+        foreach(var kvp in playersDone)
         {
             if(!kvp.Value)
                 allPlayersDone = false;
         }
 
-        // if(allPlayersDone)
+        if(allPlayersDone)
+            waitingForPlayers = false;
 
     }
 }

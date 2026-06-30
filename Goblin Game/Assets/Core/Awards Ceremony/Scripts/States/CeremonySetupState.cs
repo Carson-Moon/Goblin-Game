@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 // Responsible for the initial setup of the ceremony scene.
 
-public class CeremonySetup : CeremonyState
+public class CeremonySetupState : CeremonyState
 {
     [SerializeField] IntStat[] intStats;
     [SerializeField] FloatStat[] floatStats;
+
+    public IEnumerable<string> AllStatStrings => intStats.Select(x => x.ToString()).Concat(floatStats.Select(x => x.ToString()));
 
     [SerializeField] CeremonyWheel wheelUI;
     [SerializeField] SpawnPointSetter spawnPointSetter;

@@ -3044,8 +3044,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1978030065}
   - component: {fileID: 1978030064}
+  - component: {fileID: 1978030066}
   m_Layer: 0
-  m_Name: State Announcement State
+  m_Name: Stat Announcement State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3065,6 +3066,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   nextState: {fileID: 1904385052}
+  setupState: {fileID: 78096486}
+  statAnnouncement: {fileID: 1978030066}
+  numStatsToAnnounce: 3
 --- !u!4 &1978030065
 Transform:
   m_ObjectHideFlags: 0
@@ -3080,6 +3084,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 487836820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978030066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978030063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f739858a5cc0af4ab5df77e7c6950d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelUI: {fileID: 8887404775581264028}
 --- !u!1 &2011619693
 GameObject:
   m_ObjectHideFlags: 0
