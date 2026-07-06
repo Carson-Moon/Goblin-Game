@@ -22,6 +22,7 @@ public class CeremonyWheel : MonoBehaviour
     [SerializeField] AnimationCurve spinCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     private List<GameObject> labelObjects = new();
+    private List<(string, string)> categories = new();
     private float currentAngleOffset = 0f;
     private int categoryCount;
 
@@ -58,11 +59,19 @@ public class CeremonyWheel : MonoBehaviour
             tm.alignment = TextAlignment.Left;
 
             labelObjects.Add(labelObj);
+            categories.Add((allCategories[i], allCategories[i]));
         }
     }
 
-    public void Spin(int categoryIndex, Action onSpinComplete)
+    public void Spin(string categoryString, Action onSpinComplete)
     {
+        int categoryIndex = categories.Select(x => x.Item1).ToList().IndexOf(categoryString);
+        if(categoryIndex == -1)
+        {
+            Debug.Log("Could not spin wheel! Category index is -1!");
+            return;
+        }
+
         StartCoroutine(SpinCoroutine(categoryIndex, onSpinComplete));
     }
 
