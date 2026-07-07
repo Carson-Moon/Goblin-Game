@@ -10,6 +10,7 @@ public class ServiceLoader : MonoBehaviour
     void Awake()
     {
         UsernameHolder.FetchExistingUsername();
+        ColorHolder.FetchExistingColor();
     }
 
     private async void Start() 
