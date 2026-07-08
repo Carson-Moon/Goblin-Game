@@ -14,11 +14,12 @@ public static class ColorHolder
     private const string COLOR_PLAYER_PREF_B = "colorB";
 
 
-    public static void FetchExistingColor()
+    public static Color FetchExistingColor()
     {
         colorR = PlayerPrefs.GetFloat(COLOR_PLAYER_PREF_R, 0);
         colorG = PlayerPrefs.GetFloat(COLOR_PLAYER_PREF_G, 1);
         colorB = PlayerPrefs.GetFloat(COLOR_PLAYER_PREF_B, 0);
+        return Color;
     }
 
     public static void SetNewColor(Color newColor)
@@ -26,7 +27,7 @@ public static class ColorHolder
         Debug.Log($"Set new color: {newColor}");
 
         PlayerPrefs.SetFloat(COLOR_PLAYER_PREF_R, newColor.r);
-        PlayerPrefs.SetFloat(COLOR_PLAYER_PREF_G, newColor.b);
+        PlayerPrefs.SetFloat(COLOR_PLAYER_PREF_G, newColor.g);
         PlayerPrefs.SetFloat(COLOR_PLAYER_PREF_B, newColor.b);
         PlayerPrefs.Save();
 

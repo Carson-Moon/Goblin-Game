@@ -9,9 +9,10 @@ public static class UsernameHolder
     private const string USERNAME_PLAYER_PREF = "username";
 
 
-    public static void FetchExistingUsername()
+    public static string FetchExistingUsername()
     {
-        username = PlayerPrefs.GetString(USERNAME_PLAYER_PREF, string.Empty);
+        username = PlayerPrefs.GetString(USERNAME_PLAYER_PREF, "Mind Goblin");
+        return username;
     }
 
     public static void SetNewUsername(string newUsername)

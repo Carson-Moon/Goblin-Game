@@ -8,7 +8,7 @@ public class CustomizeColorChanger : MonoBehaviour
     [SerializeField] Slider redSlider;
     [SerializeField] Slider greenSlider;
     [SerializeField] Slider blueSlider;
-    private Color chosenColor = new Color(1, 1, 1);
+    private Color chosenColor = new Color(0, 1, 0);
     public Color ChosenColor => chosenColor;
 
 
@@ -21,10 +21,13 @@ public class CustomizeColorChanger : MonoBehaviour
     {
         yield return new WaitUntil(() => goblinMats.Materials.Count > 0);
 
+        chosenColor = ColorHolder.Color;
+        redSlider.value = chosenColor.r;
+        greenSlider.value = chosenColor.g;
+        blueSlider.value = chosenColor.b;
+
         foreach(var mat in goblinMats.Materials)
             mat.SetColor("_Hue_Shift", chosenColor);
-
-        Debug.Log("Set start color.");
     }
 
     public void UpdateChosenColor()

@@ -28,4 +28,10 @@ public class GoblinMaterialInstantiater : MonoBehaviour
             }
         }
     }
+
+    public void SetMaterialHueShift(Color color)
+    {
+        foreach(var mat in materials)
+            mat.SetColor("_Hue_Shift", color);
+    }
 }
