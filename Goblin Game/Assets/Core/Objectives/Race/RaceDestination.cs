@@ -12,6 +12,8 @@ public class RaceDestination : MonoBehaviour
 
     public void Initialize(Action<ulong> onComplete)
     {
+        Debug.Log("Initialized.");
+        gameObject.SetActive(true);
         listening = true;
         OnLocalPlayerEntered += onComplete;
     }
