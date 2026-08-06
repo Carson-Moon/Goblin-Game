@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class Objective : MonoBehaviour
+public class Objective : MonoBehaviour
 {
     [SerializeField] string objectiveName;
     public string ObjectiveName => objectiveName;
@@ -9,23 +10,39 @@ public abstract class Objective : MonoBehaviour
     [SerializeField] string objectiveDescription;
     public string ObjectiveDescription => objectiveDescription;
 
-    public int Variations => listener.Variations;
+    [SerializeField] ObjectiveCondition[] conditions;
 
-    [SerializeField] ObjectiveListener listener;
 
     public event Action<ulong> NotifyServerObjectiveCompleted;
 
 
-    public void StartObjective(int variation)
+    public void StartObjective(Action<ulong> onComplete)
     {
-        listener.SetupObjective(variation);
-        listener.SignalObjectiveCompleted += ObjectiveCompleted;
+        NotifyServerObjectiveCompleted += onComplete;
+
+        foreach(var condition in conditions)
+            condition.Begin(OnConditionCompleted);
     }
 
     public void EndObjective()
     {
-        listener.CleanUpObjective();
-        listener.SignalObjectiveCompleted -= ObjectiveCompleted;
+        NotifyServerObjectiveCompleted = null;
+
+        foreach(var condition in conditions)
+            condition.End();
+    }
+
+    private void OnConditionCompleted()
+    {
+        bool allConditionsComplete = true;
+        foreach(var condition in conditions)
+        {
+            if(!condition.IsComplete())
+                allConditionsComplete = false;
+        }
+        
+        if(allConditionsComplete)
+            ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
     }
 
     public void ObjectiveCompleted(ulong playerID)

@@ -23,8 +23,7 @@ public class ServerObjectiveManager : NetworkBehaviour
         };
 
         int objectiveIndex = objectives.GetRandomObjectiveIndex();
-        int variation = objectives.GetRandomObjectiveVariation(objectiveIndex);
 
-        clientObjectiveManager.ReceiveObjectiveClientRpc(objectiveIndex, variation, clientRpcParams);
+        clientObjectiveManager.ReceiveObjectiveClientRpc(objectiveIndex, clientRpcParams);
     }
 }

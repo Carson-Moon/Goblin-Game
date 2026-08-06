@@ -15,9 +15,4 @@ public class ObjectiveList : MonoBehaviour
     {
         return Random.Range(0, allObjectives.Count);
     }
-
-    public int GetRandomObjectiveVariation(int objectiveIndex)
-    {
-        return Random.Range(0, allObjectives[objectiveIndex].Variations);
-    }
 }

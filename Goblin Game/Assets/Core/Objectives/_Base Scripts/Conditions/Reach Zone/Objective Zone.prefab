@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5963660076160507650}
+  - component: {fileID: 4184232877655842168}
   - component: {fileID: 4359604962040417161}
   - component: {fileID: 2887493475569101771}
   - component: {fileID: 5322845750655908339}
-  - component: {fileID: 1998568882073277854}
   - component: {fileID: 8917383795165539996}
   m_Layer: 0
-  m_Name: Race Destination
+  m_Name: Objective Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +36,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4184232877655842168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996226547235329497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9d93566667e5344b7c5745ea2d762c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4359604962040417161
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110,18 +122,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1998568882073277854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996226547235329497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57cd3032bfe27f045984fa1e4a53a6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &8917383795165539996
 Rigidbody:
   m_ObjectHideFlags: 0
