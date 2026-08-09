@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1696503621
+  GlobalObjectIdHash: 1817887427
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -891,9 +891,12 @@ MonoBehaviour:
         byte0027: 0
         byte0028: 0
         byte0029: 0
+  goblinColor:
+    m_InternalValue: {r: 0, g: 0, b: 0, a: 0}
   armOverlayCamera: {fileID: 3038331782566860949}
   goblinController: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
+  goblinMaterials: {fileID: 0}
 --- !u!114 &5991039492803107786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,7 +1294,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1396,7 +1399,10 @@ MonoBehaviour:
   _pickupAction: {fileID: 1745396969761280378}
   _pickupVisuals: {fileID: 5680862929876397446}
   _pickupUI: {fileID: 1914527064380788217}
+  cameraZoom: {fileID: 0}
+  trajectoryVisualizer: {fileID: 0}
   playerCamera: {fileID: 4201775871144521541}
+  throwChargeLength: 0
   targetDistance: 5
   throwStrength: 40
   throwStartPosition: {fileID: 3424494834573979398}
