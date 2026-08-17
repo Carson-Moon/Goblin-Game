@@ -129,8 +129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581938333026998448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.024379525, y: 0.70668644, z: 0.024379525, w: 0.7066864}
-  m_LocalPosition: {x: -39.43, y: 4.17, z: 0}
+  m_LocalRotation: {x: 0.1471591, y: 0.69432825, z: -0.1483726, w: 0.68864954}
+  m_LocalPosition: {x: -95.22916, y: 12.364346, z: -73.55102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170,7 +170,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -798,9 +798,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7331015665713564294}
   - component: {fileID: 296426229693235721}
+  - component: {fileID: 5991039492803107786}
   - component: {fileID: 353154872688970811}
   - component: {fileID: 6357012298814795514}
-  - component: {fileID: 5991039492803107786}
   - component: {fileID: 6795982543156156883}
   - component: {fileID: 5226023130085212699}
   - component: {fileID: 1436054211432088170}
@@ -861,6 +861,47 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &5991039492803107786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585518109996465769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cdf956d324e4d4ab7110d12078a2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  goblin: {fileID: 5226023130085212699}
+  goblinCharacter: {fileID: 8215219192210770407}
+  kinematicCharacterMotor: {fileID: 7404937040295175108}
+  goblinMainCamera: {fileID: 4201775871144521541}
+  goblinArmCamera: {fileID: 3038331782566860949}
+  cineCamera: {fileID: 9202160244556914376}
+  cineBrain: {fileID: 6908813717726033148}
+  goblinCamera: {fileID: 4011678651782211475}
+  audioListener: {fileID: 6362148326120534586}
+  goblinInput: {fileID: 6795982543156156883}
+  goblinLeftClick: {fileID: 4427158862887684846}
+  goblinRightClick: {fileID: 8814946469210745664}
+  stabAction: {fileID: 2221687886784087454}
+  pickupAction: {fileID: 1745396969761280378}
+  throwAction: {fileID: 5765187728319096523}
+  goblinCoinEating: {fileID: 2322484879353364755}
+  thirdPersonBody:
+  - {fileID: 1439534210765040813}
+  - {fileID: 5229878427761971645}
+  - {fileID: 5613060280033638810}
+  - {fileID: 2303786566991456684}
+  - {fileID: 4780954048378649252}
+  - {fileID: 6632227884516025217}
+  - {fileID: 5830356678425708891}
+  arms: {fileID: 3802210966163159799}
+  goblinAnimator: {fileID: 6832119070845444782}
+  playerCanvas: {fileID: 6325428156649466176}
+  networkInitialize: 1
 --- !u!114 &353154872688970811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,47 +978,6 @@ MonoBehaviour:
   goblinController: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
   goblinMaterials: {fileID: 2178682684440674891}
---- !u!114 &5991039492803107786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585518109996465769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cdf956d324e4d4ab7110d12078a2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  goblin: {fileID: 5226023130085212699}
-  goblinCharacter: {fileID: 8215219192210770407}
-  kinematicCharacterMotor: {fileID: 7404937040295175108}
-  goblinMainCamera: {fileID: 4201775871144521541}
-  goblinArmCamera: {fileID: 3038331782566860949}
-  cineCamera: {fileID: 9202160244556914376}
-  cineBrain: {fileID: 6908813717726033148}
-  goblinCamera: {fileID: 4011678651782211475}
-  audioListener: {fileID: 6362148326120534586}
-  goblinInput: {fileID: 6795982543156156883}
-  goblinLeftClick: {fileID: 4427158862887684846}
-  goblinRightClick: {fileID: 8814946469210745664}
-  stabAction: {fileID: 2221687886784087454}
-  pickupAction: {fileID: 1745396969761280378}
-  throwAction: {fileID: 5765187728319096523}
-  goblinCoinEating: {fileID: 2322484879353364755}
-  thirdPersonBody:
-  - {fileID: 1439534210765040813}
-  - {fileID: 5229878427761971645}
-  - {fileID: 5613060280033638810}
-  - {fileID: 2303786566991456684}
-  - {fileID: 4780954048378649252}
-  - {fileID: 6632227884516025217}
-  - {fileID: 5830356678425708891}
-  arms: {fileID: 3802210966163159799}
-  goblinAnimator: {fileID: 6832119070845444782}
-  playerCanvas: {fileID: 6325428156649466176}
-  overrideInitialization: 0
 --- !u!114 &6795982543156156883
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class GoblinInitializer : NetworkBehaviour
 {
+    [Header("Local or Networked")]
+    [Tooltip("Disable this if you want to drop the prefab into a scene to test!")]
+    [SerializeField] bool networkInitialize = true;
+
     // Movement
     [SerializeField] GoblinController goblin;
     [SerializeField] GoblinCharacter goblinCharacter;
@@ -38,40 +42,35 @@ public class GoblinInitializer : NetworkBehaviour
     // UI
     [SerializeField] GameObject playerCanvas;
 
-    [SerializeField] bool overrideInitialization = false;
+    
 
     void Awake()
     {
-        if (overrideInitialization)
-            return;
+        if (networkInitialize)
+        {
+            goblin.enabled = false;
+            goblinCharacter.enabled = false;
+            kinematicCharacterMotor.enabled = false;
 
-        goblin.enabled = false;
-        goblinCharacter.enabled = false;
-        kinematicCharacterMotor.enabled = false;
+            goblinMainCamera.enabled = false;
+            goblinArmCamera.enabled = false;
+            cineCamera.enabled = false;
+            cineBrain.enabled = false;
+            goblinCamera.enabled = false;
 
-        goblinMainCamera.enabled = false;
-        goblinArmCamera.enabled = false;
-        cineCamera.enabled = false;
-        cineBrain.enabled = false;
-        goblinCamera.enabled = false;
+            goblinInput.enabled = false;
+            goblinLeftClick.enabled = false;
+            goblinRightClick.enabled = false;
+            stabAction.enabled = false;
+            pickupAction.enabled = false;
+            throwAction.enabled = false;
+            goblinCoinEating.enabled = false;
 
-        goblinInput.enabled = false;
-        goblinLeftClick.enabled = false;
-        goblinRightClick.enabled = false;
-        stabAction.enabled = false;
-        pickupAction.enabled = false;
-        throwAction.enabled = false;
-        goblinCoinEating.enabled = false;
+            arms.SetActive(false);
+            goblinAnimator.enabled = false;
 
-        arms.SetActive(false);
-        goblinAnimator.enabled = false;
-
-        playerCanvas.SetActive(false);
-    }
-
-    void Start()
-    {
-        // Move to a spawn point here probably eventually.
+            playerCanvas.SetActive(false);
+        }
     }
 
     public override void OnNetworkSpawn()
