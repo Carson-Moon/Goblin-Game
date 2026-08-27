@@ -11,7 +11,7 @@ public class Objective : MonoBehaviour
     public string ObjectiveDescription => objectiveDescription;
 
     [SerializeField] ObjectiveCondition[] conditions;
-
+    public ObjectiveCondition[] Conditions => conditions;
 
     public event Action<ulong> NotifyServerObjectiveCompleted;
 
@@ -42,7 +42,13 @@ public class Objective : MonoBehaviour
         }
         
         if(allConditionsComplete)
-            ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
+        {
+            if(NetworkManager.Singleton != null)
+                ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
+            else
+                ObjectiveCompleted(0);
+        }
+            
     }
 
     public void ObjectiveCompleted(ulong playerID)

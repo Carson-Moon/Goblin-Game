@@ -18,9 +18,15 @@ public abstract class ObjectiveCondition : MonoBehaviour
         OnEnd();
     }
 
+    public void UpdateConditionUI()
+    {
+        ObjectiveCanvas.Instance.UpdateConditionPanel(this);
+    }
+
 
     protected abstract void OnBegin();
     protected abstract void OnEnd();
     public abstract bool IsComplete();
     public abstract float GetProgressPercentage();
+    public abstract string GetPanelDisplay();
 }

@@ -5,7 +5,7 @@ public class ReachZoneCondition : ObjectiveCondition
     [SerializeField] ObjectiveZone[] zones;
     [SerializeField] int numberToReach;
     private int reached = 0;
-    
+
 
     protected override void OnBegin()
     {
@@ -35,5 +35,12 @@ public class ReachZoneCondition : ObjectiveCondition
 
         if(IsComplete())
             OnConditionCompleted?.Invoke();
+
+        UpdateConditionUI();
+    }
+
+    public override string GetPanelDisplay()
+    {
+        return $"Zones: {reached}/{numberToReach}";
     }
 }
