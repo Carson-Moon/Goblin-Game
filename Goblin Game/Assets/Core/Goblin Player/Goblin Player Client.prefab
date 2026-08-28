@@ -129,8 +129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581938333026998448}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1471591, y: 0.69432825, z: -0.1483726, w: 0.68864954}
-  m_LocalPosition: {x: -95.22916, y: 12.364346, z: -73.55102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168,11 +168,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 75
+  near clip plane: 0.01
+  far clip plane: 5000
+  field of view: 90
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -874,6 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  networkInitialize: 1
   goblin: {fileID: 5226023130085212699}
   goblinCharacter: {fileID: 8215219192210770407}
   kinematicCharacterMotor: {fileID: 7404937040295175108}
@@ -901,7 +902,6 @@ MonoBehaviour:
   arms: {fileID: 3802210966163159799}
   goblinAnimator: {fileID: 6832119070845444782}
   playerCanvas: {fileID: 6325428156649466176}
-  networkInitialize: 1
 --- !u!114 &353154872688970811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,7 +2415,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.39
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -2432,7 +2432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Capsule: {fileID: 6344617391449248736}
-  CapsuleRadius: 0.5
+  CapsuleRadius: 0.39
   CapsuleHeight: 2
   CapsuleYOffset: 1
   CapsulePhysicsMaterial: {fileID: 0}
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   AllowSteppingWithoutStableGrounding: 0
   MinRequiredStepDepth: 0.1
   LedgeAndDenivelationHandling: 1
-  MaxStableDistanceFromLedge: 0.5
+  MaxStableDistanceFromLedge: 0.3
   MaxVelocityForLedgeSnap: 0
   MaxStableDenivelationAngle: 180
   InteractiveRigidbodyHandling: 1
@@ -2490,11 +2490,11 @@ MonoBehaviour:
   slideFriction: 0.8
   slideSteerAcceleration: 5
   slideGravity: -90
-  standHeight: 1.2
-  crouchHeight: 0.6
+  standHeight: 1.6
+  crouchHeight: 0.8
   crouchHeightResponse: 15
-  standCameraTargetHeight: 1.229
-  crouchCameraTargetHeight: 0
+  standCameraTargetHeight: 1.33
+  crouchCameraTargetHeight: 0.415
   minWalkSpeed: 5
   maxWalkSpeed: 10
   lowCoinThreshold: 10

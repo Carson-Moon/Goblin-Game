@@ -46,10 +46,9 @@ public class GoblinController : MonoBehaviour
             Move = CanMove ? input.Movement.ReadValue<Vector2>() : Vector2.zero,
             Jump = CanMove ? input.Jump.WasPressedThisFrame() : false,
             JumpSustain = CanMove ? input.Jump.IsPressed() : false,
-            Crouch = input.Crouch.WasPressedThisFrame()
-                ? CrouchInput.Toggle
-                : CrouchInput.None
+            Crouch = input.Crouch.IsPressed()
         };
+        
         goblinCharacter.UpdateInput(characterInput);
         goblinCharacter.UpdateBody(deltaTime);
     }

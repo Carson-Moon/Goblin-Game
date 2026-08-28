@@ -29,7 +29,7 @@ public struct CharacterInput
     public Vector2 Move;
     public bool Jump;
     public bool JumpSustain;
-    public CrouchInput Crouch;
+    public bool Crouch;
 }
 
 public class GoblinCharacter : MonoBehaviour, ICharacterController
@@ -47,6 +47,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     [SerializeField] float airSpeed = 15f;
     [SerializeField] float airAcceleration = 70f;
     [SerializeField] float jumpSpeed = 20f;
+    [SerializeField] float maxCoyoteTime = 0.2f;
+    private float timeSinceLastGrounded = 0;
     [Range(0, 1), SerializeField] float jumpSustainGravity = 0.4f;
     [SerializeField] float gravity = -90f;
     [Space]
@@ -56,8 +58,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     [Tooltip("Rate at which sliding can be steered"), SerializeField] float slideSteerAcceleration = 5f;
     [SerializeField] float slideGravity = -90f;
     [Space]
-    [SerializeField] float standHeight = 2f;
-    [SerializeField] float crouchHeight = 1f;
+    [SerializeField] float standHeight;
+    [SerializeField] float crouchHeight;
     [SerializeField] float crouchHeightResponse = 15f;
     [Space]
     [Range(0, 1.5f), SerializeField] float standCameraTargetHeight = 0.9f;
@@ -94,6 +96,13 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
         goblinCoins = GetComponentInParent<GoblinCoins>();
         goblinCoins.OnNumberOfCoinsChanged += SetWalkSpeed;
+
+        motor.SetCapsuleDimensions
+        (
+            radius: motor.Capsule.radius,
+            height: standHeight,
+            yOffset: standHeight * 0.5f
+        );
     }
 
     public void UpdateInput(CharacterInput input)
@@ -107,12 +116,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         _requestedJump = _requestedJump || input.Jump;
         _requestedJumpSustain = input.JumpSustain;
 
-        _requestedCrouch = input.Crouch switch
-        {
-            CrouchInput.Toggle => !_requestedCrouch,
-            CrouchInput.None => _requestedCrouch,
-            _ => _requestedCrouch
-        };
+        _requestedCrouch = input.Crouch;
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -354,9 +358,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             {
                 _requestedJump = false;
             }
-
         }
-
     }
 
     public void BeforeCharacterUpdate(float deltaTime)
@@ -366,6 +368,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         // Crouch
         if (_requestedCrouch && _state.stance is Stance.Stand)
         {
+            Debug.Log($"CrouchHeight: {crouchHeight}");
             _state.stance = Stance.Crouch;
             motor.SetCapsuleDimensions
             (
