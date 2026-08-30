@@ -48,7 +48,11 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     [SerializeField] float airAcceleration = 70f;
     [SerializeField] float jumpSpeed = 20f;
     [SerializeField] float maxCoyoteTime = 0.2f;
-    private float timeSinceLastGrounded = 0;
+    private float coyoteTimer = 0;
+    private bool isJumping = false;
+    [SerializeField] float jumpResetCooldownLength = 0.2f;
+    private float jumpResetCooldown = 0;
+    
     [Range(0, 1), SerializeField] float jumpSustainGravity = 0.4f;
     [SerializeField] float gravity = -90f;
     [Space]
@@ -131,17 +135,12 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     public void UpdateBody(float deltaTime)
     {
-        var currentHeight = motor.Capsule.height;
-        var normalizedHeight = currentHeight / standHeight;
-
-        // Replaced currentHeight with 1 for now.
         var cameraTargetHeight = 1 *
         (
             _state.stance is Stance.Stand
                 ? standCameraTargetHeight
                 : crouchCameraTargetHeight
         );
-        //var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
 
         cameraTarget.localPosition = Vector3.Lerp
         (
@@ -149,12 +148,6 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
             b: new Vector3(0f, cameraTargetHeight, 0f),
             t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
         );
-        // root.localScale = Vector3.Lerp
-        // (
-        //     a: root.localScale,
-        //     b: rootTargetScale,
-        //     t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
-        // );
     }
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
@@ -339,9 +332,9 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
         if (_requestedJump)
         {
-            var grounded = motor.GroundingStatus.IsStableOnGround;
+            bool canJump = !isJumping && (motor.GroundingStatus.IsStableOnGround || coyoteTimer > 0);
 
-            if (grounded)
+            if (canJump)
             {
                 _requestedJump = false;
                 _requestedCrouch = false;
@@ -353,6 +346,10 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 var targetVerticalSpeed = Mathf.Max(currentVerticalSpeed, jumpSpeed);
                 // Add the difference in current and target vertical speed to the character's velocity.
                 currentVelocity += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
+
+                coyoteTimer = 0;
+                isJumping = true;
+                jumpResetCooldown = jumpResetCooldownLength;
             }
             else
             {
@@ -377,6 +374,17 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 yOffset: crouchHeight * 0.5f
             );
         }
+
+        jumpResetCooldown = Mathf.Clamp(jumpResetCooldown - deltaTime, -1, jumpResetCooldownLength);
+
+        if(motor.GroundingStatus.IsStableOnGround)
+        {
+            if(isJumping && jumpResetCooldown <= 0)
+                isJumping = false;
+            coyoteTimer = maxCoyoteTime;
+        }
+        else
+            coyoteTimer = Mathf.Clamp(coyoteTimer - deltaTime, -1, maxCoyoteTime);
     }
 
     public void AfterCharacterUpdate(float deltaTime)
