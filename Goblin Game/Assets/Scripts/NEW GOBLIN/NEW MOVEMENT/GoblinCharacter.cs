@@ -82,12 +82,6 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     private Collider[] _uncrouchOverlapColliders;
 
-    [Header("Coin Variables")]
-    [SerializeField] float minWalkSpeed;
-    [SerializeField] float maxWalkSpeed;
-    [SerializeField, Tooltip("How many coins until we start losing speed.")] float lowCoinThreshold;
-    [SerializeField, Tooltip("How many coins until we are the slowest.")] float highCoinThreshold;
-    private GoblinCoins goblinCoins;
 
     public void Initialize()
     {
@@ -97,9 +91,6 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         _uncrouchOverlapColliders = new Collider[8];
 
         motor.CharacterController = this;
-
-        goblinCoins = GetComponentInParent<GoblinCoins>();
-        goblinCoins.OnNumberOfCoinsChanged += SetWalkSpeed;
 
         motor.SetCapsuleDimensions
         (
@@ -365,7 +356,6 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         // Crouch
         if (_requestedCrouch && _state.stance is Stance.Stand)
         {
-            Debug.Log($"CrouchHeight: {crouchHeight}");
             _state.stance = Stance.Crouch;
             motor.SetCapsuleDimensions
             (
@@ -467,20 +457,40 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         return new Vector3(motor.Velocity.x, 0f, motor.Velocity.z).magnitude;
     }
 
-    public void SetWalkSpeed(int coins)
+    public void UpdateMovementSettings(MovementSettings settings)
     {
-        if(coins < lowCoinThreshold)
+        walkSpeed = settings.WalkSpeed;
+        walkResponse = settings.WalkResponse;
+        crouchSpeed = settings.CrouchSpeed;
+        crouchResponse = settings.CrouchResponse;
+        slideStartSpeed = settings.SlideStartSpeed;
+        slideEndSpeed = settings.SlideEndSpeed;
+        slideFriction = settings.SlideFriction;
+        slideGravity = settings.SlideGravity;
+        airSpeed = settings.AirSpeed;
+        airAcceleration = settings.AirAcceleration;
+        jumpSpeed = settings.JumpSpeed;
+        jumpSustainGravity = settings.JumpSustainGravity;
+        gravity = settings.Gravity;
+    }
+
+    public MovementSettings GetMovementSettings()
+    {
+        return new MovementSettings()
         {
-            walkSpeed = maxWalkSpeed;
-        }
-        else if(coins > highCoinThreshold)
-        {
-            walkSpeed = minWalkSpeed;
-        }
-        else
-        {
-            float percentage = (coins - lowCoinThreshold) / (highCoinThreshold - lowCoinThreshold);
-            walkSpeed = maxWalkSpeed - (percentage * (maxWalkSpeed - minWalkSpeed));
-        }
+            WalkSpeed = walkSpeed,
+            WalkResponse = walkResponse,
+            CrouchSpeed = crouchSpeed,
+            CrouchResponse = crouchResponse,
+            SlideStartSpeed = slideStartSpeed,
+            SlideEndSpeed = slideEndSpeed,
+            SlideFriction = slideFriction,
+            SlideGravity = slideGravity,
+            AirSpeed = airSpeed,
+            AirAcceleration = airAcceleration,
+            JumpSpeed = jumpSpeed,
+            JumpSustainGravity = jumpSustainGravity,
+            Gravity = gravity
+        };
     }
 }
