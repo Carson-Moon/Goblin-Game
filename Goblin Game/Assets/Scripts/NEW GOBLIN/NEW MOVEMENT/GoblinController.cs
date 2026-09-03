@@ -6,6 +6,10 @@ public class GoblinController : MonoBehaviour
     [Header("Character Controllers")]
     [SerializeField] private GoblinCharacter goblinCharacter;
     [SerializeField] private GoblinCamera goblinCamera;
+    [Header("Camera Effects")]
+    [SerializeField] private CameraEffectStack cameraEffects;
+    [SerializeField] private LandingDipEffect landingDipEffect;
+    [SerializeField] private HandSway handSway;
 
     [SerializeField] private List<string> _movementLocks = new();
     [SerializeField] private List<string> _lookLocks = new();
@@ -21,6 +25,9 @@ public class GoblinController : MonoBehaviour
 
         goblinCharacter.Initialize();
         goblinCamera.Initialize(goblinCharacter.CameraTarget);
+        landingDipEffect.Initialize(goblinCharacter);
+        cameraEffects.Initialize();
+        handSway.Initialize();
     }
 
     void OnDestroy()
@@ -34,11 +41,13 @@ public class GoblinController : MonoBehaviour
         var input = pControls.GoblinMovement;
         var deltaTime = Time.deltaTime;
 
+        cameraEffects.Tick(deltaTime);
+
         var cameraInput = new CameraInput
         {
             Look = CanLook ? input.Look.ReadValue<Vector2>() : Vector2.zero
         };
-        goblinCamera.UpdateRotation(cameraInput);
+        goblinCamera.UpdateRotation(cameraInput, cameraEffects.EulerOffset);
 
         var characterInput = new CharacterInput
         {
@@ -55,7 +64,9 @@ public class GoblinController : MonoBehaviour
 
     void LateUpdate()
     {
-        goblinCamera.UpdatePosition(goblinCharacter.CameraTarget);
+        goblinCamera.UpdatePosition(goblinCharacter.CameraTarget, cameraEffects.PositionOffset);
+        handSway.Tick(Time.deltaTime);
+        // Debug.Log(cameraEffects.PositionOffset.y);
     }
 
     public void Teleport(Vector3 position)

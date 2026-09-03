@@ -55,6 +55,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     
     [Range(0, 1), SerializeField] float jumpSustainGravity = 0.4f;
     [SerializeField] float gravity = -90f;
+
+    [SerializeField] private Vector3 _velocityBeforeGrounding;
     [Space]
     [Tooltip("Speed gained at the beginning of a slide"), SerializeField] float slideStartSpeed = 25f;
     [Tooltip("Minimum speed for player to be considered sliding"), SerializeField] float slideEndSpeed = 15f;
@@ -81,6 +83,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     private bool _requestedCrouch;
 
     private Collider[] _uncrouchOverlapColliders;
+
+    public event System.Action<float> Landed;
 
 
     public void Initialize()
@@ -347,6 +351,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 _requestedJump = false;
             }
         }
+
+        _velocityBeforeGrounding = currentVelocity;
     }
 
     public void BeforeCharacterUpdate(float deltaTime)
@@ -439,6 +445,13 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     {
         if (!motor.GroundingStatus.IsStableOnGround && _state.stance is Stance.Slide)
             _state.stance = Stance.Crouch;
+
+        if (motor.GroundingStatus.IsStableOnGround && !motor.LastGroundingStatus.IsStableOnGround)
+        {
+            float impactSpeed = -Vector3.Dot(_velocityBeforeGrounding, motor.CharacterUp);
+            // Debug.Log($"Landed At Impact Speed: {impactSpeed:F1}");
+            Landed?.Invoke(impactSpeed);
+        }
     }
 
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)

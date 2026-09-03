@@ -20,17 +20,17 @@ public class GoblinCamera : MonoBehaviour
         transform.eulerAngles = _eulerAngles = cameraTarget.eulerAngles;
     }
 
-    public void UpdateRotation(CameraInput input)
+    public void UpdateRotation(CameraInput input, Vector3 eulerOffset)
     {
         _eulerAngles += new Vector3(-input.Look.y, input.Look.x) * sensitivity;
 
         _eulerAngles = new Vector3(Mathf.Clamp(_eulerAngles.x, -verticalClamp, verticalClamp), _eulerAngles.y, _eulerAngles.z);
 
-        transform.eulerAngles = _eulerAngles;
+        transform.eulerAngles = _eulerAngles + eulerOffset;
     }
 
-    public void UpdatePosition(Transform target)
+    public void UpdatePosition(Transform target, Vector3 positionOffset)
     {
-        transform.position = target.position;
+        transform.position = target.position + positionOffset;
     }
 }

@@ -1102,6 +1102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goblinCharacter: {fileID: 8215219192210770407}
   goblinCamera: {fileID: 4011678651782211475}
+  cameraEffects: {fileID: 6541835406348762738}
+  landingDipEffect: {fileID: 8842055320129979231}
+  handSway: {fileID: 5932679559378546247}
   _movementLocks: []
   _lookLocks: []
 --- !u!114 &1436054211432088170
@@ -2323,6 +2326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8143758072915861600}
+  - component: {fileID: 5932679559378546247}
   m_Layer: 0
   m_Name: Arms
   m_TagString: Untagged
@@ -2347,6 +2351,25 @@ Transform:
   - {fileID: 8302490114176928534}
   m_Father: {fileID: 4490883546053278517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5932679559378546247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802210966163159799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e3764e0c08276478ee0659277a0b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 4490883546053278517}
+  localOffset: {x: 0, y: 0, z: 0}
+  positionResponse: 50
+  frequency: 2.5
+  dampingRatio: 0.5
+  kickPerDegree: 10
+  maxAngleOffset: 30
 --- !u!1 &3868402280628327220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,8 +2506,11 @@ MonoBehaviour:
   airSpeed: 8
   airAcceleration: 100
   jumpSpeed: 15
+  maxCoyoteTime: 0.2
+  jumpResetCooldownLength: 0.2
   jumpSustainGravity: 0.8
   gravity: -50
+  _velocityBeforeGrounding: {x: 0, y: 0, z: 0}
   slideStartSpeed: 15
   slideEndSpeed: 12
   slideFriction: 0.8
@@ -2495,10 +2521,6 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 1.33
   crouchCameraTargetHeight: 0.415
-  minWalkSpeed: 5
-  maxWalkSpeed: 10
-  lowCoinThreshold: 10
-  highCoinThreshold: 30
 --- !u!114 &4427158862887684846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5888,6 +5910,8 @@ GameObject:
   - component: {fileID: 4011678651782211475}
   - component: {fileID: 691395841388577097}
   - component: {fileID: 2848189808700957074}
+  - component: {fileID: 6541835406348762738}
+  - component: {fileID: 8842055320129979231}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5903,7 +5927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8546556234041210145}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5979,6 +6003,59 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6541835406348762738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546556234041210145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15259502d445959439c0192ca6482417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8842055320129979231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546556234041210145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b8685b3a85ce047bbda73861d822be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 4
+  dampingRatio: 0.5
+  dipPerSpeed: 2
+  maxImpactSpeed: 60
+  response:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pitchRatio: 4
 --- !u!1 &9106764007832235064
 GameObject:
   m_ObjectHideFlags: 0
