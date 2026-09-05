@@ -84,6 +84,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     private Collider[] _uncrouchOverlapColliders;
 
+    public Stance Stance => _state.stance;
+
     public event System.Action<float> Landed;
 
 
@@ -422,6 +424,11 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         // And update the _lastState to store the character state snapshot taken at
         // the beginning of this character update.
         _lastState = _tempState;
+    }
+
+    public KinematicCharacterMotor getKinematicCharacterMotor()
+    {
+        return motor;
     }
 
     public bool IsColliderValidForCollisions(Collider coll)

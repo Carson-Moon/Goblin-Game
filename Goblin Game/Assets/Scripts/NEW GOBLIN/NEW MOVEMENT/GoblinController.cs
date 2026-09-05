@@ -65,6 +65,8 @@ public class GoblinController : MonoBehaviour
     void LateUpdate()
     {
         goblinCamera.UpdatePosition(goblinCharacter.CameraTarget, cameraEffects.PositionOffset);
+        Debug.Log($"fov offset: {cameraEffects.FovOffset}");
+        goblinCamera.UpdateFov(cameraEffects.FovOffset);
         handSway.Tick(Time.deltaTime);
         // Debug.Log(cameraEffects.PositionOffset.y);
     }

@@ -6,6 +6,7 @@ public class CameraEffectStack : MonoBehaviour
 
     public Vector3 PositionOffset { get; private set; }
     public Vector3 EulerOffset { get; private set; }
+    public float FovOffset { get; private set; }
 
     public void Initialize()
     {
@@ -16,6 +17,7 @@ public class CameraEffectStack : MonoBehaviour
     {
         var position = Vector3.zero;
         var euler = Vector3.zero;
+        var fov = 0f;
 
         foreach (var effect in _effects)
         {
@@ -24,9 +26,11 @@ public class CameraEffectStack : MonoBehaviour
             effect.Tick(deltaTime);
             position += effect.PositionOffset;
             euler += effect.EulerOffset;
+            fov += effect.FovOffset;
         }
 
         PositionOffset = position;
         EulerOffset = euler;
+        FovOffset = fov;
     }
 }

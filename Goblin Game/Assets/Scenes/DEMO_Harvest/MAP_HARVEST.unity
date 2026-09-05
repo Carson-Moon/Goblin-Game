@@ -6216,6 +6216,22 @@ MonoBehaviour:
   m_ObjectForwardAxis: 2
   m_ObjectUpAxis: 1
   m_StartOffset: 0.25
+--- !u!1 &218209976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2556874686487586637, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+  m_PrefabInstance: {fileID: 222668904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &218209979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9202160244556914376, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+  m_PrefabInstance: {fileID: 222668904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218209976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &222668904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6255,6 +6271,26 @@ PrefabInstance:
     - target: {fileID: 2864385374415639838, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 218209979}
+    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: _armFovRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: cameraHolder
+      value: 
+      objectReference: {fileID: 218209976}
+    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: cinamachineCamera
+      value: 
+      objectReference: {fileID: 218209976}
+    - target: {fileID: 4414902784371118378, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: _responsiveness
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5991039492803107786, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: networkInitialize
@@ -33911,7 +33947,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 76
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
