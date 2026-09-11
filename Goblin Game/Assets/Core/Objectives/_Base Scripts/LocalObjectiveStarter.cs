@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LocalObjectiveStarter : MonoBehaviour
 {
-    [SerializeField] Objective objective;
+    [SerializeField] LevelObjectives levelObjectives;
     [SerializeField] float initialStartWait;
 
 
@@ -16,14 +16,25 @@ public class LocalObjectiveStarter : MonoBehaviour
     {
         yield return new WaitForSeconds(initialStartWait);
 
-        if(objective != null)
+        Vector2Int objectiveIndex = levelObjectives.GetRandomObjectiveIndex();
+        if(objectiveIndex.x == -1)
         {
-            Debug.Log("Objective started!");
-            objective.StartObjective(OnObjectiveCompleteHandler);
-            ObjectiveCanvas.Instance.Initialize(objective);
+            Debug.LogWarning("Did not find any objectives!");
         }
         else
-            Debug.Log("Erm... We don't have an objective to start locally.");
+        {
+            Debug.Log("Objective started!");
+            Objective objective = levelObjectives.GetObjectiveByIndex(objectiveIndex);
+            if(objective != null)
+            {
+                objective.StartObjective(OnObjectiveCompleteHandler);
+                ObjectiveCanvas.Instance.Initialize(objective);
+            }
+            else
+            {
+                Debug.LogWarning("Objective was null.");
+            }
+        }
     }
 
     private void OnObjectiveCompleteHandler(ulong playerID)

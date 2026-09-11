@@ -43,7 +43,7 @@ public class ObjectiveZone : MonoBehaviour
         }
 
         NetworkObject networkObject = other.gameObject.GetComponentInParent<NetworkObject>();
-        if(networkObject != null && networkObject.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+        if(networkObject != null && NetworkManager.Singleton != null && networkObject.OwnerClientId == NetworkManager.Singleton.LocalClientId)
         {
             OnLocalPlayerEntered?.Invoke();
             listeningForPlayer = false;
