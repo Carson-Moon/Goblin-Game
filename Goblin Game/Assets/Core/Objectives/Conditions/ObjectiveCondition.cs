@@ -8,6 +8,7 @@ public abstract class ObjectiveCondition : MonoBehaviour
 
     public void Begin(Action onComplete)
     {
+        OnConditionCompleted = null;
         OnConditionCompleted += onComplete;
         OnBegin();
     }

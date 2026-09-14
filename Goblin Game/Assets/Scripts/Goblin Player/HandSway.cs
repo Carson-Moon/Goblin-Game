@@ -28,7 +28,7 @@ public class HandSway : MonoBehaviour
 
     public void Tick(float deltaTime)
     {
-        Debug.Log("arms tick");
+        // Debug.Log("arms tick");
         var dt = Mathf.Min(deltaTime, 1f / 30f);
 
         // How much the camera turned since last frame, in camera-local axes.

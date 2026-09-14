@@ -30,17 +30,24 @@ public class ObjectiveCanvas : MonoBehaviour
             conditionPanels.Add(condition, CreatePanel(condition.GetPanelDisplay()));
     }
 
-    private ObjectivePanelUI CreatePanel(string display)
+    public void ResetUI()
     {
-        ObjectivePanelUI panel = Instantiate(panelPrefab, panelHolder);
-        panel.Initialize(display);
-        return panel;
+        DestroyUI();
     }
 
     public void UpdateConditionPanel(ObjectiveCondition condition)
     {
         if(conditionPanels.ContainsKey(condition))
             conditionPanels[condition].Initialize(condition.GetPanelDisplay());
+    }
+
+
+
+    private ObjectivePanelUI CreatePanel(string display)
+    {
+        ObjectivePanelUI panel = Instantiate(panelPrefab, panelHolder);
+        panel.Initialize(display);
+        return panel;
     }
 
     private void DestroyUI()

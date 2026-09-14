@@ -15,6 +15,6 @@ public static class NetworkExtensions
         }
         
         Debug.LogWarning("Could not find ServerLobbyManager!");
-        return default;
+        return "{Player_Username}";
     }
 }

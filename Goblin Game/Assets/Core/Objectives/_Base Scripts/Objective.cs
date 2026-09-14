@@ -18,6 +18,7 @@ public class Objective : MonoBehaviour
 
     public void StartObjective(Action<ulong> onComplete)
     {
+        NotifyServerObjectiveCompleted = null;
         NotifyServerObjectiveCompleted += onComplete;
 
         foreach(var condition in conditions)

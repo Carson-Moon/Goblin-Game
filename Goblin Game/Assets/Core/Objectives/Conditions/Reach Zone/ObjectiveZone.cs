@@ -17,6 +17,9 @@ public class ObjectiveZone : MonoBehaviour
     public void EnableZone(Action onComplete)
     {
         listeningForPlayer = true;
+        OnLocalPlayerEntered = null;
+        OnLocalPlayerEntered?.Invoke();
+
         OnLocalPlayerEntered += onComplete;
         gameObject.SetActive(true);
     }

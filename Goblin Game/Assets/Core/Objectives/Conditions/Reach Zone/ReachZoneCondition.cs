@@ -3,12 +3,14 @@ using UnityEngine;
 public class ReachZoneCondition : ObjectiveCondition
 {
     [SerializeField] ObjectiveZone[] zones;
-    [SerializeField] int numberToReach;
+    private int numberToReach => zones.Length;
     private int reached = 0;
 
 
     protected override void OnBegin()
     {
+        reached = 0;
+
         foreach(var zone in zones)
             zone.EnableZone(OnLocalPlayerEnteredZone);
     }

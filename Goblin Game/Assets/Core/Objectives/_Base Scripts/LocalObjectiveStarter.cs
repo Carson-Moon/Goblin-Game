@@ -5,16 +5,26 @@ public class LocalObjectiveStarter : MonoBehaviour
 {
     [SerializeField] LevelObjectives levelObjectives;
     [SerializeField] float initialStartWait;
+    [SerializeField] float betweenObjectivesWait;
+    [SerializeField] Timer timer;
+
+    [Header("UI")]
+    [SerializeField] ObjectiveWinnerDisplay winnerUI;
 
 
     void Start()
     {
-        StartCoroutine(StartObjectiveWithWait());
+        StartObjective(initialStartWait);
     }
 
-    IEnumerator StartObjectiveWithWait()
+    private void StartObjective(float wait)
     {
-        yield return new WaitForSeconds(initialStartWait);
+        StartCoroutine(StartObjectiveWithWait(wait));
+    }
+
+    IEnumerator StartObjectiveWithWait(float wait)
+    {
+        yield return new WaitForSeconds(wait);
 
         Vector2Int objectiveIndex = levelObjectives.GetRandomObjectiveIndex();
         if(objectiveIndex.x == -1)
@@ -40,5 +50,9 @@ public class LocalObjectiveStarter : MonoBehaviour
     private void OnObjectiveCompleteHandler(ulong playerID)
     {
         Debug.Log("Objective was completed.");
+        ObjectiveCanvas.Instance.ResetUI();
+        winnerUI.DisplayWinner(playerID);
+
+        timer.StartTimer(betweenObjectivesWait, () => StartObjective(0));
     }
 }
