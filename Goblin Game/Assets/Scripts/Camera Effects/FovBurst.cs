@@ -18,7 +18,7 @@ public class FovBurst : CameraEffect
 
     public override void Tick(float deltaTime)
     {
-        Debug.Log($"tick - sliding: {_character.Stance == Stance.Slide}, wasSliding: {_wasSliding}, value: {_value}, velocity: {_velocity}");
+        // Debug.Log($"tick - sliding: {_character.Stance == Stance.Slide}, wasSliding: {_wasSliding}, value: {_value}, velocity: {_velocity}");
         bool sliding = _character.Stance == Stance.Slide;
 
         // on slide entry
