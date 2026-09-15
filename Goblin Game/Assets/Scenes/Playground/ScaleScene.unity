@@ -736,6 +736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin Player Client
       objectReference: {fileID: 0}
+    - target: {fileID: 2287464865427135792, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dd8bc80b5a1f2614494c58e7d6a450a0, type: 2}
     - target: {fileID: 2570955203788132091, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -744,6 +748,14 @@ PrefabInstance:
       propertyPath: _armFovRatio
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4296305683065518055, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dd8bc80b5a1f2614494c58e7d6a450a0, type: 2}
+    - target: {fileID: 4472575566395504308, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dd8bc80b5a1f2614494c58e7d6a450a0, type: 2}
     - target: {fileID: 5991039492803107786, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: networkInitialize
       value: 0
@@ -788,10 +800,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9026995835665691822, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dd8bc80b5a1f2614494c58e7d6a450a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7066313915201430937, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
 --- !u!1 &648271867
 GameObject:
