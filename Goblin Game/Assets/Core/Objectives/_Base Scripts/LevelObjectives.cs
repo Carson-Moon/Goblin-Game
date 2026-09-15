@@ -11,7 +11,7 @@ public class LevelObjectives : MonoBehaviour
         List<ObjectiveCollection> collections = new();
         foreach(Transform child in transform)
         {
-            if(child.TryGetComponent(out ObjectiveCollection collection))
+            if(child.TryGetComponent(out ObjectiveCollection collection) && child.gameObject.activeInHierarchy)
                 collections.Add(collection);
         }
         objectiveCollections = collections.ToArray();

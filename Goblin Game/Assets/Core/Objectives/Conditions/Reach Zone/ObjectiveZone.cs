@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ObjectiveZone : MonoBehaviour
 {
+    [SerializeField] float disableDelay = 0;
     private bool listeningForPlayer = false;
 
     public event Action OnLocalPlayerEntered;
@@ -11,7 +13,7 @@ public class ObjectiveZone : MonoBehaviour
 
     void Awake()
     {
-        DisableZone();
+        DisableZone(true);
     }
 
     public void EnableZone(Action onComplete)
@@ -24,10 +26,18 @@ public class ObjectiveZone : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void DisableZone()
+    public void DisableZone(bool skipDelay = false)
     {
         listeningForPlayer = false;
         OnLocalPlayerEntered = null;
+        StartCoroutine(DisableGameObjectDelay(skipDelay));
+    }
+
+    IEnumerator DisableGameObjectDelay(bool skipDelay = false)
+    {
+        if(!skipDelay)
+            yield return new WaitForSeconds(disableDelay);
+        
         gameObject.SetActive(false);
     }
 
