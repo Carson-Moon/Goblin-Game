@@ -10,6 +10,7 @@ public abstract class ObjectiveCondition : MonoBehaviour
     {
         OnConditionCompleted = null;
         OnConditionCompleted += onComplete;
+
         OnBegin();
     }
 
@@ -23,7 +24,6 @@ public abstract class ObjectiveCondition : MonoBehaviour
     {
         ObjectiveCanvas.Instance.UpdateConditionPanel(this);
     }
-
 
     protected abstract void OnBegin();
     protected abstract void OnEnd();
