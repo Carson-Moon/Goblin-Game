@@ -10,7 +10,7 @@ public class ClientObjectiveManager : NetworkBehaviour
     public void ReceiveObjectiveClientRpc(int objectiveIndex, ClientRpcParams clientRpcParams = default)
     {
         Objective objective = Instantiate(objectives.GetObjectiveByIndex(objectiveIndex));
-        objective.StartObjective(NotifyServerObjectiveCompleteServerRpc);
+        // objective.StartObjective(NotifyServerObjectiveCompleteServerRpc);
         Debug.Log($"Received objective {objectiveIndex}.");
     }
 

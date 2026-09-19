@@ -15,7 +15,7 @@ public class StabAction : MonoBehaviour
     [Header("Animator")]
     [SerializeField] GoblinAnimator goblinAnimator;
     [SerializeField] Animator anim;
-    private int AttackHash = Animator.StringToHash("attack");
+    private int AttackHash = Animator.StringToHash("attack1");
 
 
     public void AttemptStab()
