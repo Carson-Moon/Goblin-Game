@@ -4011,6 +4011,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
+--- !u!4 &108115102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
+  m_PrefabInstance: {fileID: 1201015964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &121735559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2256261716806285402, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
@@ -5293,21 +5298,37 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2221592280
       objectReference: {fileID: 0}
+    - target: {fileID: 1195703839912270387, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1585518109996465769, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Name
       value: Goblin Player Client
       objectReference: {fileID: 0}
     - target: {fileID: 1585518109996465769, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2515394419249536035, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2864385374415639838, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: _armFovRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065944487667801021, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201775871144521541, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: field of view
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5991039492803107786, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: networkInitialize
@@ -5352,6 +5373,10 @@ PrefabInstance:
     - target: {fileID: 7331015665713564294, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202160244556914376, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      propertyPath: Lens.FieldOfView
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11777,6 +11802,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
   m_PrefabInstance: {fileID: 496410829}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &500866134 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2821447385778262800, guid: aa5c078cfdaa69f45b3abefef6706047, type: 3}
+  m_PrefabInstance: {fileID: 1719642926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &512913533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17170,6 +17200,11 @@ MonoBehaviour:
   m_EditMode: 0
   m_FlipNormals: 0
   isOnGrid: 1
+--- !u!4 &677465502 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3645532661172282261, guid: 5b7fe02001962df4e98121678439c8dc, type: 3}
+  m_PrefabInstance: {fileID: 1846983690}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &683952748
 GameObject:
   m_ObjectHideFlags: 0
@@ -25660,15 +25695,6 @@ PrefabInstance:
       addedObject: {fileID: 1630350524}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1965208201}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1719642927}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1846983691}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 256076573}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
@@ -25676,6 +25702,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1427296761}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 500866134}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 677465502}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2256261716806285402, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
@@ -32540,6 +32572,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1557395224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1472590216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
+  m_PrefabInstance: {fileID: 879466633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1493035858
 GameObject:
   m_ObjectHideFlags: 0
@@ -33749,12 +33786,12 @@ Transform:
   - {fileID: 1787467065}
   - {fileID: 482778600}
   - {fileID: 1131319413}
-  - {fileID: 879466634}
   - {fileID: 2125533543}
   - {fileID: 1206063757}
-  - {fileID: 1201015965}
   - {fileID: 557985249}
   - {fileID: 1445935335}
+  - {fileID: 1472590216}
+  - {fileID: 108115102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1564747898
@@ -46273,20 +46310,6 @@ SceneRoots:
   - {fileID: 624332702}
   - {fileID: 965316338}
   - {fileID: 793238278}
-  - {fileID: 1784713159}
-  - {fileID: 1121505177}
-  - {fileID: 1309852212}
-  - {fileID: 587973906}
-  - {fileID: 496410829}
-  - {fileID: 890710573}
-  - {fileID: 47052592}
-  - {fileID: 1787467064}
-  - {fileID: 482778599}
-  - {fileID: 1131319412}
-  - {fileID: 879466633}
-  - {fileID: 2125533542}
-  - {fileID: 1206063756}
-  - {fileID: 1201015964}
   - {fileID: 1126096037}
   - {fileID: 1392603852}
   - {fileID: 1563313805516630006}
@@ -46298,3 +46321,4 @@ SceneRoots:
   - {fileID: 2009573209}
   - {fileID: 1467221706}
   - {fileID: 2041137110}
+  - {fileID: 1965208200}
