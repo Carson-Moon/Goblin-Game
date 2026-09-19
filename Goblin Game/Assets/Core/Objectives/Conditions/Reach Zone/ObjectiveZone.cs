@@ -8,7 +8,7 @@ public class ObjectiveZone : MonoBehaviour
     [SerializeField] float disableDelay = 0;
     private bool listeningForPlayer = false;
 
-    public event Action OnLocalPlayerEntered;
+    public Action<ObjectiveZone> OnLocalPlayerEntered;
 
 
     void Awake()
@@ -16,11 +16,9 @@ public class ObjectiveZone : MonoBehaviour
         DisableZone(true);
     }
 
-    public void EnableZone(Action onComplete)
+    public void EnableZone(Action<ObjectiveZone> onComplete)
     {
         listeningForPlayer = true;
-        OnLocalPlayerEntered = null;
-        OnLocalPlayerEntered?.Invoke();
 
         OnLocalPlayerEntered += onComplete;
         gameObject.SetActive(true);
@@ -47,18 +45,18 @@ public class ObjectiveZone : MonoBehaviour
             return;
 
         // For local testing, think of a more elegant solution?
-        if(NetworkManager.Singleton == null && other.TryGetComponent(out GoblinCharacter _))
-        {
-            OnLocalPlayerEntered?.Invoke();
-            listeningForPlayer = false;
-            DisableZone();
-            return;
-        }
+        // if(NetworkManager.Singleton == null && other.TryGetComponent(out GoblinCharacter _))
+        // {
+        //     OnLocalPlayerEntered?.Invoke();
+        //     listeningForPlayer = false;
+        //     DisableZone();
+        //     return;
+        // }
 
         NetworkObject networkObject = other.gameObject.GetComponentInParent<NetworkObject>();
         if(networkObject != null && NetworkManager.Singleton != null && networkObject.OwnerClientId == NetworkManager.Singleton.LocalClientId)
         {
-            OnLocalPlayerEntered?.Invoke();
+            OnLocalPlayerEntered?.Invoke(this);
             listeningForPlayer = false;
             DisableZone();
         }

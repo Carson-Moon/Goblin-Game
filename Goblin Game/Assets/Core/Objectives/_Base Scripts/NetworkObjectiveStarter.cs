@@ -1,31 +1,33 @@
-using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class LocalObjectiveStarter : MonoBehaviour
+public class NetworkObjectiveStarter : NetworkBehaviour
 {
     [SerializeField] LevelObjectives levelObjectives;
     [SerializeField] float initialStartWait;
     [SerializeField] float betweenObjectivesWait;
     [SerializeField] Timer timer;
 
-    [Header("UI")]
-    [SerializeField] ObjectiveWinnerDisplay winnerUI;
 
 
-    void Start()
+    void Update()
     {
-        StartObjective(initialStartWait);
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            if(IsServer)
+                PreObjectiveClientRpc();
+        }
     }
 
-    private void StartObjective(float wait)
+
+    [ClientRpc]
+    private void PreObjectiveClientRpc()
     {
-        StartCoroutine(StartObjectiveWithWait(wait));
+        timer.StartTimer(betweenObjectivesWait, IsServer ? StartObjectiveServer : null);
     }
 
-    IEnumerator StartObjectiveWithWait(float wait)
+    private void StartObjectiveServer()
     {
-        yield return new WaitForSeconds(wait);
-
         Vector2Int objectiveIndex = levelObjectives.GetRandomObjectiveIndex();
         if(objectiveIndex.x == -1)
         {
@@ -45,14 +47,5 @@ public class LocalObjectiveStarter : MonoBehaviour
                 Debug.LogWarning("Objective was null.");
             }
         }
-    }
-
-    private void OnObjectiveCompleteHandler(ulong playerID)
-    {
-        Debug.Log("Objective was completed.");
-        ObjectiveCanvas.Instance.ResetUI();
-        winnerUI.DisplayWinner(playerID);
-
-        timer.StartTimer(betweenObjectivesWait, () => StartObjective(0));
     }
 }

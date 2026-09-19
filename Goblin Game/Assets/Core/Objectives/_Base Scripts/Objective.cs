@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Objective : MonoBehaviour
+public class Objective : NetworkBehaviour
 {
     [SerializeField] string objectiveName;
     public string ObjectiveName => objectiveName;
@@ -16,44 +16,78 @@ public class Objective : MonoBehaviour
     public event Action<ulong> NotifyServerObjectiveCompleted;
 
 
-    public void StartObjective(Action<ulong> onComplete)
+    public void StartObjectiveServer()
     {
-        NotifyServerObjectiveCompleted = null;
-        NotifyServerObjectiveCompleted += onComplete;
-
-        foreach(var condition in conditions)
-            condition.Begin(OnConditionCompleted);
+        OnStartObjectiveServer();
+        OnStartObjectiveClientRpc();
     }
 
-    public void EndObjective()
+    private void OnStartObjectiveServer()
     {
-        NotifyServerObjectiveCompleted = null;
-
         foreach(var condition in conditions)
-            condition.End();
+            condition.SetupConditionServer();
     }
 
-    private void OnConditionCompleted()
+    [ClientRpc]
+    private void OnStartObjectiveClientRpc()
     {
-        bool allConditionsComplete = true;
-        foreach(var condition in conditions)
-        {
-            if(!condition.IsComplete())
-                allConditionsComplete = false;
-        }
+        ObjectiveCanvas.Instance.Initialize(this);
+    }
+
+    public void EndObjectiveServer()
+    {
         
-        if(allConditionsComplete)
-        {
-            if(NetworkManager.Singleton != null)
-                ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
-            else
-                ObjectiveCompleted(0);
-        }
-            
     }
 
-    public void ObjectiveCompleted(ulong playerID)
+    private void OnEndObjectiveServer()
     {
-        NotifyServerObjectiveCompleted?.Invoke(playerID);
+        
     }
+
+    [ClientRpc]
+    private void OnEndObjectiveClientRpc()
+    {
+        
+    }
+
+    // public void StartObjective(Action<ulong> onComplete)
+    // {
+    //     NotifyServerObjectiveCompleted = null;
+    //     NotifyServerObjectiveCompleted += onComplete;
+
+    //     foreach(var condition in conditions)
+    //         condition.Begin(OnConditionCompleted);
+    // }
+
+    // public void EndObjective()
+    // {
+    //     NotifyServerObjectiveCompleted = null;
+
+    //     foreach(var condition in conditions)
+    //         condition.End();
+    // }
+
+    // private void OnConditionCompleted()
+    // {
+    //     bool allConditionsComplete = true;
+    //     foreach(var condition in conditions)
+    //     {
+    //         if(!condition.IsComplete())
+    //             allConditionsComplete = false;
+    //     }
+        
+    //     if(allConditionsComplete)
+    //     {
+    //         if(NetworkManager.Singleton != null)
+    //             ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
+    //         else
+    //             ObjectiveCompleted(0);
+    //     }
+            
+    // }
+
+    // public void ObjectiveCompleted(ulong playerID)
+    // {
+    //     NotifyServerObjectiveCompleted?.Invoke(playerID);
+    // }
 }

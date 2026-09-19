@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class RaceCondition : ObjectiveCondition
@@ -6,43 +7,55 @@ public class RaceCondition : ObjectiveCondition
     private int ringIndex = 0;
 
 
-    protected override void OnBegin()
-    {
-        ringIndex = 0;
-        orderedRings[ringIndex].EnableZone(PlayerReachedRing);
-    }
-
-    public override bool IsComplete()
-    {
-        return orderedRings.Length == ringIndex;
-    }
-
-    protected override void OnEnd()
-    {
-        foreach(var zone in orderedRings)
-            zone.DisableZone();
-    }
-
     public override string GetPanelDisplay()
     {
         return $"Rings: {ringIndex} / {orderedRings.Length}";
     }
 
-    public override float GetProgressPercentage()
+#region Setup
+
+    protected override void OnSetupConditionServer()
     {
-        return (float) ringIndex / orderedRings.Length;
+        // Pass
     }
 
-    
-    private void PlayerReachedRing()
+    [ClientRpc]
+    protected override void OnSetupConditionClientRpc()
     {
-        ringIndex++;
+        ringIndex = 0;
+        ProgressRaceRings();
+    }
 
-        if(!IsComplete())
-            orderedRings[ringIndex].EnableZone(PlayerReachedRing);
+#endregion
+
+    private void ProgressRaceRings()
+    {
+        orderedRings[ringIndex].EnableZone(OnRingReached);
+    }
+
+    private void HideAllRings()
+    {
+        foreach(var ring in orderedRings)
+            HideRing(ring);
+    }
+
+    private void HideRing(ObjectiveZone ring)
+    {
+        ring.DisableZone();
+    }
+
+    private void OnRingReached(ObjectiveZone zone)
+    {
+        HideRing(orderedRings[ringIndex]);
+
+        ringIndex++;
+        if(orderedRings.Length == ringIndex)
+            Debug.Log("Ring Objective complete!");
         else
-            OnConditionCompleted?.Invoke();
-            
+            ProgressRaceRings();
+
         UpdateConditionUI();
     }
+
+
 }

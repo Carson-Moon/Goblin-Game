@@ -1,33 +1,28 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class ObjectiveCondition : MonoBehaviour
+public abstract class ObjectiveCondition : NetworkBehaviour
 {
-    protected Action OnConditionCompleted;
-
-
-    public void Begin(Action onComplete)
-    {
-        OnConditionCompleted = null;
-        OnConditionCompleted += onComplete;
-
-        OnBegin();
-    }
-
-    public void End()
-    {
-        OnConditionCompleted = null;
-        OnEnd();
-    }
-
     public void UpdateConditionUI()
     {
         ObjectiveCanvas.Instance.UpdateConditionPanel(this);
     }
 
-    protected abstract void OnBegin();
-    protected abstract void OnEnd();
-    public abstract bool IsComplete();
-    public abstract float GetProgressPercentage();
+    public void SetupConditionServer()
+    {
+        OnSetupConditionServer();
+        OnSetupConditionClientRpc();
+    }
+
+    protected abstract void OnSetupConditionServer();
+
+    [ClientRpc]
+    protected virtual void OnSetupConditionClientRpc()
+    {
+        
+    }
+
+
     public abstract string GetPanelDisplay();
 }
