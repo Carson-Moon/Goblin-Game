@@ -431,6 +431,11 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         return motor;
     }
 
+    public Stance getStance()
+    {
+        return _state.stance;
+    }
+
     public bool IsColliderValidForCollisions(Collider coll)
     {
         return true;

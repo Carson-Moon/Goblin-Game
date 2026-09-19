@@ -6152,6 +6152,7 @@ GameObject:
   - component: {fileID: 8842055320129979231}
   - component: {fileID: 4414902784371118378}
   - component: {fileID: 8200798526461610004}
+  - component: {fileID: 8330616750733926267}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -6333,6 +6334,35 @@ MonoBehaviour:
   _damping: 0.8
   _referenceSpeed: 25
   _character: {fileID: 8215219192210770407}
+--- !u!114 &8330616750733926267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546556234041210145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76079b0b56fefe40942e0b1dc5eb3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 8215219192210770407}
+  _motor: {fileID: 7404937040295175108}
+  frequency: 1
+  horizontalAmplitude: 0.01
+  verticalAmplitude: 0.015
+  rollAmplitude: 0.35
+  pitchAmplitude: 0.2
+  stepSpring:
+    stiffness: 160
+    damping: 18
+    maxAmplitude: 0.04
+    restThreshold: 0.001
+    Value: 0
+    Velocity: 0
+    Target: 0
+  stepForce: 0.15
+  blendSpeed: 8
 --- !u!1 &9106764007832235064
 GameObject:
   m_ObjectHideFlags: 0

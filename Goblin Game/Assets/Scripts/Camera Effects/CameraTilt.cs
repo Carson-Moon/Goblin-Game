@@ -18,6 +18,7 @@ public class CameraTilt : CameraEffect
 
     public override void Tick(float deltaTime)
     {
+        // This should probably be moved out of the tick function and moved above it. We only need to assign the character motor once, not every tick.
         var motor = _character.getKinematicCharacterMotor();
 
         Vector3 planar = Vector3.ProjectOnPlane(motor.Velocity, motor.CharacterUp);
