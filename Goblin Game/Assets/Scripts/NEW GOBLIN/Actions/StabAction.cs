@@ -14,6 +14,7 @@ public class StabAction : MonoBehaviour
 
     [Header("Animator")]
     [SerializeField] GoblinAnimator goblinAnimator;
+    [SerializeField] NetworkMovementAnimator networkAnimator;
     [SerializeField] Animator anim;
     private int AttackHash = Animator.StringToHash("attack1");
 
@@ -28,8 +29,9 @@ public class StabAction : MonoBehaviour
 
     public void PerformStab()
     {
-        if (anim) anim.SetTrigger(AttackHash);
-        if (goblinAnimator) goblinAnimator.StabAnimation();
+        if (anim != null) anim.SetTrigger(AttackHash);
+        if (goblinAnimator != null) goblinAnimator.StabAnimation();
+        if(networkAnimator != null) networkAnimator.StabAnimationClientRpc();
 
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabbableMask);
         foreach (Collider col in cols)

@@ -1,7 +1,9 @@
+using System;
 using KinematicCharacterController;
+using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkMovementAnimator : MonoBehaviour
+public class NetworkMovementAnimator : NetworkBehaviour
 {
     [SerializeField] Transform forwardReference;
     [SerializeField] Animator animator;
@@ -10,7 +12,10 @@ public class NetworkMovementAnimator : MonoBehaviour
     [SerializeField] float maxMoveThreshold;
     [SerializeField] float smoothing;
 
-    Vector3 lastFrameVelocity;
+    [SerializeField] NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>(Vector3.zero);
+    [SerializeField] NetworkVariable<bool> networkIsOnStableGround = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private bool lastFrameIsOnStableGround = false;
+
     CharacterGroundingReport lastFrameGroundingStatus;
     Vector3 forwardRelativeVelocity;
     float horizontalSmoothVel;
@@ -21,18 +26,40 @@ public class NetworkMovementAnimator : MonoBehaviour
 
     void Update()
     {
+        if(IsOwner)
+        {
+            networkVelocity.Value = characterMotor.Velocity;
+            networkIsOnStableGround.Value = lastFrameGroundingStatus.IsStableOnGround;
+        }
+            
         CheckForJump();
         CheckForLand();
 
         UpdateGroundAnimations();
 
-        lastFrameVelocity = characterMotor.Velocity;
-        lastFrameGroundingStatus = characterMotor.GroundingStatus;
+        lastFrameIsOnStableGround = networkIsOnStableGround.Value;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        networkVelocity.OnValueChanged += OnVelocityChanged;
+        networkIsOnStableGround.OnValueChanged += OnBoolChanged;
+        base.OnNetworkSpawn();
+    }
+
+    private void OnBoolChanged(bool previousValue, bool newValue)
+    {
+        
+    }
+
+    private void OnVelocityChanged(Vector3 previousValue, Vector3 newValue)
+    {
+        
     }
 
     private void UpdateGroundAnimations()
     {
-        forwardRelativeVelocity = forwardReference.InverseTransformDirection(characterMotor.Velocity);
+        forwardRelativeVelocity = forwardReference.InverseTransformDirection(networkVelocity.Value);
 
         horizontalTarget = Mathf.SmoothDamp(horizontalTarget, Mathf.Clamp(forwardRelativeVelocity.x / maxMoveThreshold, -1, 1), ref horizontalSmoothVel, smoothing);
         forwardTarget = Mathf.SmoothDamp(forwardTarget, Mathf.Clamp(forwardRelativeVelocity.z / maxMoveThreshold, -1, 1), ref forwardSmoothVel, smoothing);
@@ -43,7 +70,7 @@ public class NetworkMovementAnimator : MonoBehaviour
 
     private void CheckForJump()
     {
-        if(lastFrameGroundingStatus.IsStableOnGround && !characterMotor.GroundingStatus.IsStableOnGround)
+        if(lastFrameIsOnStableGround && !networkIsOnStableGround.Value)
         {
             if(characterMotor.Velocity.y > 0)
                 animator.SetTrigger("_Jump");
@@ -52,10 +79,16 @@ public class NetworkMovementAnimator : MonoBehaviour
 
     private void CheckForLand()
     {
-        if(!lastFrameGroundingStatus.IsStableOnGround && characterMotor.GroundingStatus.IsStableOnGround)
+        if(!lastFrameIsOnStableGround && networkIsOnStableGround.Value)
         {
             animator.SetTrigger("_Land");
                 
         }
+    }
+
+    [ClientRpc]
+    public void StabAnimationClientRpc()
+    {
+        animator.SetTrigger("stab");
     }
 }

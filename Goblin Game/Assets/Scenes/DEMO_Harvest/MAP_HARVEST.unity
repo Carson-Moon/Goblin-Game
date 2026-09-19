@@ -5298,37 +5298,21 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2221592280
       objectReference: {fileID: 0}
-    - target: {fileID: 1195703839912270387, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1585518109996465769, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Name
       value: Goblin Player Client
       objectReference: {fileID: 0}
     - target: {fileID: 1585518109996465769, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2515394419249536035, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2864385374415639838, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: _armFovRatio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065944487667801021, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4201775871144521541, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: field of view
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5991039492803107786, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: networkInitialize
@@ -5373,10 +5357,6 @@ PrefabInstance:
     - target: {fileID: 7331015665713564294, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9202160244556914376, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23262,6 +23242,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 217153287}
   m_SourcePrefab: {fileID: 100100000, guid: 9a89e2d6ce5c55f46adf7f3dc6c54747, type: 3}
+--- !u!114 &972330474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8215219192210770407, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+  m_PrefabInstance: {fileID: 138989826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591d8bb341cd6e743acfce390db65489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &981482104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24016,6 +24007,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1823088305581077507, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
+--- !u!4 &1074967293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2821447385778262800, guid: aa5c078cfdaa69f45b3abefef6706047, type: 3}
+  m_PrefabInstance: {fileID: 1965208200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1075257055
 GameObject:
   m_ObjectHideFlags: 0
@@ -25708,6 +25704,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
       addedObject: {fileID: 677465502}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074967293}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2256261716806285402, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
       insertIndex: -1
@@ -45883,7 +45882,7 @@ PrefabInstance:
     - target: {fileID: 4698149470409055145, guid: 88e25d7ca8e3e8f43b9e763e7f9e7d1d, type: 3}
       propertyPath: goblinCharacter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 972330474}
     - target: {fileID: 4978963081245309187, guid: 88e25d7ca8e3e8f43b9e763e7f9e7d1d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -46321,4 +46320,3 @@ SceneRoots:
   - {fileID: 2009573209}
   - {fileID: 1467221706}
   - {fileID: 2041137110}
-  - {fileID: 1965208200}
