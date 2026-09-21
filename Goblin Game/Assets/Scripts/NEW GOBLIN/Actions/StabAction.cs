@@ -31,7 +31,7 @@ public class StabAction : MonoBehaviour
     {
         if (anim != null) anim.SetTrigger(AttackHash);
         if (goblinAnimator != null) goblinAnimator.StabAnimation();
-        if(networkAnimator != null) networkAnimator.StabAnimationClientRpc();
+        if(networkAnimator != null) networkAnimator.StabAnimationServerRpc();
 
         Collider[] cols = Physics.OverlapSphere(stabPosition.position, stabRadius, stabbableMask);
         foreach (Collider col in cols)

@@ -37,7 +37,6 @@ public class GoblinInitializer : NetworkBehaviour
     // Graphics
     [SerializeField] GameObject[] thirdPersonBody;
     [SerializeField] GameObject arms;
-    [SerializeField] GoblinAnimator goblinAnimator;
 
     // UI
     [SerializeField] GameObject playerCanvas;
@@ -67,7 +66,6 @@ public class GoblinInitializer : NetworkBehaviour
             goblinCoinEating.enabled = false;
 
             arms.SetActive(false);
-            goblinAnimator.enabled = false;
 
             playerCanvas.SetActive(false);
         }
@@ -98,7 +96,6 @@ public class GoblinInitializer : NetworkBehaviour
             goblinCoinEating.enabled = true;
 
             arms.SetActive(true);
-            goblinAnimator.enabled = true;
 
             playerCanvas.SetActive(true);
         }

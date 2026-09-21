@@ -8,12 +8,14 @@ public class NetworkMovementAnimator : NetworkBehaviour
     [SerializeField] Transform forwardReference;
     [SerializeField] Animator animator;
     [SerializeField] KinematicCharacterMotor characterMotor;
+    [SerializeField] GoblinCharacter goblinCharacter;
 
     [SerializeField] float maxMoveThreshold;
     [SerializeField] float smoothing;
 
-    [SerializeField] NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>(Vector3.zero);
+    [SerializeField] NetworkVariable<Vector3> networkVelocity = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] NetworkVariable<bool> networkIsOnStableGround = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] NetworkVariable<bool> networkIsSliding = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool lastFrameIsOnStableGround = false;
 
     CharacterGroundingReport lastFrameGroundingStatus;
@@ -29,7 +31,8 @@ public class NetworkMovementAnimator : NetworkBehaviour
         if(IsOwner)
         {
             networkVelocity.Value = characterMotor.Velocity;
-            networkIsOnStableGround.Value = lastFrameGroundingStatus.IsStableOnGround;
+            networkIsOnStableGround.Value = characterMotor.GroundingStatus.IsStableOnGround;
+            networkIsSliding.Value = goblinCharacter.Stance is Stance.Slide;
         }
             
         CheckForJump();
@@ -44,6 +47,7 @@ public class NetworkMovementAnimator : NetworkBehaviour
     {
         networkVelocity.OnValueChanged += OnVelocityChanged;
         networkIsOnStableGround.OnValueChanged += OnBoolChanged;
+        networkIsSliding.OnValueChanged += OnBoolChanged;
         base.OnNetworkSpawn();
     }
 
@@ -61,8 +65,11 @@ public class NetworkMovementAnimator : NetworkBehaviour
     {
         forwardRelativeVelocity = forwardReference.InverseTransformDirection(networkVelocity.Value);
 
-        horizontalTarget = Mathf.SmoothDamp(horizontalTarget, Mathf.Clamp(forwardRelativeVelocity.x / maxMoveThreshold, -1, 1), ref horizontalSmoothVel, smoothing);
-        forwardTarget = Mathf.SmoothDamp(forwardTarget, Mathf.Clamp(forwardRelativeVelocity.z / maxMoveThreshold, -1, 1), ref forwardSmoothVel, smoothing);
+        float xTarget = !networkIsSliding.Value ?Mathf.Clamp(forwardRelativeVelocity.x / maxMoveThreshold, -1, 1) : 0;
+        float yTarget = !networkIsSliding.Value ? Mathf.Clamp(forwardRelativeVelocity.z / maxMoveThreshold, -1, 1) : 2;
+
+        horizontalTarget = Mathf.SmoothDamp(horizontalTarget, xTarget, ref horizontalSmoothVel, smoothing);
+        forwardTarget = Mathf.SmoothDamp(forwardTarget, yTarget, ref forwardSmoothVel, smoothing);
 
         animator.SetFloat("_Strafe", horizontalTarget);
         animator.SetFloat("_Forward", forwardTarget);
@@ -86,9 +93,16 @@ public class NetworkMovementAnimator : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void StabAnimationClientRpc()
+    [ServerRpc(RequireOwnership = false)]
+    public void StabAnimationServerRpc()
     {
+        StabAnimationClientRpc();
+    }
+
+    [ClientRpc]
+    private void StabAnimationClientRpc()
+    {
+    Debug.Log("Stab.");
         animator.SetTrigger("stab");
     }
 }
