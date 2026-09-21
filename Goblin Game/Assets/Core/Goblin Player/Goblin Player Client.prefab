@@ -2169,6 +2169,7 @@ GameObject:
   - component: {fileID: 6344617391449248736}
   - component: {fileID: 7404937040295175108}
   - component: {fileID: 8215219192210770407}
+  - component: {fileID: 6310894937415005447}
   - component: {fileID: 4427158862887684846}
   - component: {fileID: 8814946469210745664}
   - component: {fileID: 250245159957266787}
@@ -2308,6 +2309,21 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 1.33
   crouchCameraTargetHeight: 0.415
+  impulseController: {fileID: 6310894937415005447}
+--- !u!114 &6310894937415005447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868402280628327220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6c2f6ff8557a74e97398d54697b1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0}
+  force: 0
 --- !u!114 &4427158862887684846
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -88,6 +88,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
 
     public event System.Action<float> Landed;
 
+    [SerializeField] ImpulseController impulseController;
+
 
     public void Initialize()
     {
@@ -353,6 +355,8 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
                 _requestedJump = false;
             }
         }
+
+        currentVelocity += impulseController.ApplyImpulseForces(motor);
 
         _velocityBeforeGrounding = currentVelocity;
     }

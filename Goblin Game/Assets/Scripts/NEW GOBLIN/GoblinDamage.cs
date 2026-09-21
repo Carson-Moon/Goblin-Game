@@ -13,6 +13,7 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
 
     public void TakeDamage(Vector3 damagePoint)
     {
+        Debug.Log("Take Damage.");
         TakeDamageClientRpc();
     }
 
