@@ -6430,6 +6430,56 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &304174164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304174165}
+  - component: {fileID: 304174166}
+  m_Layer: 0
+  m_Name: King of the Hill 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304174165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304174164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2070007029}
+  m_Father: {fileID: 1618688110}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &304174166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304174164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b21b40788784a845b576b3681b2a674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  objectiveName: King of the Hill
+  objectiveDescription: Get points by staying in zones!
+  conditions:
+  - {fileID: 2070007030}
 --- !u!1 &313216794
 GameObject:
   m_ObjectHideFlags: 0
@@ -23977,6 +24027,67 @@ Transform:
   - {fileID: 1258335507}
   m_Father: {fileID: 1383718057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1037920127
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2070007029}
+    m_Modifications:
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968259623329755210, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_Name
+      value: King of the Hill Zone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985113071299854624, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: sendPointsTimerLength
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
 --- !u!1 &1062289825 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2587597558878920165, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
@@ -30893,6 +31004,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3312793827714476667, guid: 8200c79c202181947b11259c68179db2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781232599117419622, guid: 8200c79c202181947b11259c68179db2, type: 3}
+      propertyPath: m_Name
+      value: Collect All Coins 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8865106287271510109, guid: 8200c79c202181947b11259c68179db2, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2677303922
@@ -30903,7 +31022,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3279147927481622233, guid: 8200c79c202181947b11259c68179db2, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1618688110}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8200c79c202181947b11259c68179db2, type: 3}
 --- !u!114 &1411816746 stripped
@@ -30917,6 +31039,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea4c236d55d6b547beb98abae71f1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1411816747 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3279147927481622233, guid: 8200c79c202181947b11259c68179db2, type: 3}
+  m_PrefabInstance: {fileID: 1411816745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1427296760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34503,6 +34630,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
   m_PrefabInstance: {fileID: 1574852066}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1618688109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618688110}
+  - component: {fileID: 1618688111}
+  m_Layer: 0
+  m_Name: King of the Hill Objectives
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618688110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618688109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 304174165}
+  m_Father: {fileID: 1411816747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1618688111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618688109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad710202d5d00d42b63a1b5a5fbe9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1621366506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36623,6 +36795,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
   m_PrefabInstance: {fileID: 1306523537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1687144143
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2070007029}
+    m_Modifications:
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968259623329755210, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: m_Name
+      value: King of the Hill Zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985113071299854624, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+      propertyPath: sendPointsTimerLength
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+--- !u!4 &1687144144 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+  m_PrefabInstance: {fileID: 1687144143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1687144145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6985113071299854624, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+  m_PrefabInstance: {fileID: 1687144143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f174440a56cbf04ea633da01c4b7cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1698822706
 GameObject:
   m_ObjectHideFlags: 0
@@ -42136,6 +42385,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5c078cfdaa69f45b3abefef6706047, type: 3}
+--- !u!4 &1965702256 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2261988892416696622, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+  m_PrefabInstance: {fileID: 1037920127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1965702261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6985113071299854624, guid: 8d1b40f8ab764df47a1912233504ef53, type: 3}
+  m_PrefabInstance: {fileID: 1037920127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f174440a56cbf04ea633da01c4b7cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1978269525
 GameObject:
   m_ObjectHideFlags: 0
@@ -43719,6 +43984,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dd1a9a1e967ce4eb27e2ab817b83b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2070007028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2070007029}
+  - component: {fileID: 2070007030}
+  m_Layer: 0
+  m_Name: King of the Hill Moving Condition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2070007029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070007028}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1687144144}
+  - {fileID: 1965702256}
+  m_Father: {fileID: 304174165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2070007030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070007028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e96d57b2a82d1046b78a86145f1b8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  zones:
+  - {fileID: 1687144145}
+  - {fileID: 1965702261}
+  zoneTime: 10
 --- !u!1 &2072380188
 GameObject:
   m_ObjectHideFlags: 0

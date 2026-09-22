@@ -102,7 +102,6 @@ public class NetworkMovementAnimator : NetworkBehaviour
     [ClientRpc]
     private void StabAnimationClientRpc()
     {
-    Debug.Log("Stab.");
         animator.SetTrigger("stab");
     }
 }
