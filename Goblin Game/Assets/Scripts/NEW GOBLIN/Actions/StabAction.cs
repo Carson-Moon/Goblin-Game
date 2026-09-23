@@ -42,7 +42,9 @@ public class StabAction : MonoBehaviour
                 continue;
 
             damageable.TakeDamage(stabPosition.position);
-            RoundStatTracker.Instance.TrackIntStat(IntStat.Stabbed_Someone);
+
+            if(RoundStatTracker.Instance != null)
+                RoundStatTracker.Instance.TrackIntStat(IntStat.Stabbed_Someone);
         }
 
         PerformCooldown();

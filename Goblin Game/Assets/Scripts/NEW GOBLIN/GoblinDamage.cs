@@ -6,6 +6,7 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
     [SerializeField] DamageVignette damageVignette;
     [SerializeField] CameraShake cameraShake;
 
+    [SerializeField] ImpulseController impulseController;
     [SerializeField] Transform coinSpawnPosition;
     [SerializeField] UnconsciousManager unconsciousManager;
     [SerializeField] GoblinCoins goblinCoins;
@@ -14,26 +15,26 @@ public class GoblinDamage : NetworkBehaviour, IDamageable
     public void TakeDamage(Vector3 damagePoint)
     {
         Debug.Log("Take Damage.");
-        TakeDamageClientRpc();
+        TakeDamageClientRpc(damagePoint);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void TakeDamageClientRpc()
+    private void TakeDamageClientRpc(Vector3 damagePoint)
     {
         if(!IsOwner)
             return;
 
-        RoundStatTracker.Instance.TrackIntStat(IntStat.Got_Stabbed);
+        if(RoundStatTracker.Instance != null)
+            RoundStatTracker.Instance.TrackIntStat(IntStat.Got_Stabbed);
 
         damageVignette.PerformDamageFlash();
         cameraShake.PerformImpulseShake();
+        impulseController.AddImpulse(((transform.position - damagePoint) + Vector3.up).normalized, 30);
 
         int coinsToLose = goblinCoins.LoseCoins(5);
 
         if(CoinPool.Instance != null)
-        {
             CoinPool.Instance.SpawnMultipleCoinsServerRpc(coinSpawnPosition.position, coinsToLose);
-        }   
     }
 
     public void OnDeath()

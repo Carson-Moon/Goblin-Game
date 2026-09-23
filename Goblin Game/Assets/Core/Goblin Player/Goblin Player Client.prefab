@@ -2728,6 +2728,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   damageVignette: {fileID: 1243158559098339265}
   cameraShake: {fileID: 691395841388577097}
+  impulseController: {fileID: 6310894937415005447}
   coinSpawnPosition: {fileID: 5573091884376836184}
   unconsciousManager: {fileID: 1045678369365100981}
   goblinCoins: {fileID: 1436054211432088170}
@@ -7541,6 +7542,10 @@ PrefabInstance:
     - target: {fileID: 2604224806755980111, guid: 42254b8db9f84c644bd8456e8f9c2f1c, type: 3}
       propertyPath: m_Name
       value: Goblin Animation Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604224806755980111, guid: 42254b8db9f84c644bd8456e8f9c2f1c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2837880967579197570, guid: 42254b8db9f84c644bd8456e8f9c2f1c, type: 3}
       propertyPath: m_Layer
