@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 public class ObjectiveCanvas : MonoBehaviour
@@ -11,6 +12,9 @@ public class ObjectiveCanvas : MonoBehaviour
     [SerializeField] RectTransform panelHolder;
     private List<ObjectivePanelUI> titlePanels = new();
     private Dictionary<ObjectiveCondition, ObjectivePanelUI> conditionPanels = new();
+
+
+    private ObjectiveSignUI localSignUI = null;
 
 
     void Awake()
@@ -28,17 +32,50 @@ public class ObjectiveCanvas : MonoBehaviour
         titlePanels.Add(CreatePanel(objective.ObjectiveName));
         foreach(var condition in objective.Conditions)
             conditionPanels.Add(condition, CreatePanel(condition.GetPanelDisplay()));
+
+        // This is really dumb but whateva bro.
+        if(localSignUI == null)
+        {
+            var signUIs = FindObjectsByType<ObjectiveSignUI>(findObjectsInactive: FindObjectsInactive.Exclude, sortMode: FindObjectsSortMode.None);
+            foreach(var sign in signUIs)
+            {
+                NetworkObject netObject = sign.GetComponentInParent<NetworkObject>();
+                if(netObject.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+                {
+                    localSignUI = sign;
+                    break;
+                }
+            }
+        }
+
+        if(localSignUI == null)
+        {
+            Debug.LogWarning("We did not find a valid sign...");
+            return;
+        }
+
+        localSignUI.Show(objective);
     }
 
     public void ResetUI()
     {
         DestroyUI();
+
+        if(localSignUI != null)
+            localSignUI.Hide();
+        else
+            Debug.LogWarning("No sign found!");
     }
 
     public void UpdateConditionPanel(ObjectiveCondition condition)
     {
         if(conditionPanels.ContainsKey(condition))
             conditionPanels[condition].Initialize(condition.GetPanelDisplay());
+
+        if(localSignUI != null)
+            localSignUI.UpdateBottomText(condition);
+        else
+            Debug.LogWarning("No sign found!");
     }
 
 
