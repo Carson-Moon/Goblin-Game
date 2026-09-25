@@ -26,6 +26,11 @@ public class RaceCondition : ObjectiveCondition
         ProgressRaceRings();
     }
 
+    public override void CleanUpCondition()
+    {
+        HideAllRings();
+    }
+
 #endregion
 
     private void ProgressRaceRings()

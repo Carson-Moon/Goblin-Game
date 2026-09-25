@@ -23,6 +23,8 @@ public abstract class ObjectiveCondition : NetworkBehaviour
         
     }
 
+    public abstract void CleanUpCondition();
+
 
     public abstract string GetPanelDisplay();
 }

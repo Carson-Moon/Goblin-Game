@@ -33,6 +33,12 @@ public class CollectCondition : ObjectiveCondition
             collectable.EnableZone(OnLocalPlayerEnteredZone);
     }
 
+    public override void CleanUpCondition()
+    {
+        foreach(var collectable in collectables)
+            collectable.DisableZone();
+    }
+
 #endregion
 
     private void OnLocalPlayerEnteredZone(ObjectiveZone zone)

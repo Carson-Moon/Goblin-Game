@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LocalObjectiveStarter : MonoBehaviour
@@ -37,7 +39,7 @@ public class LocalObjectiveStarter : MonoBehaviour
             Objective objective = levelObjectives.GetObjectiveByIndex(objectiveIndex);
             if(objective != null)
             {
-                objective.StartObjectiveServer();
+                objective.StartObjectiveServer(OnObjectiveCompleteHandler);
                 ObjectiveCanvas.Instance.Initialize(objective);
             }
             else
@@ -47,11 +49,11 @@ public class LocalObjectiveStarter : MonoBehaviour
         }
     }
 
-    private void OnObjectiveCompleteHandler(ulong playerID)
+    private void OnObjectiveCompleteHandler(List<ulong> playerIDs)
     {
         Debug.Log("Objective was completed.");
         ObjectiveCanvas.Instance.ResetUI();
-        winnerUI.DisplayWinner(playerID);
+        winnerUI.DisplayWinner(playerIDs.First());
 
         timer.StartTimer(betweenObjectivesWait, () => StartObjective(0));
     }

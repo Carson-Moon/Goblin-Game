@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -13,11 +16,19 @@ public class Objective : NetworkBehaviour
     [SerializeField] ObjectiveCondition[] conditions;
     public ObjectiveCondition[] Conditions => conditions;
 
-    public event Action<ulong> NotifyServerObjectiveCompleted;
+    [Header("Timer")]
+    [SerializeField] TextMeshProUGUI timerDisplay;
+    [SerializeField] float timerLength;
+    private float timer;
+
+    public event Action<List<ulong>> NotifyServerObjectiveCompleted;
 
 
-    public void StartObjectiveServer()
+    public void StartObjectiveServer(Action<List<ulong>> onComplete)
     {
+        NotifyServerObjectiveCompleted = null;
+        NotifyServerObjectiveCompleted += onComplete;
+
         OnStartObjectiveServer();
         OnStartObjectiveClientRpc();
     }
@@ -32,6 +43,8 @@ public class Objective : NetworkBehaviour
     private void OnStartObjectiveClientRpc()
     {
         ObjectiveCanvas.Instance.Initialize(this);
+
+        StartObjectiveTimer();
     }
 
     public void EndObjectiveServer()
@@ -50,44 +63,31 @@ public class Objective : NetworkBehaviour
         
     }
 
-    // public void StartObjective(Action<ulong> onComplete)
-    // {
-    //     NotifyServerObjectiveCompleted = null;
-    //     NotifyServerObjectiveCompleted += onComplete;
+    public void CleanUpObjective()
+    {
+        foreach(var condition in conditions)
+            condition.CleanUpCondition();
+    }
 
-    //     foreach(var condition in conditions)
-    //         condition.Begin(OnConditionCompleted);
-    // }
+#region Timer
+    private void StartObjectiveTimer()
+    {
+        StartCoroutine(ObjectiveTimer());
+    }
 
-    // public void EndObjective()
-    // {
-    //     NotifyServerObjectiveCompleted = null;
+    IEnumerator ObjectiveTimer()
+    {
+        timer = timerLength;
 
-    //     foreach(var condition in conditions)
-    //         condition.End();
-    // }
+        while(timer > 0)
+        {
+            timer -= Time.deltaTime;
+            timerDisplay.text = timer.ToString("F0");
+            yield return null;
+        }
 
-    // private void OnConditionCompleted()
-    // {
-    //     bool allConditionsComplete = true;
-    //     foreach(var condition in conditions)
-    //     {
-    //         if(!condition.IsComplete())
-    //             allConditionsComplete = false;
-    //     }
-        
-    //     if(allConditionsComplete)
-    //     {
-    //         if(NetworkManager.Singleton != null)
-    //             ObjectiveCompleted(NetworkManager.Singleton.LocalClientId);
-    //         else
-    //             ObjectiveCompleted(0);
-    //     }
-            
-    // }
+        NotifyServerObjectiveCompleted?.Invoke(new List<ulong> {});
+    }
 
-    // public void ObjectiveCompleted(ulong playerID)
-    // {
-    //     NotifyServerObjectiveCompleted?.Invoke(playerID);
-    // }
+#endregion
 }

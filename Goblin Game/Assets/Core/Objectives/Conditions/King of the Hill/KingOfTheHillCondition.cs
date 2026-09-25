@@ -27,12 +27,16 @@ public class KingOfTheHillCondition : ObjectiveCondition
         StartZoneTimerServer();
     }
 
-    
-
     [ClientRpc]
     protected override void OnSetupConditionClientRpc()
     {
         zones[zoneIndex].EnableZone(OnLocalPlayerUpdatePoints);
+    }
+
+    public override void CleanUpCondition()
+    {
+        foreach(var zone in zones)
+            zone.DisableZone();
     }
 
 #endregion

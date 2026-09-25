@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     [SerializeField] float initialStartWait;
     [SerializeField] float betweenObjectivesWait;
     [SerializeField] Timer timer;
+
+    private Objective currentObjective;
 
 
 
@@ -23,6 +26,9 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     [ClientRpc]
     private void PreObjectiveClientRpc()
     {
+        if(currentObjective != null)
+            currentObjective.CleanUpObjective();
+
         timer.StartTimer(betweenObjectivesWait, IsServer ? StartObjectiveServer : null);
     }
 
@@ -36,16 +42,22 @@ public class NetworkObjectiveStarter : NetworkBehaviour
         else
         {
             Debug.Log("Objective started!");
-            Objective objective = levelObjectives.GetObjectiveByIndex(objectiveIndex);
-            if(objective != null)
+            currentObjective = levelObjectives.GetObjectiveByIndex(objectiveIndex);
+            if(currentObjective != null)
             {
-                objective.StartObjectiveServer();
-                ObjectiveCanvas.Instance.Initialize(objective);
+                currentObjective.StartObjectiveServer(StopObjectiveServer);
+                ObjectiveCanvas.Instance.Initialize(currentObjective);
             }
             else
             {
                 Debug.LogWarning("Objective was null.");
             }
         }
+    }
+
+    private void StopObjectiveServer(List<ulong> winners)
+    {
+        Debug.Log("Objective is over.");
+        PreObjectiveClientRpc();
     }
 }
