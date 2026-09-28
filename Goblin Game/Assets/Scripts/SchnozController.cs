@@ -49,6 +49,9 @@ public class SchnozController : MonoBehaviour
         Transform nearestTarget = null;
         float nearestDistanceSqr = detectionRadius * detectionRadius;
 
+        // This could be stupid because we're looking for all of the objects in the scene with the specified tag every scan,
+        // instead of just checking the objects that are in the radius that we define. 
+        // We could, later down the line, just check the objects that are in the detection radius FIRST, then filter by tag.
         foreach (GameObject candidate in GameObject.FindGameObjectsWithTag(interestTag))
         {
             float distanceSqr = (candidate.transform.position - transform.position).sqrMagnitude;
