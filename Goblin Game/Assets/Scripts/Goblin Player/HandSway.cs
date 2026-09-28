@@ -39,7 +39,7 @@ public class HandSway : MonoBehaviour
 
         _lastTargetRotation = target.rotation;
 
-        // Camera turning kicks the spring the opposite way — the arms get left behind.
+        // Camera turning kicks the spring the opposite way and the arms get left behind.
         _swingVelocity -= localDelta * kickPerDegree / Mathf.Max(dt, 0.0001f) * dt;
 
         var omega = 2f * Mathf.PI * frequency;
