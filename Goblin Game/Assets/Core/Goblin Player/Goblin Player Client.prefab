@@ -1191,13 +1191,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915397695260578347}
-  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1233408750006493579}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 957164249e2f01e42aa1d68f8f4d60b8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4367c2aa165aec5429edbf22a3ecd9f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4185,15 +4185,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stabPosition: {fileID: 5339422730305142087}
-  stabRadius: 0.5
+  stabRadius: 1
   stabbableMask:
     serializedVersion: 2
     m_Bits: 1049728
-  stabCooldownLength: 0.25
+  stabCooldownLength: 0.3
   onCooldown: 0
   goblinAnimator: {fileID: 0}
   networkAnimator: {fileID: 1530639111520946073}
   anim: {fileID: 6009862777966355732}
+  reticle: {fileID: 3818992838941488161}
 --- !u!1 &5630488182429476399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4601,6 +4602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1233408750006493579}
+  - component: {fileID: 3818992838941488161}
   - component: {fileID: 3627950177229302804}
   - component: {fileID: 1614473968629357179}
   - component: {fileID: 4426160219713620785}
@@ -4636,6 +4638,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &3818992838941488161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6325428156649466176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f854b5863d78b4badb800fba7f2871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reticle: {fileID: 4643026754393482745}
+  flashDuration: 0.4
+  defaultSprite: {fileID: 21300000, guid: 4367c2aa165aec5429edbf22a3ecd9f9, type: 3}
+  flashSprite: {fileID: 21300000, guid: 4438784888697034ea7bc545061ae5ab, type: 3}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  flashColor: {r: 0.6037736, g: 0.20790316, b: 0.20790316, a: 1}
 --- !u!223 &3627950177229302804
 Canvas:
   m_ObjectHideFlags: 0

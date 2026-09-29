@@ -16,6 +16,7 @@ public class StabAction : MonoBehaviour
     [SerializeField] GoblinAnimator goblinAnimator;
     [SerializeField] NetworkMovementAnimator networkAnimator;
     [SerializeField] Animator anim;
+    [SerializeField] PlayerReticle reticle;
     private int AttackHash = Animator.StringToHash("attack1");
 
 
@@ -46,6 +47,9 @@ public class StabAction : MonoBehaviour
             if(RoundStatTracker.Instance != null)
                 RoundStatTracker.Instance.TrackIntStat(IntStat.Stabbed_Someone);
         }
+
+        if(cols.Length > 0)
+            reticle.Flash();
 
         PerformCooldown();
     }
