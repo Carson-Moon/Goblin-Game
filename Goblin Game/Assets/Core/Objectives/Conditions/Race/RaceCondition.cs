@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -29,6 +30,11 @@ public class RaceCondition : ObjectiveCondition
     public override void CleanUpCondition()
     {
         HideAllRings();
+    }
+
+    public override List<ulong> GetConditionWinners()
+    {
+        return new List<ulong>(){};
     }
 
 #endregion

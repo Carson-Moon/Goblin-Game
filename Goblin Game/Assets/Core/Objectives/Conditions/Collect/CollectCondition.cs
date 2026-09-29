@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -37,6 +38,12 @@ public class CollectCondition : ObjectiveCondition
     {
         foreach(var collectable in collectables)
             collectable.DisableZone();
+    }
+
+    public override List<ulong> GetConditionWinners()
+    {
+        var orderedPlayers = playerPoints.OrderByDescending(x => x.Value);
+        return orderedPlayers.Where(x => x.Value == orderedPlayers.First().Value).Select(x => x.Key).ToList();
     }
 
 #endregion

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ public abstract class ObjectiveCondition : NetworkBehaviour
     {
         
     }
+
+    public abstract List<ulong> GetConditionWinners();
 
     public abstract void CleanUpCondition();
 

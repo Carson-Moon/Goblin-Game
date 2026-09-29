@@ -53,7 +53,7 @@ public class LocalObjectiveStarter : MonoBehaviour
     {
         Debug.Log("Objective was completed.");
         ObjectiveCanvas.Instance.ResetUI();
-        winnerUI.DisplayWinner(playerIDs.First());
+        winnerUI.DisplayWinners(playerIDs);
 
         timer.StartTimer(betweenObjectivesWait, () => StartObjective(0));
     }

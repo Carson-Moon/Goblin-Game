@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -26,9 +27,6 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     [ClientRpc]
     private void PreObjectiveClientRpc()
     {
-        if(currentObjective != null)
-            currentObjective.CleanUpObjective();
-
         timer.StartTimer(betweenObjectivesWait, IsServer ? StartObjectiveServer : null);
     }
 
@@ -57,7 +55,19 @@ public class NetworkObjectiveStarter : NetworkBehaviour
 
     private void StopObjectiveServer(List<ulong> winners)
     {
+        DisplayWinScreenClientRpc(winners.ToArray());
+
+        if(currentObjective != null)
+            currentObjective.EndObjectiveServer();
+
         Debug.Log("Objective is over.");
+
         PreObjectiveClientRpc();
+    }
+
+    [ClientRpc]
+    private void DisplayWinScreenClientRpc(ulong[] winners)
+    {
+        ObjectiveWinnerDisplay.Instance.DisplayWinners(winners.ToList());
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -49,7 +50,8 @@ public class Objective : NetworkBehaviour
 
     public void EndObjectiveServer()
     {
-        
+        OnEndObjectiveServer();
+        OnEndObjectiveClientRpc();
     }
 
     private void OnEndObjectiveServer()
@@ -60,13 +62,34 @@ public class Objective : NetworkBehaviour
     [ClientRpc]
     private void OnEndObjectiveClientRpc()
     {
-        
+        CleanUpObjective();
     }
 
     public void CleanUpObjective()
     {
         foreach(var condition in conditions)
             condition.CleanUpCondition();
+    }
+
+    private List<ulong> GetObjectiveWinners()
+    {
+        Dictionary<ulong, int> playerPoints = new();
+
+        foreach(var condition in conditions)
+        {
+            List<ulong> conditionWinners = condition.GetConditionWinners();
+            foreach(var winner in conditionWinners)
+            {
+                if(playerPoints.ContainsKey(winner))
+                    playerPoints[winner]++;
+                else
+                    playerPoints.Add(winner, 1);
+            }
+        }
+
+        var orderedPlayers = playerPoints.OrderByDescending(x => x.Value).ToList();
+        var allWinners = playerPoints.Where(x => x.Value == orderedPlayers.First().Value).ToList();
+        return allWinners.Select(x => x.Key).ToList();
     }
 
 #region Timer
@@ -86,7 +109,7 @@ public class Objective : NetworkBehaviour
             yield return null;
         }
 
-        NotifyServerObjectiveCompleted?.Invoke(new List<ulong> {});
+        NotifyServerObjectiveCompleted?.Invoke(GetObjectiveWinners());
     }
 
 #endregion

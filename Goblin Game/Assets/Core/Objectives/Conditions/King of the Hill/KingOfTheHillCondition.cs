@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -37,6 +38,12 @@ public class KingOfTheHillCondition : ObjectiveCondition
     {
         foreach(var zone in zones)
             zone.DisableZone();
+    }
+
+    public override List<ulong> GetConditionWinners()
+    {
+        var orderedPlayers = playerPoints.OrderByDescending(x => x.Value);
+        return orderedPlayers.Where(x => x.Value == orderedPlayers.First().Value).Select(x => x.Key).ToList();
     }
 
 #endregion
