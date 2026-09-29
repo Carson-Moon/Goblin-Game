@@ -1,16 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
 public class RaceCondition : ObjectiveCondition
 {
-    [SerializeField] ObjectiveZone[] orderedRings;
-    private int ringIndex = 0;
+    [SerializeField] ObjectiveZone[] rings;
+    private int ringsReached = 0;
+
+    private Dictionary<ulong, int> playerPoints = new();
 
 
     public override string GetPanelDisplay()
     {
-        return $"Rings: {ringIndex} / {orderedRings.Length}";
+        return $"Rings: {ringsReached} / {rings.Length}";
     }
 
 #region Setup
@@ -23,8 +26,8 @@ public class RaceCondition : ObjectiveCondition
     [ClientRpc]
     protected override void OnSetupConditionClientRpc()
     {
-        ringIndex = 0;
-        ProgressRaceRings();
+        ringsReached = 0;
+        SetupRaceRings();
     }
 
     public override void CleanUpCondition()
@@ -34,19 +37,21 @@ public class RaceCondition : ObjectiveCondition
 
     public override List<ulong> GetConditionWinners()
     {
-        return new List<ulong>(){};
+        var orderedPlayers = playerPoints.OrderByDescending(x => x.Value);
+        return orderedPlayers.Where(x => x.Value == orderedPlayers.First().Value).Select(x => x.Key).ToList();
     }
 
 #endregion
 
-    private void ProgressRaceRings()
+    private void SetupRaceRings()
     {
-        orderedRings[ringIndex].EnableZone(OnRingReached);
+        foreach(var ring in rings)
+            ring.EnableZone(OnRingReached);
     }
 
     private void HideAllRings()
     {
-        foreach(var ring in orderedRings)
+        foreach(var ring in rings)
             HideRing(ring);
     }
 
@@ -57,15 +62,32 @@ public class RaceCondition : ObjectiveCondition
 
     private void OnRingReached(ObjectiveZone zone)
     {
-        HideRing(orderedRings[ringIndex]);
+        HideRing(zone);
 
-        ringIndex++;
-        if(orderedRings.Length == ringIndex)
+        ringsReached++;
+        if(rings.Length == ringsReached)
             Debug.Log("Ring Objective complete!");
-        else
-            ProgressRaceRings();
 
         UpdateConditionUI();
+
+        OnPlayerReachedRingServerRpc(NetworkManager.Singleton.LocalClientId, ringsReached);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void OnPlayerReachedRingServerRpc(ulong playerID, int ringsReached)
+    {
+        OnPlayerReachedRingClientRpc(playerID, ringsReached);
+    }
+
+    [ClientRpc]
+    private void OnPlayerReachedRingClientRpc(ulong playerID, int ringsReached)
+    {
+        if(playerPoints.ContainsKey(playerID))
+            playerPoints[playerID] = ringsReached;
+        else
+            playerPoints.Add(playerID, ringsReached);
+
+            UpdateConditionUI();
     }
 
 

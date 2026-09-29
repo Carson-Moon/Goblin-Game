@@ -9,6 +9,9 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     [SerializeField] float initialStartWait;
     [SerializeField] float betweenObjectivesWait;
     [SerializeField] Timer timer;
+    [SerializeField] int pointsToWin = 3;
+
+    Dictionary<ulong, int> playerObjectivePoints = new();
 
     private Objective currentObjective;
 
@@ -55,7 +58,7 @@ public class NetworkObjectiveStarter : NetworkBehaviour
 
     private void StopObjectiveServer(List<ulong> winners)
     {
-        DisplayWinScreenClientRpc(winners.ToArray());
+        GetObjectiveWinnersClientRpc(winners.ToArray());
 
         if(currentObjective != null)
             currentObjective.EndObjectiveServer();
@@ -66,8 +69,32 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void DisplayWinScreenClientRpc(ulong[] winners)
+    private void GetObjectiveWinnersClientRpc(ulong[] winners)
     {
+        foreach(var winner in winners)
+        {
+            if(playerObjectivePoints.ContainsKey(winner))
+                playerObjectivePoints[winner]++;
+            else
+                playerObjectivePoints.Add(winner, 1);
+        }
+
         ObjectiveWinnerDisplay.Instance.DisplayWinners(winners.ToList());
+
+        if(IsServer)
+        {
+            var orderedPlayers = playerObjectivePoints.OrderByDescending(x => x.Value);
+            if(orderedPlayers.First().Value == pointsToWin)
+            {
+                var overallWinners = playerObjectivePoints.Where(x => x.Value == pointsToWin).Select(x => x.Key).ToArray();
+                GetOverallObjectiveWinnersClientRpc(overallWinners);
+            }
+        }
+    }
+
+    [ClientRpc]
+    private void GetOverallObjectiveWinnersClientRpc(ulong[] winners)
+    {
+        Debug.Log("OVerall winners!");
     }
 }
