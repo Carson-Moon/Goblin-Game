@@ -79,7 +79,7 @@ public class NetworkObjectiveStarter : NetworkBehaviour
                 playerObjectivePoints.Add(winner, 1);
         }
 
-        ObjectiveWinnerDisplay.Instance.DisplayWinners(winners.ToList());
+        ObjectiveWinnerDisplay.Instance.DisplayWinners(winners.ToList(), playerObjectivePoints);
 
         if(IsServer)
         {
