@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -24,6 +25,19 @@ public class NetworkObjectiveStarter : NetworkBehaviour
             if(IsServer)
                 PreObjectiveClientRpc();
         }
+    }
+
+    void Start()
+    {
+        StartCoroutine(StartObjectives());
+    }
+
+    IEnumerator StartObjectives()
+    {
+        yield return new WaitForSeconds(5);
+
+        if(IsServer)
+            PreObjectiveClientRpc();
     }
 
 

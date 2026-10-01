@@ -98,7 +98,7 @@ public class KingOfTheHillCondition : ObjectiveCondition
         else
             playerPoints.Add(playerID, points);
 
-        Debug.Log($"{playerID} has {points} points.");
+        // Debug.Log($"{playerID} has {points} points.");
 
         UpdateConditionUI();
     }

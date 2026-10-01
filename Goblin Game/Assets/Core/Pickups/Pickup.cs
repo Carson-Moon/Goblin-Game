@@ -8,6 +8,9 @@ public class Pickup : NetworkBehaviour
     private Rigidbody _rb;
     private NetworkObject _networkObject;
 
+    [SerializeField] float explosionRadius;
+    [SerializeField] float explosionForce;
+
     [SerializeField] private PickupID _id;
     public PickupID ID => _id;
 
@@ -90,7 +93,8 @@ public class Pickup : NetworkBehaviour
         if(HoldsCoins)
         {
             int coinsToSpawn = pickupCoins.Coins;
-            CoinPool.Instance.SpawnMultipleCoinsServerRpc(transform.position, coinsToSpawn);
+            if(CoinPool.Instance != null)
+                CoinPool.Instance.SpawnMultipleCoinsServerRpc(transform.position, coinsToSpawn);
             pickupCoins.SetCoinsServerRpc(0);
         }
             
@@ -99,6 +103,8 @@ public class Pickup : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void BreakClientRpc()
     {
+        Impulse();
+
         Sequence sequence = DOTween.Sequence();
         sequence.AppendCallback(() =>
         {
@@ -120,6 +126,21 @@ public class Pickup : NetworkBehaviour
                 breakVFX.transform.localPosition = Vector3.zero;
             }
         });
+
+        
+    }
+
+    private void Impulse()
+    {
+        var cols = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach(var col in cols)
+        {
+            if(col.TryGetComponent(out GoblinCharacter goblin))
+            {
+                Vector3 direction = goblin.transform.position - transform.position;
+                goblin.GetComponentInParent<ImpulseController>().AddImpulse(direction, explosionForce);
+            }
+        }
     }
 
 #endregion
