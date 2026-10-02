@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 3651217057639450498}
   m_Layer: 21
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Objective
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 901911114456649600}
-  col: {fileID: 26859815370119270}
   spawnForce: 6.5
   spawnTorque: 0.1
   collectCooldown: 0.2
