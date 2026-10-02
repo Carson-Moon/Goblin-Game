@@ -29,6 +29,8 @@ public class NetworkObjectiveStarter : NetworkBehaviour
 
     void Start()
     {
+        LoadingScreenManager.Instance.DisableLoadingScreen();
+
         StartCoroutine(StartObjectives());
     }
 
@@ -78,8 +80,6 @@ public class NetworkObjectiveStarter : NetworkBehaviour
             currentObjective.EndObjectiveServer();
 
         Debug.Log("Objective is over.");
-
-        PreObjectiveClientRpc();
     }
 
     [ClientRpc]
@@ -103,6 +103,8 @@ public class NetworkObjectiveStarter : NetworkBehaviour
                 var overallWinners = playerObjectivePoints.Where(x => x.Value == pointsToWin).Select(x => x.Key).ToArray();
                 GetOverallObjectiveWinnersClientRpc(overallWinners);
             }
+            else
+                PreObjectiveClientRpc();
         }
     }
 
@@ -110,5 +112,6 @@ public class NetworkObjectiveStarter : NetworkBehaviour
     private void GetOverallObjectiveWinnersClientRpc(ulong[] winners)
     {
         Debug.Log("OVerall winners!");
+        OverallWinnerDisplay.Instance.DisplayOverallWinners(winners.ToList());
     }
 }
