@@ -1,5 +1,6 @@
 void ReadHeight_float(
     float2 uv,
+    float2 Tiling,
     UnityTexture2D _Heightmap,
     float3 ViewDirTS,
     int Steps,
@@ -17,11 +18,15 @@ void ReadHeight_float(
     // multiply heightscale here for the maximum offset, representing the actual physical depth
     float2 rayDirection = (viewDir.xy / max(viewDir.z, 0.0001)) * HeightScale;
 
+    // In the case of tiling, scale the ray trajectory by the inverse of the texture size
+    rayDirection /= Tiling;
+
     // Step sizes must divide the total offset by the total number of steps present.
-    float2 uvStep = rayDirection / (float)Steps;
+    float2 uvStep = (rayDirection / (float)Steps) / Tiling;
     float heightStep = 1.0 / (float)Steps;
 
-    float2 currentUV = uv + (uvStep * (Steps * Bias));
+    float2 currentUV = (uv * Tiling) + (uvStep * (Steps * Bias));
+
     float currentRayHeight = 1.0;
 
     float2 previousUV = currentUV;
@@ -60,12 +65,12 @@ void ReadHeight_float(
         }
     }
 
-    HitUV = currentUV;
+    HitUV = currentUV / Tiling;
 
     // silhouette clipping for SPOM
     
     // check if the calculated intersection UV is outside the valid 0-1 quad boundary
-    if (!intersected || currentUV.x < 0.0 || currentUV.x > 1.0 || currentUV.y < 0.0 || currentUV.y > 1.0)
+    if (!intersected || currentUV.x < 0.0 || currentUV.y < 0.0)
     {
         SilhouetteMask = 0.0;
     }
