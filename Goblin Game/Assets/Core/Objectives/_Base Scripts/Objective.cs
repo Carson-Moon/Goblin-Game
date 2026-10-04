@@ -92,6 +92,12 @@ public class Objective : NetworkBehaviour
         return allWinners.Select(x => x.Key).ToList();
     }
 
+    public void EndObjectiveEarly()
+    {
+        StopAllCoroutines();
+        NotifyServerObjectiveCompleted?.Invoke(GetObjectiveWinners());
+    }
+
 #region Timer
     private void StartObjectiveTimer()
     {

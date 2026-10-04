@@ -10,6 +10,8 @@ public class RaceCondition : ObjectiveCondition
 
     private Dictionary<ulong, int> playerPoints = new();
 
+    private Objective ParentObjective => GetComponentInParent<Objective>();
+
 
     public override string GetPanelDisplay()
     {
@@ -88,6 +90,14 @@ public class RaceCondition : ObjectiveCondition
             playerPoints.Add(playerID, ringsReached);
 
             UpdateConditionUI();
+
+        if(IsServer)
+        {
+            if(playerPoints[playerID] == rings.Length)
+            {
+                ParentObjective.EndObjectiveEarly();
+            }
+        }
     }
 
 
