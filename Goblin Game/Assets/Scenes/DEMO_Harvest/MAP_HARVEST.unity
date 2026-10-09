@@ -4207,6 +4207,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5687199715925403383, guid: 478930d26e4786f4e9f86354cd66e4d0, type: 3}
   m_PrefabInstance: {fileID: 1201015964}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &118597621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+  m_PrefabInstance: {fileID: 358340140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &118597625
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118597621}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4579454407841743219, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
 --- !u!1 &121735559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2256261716806285402, guid: aff8fa5e84999df4ba06f8234b9fac61, type: 3}
@@ -5495,15 +5522,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1585518109996465769, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2515394419249536035, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2864385374415639838, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5991039492803107786, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: networkInitialize
@@ -5552,7 +5579,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7066313915201430937, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2387423047671479651, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1087282614648445717, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
 --- !u!43 &152902956
 Mesh:
@@ -9742,6 +9778,70 @@ MonoBehaviour:
   m_EditMode: 0
   m_FlipNormals: 0
   isOnGrid: 1
+--- !u!1001 &358340140
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e478bf56707ec8240aa29793bd144373, type: 2}
+    - target: {fileID: 919132149155446097, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      propertyPath: m_Name
+      value: Harvest_GroundUnevenVertexPaint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 118597625}
+  m_SourcePrefab: {fileID: 100100000, guid: 1bf4d9aafb18cf9498c671117308687f, type: 3}
 --- !u!1 &358741833
 GameObject:
   m_ObjectHideFlags: 0
@@ -22479,7 +22579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3026375758465306097, guid: e7c293afdf16af547867bf959e256145, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -125.82312
+      value: -125.82324
       objectReference: {fileID: 0}
     - target: {fileID: 3026375758465306097, guid: e7c293afdf16af547867bf959e256145, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -33338,6 +33438,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 49a259f84eae8be44817fe9225c6dde1, type: 3}
       propertyPath: m_Name
       value: Harvest_GroundUneven
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 49a259f84eae8be44817fe9225c6dde1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52822,3 +52926,4 @@ SceneRoots:
   - {fileID: 1655855631}
   - {fileID: 939899049}
   - {fileID: 2029752528}
+  - {fileID: 358340140}
