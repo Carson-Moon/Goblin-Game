@@ -202,9 +202,6 @@
             "m_Id": "52a6d0e670184a3796cc88eea96cf294"
         },
         {
-            "m_Id": "14439323711044b4b1f26ab718b1c4b9"
-        },
-        {
             "m_Id": "7a37fcd444b345e9be253f590406af1c"
         },
         {
@@ -430,20 +427,6 @@
                     "m_Id": "749b814461aa405da67cac68f4a81743"
                 },
                 "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "05a3f3d110884b4db89a3f68ec1ff44a"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "14439323711044b4b1f26ab718b1c4b9"
-                },
-                "m_SlotId": 1
             }
         },
         {
@@ -1929,54 +1912,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
-    "m_ObjectId": "0e052228c17e43b2bf61b8e245271c88",
-    "m_Id": 2,
-    "m_DisplayName": "Out",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "e00": 0.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 0.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 0.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 0.0
-    },
-    "m_DefaultValue": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0e4835702f8b49ce960e1412e1d519ea",
     "m_Id": 0,
@@ -2272,8 +2207,8 @@
     "m_ObjectId": "13e7f266606645bdafc080d006096004",
     "m_Title": "SPOM Setup",
     "m_Position": {
-        "x": -2815.00048828125,
-        "y": -1219.0001220703125
+        "x": -2815.0,
+        "y": -1219.0
     }
 }
 
@@ -2296,49 +2231,6 @@
         "y": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
-    "m_ObjectId": "14439323711044b4b1f26ab718b1c4b9",
-    "m_Group": {
-        "m_Id": "ab9d8b073bd7470198da4e839a3fb499"
-    },
-    "m_Name": "Multiply",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1291.9998779296875,
-            "y": -1694.999755859375,
-            "width": 207.9998779296875,
-            "height": 301.9998779296875
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "ba08f82ad814464da0469df8e8ad0c66"
-        },
-        {
-            "m_Id": "42d2eb05b9b24d5788acf7440e195538"
-        },
-        {
-            "m_Id": "0e052228c17e43b2bf61b8e245271c88"
-        }
-    ],
-    "synonyms": [
-        "multiplication",
-        "times",
-        "x"
-    ],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    }
 }
 
 {
@@ -3426,7 +3318,7 @@
     "m_ObjectId": "3445060ff15d48feadb77835e1b8c0de",
     "m_Title": "Normal Map",
     "m_Position": {
-        "x": -1952.0001220703125,
+        "x": -1952.0,
         "y": -564.0
     }
 }
@@ -3930,54 +3822,6 @@
         "y": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
-    "m_ObjectId": "42d2eb05b9b24d5788acf7440e195538",
-    "m_Id": 1,
-    "m_DisplayName": "B",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "B",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "e00": 2.0,
-        "e01": 2.0,
-        "e02": 2.0,
-        "e03": 2.0,
-        "e10": 2.0,
-        "e11": 2.0,
-        "e12": 2.0,
-        "e13": 2.0,
-        "e20": 2.0,
-        "e21": 2.0,
-        "e22": 2.0,
-        "e23": 2.0,
-        "e30": 2.0,
-        "e31": 2.0,
-        "e32": 2.0,
-        "e33": 2.0
-    },
-    "m_DefaultValue": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
-    }
 }
 
 {
@@ -7205,8 +7049,8 @@
     "m_ObjectId": "ab9d8b073bd7470198da4e839a3fb499",
     "m_Title": "Toggle support for Vertex Color",
     "m_Position": {
-        "x": -2034.000244140625,
-        "y": -2103.000244140625
+        "x": -2033.9998779296875,
+        "y": -2103.0
     }
 }
 
@@ -7503,54 +7347,6 @@
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
-    "m_ObjectId": "ba08f82ad814464da0469df8e8ad0c66",
-    "m_Id": 0,
-    "m_DisplayName": "A",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "A",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "e00": 0.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 0.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 0.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 0.0
-    },
-    "m_DefaultValue": {
-        "e00": 1.0,
-        "e01": 0.0,
-        "e02": 0.0,
-        "e03": 0.0,
-        "e10": 0.0,
-        "e11": 1.0,
-        "e12": 0.0,
-        "e13": 0.0,
-        "e20": 0.0,
-        "e21": 0.0,
-        "e22": 1.0,
-        "e23": 0.0,
-        "e30": 0.0,
-        "e31": 0.0,
-        "e32": 0.0,
-        "e33": 1.0
     }
 }
 
@@ -8347,8 +8143,8 @@
     "m_ObjectId": "d4bd5b0b7716412ba9c011313be944a1",
     "m_Title": "Secondary Color SPOM",
     "m_Position": {
-        "x": -2650.999755859375,
-        "y": 713.9999389648438
+        "x": -2651.0,
+        "y": 714.0
     }
 }
 
