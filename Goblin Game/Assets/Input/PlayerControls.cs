@@ -82,7 +82,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pickup"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""f25f944e-3e33-4f56-a0f4-3c6320407ddd"",
                     ""expectedControlType"": """",
@@ -263,7 +263,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pickup"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -566,7 +566,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GoblinControls_Sprint = m_GoblinControls.FindAction("Sprint", throwIfNotFound: true);
         m_GoblinControls_Crouch = m_GoblinControls.FindAction("Crouch", throwIfNotFound: true);
         m_GoblinControls_Stab = m_GoblinControls.FindAction("Stab", throwIfNotFound: true);
-        m_GoblinControls_Pickup = m_GoblinControls.FindAction("Pickup", throwIfNotFound: true);
+        m_GoblinControls_Interact = m_GoblinControls.FindAction("Interact", throwIfNotFound: true);
         m_GoblinControls_Throw = m_GoblinControls.FindAction("Throw", throwIfNotFound: true);
         m_GoblinControls_Debug = m_GoblinControls.FindAction("Debug", throwIfNotFound: true);
         m_GoblinControls_Vacuum = m_GoblinControls.FindAction("Vacuum", throwIfNotFound: true);
@@ -659,7 +659,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GoblinControls_Sprint;
     private readonly InputAction m_GoblinControls_Crouch;
     private readonly InputAction m_GoblinControls_Stab;
-    private readonly InputAction m_GoblinControls_Pickup;
+    private readonly InputAction m_GoblinControls_Interact;
     private readonly InputAction m_GoblinControls_Throw;
     private readonly InputAction m_GoblinControls_Debug;
     private readonly InputAction m_GoblinControls_Vacuum;
@@ -676,7 +676,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_GoblinControls_Sprint;
         public InputAction @Crouch => m_Wrapper.m_GoblinControls_Crouch;
         public InputAction @Stab => m_Wrapper.m_GoblinControls_Stab;
-        public InputAction @Pickup => m_Wrapper.m_GoblinControls_Pickup;
+        public InputAction @Interact => m_Wrapper.m_GoblinControls_Interact;
         public InputAction @Throw => m_Wrapper.m_GoblinControls_Throw;
         public InputAction @Debug => m_Wrapper.m_GoblinControls_Debug;
         public InputAction @Vacuum => m_Wrapper.m_GoblinControls_Vacuum;
@@ -710,9 +710,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stab.started += instance.OnStab;
             @Stab.performed += instance.OnStab;
             @Stab.canceled += instance.OnStab;
-            @Pickup.started += instance.OnPickup;
-            @Pickup.performed += instance.OnPickup;
-            @Pickup.canceled += instance.OnPickup;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
@@ -753,9 +753,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stab.started -= instance.OnStab;
             @Stab.performed -= instance.OnStab;
             @Stab.canceled -= instance.OnStab;
-            @Pickup.started -= instance.OnPickup;
-            @Pickup.performed -= instance.OnPickup;
-            @Pickup.canceled -= instance.OnPickup;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
@@ -939,7 +939,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnStab(InputAction.CallbackContext context);
-        void OnPickup(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);
         void OnVacuum(InputAction.CallbackContext context);

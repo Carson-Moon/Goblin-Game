@@ -16,6 +16,7 @@ public class NetworkObjectiveStarter : NetworkBehaviour
 
     private Objective currentObjective;
 
+    [SerializeField] AltarController altarController;
 
 
     void Update()
@@ -64,6 +65,7 @@ public class NetworkObjectiveStarter : NetworkBehaviour
             {
                 currentObjective.StartObjectiveServer(StopObjectiveServer);
                 ObjectiveCanvas.Instance.Initialize(currentObjective);
+                altarController.ResetAltarsClientRpc();
             }
             else
             {
@@ -97,6 +99,12 @@ public class NetworkObjectiveStarter : NetworkBehaviour
 
         if(IsServer)
         {
+            if(!playerObjectivePoints.Any())
+            {
+                PreObjectiveClientRpc();
+                return;
+            }
+            
             var orderedPlayers = playerObjectivePoints.OrderByDescending(x => x.Value);
             if(orderedPlayers.First().Value == pointsToWin)
             {

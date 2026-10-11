@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class LevelObjectives : MonoBehaviour
+public class LevelObjectives : NetworkBehaviour
 {
-    private ObjectiveCollection[] objectiveCollections;
+    private List<ObjectiveCollection> objectiveCollections =  new();
+    public List<ObjectiveCollection> ObjectiveCollections => objectiveCollections;
+
+    public int chosenCollectionIndex;
 
 
     void Start()
@@ -14,16 +18,18 @@ public class LevelObjectives : MonoBehaviour
             if(child.TryGetComponent(out ObjectiveCollection collection) && child.gameObject.activeInHierarchy)
                 collections.Add(collection);
         }
-        objectiveCollections = collections.ToArray();
+        objectiveCollections = collections;
     }
 
     public Vector2Int GetRandomObjectiveIndex()
     {
-        if(objectiveCollections.Length == 0)
+        if(objectiveCollections.Count == 0)
             return new Vector2Int(-1, -1);
 
-        int collectionIndex = Random.Range(0, objectiveCollections.Length);
+        int collectionIndex = chosenCollectionIndex != -1 ? chosenCollectionIndex : Random.Range(0, objectiveCollections.Count);
         int objectiveIndex = Random.Range(0, objectiveCollections[collectionIndex].Objectives.Length);
+
+        chosenCollectionIndex = -1;
 
         return new Vector2Int(collectionIndex, objectiveIndex);
     }
@@ -37,5 +43,11 @@ public class LevelObjectives : MonoBehaviour
         }
         else
             return objectiveCollections[objectiveIndex.x].Objectives[objectiveIndex.y];
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetCollectionIndexServerRpc(int index)
+    {
+        chosenCollectionIndex = index;
     }
 }

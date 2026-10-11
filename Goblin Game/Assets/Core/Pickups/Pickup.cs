@@ -35,7 +35,7 @@ public class Pickup : NetworkBehaviour
         pickupCoins = GetComponent<PickupCoins>();
     }
 
-    public void OnPickup()
+    public virtual void OnPickup()
     {
         if(_pickedUp)
         {
@@ -50,7 +50,7 @@ public class Pickup : NetworkBehaviour
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void OnPickupClientRpc()
+    protected virtual void OnPickupClientRpc()
     {
         ToggleObject(false);
     }

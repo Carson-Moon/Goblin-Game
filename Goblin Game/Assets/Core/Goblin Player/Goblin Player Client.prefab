@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2221592280
+  GlobalObjectIdHash: 1395481741
   InScenePlacedSourceGlobalObjectIdHash: 1395481741
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1082,6 +1082,21 @@ MonoBehaviour:
       - m_Target: {fileID: 2322484879353364755}
         m_TargetAssemblyTypeName: GoblinCoinEating, Assembly-CSharp
         m_MethodName: StopEatingCoins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6619639168250370743}
+        m_TargetAssemblyTypeName: InteractAction, Assembly-CSharp
+        m_MethodName: AttemptInteract
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2415,8 +2430,9 @@ GameObject:
   - component: {fileID: 5794001471857959723}
   - component: {fileID: 1745396969761280378}
   - component: {fileID: 5680862929876397446}
+  - component: {fileID: 6619639168250370743}
   m_Layer: 0
-  m_Name: Pickup
+  m_Name: Pickup/Interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2474,6 +2490,24 @@ MonoBehaviour:
   - {fileID: 5917358844684130976}
   thirdPersonVisuals:
   - {fileID: 0}
+--- !u!114 &6619639168250370743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3347898466401903421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4c0a95d41e93a48888866c6c69db29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTransform: {fileID: 8105120241247439305}
+  interactLength: 1
+  interactRadius: 1
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!1 &3533332959557903773
 GameObject:
   m_ObjectHideFlags: 0
