@@ -16,15 +16,9 @@ public class OscillatingEmissionStrength : MonoBehaviour
         {
             Debug.LogError("Emission material is not assigned.");
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (oscillate)
-        {
+        if(oscillate)
             StartCoroutine(OscillateEmissionStrength());
-        }
     }
 
     // Coroutine to oscillate the emission strength
