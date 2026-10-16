@@ -6,9 +6,12 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using System;
+using TMPro;
 
 public class RelayConnection : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI joinCodeUI;
+
     public static RelayConnection Instance {get; private set;}
 
     private string joinCode = string.Empty;
@@ -56,6 +59,7 @@ public class RelayConnection : MonoBehaviour
             Debug.Log("Starting to host a lobby...");
             await StartRelayAsHost();
             Debug.Log($"Successfully hosted a lobby. Join code is <color=green>{joinCode}</color>");
+            joinCodeUI.text = $"Join Code: {joinCode}";
             onSuccess?.Invoke();
         }
         catch(Exception e)
