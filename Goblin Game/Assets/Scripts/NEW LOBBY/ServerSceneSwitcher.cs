@@ -9,6 +9,7 @@ public class ServerSceneSwitcher : NetworkBehaviour
     [SerializeField] string gameScene = "GameScene";
     [SerializeField] string awardsScene = "AwardsCeremony";
     private string targetScene;
+    bool switching = false;
 
     private Dictionary<ulong, bool> readyToSwitch = new();
 
@@ -36,6 +37,11 @@ public class ServerSceneSwitcher : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void StartTransitionToSceneServerRpc()
     {
+        if(switching)
+            return;
+
+        switching = true;
+
         // Setup our dictionary with all client ids.
         readyToSwitch.Clear();
         foreach (ulong clientID in ServerLobbyManager.Instance.ClientIDs)
@@ -78,6 +84,7 @@ public class ServerSceneSwitcher : NetworkBehaviour
 
     private void LoadGameScene()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(targetScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        // NetworkManager.Singleton.SceneManager.LoadScene(targetScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(gameScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }
