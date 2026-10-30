@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3278273346508084156
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SPOM_Backrooms_Ceiling
+  m_Shader: {fileID: -6465566751694194690, guid: 26789540192d3eb42a352860a068fbac, type: 3}
+  m_Parent: {fileID: 2100000, guid: 606e1c721505fba409cdb85bf332c7da, type: 2}
+  m_ModifiedSerializedProperties: 2
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _EmissionMap_1:
+        m_Texture: {fileID: 2800000, guid: b82a16b73636e174db3ae514784dd963, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Heightmap_1_VTC_RED:
+        m_Texture: {fileID: 2800000, guid: 341f2d8754ccadb469a0ed38c0859d02, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Heightmap_2_VTC_GREEN:
+        m_Texture: {fileID: 2800000, guid: 341f2d8754ccadb469a0ed38c0859d02, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_AO_1_VTC_RED:
+        m_Texture: {fileID: 2800000, guid: 76ec0f94e4c88af4baec92f36e5912a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_AO_2_VTC_GREEN:
+        m_Texture: {fileID: 2800000, guid: 76ec0f94e4c88af4baec92f36e5912a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Normal_1_VTC_RED:
+        m_Texture: {fileID: 2800000, guid: c9f569a63a3a70549861c5ffef3af7ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex_Normal_2_VTC_GREEN:
+        m_Texture: {fileID: 2800000, guid: c9f569a63a3a70549861c5ffef3af7ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_1_VTC_RED:
+        m_Texture: {fileID: 2800000, guid: fa3cf1194f86f024a893861e370b8101, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_2_VTC_GREEN:
+        m_Texture: {fileID: 2800000, guid: fa3cf1194f86f024a893861e370b8101, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AO_Strength_1_VTC_RED: 1
+    - _AO_Strength_2_VTC_GREEN: 1
+    - _Bias: 0.1
+    - _Bias_2: 0.1
+    - _EmissionStrength_1: 1
+    - _HeightScale: 0.1
+    - _HeightScale_2: 0.1
+    - _Steps_2: 20
+    - _UseVTC: 0
+    - _hasEmissionMap: 1
+    m_Colors:
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling_2: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
