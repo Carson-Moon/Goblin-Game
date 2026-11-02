@@ -39,8 +39,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Depth_Fade_Distance: 0.675
+    - _Depth_Fade_Distance: 1
     - _Foam_Opacity: 0.12
+    - _Horizon_Distance: 0.12
     - _Intersection_Foam_Blend: 0.19
     - _Intersection_Foam_Cutoff: 1
     - _Lighting_Smoothness: 0.36
@@ -53,6 +54,9 @@ Material:
     - _Wave_Speed: 0.32
     - _Wave_Steepness: 0.05
     m_Colors:
+    - _DeepColor: {r: 0.72463506, g: 0.86383057, b: 0.8679245, a: 1}
+    - _Horizon_Color: {r: 0.52429694, g: 0.8113208, b: 0.73347944, a: 0}
     - _Intersection_Foam_Color: {r: 0.086863644, g: 0.26817358, b: 0.3018868, a: 1}
+    - _ShallowColor: {r: 0.5549128, g: 0.8113208, b: 0.7550572, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
