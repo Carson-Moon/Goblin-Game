@@ -15,6 +15,8 @@ public class GoblinAnimator : MonoBehaviour
     [SerializeField] float maxRunningThreshold;
     [SerializeField] float blendResponse;
     private int MoveHash = Animator.StringToHash("movementBlend");
+    private int IsWalkingForwardHash = Animator.StringToHash("isWalkingForward");
+    private int IsWalkingBackwardHash = Animator.StringToHash("isWalkingBackward");
     private float currentMovementBlend;
     private float targetMovementBlend;
 
@@ -39,6 +41,8 @@ public class GoblinAnimator : MonoBehaviour
         );
 
         anim.SetFloat(MoveHash, currentMovementBlend);
+        anim.SetBool(IsWalkingForwardHash, targetMovementBlend > 0f);
+        anim.SetBool(IsWalkingBackwardHash, targetMovementBlend < 0f);
     }
     
     public void StabAnimation()
