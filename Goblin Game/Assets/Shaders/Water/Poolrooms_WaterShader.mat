@@ -23,13 +23,13 @@ Material:
   m_Name: Poolrooms_WaterShader
   m_Shader: {fileID: -6465566751694194690, guid: e306d7e85984f3e4ea3c1eed7c3b1f1f, type: 3}
   m_Parent: {fileID: 2100000, guid: 448af11410d157a45aaa1cbc8791d7d3, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 24
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3050
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -48,6 +48,8 @@ Material:
     - _Normals_Scale: 0.81
     - _Normals_Speed: 0.05
     - _Normals_Strength: 5.49
+    - _QueueControl: 0
+    - _QueueOffset: 50
     - _Refraction_Speed: 0.21
     - _Surface_Foam_Distortion: 1.78
     - _Surface_Foam_Tiling: 10.79
