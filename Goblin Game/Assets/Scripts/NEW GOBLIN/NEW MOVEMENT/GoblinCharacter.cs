@@ -440,6 +440,11 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
         return _state.stance;
     }
 
+    public bool getIsGrounded()
+    {
+        return motor.GroundingStatus.IsStableOnGround;
+    }
+
     public bool IsColliderValidForCollisions(Collider coll)
     {
         return true;

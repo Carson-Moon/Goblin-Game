@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3134776514
+  GlobalObjectIdHash: 1395481741
   InScenePlacedSourceGlobalObjectIdHash: 1395481741
   DeferredDespawnTick: 0
   Ownership: 1
@@ -3645,20 +3645,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goblinCharacter: {fileID: 8215219192210770407}
-  footstepIntervalMin: 0.1
-  footstepIntervalMax: 0.8
+  footstepIntervalMin: 0.2
+  footstepIntervalMax: 0.5
   footstepAudioSource: {fileID: 7740241702490992853}
   footstepClips:
-  - {fileID: 8300000, guid: d1df93e38a73fe04da6ab26fc74bfc3a, type: 3}
-  - {fileID: 8300000, guid: d232eeae9c69bd347ac8f0751ef1a2d4, type: 3}
-  - {fileID: 8300000, guid: 8d4a7f4c5558d734f8a4b3da5facdd2a, type: 3}
-  - {fileID: 8300000, guid: 9c826246c9f006a4ca88a89d0a04413f, type: 3}
-  - {fileID: 8300000, guid: c7775b86688a3fa4e898194373076873, type: 3}
-  - {fileID: 8300000, guid: 0953dca094e49ce45a547b9db6dc0531, type: 3}
-  - {fileID: 8300000, guid: 73344eef13e80ae4abaa23dfc2528896, type: 3}
-  - {fileID: 8300000, guid: ff0c5c6b1711b5b4bbdd4733f67fc7b0, type: 3}
-  - {fileID: 8300000, guid: e177c1f6ee1372545aaef2e5f01578b2, type: 3}
-  - {fileID: 8300000, guid: c183e493f5bc5ca4bbf0cb5021f55a10, type: 3}
+  - {fileID: 8300000, guid: df76363ead855b040be73a00c020fb02, type: 3}
+  - {fileID: 8300000, guid: db2d67b50e99bbb489afaded319d2936, type: 3}
+  - {fileID: 8300000, guid: 5092c2c84b9a61b43816b05ddea216d9, type: 3}
+  - {fileID: 8300000, guid: 0cd2f609610edac48b5b36847542a7c9, type: 3}
+  - {fileID: 8300000, guid: 26c7ef6c50d1ba641855268fbf49c928, type: 3}
+  - {fileID: 8300000, guid: 07ce87d5147e60242885203ce8ade11c, type: 3}
+  - {fileID: 8300000, guid: 4d0196e518cb9e2438c9841cd4b116f4, type: 3}
+  - {fileID: 8300000, guid: b21f8c845c9e0f94ea7e15ab2ab6cb8a, type: 3}
+  - {fileID: 8300000, guid: 872e8951a6696124ea5e5f9c4e9698d1, type: 3}
+  - {fileID: 8300000, guid: 9fc2cc3b68f4199429b4517af4639381, type: 3}
+  landingClips:
+  - {fileID: 8300000, guid: bcc8b93f812e9ce46be5a1e650ebddcb, type: 3}
+  - {fileID: 8300000, guid: 3cc29e04c61e1cc4c95570738b2efc31, type: 3}
+  - {fileID: 8300000, guid: 7a5a374ddea19d14d8a37a71c38ac55a, type: 3}
+  - {fileID: 8300000, guid: d436d93e83a11bd4ab315638cc1729a0, type: 3}
+  - {fileID: 8300000, guid: 9033adc8e9d075c4dbb2a611b3d2df18, type: 3}
+  landingVolumeSubtractAmount: 0.5
 --- !u!1 &4575173998306461047
 GameObject:
   m_ObjectHideFlags: 0

@@ -1821,58 +1821,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: footstepIntervalMax
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: footstepIntervalMin
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: footstepClips.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: df76363ead855b040be73a00c020fb02, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: db2d67b50e99bbb489afaded319d2936, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 5092c2c84b9a61b43816b05ddea216d9, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 0cd2f609610edac48b5b36847542a7c9, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[4]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 26c7ef6c50d1ba641855268fbf49c928, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[5]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 07ce87d5147e60242885203ce8ade11c, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[6]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 4d0196e518cb9e2438c9841cd4b116f4, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[7]'
-      value: 
-      objectReference: {fileID: 8300000, guid: b21f8c845c9e0f94ea7e15ab2ab6cb8a, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[8]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 872e8951a6696124ea5e5f9c4e9698d1, type: 3}
-    - target: {fileID: 3393405329876557931, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
-      propertyPath: 'footstepClips.Array.data[9]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 9fc2cc3b68f4199429b4517af4639381, type: 3}
     - target: {fileID: 4011678651782211475, guid: 3ab74ce639a79e14ba60cc5732b9d0a2, type: 3}
       propertyPath: _armFovRatio
       value: 1
@@ -4641,6 +4589,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 153317131755042414, guid: ef25f78e25f555f4590207d4ae2386af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.68292004
+      objectReference: {fileID: 0}
+    - target: {fileID: 153317131755042414, guid: ef25f78e25f555f4590207d4ae2386af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7304932
+      objectReference: {fileID: 0}
+    - target: {fileID: 153317131755042414, guid: ef25f78e25f555f4590207d4ae2386af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 93.856
+      objectReference: {fileID: 0}
     - target: {fileID: 2206433598811332599, guid: ef25f78e25f555f4590207d4ae2386af, type: 3}
       propertyPath: m_Name
       value: Grass Bundle of 120

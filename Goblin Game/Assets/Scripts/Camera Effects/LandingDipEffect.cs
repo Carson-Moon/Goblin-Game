@@ -37,7 +37,6 @@ public class LandingDipEffect : CameraEffect
     {
         var t = Mathf.Clamp01(impactSpeed / maxImpactSpeed);
         _dipVelocity -= response.Evaluate(t) * maxImpactSpeed * dipPerSpeed;
-        // Debug.Log($"LandingDipEffect: OnLanded called with impactSpeed={impactSpeed}, t={t}, dipVelocity={_dipVelocity}");
     }
 
     public override void Tick(float deltaTime)
