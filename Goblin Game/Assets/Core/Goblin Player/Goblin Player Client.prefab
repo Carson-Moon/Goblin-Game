@@ -858,6 +858,7 @@ Transform:
   - {fileID: 4289707622058113662}
   - {fileID: 2819674775087550483}
   - {fileID: 4359416825594069926}
+  - {fileID: 6975085054977164497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &296426229693235721
@@ -3501,6 +3502,163 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vignetteGroup: {fileID: 672149815071892054}
+--- !u!1 &4541332584341988314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6975085054977164497}
+  - component: {fileID: 7740241702490992853}
+  - component: {fileID: 3393405329876557931}
+  m_Layer: 0
+  m_Name: FootstepSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6975085054977164497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541332584341988314}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7535844, y: 0.57754993, z: -0.062359523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7331015665713564294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7740241702490992853
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541332584341988314}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 3.5
+  MaxDistance: 4.26
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3393405329876557931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541332584341988314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3d423af7ee6504cb78d00dab621dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goblinCharacter: {fileID: 8215219192210770407}
+  footstepIntervalMin: 0.1
+  footstepIntervalMax: 0.8
+  footstepAudioSource: {fileID: 7740241702490992853}
+  footstepClips:
+  - {fileID: 8300000, guid: d1df93e38a73fe04da6ab26fc74bfc3a, type: 3}
+  - {fileID: 8300000, guid: d232eeae9c69bd347ac8f0751ef1a2d4, type: 3}
+  - {fileID: 8300000, guid: 8d4a7f4c5558d734f8a4b3da5facdd2a, type: 3}
+  - {fileID: 8300000, guid: 9c826246c9f006a4ca88a89d0a04413f, type: 3}
+  - {fileID: 8300000, guid: c7775b86688a3fa4e898194373076873, type: 3}
+  - {fileID: 8300000, guid: 0953dca094e49ce45a547b9db6dc0531, type: 3}
+  - {fileID: 8300000, guid: 73344eef13e80ae4abaa23dfc2528896, type: 3}
+  - {fileID: 8300000, guid: ff0c5c6b1711b5b4bbdd4733f67fc7b0, type: 3}
+  - {fileID: 8300000, guid: e177c1f6ee1372545aaef2e5f01578b2, type: 3}
+  - {fileID: 8300000, guid: c183e493f5bc5ca4bbf0cb5021f55a10, type: 3}
 --- !u!1 &4575173998306461047
 GameObject:
   m_ObjectHideFlags: 0

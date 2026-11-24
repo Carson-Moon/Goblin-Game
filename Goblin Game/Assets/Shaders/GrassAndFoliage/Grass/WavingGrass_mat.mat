@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2550
+  m_CustomRenderQueue: 2580
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -98,14 +98,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dither_Power: 0.42
+    - _Dither_Power: 1.03
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Ground_Dither_Amount: 1.95
+    - _Ground_Dither_Amount: 0.95
+    - _Max_Bend_Angle: -1.75
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

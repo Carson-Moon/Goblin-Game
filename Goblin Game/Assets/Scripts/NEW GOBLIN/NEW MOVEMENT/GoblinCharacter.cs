@@ -39,7 +39,7 @@ public class GoblinCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private Transform cameraTarget;
     public Transform CameraTarget => cameraTarget;
     [Space]
-    [SerializeField] float walkSpeed = 20f;
+    [SerializeField] public float walkSpeed = 20f;
     [SerializeField] float crouchSpeed = 7f;
     [SerializeField] float walkResponse = 25f;
     [SerializeField] float crouchResponse = 20f;
